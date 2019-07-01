@@ -1,0 +1,39 @@
+/* Adaptive styles */
+/* Large Desktop */
+@media (min-width: 1200px){
+  .container{
+    position: relative;
+  }
+}
+    
+/* Desktop */
+@media (max-width: 1199px) {
+  .container{
+    width: 970px;
+  }
+}
+  
+        
+/* Tablet */
+@media (max-width: 991px)  {
+  .container{
+    width: 750px;
+  }
+}
+ 
+      
+    
+/* Phone */
+@media (max-width: 767px){
+  .container{
+    width: 100%;
+  }
+}
+  
+    
+  
+@media (max-width: 479px){
+  .container{
+    position: relative;
+  }
+}

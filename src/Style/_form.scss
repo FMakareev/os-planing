@@ -1,0 +1,238 @@
+.form{
+  &__group{
+    position: relative;
+    margin-bottom: 15px;
+    &--select{
+      width: 270px;
+    }
+    &.disabled{
+      input{
+        background: #edeeef;
+        border-color: #edeeef;
+        color: #8288a2;
+      }
+      .form__label{
+        color: #8288a2;
+      }
+    }
+    &-text{
+      color: #8288a2;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 20px;
+      margin-bottom: 20px;
+    }
+    &--textarea{
+      border-radius: 6px;
+      border: 1px solid #c3c9db;
+      position: relative;
+      &.focus{
+        border-color: #41a3fd;
+      }
+    }
+    &--text{
+      .form__input{
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 40px;
+        border: none;
+      }
+      .form__label{
+        left: 0;
+        color: #8288a2;
+      }
+    }
+    &--wide{
+      width: 100%;
+    }
+    &.hidden{
+      display: none;
+    }
+	}
+  &__input,
+  &__textarea{
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0 15px;
+    color: #1b1b1b;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    outline: none;
+    border: 1px solid #c3c9db;
+    border-radius: 6px;
+    &:focus{
+      border-color: #41a3fd;
+    }
+    &.error{
+      border-color: #EF223A;
+    }
+  }
+  label.error{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    color: #EF223A;
+    display: block;
+    margin-top: 2px;
+  }
+  &__input--date{
+    background: url(../img/date.svg) 95% center no-repeat;
+  }
+  &__textarea{
+    height: 130px;
+    resize: none;
+    padding-top: 0;
+    margin-top: 32px;
+    border: none;
+    display: block;
+  }
+  &__label{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    color: #1b1b1b;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    pointer-events: none;
+  }
+  &__select{
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0 15px;
+    color: #1b1b1b;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    outline: none;
+    border: 1px solid #c3c9db;
+    border-radius: 6px;
+    min-height: 68px;
+    &:focus{
+			border-color: #41a3fd;
+			
+		}
+		&.opened{
+			border-radius: 6px 6px 0 0;		
+			box-shadow: 0 8px 24px rgba(130, 136, 162, 0.4);
+		}
+  }
+  &__button{
+    margin-top: 10px;
+	}
+	&__bsave{
+		margin-top: 30px;
+		.button-primary{
+			margin-bottom: 0;
+		}
+	}
+  &--selects{
+    display: flex;
+    .form__group{
+      margin-right: 15px;
+    }
+  }
+  &--setting{
+    .form__group{
+      max-width: 500px;
+    }
+    margin-bottom: 50px;
+  }
+  &__save{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    color: #4dc87e;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    margin-top: -13px;
+    margin-left: 30px;
+    .icon{
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      margin-right: 15px;
+    }
+  }
+  &__group--checkbox{
+    color: #1b1b1b;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    margin: 30px 0 40px;
+    input{
+      width: 0;
+      height: 0;
+      opacity: 0;
+      overflow: hidden;
+      &:checked ~ label:before{
+        background: url(../img/check.svg) center center no-repeat;
+        background-size: 11px;
+      }
+    }
+    label{
+      position: relative;
+      padding-left: 35px;
+      cursor: pointer;
+      &:before{
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        border-radius: 3px;
+        border: 1px solid #3789d4;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+      }
+    }
+  }
+  &--password{
+    .form__group:first-child{
+      margin: 30px 0 50px;
+    }
+    .form__group:nth-child(3){
+      margin-bottom: 40px;
+    }
+  }
+  &__pass-visible{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 22px;
+    height: 22px;
+    color: #8288a2;
+    margin-top: -12px;
+    .icon{
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+    &:hover{
+      color: #3789d4;
+    }
+  }
+  &--statistic{
+    display: flex;
+    flex-wrap: wrap;
+    .form__group{
+      width: calc(50% - 7px);
+      &:nth-child(1){
+        margin-right: 14px;
+      }
+      &--wide{
+        width: 100%;
+      }
+    }
+  }
+}

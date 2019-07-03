@@ -11,7 +11,7 @@
   overflow: auto;
   transition: all 0.35s;
   z-index: 999;
-  &.open{
+  &--open{
     opacity: 1;
     pointer-events: auto;
   }
@@ -24,6 +24,9 @@
   position: relative;
   padding: 40px 48px;
   display: none;
+  &--open{
+    display: block;
+  }
   &--city-details{
     width: 700px;
     .inner-info__status{
@@ -35,6 +38,10 @@
         top: -2px;
       }
     }
+  }
+
+  &--delete {
+    width: 380px;
   }
   &--add-project,
   &--edit-project,

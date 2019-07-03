@@ -1,4 +1,4 @@
-@import "normalize";
+@import "~normalize.scss/normalize.scss";
 @import 'fontsMixin';
 @import 'var';
 //@import 'sprite';
@@ -48,7 +48,7 @@ textarea{
 
 
 .start-bg{
-	background: url(../img/start_bg.png) center center no-repeat;
+	background: url(../Assets/img/start_bg.png) center center no-repeat;
 	background-size: cover;
 	width: 100%;
 	min-height: 100vh;
@@ -183,17 +183,21 @@ textarea{
 			padding: 23px 65px 18px;
 			.notifications__item{
 				&:nth-child(1){
-					width: 260px;
+					max-width: 260px;
+					width: 100%;
 					padding-left: 95px;
 				}
 				&:nth-child(2){
-					width: 300px;
+					max-width: 300px;
+					width: 100%;
 				}
 				&:nth-child(3){
-					width: 280px;
+					max-width: 280px;
+					width: 100%;
 				}
 				&:nth-child(4){
-					width: 150px;
+					max-width: 150px;
+					width: 100%;
 					text-align: center;
 				}
 			}
@@ -234,7 +238,7 @@ textarea{
 			height: 64px;
 			border-radius: 50%;
 			margin-right: 30px;
-			background: url(../img/no-photo.svg) center center no-repeat;
+			background: url(../Assets/img/no-photo.svg) center center no-repeat;
 			background-size: cover;
 			img{
 				width: 100%;
@@ -325,7 +329,7 @@ textarea{
 				height: 64px;
 				margin-right: 30px;
 				border-radius: 50%;
-				background: url(../img/no-photo.svg) center center no-repeat;
+				background: url(../Assets/img/no-photo.svg) center center no-repeat;
 				background-size: cover;
 				img{
 					width: 100%;
@@ -368,19 +372,23 @@ textarea{
 			align-items: center;
 			.notifications-item{
 				&__user{
-					width: 260px;
+					max-width: 260px;
+					width: 100%;
 					margin-right: 20px;
 				}
 				&__name{
-					width: 300px;
+					max-width: 300px;
+					width: 100%;
 					margin-right: 20px;
 				}
 				&__email{
-					width: 280px;
+					max-width: 280px;
+					width: 100%;
 					margin-right: 20px;
 				}
 				&__password{
-					width: 150px;
+					max-width: 150px;
+					width: 100%;
 					text-align: center;
 					margin-right: 20px;					
 				}
@@ -424,11 +432,11 @@ textarea{
 		font-weight: 500;
 		line-height: 24px;
 	}
-	img{
-		display: block;
-		margin: 50px 0;
-		max-width: 100%;
-	}
+	//img{
+	//	display: block;
+	//	margin: 50px 0;
+	//	max-width: 100%;
+	//}
 	.city-details__tags{
 		margin: 35px 0 40px;
 	}
@@ -486,34 +494,41 @@ textarea{
 			width: 44px;
 			height: 40px;
 			position: absolute;
-			top: -20px;
 			left: 0;
+		}
+		&--withdate {
+			&:before{
+				top: -20px;
+			}
 		}
 		&--report{
 			color: #ef223a;
+			fill: #ef223a;
 			&:before{
-				background: url(../img/report-icon.svg) center center no-repeat;
+				background: url(../Assets/img/report-icon.svg) center center no-repeat;
 				background-size: 100%;
 			}
 		}
 		&--review{
 			color: #f69752;
+			fill: #f69752;
 			&:before{
-				background: url(../img/review-icon.svg) center center no-repeat;
+				background: url(../Assets/img/review-icon.svg) center center no-repeat;
 				background-size: 100%;
 			}
 		}
 		&--ok{
 			color: #4dc87e;
+			fill: #4dc87e;
 			&:before{
-				background: url(../img/ok-icon.svg) center center no-repeat;
+				background: url(../Assets/img/ok-icon.svg) center center no-repeat;
 				background-size: 100%;
 			}
 		}
 		.icon-arrow{
-			width: 10px;
-			height: 6px;
-			fill: currentColor;
+			//width: 10px;
+			//height: 6px;
+			//fill: currentColor;
 			display: block;
 			margin-left: 5px;
 		}
@@ -575,6 +590,9 @@ textarea{
 		width: 14px;
 		height: 16px;
 		margin-right: 10px;
+		margin-top: 0;
+		margin-bottom: 0;
+		margin-left: 0;
 		fill: currentColor;
 	}
 	&:hover{
@@ -588,7 +606,7 @@ textarea{
 	&__img{
 		width: 96px;
 		height: 96px;
-		background: url(../img/no-photo.svg) center center no-repeat;
+		background: url(../Assets/img/no-photo.svg) center center no-repeat;
 		background-size: cover;
 		margin-right: 25px;
 		display: flex;
@@ -611,6 +629,10 @@ textarea{
 		font-weight: 500;
 		line-height: 24px;
 		text-decoration: none;
+		background-color: transparent;
+		border: none;
+		padding: 0;
+
 		.icon{
 			display: block;
 			width: 24px;
@@ -881,6 +903,7 @@ textarea{
 
 
 .dropzone-block{
+	position: relative;
 	border-radius: 6px;
 	border: 1px dashed #8288a2;
 	height: 120px;
@@ -914,6 +937,7 @@ textarea{
 	}
 	&__close{
 		color: #ef223a;
+		fill: #ef223a;
 		margin-left: 10px;
 		.icon{
 			width: 8px;
@@ -938,3 +962,7 @@ textarea{
 @import 'select';
 @import 'datepicker';
 @import 'responsive';
+@import 'react-datepicker';
+@import 'preloader';
+
+

@@ -19,7 +19,14 @@
     color: #c3c9db;
     cursor: default;
   }
+  &--preloader {
+    display: flex;
+  }
 }
+
+
+
+
 .button--wide{
   width: 100%;
   text-align: center;

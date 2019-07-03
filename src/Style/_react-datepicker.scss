@@ -1,0 +1,194 @@
+$fontSize: 14px;
+.react-datepicker {
+  border: none;
+  box-shadow: 0 8px 24px rgba(130, 136, 162, 0.4);
+
+  &__header {
+    padding: 0;
+    border-bottom: none;
+    background-color: #fff;
+  }
+
+  &__current-month {
+    font-weight: normal;
+    font-size: $fontSize;
+  }
+
+  &__day-names {
+  }
+
+  &__day-name {
+    font-size: $fontSize;
+  }
+
+  &__day, &__day-name {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: $fontSize;
+    line-height: 26px;
+    margin: 3.5px;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+  }
+
+  &__day {
+    color: #8288a2;
+    border-radius: 50%;
+
+    &:hover {
+      background-color: transparent;
+      border-radius: 50%;
+      color: #3789D5;
+    }
+  }
+
+  &__day--outside-month {
+    color: #999;
+  }
+
+  &__day--selected {
+    border-radius: 50%;
+    color: #fff;
+    background: #3789D5;
+  }
+
+  &__header__dropdown {
+    height: 40px;
+    padding: 7px 0;
+    border-bottom: 1px solid #999999;
+    margin-bottom: 10px;
+  }
+
+  &__month-dropdown, &__year-dropdown {
+    border: 1px solid #c3c9db;
+    background-color: #fff;
+    margin-left: -16px;
+    box-shadow: 0 18px 24px -10px rgba(130, 136, 162, 0.4);
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+  }
+
+  &__month-option, &__year-option {
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    color: #1b1b1b;
+    font-weight: 500;
+    transition: all 0.35s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: Montserrat;
+    font-style: normal;
+    font-size: $fontSize;
+
+    &--selected {
+      display: none;
+    }
+
+    &:hover, &.--selected_month, &--selected_year {
+      background: #3789d4;
+      color: #fff;
+    }
+
+  }
+
+
+  &__month-dropdown-container {
+    &--scroll {
+
+    }
+  }
+
+  &__month-read-view, &__year-read-view {
+    border: none;
+    visibility: initial !important;
+
+    &--selected-month, &--selected-year {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: $fontSize;
+      line-height: 26px;
+    }
+
+    &--down-arrow {
+      background-image: url(../Assets/img/arrow-select.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      border: none;
+      width: 23px;
+      height: 12px;
+      margin: 0;
+
+      &::before {
+        content: none;
+      }
+    }
+
+  }
+
+
+  &__triangle {
+    display: none;
+  }
+
+  &__current-month {
+    display: none;
+  }
+
+  &__month {
+    margin: 0 17px 16px;
+  }
+
+  &__navigation {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &--previous {
+      background-image: url('../Assets/img/calendar_arrow_left.svg');
+    }
+
+    &--next {
+      background-image: url('../Assets/img/calendar_arrow_right.svg');
+    }
+
+    &--years {
+    }
+
+    &--years-upcoming {
+      background-image: url(../Assets/img/arrow-select.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      border: none;
+      top: 0;
+      transform: rotate(180deg);
+    }
+
+    &--years-previous {
+      background-image: url(../Assets/img/arrow-select.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      border: none;
+      top: 0;
+    }
+
+  }
+}
+
+//display: block;
+//    width: 100%;
+//    padding: 5px 15px;
+//    color: #1b1b1b;
+//    font-size: 16px;
+//    font-weight: 500;
+//    transition: all 0.35s;
+//    white-space: nowrap;
+//    overflow: hidden;
+//    text-overflow: ellipsis;

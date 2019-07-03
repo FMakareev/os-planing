@@ -106,8 +106,10 @@
 	&__ava{
 		width: 100%;
 		height: 100%;
+		max-width: 64px;
+		max-height: 64px;
 		border-radius: 50%;
-		background: url(../img/no-photo.svg) center center no-repeat;
+		background: url(../Assets/img/no-photo.svg) center center no-repeat;
 		background-size: cover;
 		display: block;
 		img{
@@ -142,7 +144,7 @@
 		margin-right: 16px;
 		border-radius: 50%;
 		overflow: hidden;
-		background: url(../img/no-photo.svg) center center no-repeat;
+		background: url(../Assets/img/no-photo.svg) center center no-repeat;
 		background-size: cover;
 		img{
 			max-width: 100%;

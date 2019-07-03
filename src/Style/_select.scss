@@ -26,9 +26,9 @@
   user-select: none;
 }
 
-.jq-selectbox {
-  z-index: 10;
-}
+//.jq-selectbox {
+//  z-index: 10;
+//}
 
 
 .jq-selectbox__select-text {
@@ -39,10 +39,21 @@
   user-select: none;
   white-space: nowrap;
   text-overflow: ellipsis;
+  padding: 0;
+  border: none;
+  max-width: 100%;
+  &:focus{
+    outline: none;
+  }
 }
 
 .jq-selectbox__dropdown {
   position: absolute;
+  z-index: 11;
+  display: none;
+  &.active {
+    display: block;
+  }
 }
 
 .jq-selectbox{
@@ -65,7 +76,7 @@
     }
     &:hover{
       .jq-selectbox__trigger{
-        background: url(../img/arrow-select.svg) center center no-repeat;
+        background: url(../Assets/img/arrow-select.svg) center center no-repeat;
       }
     }
   }
@@ -76,7 +87,7 @@
     width: 23px;
     height: 12px;
     margin-top: -4px;
-    background: url(../img/arrow-select.svg) center center no-repeat;
+    background: url(../Assets/img/arrow-select.svg) center center no-repeat;
     transition: all 0.35s;
 	}
 	&__search{
@@ -135,6 +146,6 @@
   }
   &.opened .jq-selectbox__trigger{
     transform: rotate(180deg);
-    background: url(../img/arrow-select.svg) center center no-repeat;
+    background: url(../Assets/img/arrow-select.svg) center center no-repeat;
   }
 }

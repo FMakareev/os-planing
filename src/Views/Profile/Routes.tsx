@@ -1,14 +1,21 @@
 import React from 'react';
-const Calendar = React.lazy(() => import('./View'));
+const ProfileSettingsAdmin = React.lazy(() => import('./Views/ProfileSettingsAdmin'));
+const ProfileSettingsUser = React.lazy(() => import('./Views/ProfileSettingsUser'));
 
 
-export const CalendarRoute = [
+export const ProfileRoute = [
 	{
-		path: '/calendar',
+		path: '/profile-settings-admin',
 		exact: true,
-		name: 'Календарь',
-		component: Calendar,
-	}
+		name: 'Настройки администратора',
+		component: ProfileSettingsAdmin,
+	},
+	{
+		path: '/profile-settings',
+		exact: true,
+		name: 'Настройки пользователя',
+		component: ProfileSettingsUser,
+	},
 ];
 
-export default CalendarRoute;
+export default ProfileRoute;

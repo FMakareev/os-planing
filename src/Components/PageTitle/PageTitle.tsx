@@ -1,10 +1,10 @@
 import * as React from 'react';
+import classNames from 'classnames';
 
 
-export const Breadcrumbs: React.FC<any> = () => (
-	<ul className="breadcrumbs">
-		<li><a href="javascript:void(0);">Календарь</a></li>
-		<li><span>Проекты</span></li>
-	</ul>);
+export const PageTitle: React.FC<any> = ({children, mods}) => (
+	<h1 className={classNames("h1",mods)}>
+		{children}
+	</h1>);
 
-export default Breadcrumbs;
+export default PageTitle;

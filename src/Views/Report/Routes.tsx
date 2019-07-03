@@ -1,34 +1,27 @@
 import React from 'react';
-const ProjectList = React.lazy(() => import('./Views/ProjectList'));
-const ProjectItem = React.lazy(() => import('./Views/ProjectItem'));
-const ProjectEdit = React.lazy(() => import('./Views/ProjectEdit'));
+const ReportItem = React.lazy(() => import('./Views/ReportItem'));
+const ReportEdit = React.lazy(() => import("./Views/ReportEdit"));
 
 
-export const ProjectRoute = [
+export const ReportRoute: object[] = [
 	{
-		path: '/project/edit/:id',
+		path: '/report/edit/:id',
 		exact: false,
-		name: 'Редактировать',
-		component: ProjectEdit,
+		name: 'Редактировать отчет',
+		component: ReportEdit,
 	},
 	{
-		path: '/project/edit',
+		path: '/report/edit',
 		exact: true,
-		name: 'Создать проект',
-		component: ProjectEdit,
+		name: 'Создать отчет',
+		component: ReportEdit,
 	},
 	{
-		path: '/project/:id',
+		path: '/report/:id',
 		exact: false,
-		name: 'Проект',
-		component: ProjectItem,
-	},
-	{
-		path: '/projects',
-		exact: true,
-		name: 'Список проектов',
-		component: ProjectList,
+		name: 'Отчет',
+		component: ReportItem,
 	},
 ];
 
-export default ProjectRoute;
+export default ReportRoute;

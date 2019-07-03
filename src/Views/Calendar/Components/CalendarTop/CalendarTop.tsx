@@ -1,51 +1,35 @@
 import * as React from 'react';
-import {SelectDefault} from '../Select/SelectDefault';
-import withSelect from "../Select/withSelect";
-import {MonthOptions} from "../HeaderDate/MonthOptions";
-import {Button} from '../Button/Button';
+import {SelectDefault} from '../../../../Components/Select/SelectDefault';
+import withSelect from "../../../../Components/Select/withSelect";
+import {Button} from '../../../../Components/Button/Button';
+import {CreateCityOptions, CreateProjectOptions} from '../../View/mock';
 
 const SelectDefaultWithSelect = withSelect(SelectDefault)();
 
-const LobbyOptions = [
-	{
-		name: 'Проект №1',
-		value: 'Проект №1',
-	},
-	{
-		name: 'Проект №3',
-		value: 'Проект №3',
-	},
-	{
-		name: 'Проект №2',
-		value: 'Проект №2',
-	},
-	{
-		name: 'Проект №0',
-		value: 'Проект №0',
-	},
-];
+const LobbyOptions = CreateCityOptions();
+const ProjectOptions = CreateProjectOptions();
 
 export const CalendarTop = () => (<div className="calendar__top">
-	<div className="form form--selects">
+    <div className="form form--selects">
 
-		<SelectDefaultWithSelect
-			label={'Приемная'}
-			placeholder={'Выберите город'}
-			options={LobbyOptions}
-		/>
+        <SelectDefaultWithSelect
+            label={'Приемная'}
+            placeholder={'Выберите город'}
+            options={LobbyOptions}
+        />
 
-		<SelectDefaultWithSelect
-			label={'Проект'}
-			placeholder={'Выберите категорию'}
-			options={MonthOptions}
-		/>
+        <SelectDefaultWithSelect
+            label={'Проект'}
+            placeholder={'Выберите категорию'}
+            options={ProjectOptions}
+        />
 
-	</div>
-	<div className="calendar__top-right">
-		<Button>
-			Экспорт в PDF
-		</Button>
-	</div>
+    </div>
+    <div className="calendar__top-right">
+        <Button>
+            Экспорт в PDF
+        </Button>
+    </div>
 </div>);
 
 export default CalendarTop;

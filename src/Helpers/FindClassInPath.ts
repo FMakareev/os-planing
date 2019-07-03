@@ -3,12 +3,21 @@
  * @param {string} className - название класса который
  * @desc метод ищет в массиве класс и возвращает его индекс.
  * */
-export const findClassInPath = (path, className) => {
+export const FindClassInPath = (path: any[], className: string): number => {
   try {
-    return path.findIndex(item => item.className && item.className.indexOf(className) >= 0);
+    console.log(path);
+    return path.findIndex(item => {
+      console.log(item.className);
+      if (item.className) {
+        let result: string[] = item.className.match(new RegExp(`((^|\\s)${className}(\\s|$))`, 'g'));
+        console.log(result);
+        return result.length > 0;
+      }
+      return false;
+    });
   } catch (error) {
-    return null;
+    return -1;
   }
 };
 
-export default findClassInPath;
+export default FindClassInPath;

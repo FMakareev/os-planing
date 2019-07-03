@@ -1,7 +1,7 @@
 /** @link https://stackoverflow.com/questions/50589137/scrollto-speed-duration-setting */
 
 // Element to move, time in ms to animate
-export function scrollTo(element, duration, durationFunction) {
+export function ScrollTo(element, duration, durationFunction) {
   let e = document.documentElement;
   if(e.scrollTop===0){
     let t = e.scrollTop;
@@ -94,4 +94,4 @@ export function easeOutQuint(t){
 }
 
 
-export default scrollTo;
+export default ScrollTo;

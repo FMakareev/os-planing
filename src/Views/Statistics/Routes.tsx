@@ -1,14 +1,14 @@
 import React from 'react';
-const Calendar = React.lazy(() => import('./View'));
+const Statistics = React.lazy(() => import('./View'));
 
 
-export const CalendarRoute = [
+export const StatisticsRoute = [
 	{
-		path: '/calendar',
+		path: '/statistics',
 		exact: true,
-		name: 'Календарь',
-		component: Calendar,
+		name: 'Статистика',
+		component: Statistics,
 	}
 ];
 
-export default CalendarRoute;
+export default StatisticsRoute;

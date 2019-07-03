@@ -1,5 +1,4 @@
-// генерирует массив заданной длинны
-export const range = len => {
+export const Range = (len: number): number[] => {
   const arr = [];
   for (let i = 0; i < len; i++) {
     arr.push(i);
@@ -7,4 +6,4 @@ export const range = len => {
   return arr;
 };
 
-export default range;
+export default Range;

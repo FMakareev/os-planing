@@ -9,7 +9,7 @@ interface IFormChangeUserProps {
 	[prop: string]: any
 }
 
-export const FormChangeUser: React.FC<IFormChangeUserProps> = () => (
+export const FormChangeAdmin: React.FC<IFormChangeUserProps> = () => (
 	<form className="form form--setting">
 		<TextField
 			type={'text'}
@@ -17,16 +17,50 @@ export const FormChangeUser: React.FC<IFormChangeUserProps> = () => (
 			label={'Имя'}
 		/>
 		<TextField
-			type={'text'}
-			placeholder={'Введите приемную'}
-			label={'Приемная'}
-			disabled={true}
-		/>
-		<TextField
 			type={'email'}
 			placeholder={'Введите e-mail'}
 			label={'E-mail'}
 		/>
+		<TextField
+			type={'text'}
+			placeholder={'Введите хост SMTP'}
+			label={'Хост SMTP'}
+		/>
+		<TextField
+			type={'text'}
+			placeholder={'Введите порт SMTP'}
+			label={'Порт SMTP'}
+		/>
+		<TextField
+			type={'text'}
+			placeholder={'Введите логин SMTP'}
+			label={'Пользователь SMTP'}
+		/>
+		<TextField
+			type={'text'}
+			placeholder={'Введите пароль SMTP'}
+			label={'Пароль пользователя SMTP'}
+		/>
+		<div className="form__group form__group--checkbox">
+			<input type="checkbox" checked id="check"/>
+				<label htmlFor="check">Использовать tls для SMTP</label>
+		</div>
+
+		<TextField
+			type={'text'}
+			placeholder={'Введите публичный ключ reCAPTCHA'}
+			label={'Публичный ключ reCAPTCHA'}
+		/>
+
+		<TextField
+			type={'text'}
+			placeholder={'Введите секретный ключ reCAPTCHA'}
+			label={'Секретный ключ reCAPTCHA'}
+		/>
+
+
+
+
 
 		<Link className="change-pass" to={'/change-password'}>
 			<img src={LockIcon} className="icon icon-lock "/>
@@ -40,4 +74,4 @@ export const FormChangeUser: React.FC<IFormChangeUserProps> = () => (
 	</form>
 );
 
-export default FormChangeUser;
+export default FormChangeAdmin;

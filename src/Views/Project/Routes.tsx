@@ -1,14 +1,14 @@
 import React from 'react';
-const Calendar = React.lazy(() => import('./View'));
+const ProjectList = React.lazy(() => import('./Views/ProjectList'));
 
 
-export const CalendarRoute = [
+export const ProjectRoute = [
 	{
-		path: '/calendar',
+		path: '/projects',
 		exact: true,
-		name: 'Календарь',
-		component: Calendar,
-	}
+		name: 'Список проектов',
+		component: ProjectList,
+	},
 ];
 
-export default CalendarRoute;
+export default ProjectRoute;

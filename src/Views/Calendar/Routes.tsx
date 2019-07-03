@@ -1,14 +1,23 @@
 import React from 'react';
-const Privacy = React.lazy(() => import('./View'));
+import {LAYOUT_CALENDAR} from "../../Shared/Layouts";
+const Calendar = React.lazy(() => import('./View'));
 
 
-export const PrivacyRoute = [
+export const CalendarRoute = [
 	{
-		path: '/privacy',
+		path: '/',
 		exact: true,
-		name: 'Privacy',
-		component: Privacy,
-	}
+		name: 'Календарь',
+		component: Calendar,
+		layout: LAYOUT_CALENDAR
+	},
+	{
+		path: '/calendar',
+		exact: true,
+		name: 'Календарь',
+		component: Calendar,
+		layout: LAYOUT_CALENDAR,
+	},
 ];
 
-export default PrivacyRoute;
+export default CalendarRoute;

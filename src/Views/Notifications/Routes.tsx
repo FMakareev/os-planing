@@ -1,14 +1,14 @@
 import React from 'react';
-const Calendar = React.lazy(() => import('./View'));
+const Notifications = React.lazy(() => import('./View'));
 
 
-export const CalendarRoute = [
+export const NotificationsRoute = [
 	{
-		path: '/calendar',
+		path: '/notifications',
 		exact: true,
-		name: 'Календарь',
-		component: Calendar,
-	}
+		name: 'Уведомления',
+		component: Notifications,
+	},
 ];
 
-export default CalendarRoute;
+export default NotificationsRoute;

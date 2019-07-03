@@ -1,8 +1,12 @@
 import * as React from 'react';
+import LayoutWithSidebar from '../../../../Containers/LayoutWithSidebar/LayoutWithSidebar';
+import {ReportItemContent} from '../../Components/ReportItemContent/ReportItemContent';
+import ReportItemSidebar from "../../Components/ReportItemSidebar/ReportItemSidebar";
+
+export const ReportItem = () => (<LayoutWithSidebar sidebarContent={<ReportItemSidebar/>}>
+	<ReportItemContent/>
 
 
-export const ProjectItem = () => (<div>
-	ProjectItem
-</div>);
+</LayoutWithSidebar>);
 
-export default ProjectItem;
+export default ReportItem;

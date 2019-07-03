@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import {reducer as formReducer} from 'redux-form';
 import {reducer} from '@brigad/redux-rest-easy';
+import ReducerUser from "./User/reducers";
 
 export default combineReducers({
-  form: formReducer,
   restEasy: reducer,
+  user: ReducerUser
 });

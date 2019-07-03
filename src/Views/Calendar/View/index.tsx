@@ -1,8 +1,29 @@
 import * as React from 'react';
+import {HeaderDate} from "../../../Components/HeaderDate/HeaderDate";
+import {CalendarTop} from '../Components/CalendarTop/CalendarTop';
+import {CalendarHeader} from '../Components/CalendarHeader/CalendarHeader';
+import {CreateListDay} from "./mock";
+import {CalendarContent} from "../Components/CalendarContent/CalendarContent";
+import PopupEvents from '../Components/PopupEvents/PopupEvents';
+
+const LayoutCalendar = React.lazy(() => import('../../../Containers/LayoutCalendar/LayoutCalendar'));
 
 
-export const Privacy = () => (<div>
-	Privacy
-</div>);
 
-export default Privacy;
+const CalendarDayList = CreateListDay();
+
+export const Calendar: React.FC<any> = () => {
+	return (<LayoutCalendar headerChildren={<HeaderDate/>}>
+		<CalendarTop/>
+		<PopupEvents/>
+		<div className="calendar__main">
+			<CalendarHeader/>
+			<CalendarContent
+				days={CalendarDayList}
+			/>
+		</div>
+
+	</LayoutCalendar>);
+};
+
+export default Calendar;

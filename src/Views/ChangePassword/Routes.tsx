@@ -1,14 +1,14 @@
 import React from 'react';
-const Privacy = React.lazy(() => import('./View'));
+const ChangePassword = React.lazy(() => import('./View'));
 
 
-export const PrivacyRoute = [
+export const ChangePasswordRoute = [
 	{
-		path: '/privacy',
+		path: '/change-password',
 		exact: true,
-		name: 'Privacy',
-		component: Privacy,
+		name: 'Изменить пароль',
+		component: ChangePassword,
 	}
 ];
 
-export default PrivacyRoute;
+export default ChangePasswordRoute;

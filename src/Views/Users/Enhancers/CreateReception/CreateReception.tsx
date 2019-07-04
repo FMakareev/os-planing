@@ -110,9 +110,13 @@ const CreateReception: any = (WrapperComponent: any) => {
               }
             }
           })
-            .then((response: Response): any => response.json())
+            .then((response: Response): any => {
+              console.log(response);
+              return response.json();
+            })
             .catch((error: ApolloError) => {
               Logging(error.message, 'error');
+              console.log(JSON.parse(JSON.stringify(error)));
               return error;
             });
           console.log(result.message);

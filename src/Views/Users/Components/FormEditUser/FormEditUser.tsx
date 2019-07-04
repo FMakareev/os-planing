@@ -5,18 +5,22 @@ import {TextField} from "../../../../Components/TextField/TextField";
 import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFeedback";
 import {Button} from "../../../../Components/Button/Button";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
+import {MutationResult} from "react-apollo";
+import AvatarFields from '../../../../Components/AvatarFields/AvatarFields';
 
 
 interface FormEditUserState {
   city?: string;
-  name?: string;
+  fullName?: string;
   email?: string;
   password?: string;
   passwordConfirm?: string;
 }
 
 
-interface IFormEditUserProps {
+interface IFormEditUserProps extends MutationResult {
+  initialValues?: any;
+
   [prop: string]: any
 }
 
@@ -26,18 +30,16 @@ const FormEditUserValidate = (values: FormEditUserState) => {
   if (!values.city) {
     errors.city = 'Обязательно для заполнения'
   }
-  if (!values.name) {
-    errors.name = 'Обязательно для заполнения'
+  if (!values.fullName) {
+    errors.fullName = 'Обязательно для заполнения'
   }
   if (!values.email) {
     errors.email = 'Обязательно для заполнения'
   }
-  if (!values.password) {
-    errors.password = 'Обязательно для заполнения'
-  }
-  if (!values.passwordConfirm) {
-    errors.passwordConfirm = 'Обязательно для заполнения'
-  }
+  // if (!values.password) {
+  //   errors.password = 'Обязательно для заполнения'
+  // }
+
 
   if (values.password && values.password.length < 8) {
     errors.password = 'Пароль должен быть не менее 8 символов'
@@ -46,35 +48,40 @@ const FormEditUserValidate = (values: FormEditUserState) => {
   return errors
 };
 
-const FormEditUser: React.FC<IFormEditUserProps> = () => {
+const FormEditUser: React.FC<IFormEditUserProps> = ({initialValues, onSubmit, onClose,loading}) => {
   return (
     <Form
+      initialValues={initialValues}
       validate={FormEditUserValidate}
-      onSubmit={() => {
-      }}
+      onSubmit={onSubmit}
+
       render={({
                  submitError,
                  handleSubmit,
                  form,
                  submitting,
                  pristine,
+
                }: FormRenderProps<any>): ReactNode => {
+        console.log(form);
         return (<form onSubmit={handleSubmit} className="form">
           <Field
             name="city"
             type="text"
             placeholder="Название города"
             label={'Приемная'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
             }
           </Field>
           <Field
-            name="name"
+            name="fullName"
             type="text"
             placeholder="Фамилия Имя Отчество"
             label={'Имя пользователя'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
@@ -85,6 +92,7 @@ const FormEditUser: React.FC<IFormEditUserProps> = () => {
             type="email"
             placeholder="name@gmail.com"
             label={'E-mail пользователя'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
@@ -95,18 +103,34 @@ const FormEditUser: React.FC<IFormEditUserProps> = () => {
             type="password"
             placeholder="Не менее 8 символов"
             label={'Пароль пользователя'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
             }
           </Field>
+
+          <Field
+            name="avatar"
+            type="file"
+            label={'Загрузить фото'}
+            disabled={loading}
+          >
+            {
+              (props: FieldProps<any, any>) => (<AvatarFields {...props}/>)
+            }
+          </Field>
+
           {submitError && <InvalidFeedback error={submitError}/>}
 
           <div className="button-links">
             <Button mods={'button-primary--preloader'} disabled={pristine} type={'submit'}>
-              Сохранить <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft: '8px'}}/>
+              Сохранить {loading && <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft: '8px'}}/>}
             </Button>
-            <Button type={'button'}>
+            <Button onClick={()=>{
+              form.reset();
+              onClose && onClose()
+            }} type={'button'}>
               Отмена
             </Button>
           </div>

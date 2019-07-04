@@ -9,6 +9,7 @@ interface IAvatarFieldsProps {
   input?: FieldInputProps<{
     file: any,
     preview: string
+    url?: string
   }, any>;
   meta?: FieldMetaState<any>;
 
@@ -49,7 +50,7 @@ export class AvatarFields extends React.Component<IAvatarFieldsProps, IAvatarFie
     return (<div className="change-ava">
 
       <UserAvatar
-        avatar={input && input.value && input.value.preview}
+        avatar={input && input.value && (input.value.preview || input.value.url)}
         className={'change-ava__img'}
       />
       <button className="change-ava__link">

@@ -1,6 +1,7 @@
 
-
 .preloader {
+  $this: &;
+
   display: inline-block;
   position: relative;
   width: 64px;
@@ -10,28 +11,47 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
   }
 
   &--light {
-    div{
+    div {
       border-color: #fff transparent transparent transparent;
     }
   }
+
   &--blue {
-    div{
+    div {
       border-color: #3789d4 transparent transparent transparent;
     }
   }
+
   &--dark {
-    div{
+    div {
       border-color: $preloader-color transparent transparent transparent;
+    }
+  }
+
+  &--block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+
+    &#{$this}--sm {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    &#{$this}--md {
+      margin-top: 64px;
+      margin-bottom: 64px;
     }
   }
 
   &--sm {
     width: 20px;
     height: 20px;
+
     div {
       width: 20px;
       height: 20px;
@@ -40,9 +60,11 @@
       margin: 0;
     }
   }
+
   &--md {
     width: 64px;
     height: 64px;
+
     div {
       width: 51px;
       height: 51px;
@@ -53,6 +75,7 @@
   }
 
 }
+
 .preloader div {
   box-sizing: border-box;
   display: block;
@@ -60,15 +83,19 @@
   border-radius: 50%;
   animation: preloader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
+
 .preloader div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .preloader div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .preloader div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes preloader {
   0% {
     transform: rotate(0deg);

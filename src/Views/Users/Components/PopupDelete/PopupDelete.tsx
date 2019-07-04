@@ -5,10 +5,12 @@ import {Button} from "../../../../Components/Button/Button";
 import PopupWrapper from '../../../../Components/PopupWrapper/PopupWrapper';
 
 interface IPopupDeleteProps extends IPopupHoc {
+  onDelete?(id: string, callback: any): string;
+
   [prop: string]: any
 }
 
-const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen}) => {
+const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDelete, id}) => {
   return (
     <React.Fragment>
       <PopupWrapper
@@ -21,7 +23,9 @@ const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen}) => 
           <Button onClick={onClose} type={'button'}>
             Отмена
           </Button>
-          <Button onClick={onClose} type={'button'}>
+          <Button onClick={() => {
+            onDelete && onDelete(id, onClose);
+          }} type={'button'}>
             Да
           </Button>
         </div>

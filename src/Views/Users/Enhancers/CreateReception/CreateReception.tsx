@@ -8,30 +8,14 @@ import {ApolloError} from 'apollo-boost';
 import Logging from "../../../../Helpers/Logging";
 import {FORM_ERROR} from "final-form";
 import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
+import RefetchReceptionListQueries from "../RefetchReceptionListQueries/RefetchReceptionListQueries";
 
 interface ICreateUserProps extends MutateProps {
   [prop: string]: any
 }
 
-//{"errors": {
-//                    "sys": [""],
-//                    "write": [""],
-//                    "network": [""]
-//                     },
-//                  "message": "upload success",
-//                  "file_data": {
-//                    "id": "5d1e17abed0cbd439c5ed84c",
-//                    "name": "abed91541d97e7220d00910142b3942f.png",
-//                    "sha256":"bfc389cee1a268910e971335172d6004a4133ea633b80f5893975cb5e55d14c4",
-//                    "ext": ".png",
-//                    "mime": "image/png",
-//                    "size": "0.84",
-//                    "url": "/uploads/abed91541d97e7220d00910142b3942f.png",
-//                    "provider": "local"
-//                     }
-//                  }
 
-interface IResponseUploadFile extends Response {
+export interface IResponseUploadFile extends Response {
   errors: {
     sys: string[];
     write: string[];
@@ -51,7 +35,6 @@ interface IResponseUploadFile extends Response {
 
   [prop: string]: any;
 }
-
 
 const CreateReception: any = (WrapperComponent: any) => {
   return graphql<any, IReceptionData>(CreateUserMutation)(
@@ -92,49 +75,45 @@ const CreateReception: any = (WrapperComponent: any) => {
           })
       };
 
-
       onSubmit = async (values: FormCreateUserState) => {
-        console.log(values);
 
-        // const file: IResponseUploadFile = await this.uploadFile(typeof values.avatar === 'object' && values.avatar.file);
+        const file: IResponseUploadFile = await this.uploadFile(typeof values.avatar === 'object' && values.avatar.file);
 
-        // if (file.message === "upload success") {
-          const result: ApolloError = await this.props.mutate({
-            variables: {
-              city: values.city,
-              user: {
-                email: values.email,
-                password: values.password,
-                // avatar: file.file_data.id,
-                fullName: values.fullName
-              }
-            }
-          })
-            .then((response: Response): any => {
-              console.log(response);
-              return response.json();
+        if (file.message === "upload success") {
+          const {message}: any = await this.props
+            .mutate({
+              variables: {
+                city: values.city,
+                user: {
+                  email: values.email,
+                  password: values.password,
+                  avatar: file.file_data.id,
+                  fullName: values.fullName
+                }
+              },
+              refetchQueries: [RefetchReceptionListQueries()]
             })
             .catch((error: ApolloError) => {
               Logging(error.message, 'error');
-              console.log(JSON.parse(JSON.stringify(error)));
-              return error;
+              return JSON.parse(JSON.stringify(error));
             });
-          console.log(result.message);
-          console.log(result.graphQLErrors);
-          console.log(result.networkError);
-          return {
-            [FORM_ERROR]: GetMessageByTranslateKey(result.message),
+
+          if (message) {
+            return {
+              [FORM_ERROR]: GetMessageByTranslateKey(message),
+            }
+          } else {
+            this.props.onClose && this.props.onClose();
           }
-        // }
-        //
-        // return {
-        //   [FORM_ERROR]: GetMessageByTranslateKey(file.statusText),
-        // }
+
+        }
+
+        return {
+          [FORM_ERROR]: GetMessageByTranslateKey(file.statusText),
+        }
       };
 
       render() {
-        console.log(CreateUserMutation);
-        console.log(this.props);
         return <WrapperComponent
           {...this.props}
           onSubmit={this.onSubmit}

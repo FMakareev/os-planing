@@ -8,7 +8,10 @@ interface IDict {
 
   [index: string]: any;
 }
-
+// "In field "email": Expected "String!", found null"
+// 2: "In field "password": Expected "String!", found null"
+// 3: "In field "avatar": Expected "String!", found null"
+// 4: "In field "fullName": Expected "String!", found null."
 export const TranslateDict: IDict = {
   'Login or password not found': 'Пользователь с заданным логином или паролем не найден',
   'not found': 'Совпадений не найдено',
@@ -16,6 +19,10 @@ export const TranslateDict: IDict = {
   "Internal Server Error": 'Ошибка сервера',
   'Variable "$city" of required type "String!" was not provided.': '"Приемная" обязательна для заполнения',
   'Network error: Response not successful: Received status code 400': 'Ошибка сервера',
+  'In field "email": Expected "String!", found null': 'Email обязателен для заполнения',
+  'In field "password": Expected "String!", found null': 'Пароль обязателен для заполнения',
+  'In field "avatar": Expected "String!", found null': 'Аватар обязателен для заполнения',
+  'In field "fullName": Expected "String!", found null': 'ФИО обязателено для заполнения',
 };
 
 

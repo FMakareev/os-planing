@@ -44,11 +44,11 @@ export const InitUserStoreAction = () => (dispatch: Dispatch) => {
         resolve(JSON.parse(userData));
         return JSON.parse(userData);
       }
-      resolve(null);
+      resolve({});
 
       dispatch(UserInitError('User not found'));
     } catch (e) {
-      resolve(null);
+      resolve({});
       dispatch(UserInitError(e));
     }
   })

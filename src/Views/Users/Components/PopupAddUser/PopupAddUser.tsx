@@ -35,4 +35,4 @@ const PopupAddUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onSubmit, 
   );
 };
 
-export default CreateUser(PopupHoc(PopupAddUser)({excludeWrapper: 'popup'}));
+export default PopupHoc(CreateUser(PopupAddUser))({excludeWrapper: 'popup'});

@@ -6,9 +6,20 @@ query($page: Int!,$limit: Int!){
         }
         count
         items {
+            city
+            id
             user {
                 id
+                email
+                fullName
+                role
+                avatar {
+                    id
+                    url
+                }
             }
+            updated
+            created
         }
     }
 }

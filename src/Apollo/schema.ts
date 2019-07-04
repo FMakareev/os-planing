@@ -46,6 +46,15 @@ export interface IReception extends IBase{
 export interface IReceptionData {
   reception: IReception
 }
+export interface ICreateReceptionData {
+  data: {
+    createReception: {
+      reception: IReception
+    }
+  }
+}
+// data.createReception.reception
+
 
 
 

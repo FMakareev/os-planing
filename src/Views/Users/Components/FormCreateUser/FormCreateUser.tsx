@@ -10,11 +10,23 @@ import AvatarFields from "../../../../Components/AvatarFields/AvatarFields";
 
 
 export interface FormCreateUserState {
+  id?: string;
   city?: string;
   avatar?: {
     file: any,
     preview: string
-  } | string;
+    url?: string
+    id?: string
+  };
+  fullName?: string;
+  email?: string;
+  password?: string;
+  passwordConfirm?: string;
+}
+
+interface IFormCreateUserValidate {
+  city?: string;
+  avatar?: string;
   fullName?: string;
   email?: string;
   password?: string;
@@ -27,7 +39,7 @@ interface IFormCreateUserProps extends MutationResult {
 }
 
 const FormCreateUserValidate = (values: FormCreateUserState) => {
-  const errors: FormCreateUserState = {};
+  const errors: IFormCreateUserValidate = {};
 
   if (!values.city) {
     errors.city = 'Обязательно для заполнения'
@@ -66,7 +78,7 @@ const FormCreateUserValidate = (values: FormCreateUserState) => {
 const FormCreateUser: React.FC<IFormCreateUserProps> = ({onSubmit, loading}) => {
   return (
     <Form
-      // validate={FormCreateUserValidate}
+      validate={FormCreateUserValidate}
       onSubmit={onSubmit}
       render={({
                  submitError,
@@ -147,6 +159,7 @@ const FormCreateUser: React.FC<IFormCreateUserProps> = ({onSubmit, loading}) => 
           <Button mods={'button-primary--preloader'} disabled={pristine || loading} type={'submit'}>
             Сохранить {loading && <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft: '8px'}}/>}
           </Button>
+
         </form>)
       }}
     />

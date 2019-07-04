@@ -3,12 +3,17 @@ import PopupHoc, {IPopupHoc} from "../../../../Enhancers/PopupHOC/PopupHOC";
 import PopupWrapper from "../../../../Components/PopupWrapper/PopupWrapper";
 import EditIcon from "../../../../Assets/img/spritesvg/edit.svg";
 import FormEditUser from "../FormEditUser/FormEditUser";
+import UpdateReception from '../../Enhancers/UpdateReception/UpdateReception';
+import {MutateProps} from "react-apollo";
 
-interface IPopupAddUserProps extends IPopupHoc {
+interface IPopupEditUserProps extends IPopupHoc, MutateProps {
+  onSubmit: any;
+
   [prop: string]: any
 }
 
-const PopupEditUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onOpen}) => {
+const PopupEditUser: React.FC<IPopupEditUserProps> = ({isOpen, onClose, onOpen,initialValues, result,onSubmit,...rest}) => {
+  console.log('PopupEditUser: ',rest);
   return (
     <React.Fragment>
       <PopupWrapper
@@ -17,7 +22,7 @@ const PopupEditUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onOpen}) 
         onClose={onClose}
         className="popup--add-user"
       >
-        <FormEditUser/>
+        <FormEditUser {...result} onClose={onClose} onSubmit={onSubmit} initialValues={initialValues}/>
       </PopupWrapper>
       <a href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
         <img src={EditIcon} className="icon icon-edit "/>
@@ -26,4 +31,4 @@ const PopupEditUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onOpen}) 
   );
 };
 
-export default PopupHoc(PopupEditUser)({excludeWrapper: 'popup'});
+export default PopupHoc(UpdateReception(PopupEditUser))({excludeWrapper: 'popup'});

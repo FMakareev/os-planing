@@ -17,15 +17,21 @@ export enum PreloaderPositionEnum {
   center = 'center',
 }
 
+export enum PreloaderTypeEnum {
+  inline = 'inline',
+  block = 'block',
+}
+
 interface IPreloaderProps {
   size?: PreloaderSizeEnum,
   theme?: PreloaderThemeEnum,
   position?: PreloaderPositionEnum,
+  type?: PreloaderTypeEnum,
   style?: object,
 }
 
 
-export const Preloader: React.FC<IPreloaderProps> = ({size, theme, position, style}) => (
+export const Preloader: React.FC<IPreloaderProps> = ({size, theme, position, type, style}) => (
   <div style={style} className={classNames("preloader", {
     'preloader--xs': PreloaderSizeEnum.xs === size,
     'preloader--sm': PreloaderSizeEnum.sm === size,
@@ -34,6 +40,7 @@ export const Preloader: React.FC<IPreloaderProps> = ({size, theme, position, sty
     'preloader--light': PreloaderThemeEnum.light === theme,
     'preloader--blue': PreloaderThemeEnum.blue === theme,
     'preloader--position-center ': PreloaderPositionEnum.center === position,
+    'preloader--block ': PreloaderTypeEnum.block === type,
   })}>
     <div/>
     <div/>

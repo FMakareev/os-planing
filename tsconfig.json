@@ -19,6 +19,9 @@
     "noEmit": true,
     "jsx": "preserve"
   },
+  "typeRoots": [
+    "src/graphql.d.ts"
+  ],
   "include": [
     "src"
   ]

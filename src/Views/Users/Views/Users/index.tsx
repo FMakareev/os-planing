@@ -7,6 +7,11 @@ import {mock} from './mock'
 import PopupAddUser from '../../Components/PopupAddUser/PopupAddUser';
 import PopupEditUser from '../../Components/PopupEditUser/PopupEditUser';
 import PopupDelete from '../../Components/PopupDelete/PopupDelete';
+import ReceptionList from '../../Enhancers/ReceptionList/ReceptionList';
+import CreateReception from '../../Enhancers/CreateReception/CreateReception';
+
+
+const PopupAddUserWithQuery = CreateReception(PopupAddUser);
 
 export const Users = () => (<div className="inner">
 	<Breadcrumbs history={[
@@ -41,6 +46,7 @@ export const Users = () => (<div className="inner">
 	</NotificationsTop>
 
 	<div className="notifications__content">
+		<ReceptionList/>
 		{
 			mock.map((item, index: number) => <NotificationTableRow
 				EditComponent={<PopupEditUser/>}
@@ -48,8 +54,7 @@ export const Users = () => (<div className="inner">
 				key={`NotificationTableRow-${index}`} {...item} />)
 		}
 	</div>
-
-	<PopupAddUser/>
+	<PopupAddUserWithQuery/>
 
 </div>);
 

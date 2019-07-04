@@ -5,18 +5,24 @@ import {TextField} from "../../../../Components/TextField/TextField";
 import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFeedback";
 import {Button} from "../../../../Components/Button/Button";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
+import {MutationResult} from "react-apollo";
+import AvatarFields from "../../../../Components/AvatarFields/AvatarFields";
 
 
-interface FormCreateUserState {
+export interface FormCreateUserState {
   city?: string;
-  name?: string;
+  avatar?: {
+    file: any,
+    preview: string
+  } | string;
+  fullName?: string;
   email?: string;
   password?: string;
   passwordConfirm?: string;
 }
 
 
-interface IFormCreateUserProps {
+interface IFormCreateUserProps extends MutationResult {
   [prop: string]: any
 }
 
@@ -26,8 +32,11 @@ const FormCreateUserValidate = (values: FormCreateUserState) => {
   if (!values.city) {
     errors.city = 'Обязательно для заполнения'
   }
-  if (!values.name) {
-    errors.name = 'Обязательно для заполнения'
+  if (!values.avatar) {
+    errors.avatar = 'Обязательно для заполнения'
+  }
+  if (!values.fullName) {
+    errors.fullName = 'Обязательно для заполнения'
   }
   if (!values.email) {
     errors.email = 'Обязательно для заполнения'
@@ -54,12 +63,11 @@ const FormCreateUserValidate = (values: FormCreateUserState) => {
   return errors
 };
 
-const FormCreateUser: React.FC<IFormCreateUserProps> = () => {
+const FormCreateUser: React.FC<IFormCreateUserProps> = ({onSubmit, loading}) => {
   return (
     <Form
-      validate={FormCreateUserValidate}
-      onSubmit={() => {
-      }}
+      // validate={FormCreateUserValidate}
+      onSubmit={onSubmit}
       render={({
                  submitError,
                  handleSubmit,
@@ -67,22 +75,25 @@ const FormCreateUser: React.FC<IFormCreateUserProps> = () => {
                  submitting,
                  pristine,
                }: FormRenderProps<any>): ReactNode => {
+
         return (<form onSubmit={handleSubmit} className="form">
           <Field
             name="city"
             type="text"
             placeholder="Название города"
             label={'Приемная'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
             }
           </Field>
           <Field
-            name="name"
+            name="fullName"
             type="text"
             placeholder="Фамилия Имя Отчество"
             label={'Имя пользователя'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
@@ -93,6 +104,7 @@ const FormCreateUser: React.FC<IFormCreateUserProps> = () => {
             type="email"
             placeholder="name@gmail.com"
             label={'E-mail пользователя'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
@@ -103,6 +115,7 @@ const FormCreateUser: React.FC<IFormCreateUserProps> = () => {
             type="password"
             placeholder="Не менее 8 символов"
             label={'Пароль пользователя'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
@@ -113,15 +126,26 @@ const FormCreateUser: React.FC<IFormCreateUserProps> = () => {
             type="password"
             placeholder="Не менее 8 символов"
             label={'Повторите пароль'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
             }
           </Field>
+          <Field
+            name="avatar"
+            type="file"
+            label={'Загрузить фото'}
+            disabled={loading}
+          >
+            {
+              (props: FieldProps<any, any>) => (<AvatarFields {...props}/>)
+            }
+          </Field>
           {submitError && <InvalidFeedback error={submitError}/>}
 
-          <Button mods={'button-primary--preloader'} disabled={pristine} type={'submit'}>
-            Сохранить <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft: '8px'}}/>
+          <Button mods={'button-primary--preloader'} disabled={pristine || loading} type={'submit'}>
+            Сохранить {loading && <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft: '8px'}}/>}
           </Button>
         </form>)
       }}

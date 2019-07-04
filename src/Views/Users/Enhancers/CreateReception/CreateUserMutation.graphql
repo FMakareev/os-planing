@@ -1,0 +1,21 @@
+mutation($city: String!, $user: UserInput!){
+    createReception(city: $city, user: $user){
+        reception {
+           city
+            id
+            user {
+                id
+                email
+                fullName
+                role
+                avatar {
+                    url
+                }
+            }
+            updated
+            created
+        }
+    }
+}
+
+

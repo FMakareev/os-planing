@@ -1,4 +1,5 @@
 /** isBrowser */
+import {Action, Reducer} from "redux";
 import {
   USER_ADD,
   USER_LOGIN_LOADING_ERROR,
@@ -8,14 +9,16 @@ import {
   USER_UPDATE_LOADING_ERROR,
   USER_UPDATE_LOADING_START,
   USER_UPDATE_LOADING_SUCCESS,
+  USER_INIT_LOADING_START,
+  USER_INIT_LOADING_SUCCESS,
+  USER_INIT_LOADING_ERROR,
 } from './actionTypes';
-import {IUser} from "./interfaces";
-import {Action, Reducer} from "redux";
-
+import {IUser} from "../../../Apollo/schema";
 
 
 export interface IUserState {
   userLoginLoading: boolean;
+  userInitLoading: boolean;
   userUpdateLoading: boolean;
   isLogin: boolean;
   error: any;
@@ -25,14 +28,19 @@ export interface IUserState {
 export const UserInitialState: IUserState = {
   error: null,
   userLoginLoading: false,
+  userInitLoading: true,
   userUpdateLoading: false,
   isLogin: false,
   user: null,
 };
 
 
-export const ReducerUser: Reducer = (prevState = UserInitialState, {  type,  ...rest}: Action) => {
+export const ReducerUser: Reducer = (prevState = UserInitialState, {type, ...rest}: Action) => {
   switch (type) {
+
+    /**
+     * АВТОРИЗАЦИЯ
+     * */
     case USER_LOGIN_LOADING_START:
       return Object.assign({}, prevState, {
         userLoginLoading: true,
@@ -46,10 +54,32 @@ export const ReducerUser: Reducer = (prevState = UserInitialState, {  type,  ...
       });
     case USER_LOGIN_LOADING_ERROR:
       return Object.assign({}, prevState, {
-        initLoading: false,
+        userInitLoading: false,
         isLogin: false,
         ...rest,
       });
+
+    /**
+     * ИНИЦИАЛИЗАЦИЯ
+     * */
+    case USER_INIT_LOADING_START:
+      return Object.assign({}, prevState, {
+        userInitLoading: true,
+        ...rest,
+      });
+    case USER_INIT_LOADING_SUCCESS:
+      return Object.assign({}, prevState, {
+        ...UserInitialState,
+        ...rest,
+        isLogin: true,
+      });
+    case USER_INIT_LOADING_ERROR:
+      return Object.assign({}, prevState, {
+        userInitLoading: false,
+        isLogin: false,
+        ...rest,
+      });
+
     /** экшены обновления пользователя */
     case USER_UPDATE_LOADING_START:
       return Object.assign({}, prevState, {
@@ -68,6 +98,7 @@ export const ReducerUser: Reducer = (prevState = UserInitialState, {  type,  ...
         isLogin: false,
         ...rest,
       });
+
     case USER_ADD:
       return Object.assign({}, prevState, {
         ...UserInitialState,

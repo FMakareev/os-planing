@@ -5,12 +5,9 @@
  * */
 export const FindClassInPath = (path: any[], className: string): number => {
   try {
-    console.log(path);
     return path.findIndex(item => {
-      console.log(item.className);
       if (item.className) {
         let result: string[] = item.className.match(new RegExp(`((^|\\s)${className}(\\s|$))`, 'g'));
-        console.log(result);
         return result.length > 0;
       }
       return false;

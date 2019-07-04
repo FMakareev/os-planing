@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PopupHoc, {IPopupHoc} from "../../../../Components/PopupHOC/PopupHOC";
+import PopupHoc, {IPopupHoc} from "../../../../Enhancers/PopupHOC/PopupHOC";
 import PopupWrapper from "../../../../Components/PopupWrapper/PopupWrapper";
 import EditIcon from "../../../../Assets/img/spritesvg/edit.svg";
 import FormEditUser from "../FormEditUser/FormEditUser";

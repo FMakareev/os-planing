@@ -1,13 +1,18 @@
 import * as React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {setDefaultLocale, registerLocale} from "react-datepicker";
 import ru from 'date-fns/locale/ru';
 import "react-datepicker/dist/react-datepicker.css";
 import './Style/main.scss';
-import Preloader, {PreloaderSizeEnum} from "./Components/Preloader/Preloader";
+import Preloader, {
+  PreloaderPositionEnum,
+  PreloaderSizeEnum,
+  PreloaderThemeEnum
+} from "./Components/Preloader/Preloader";
 import AppRoutes from './Views/AppRoutes';
 import RouteWithHelmet from "./Containers/RouteWithHelmet/RouteWithHelmet";
 import {LAYOUT_AUTH, LAYOUT_CALENDAR} from './Shared/Layouts';
+import AppUserInitHoc from './Enhancers/AppUserInitHOC';
 
 registerLocale('ru', ru);
 setDefaultLocale('ru');
@@ -18,8 +23,7 @@ const LayoutApp = React.lazy(() => import('./Containers/LayoutApp/LayoutApp'));
 
 export const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <React.Suspense fallback={<Preloader size={PreloaderSizeEnum.sm}/>}>
+      <React.Suspense fallback={<Preloader theme={PreloaderThemeEnum.blue} position={PreloaderPositionEnum.center} size={PreloaderSizeEnum.md}/>}>
         <Switch>
           {AppRoutes && AppRoutes.map((route: any, idx: number) => {
             return route && route.component ? (
@@ -54,9 +58,7 @@ export const App: React.FC = () => {
           })}
         </Switch>
       </React.Suspense>
-
-    </BrowserRouter>
   );
 };
 
-export default App;
+export default AppUserInitHoc(App);

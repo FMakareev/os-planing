@@ -6,10 +6,21 @@
   width: 64px;
   height: 64px;
 
+  &--position-center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
 
   &--light {
     div{
       border-color: #fff transparent transparent transparent;
+    }
+  }
+  &--blue {
+    div{
+      border-color: #3789d4 transparent transparent transparent;
     }
   }
   &--dark {

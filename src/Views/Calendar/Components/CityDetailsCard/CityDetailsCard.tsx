@@ -3,6 +3,8 @@ import {
   ProjectReportStatus,
   ReportStatusEnum
 } from '../../../Project/Components/ProjectReportStatus/ProjectReportStatus';
+import SelectStatus from "../../../../Components/Select/SelectStatus";
+import withSelect from "../../../../Components/Select/withSelect";
 
 export interface ICityDetailsCardProps {
   status: ReportStatusEnum;
@@ -12,11 +14,31 @@ export interface ICityDetailsCardProps {
   [prop: string]: any
 }
 
+const SelectStatusWithSelect = withSelect(SelectStatus)();
 const CityDetailsCard: React.FC<ICityDetailsCardProps> = ({status}) => {
   return (
     <div className="city-details">
-      <ProjectReportStatus
-        status={status}
+      <SelectStatusWithSelect
+        selected={status}
+        options={[
+          {
+            label:ReportStatusEnum.ok,
+            value:ReportStatusEnum.ok
+          },
+          {
+            label:ReportStatusEnum.report,
+            value:ReportStatusEnum.report
+          },
+          {
+            label:ReportStatusEnum.review,
+            value:ReportStatusEnum.review
+          },
+          {
+            label:ReportStatusEnum.noReport,
+            value:ReportStatusEnum.noReport
+          },
+        ]}
+
       />
       <a className="city-details__title" href="javascript:void(0);">
         Проект модернизации театра юного зрителя по адресу

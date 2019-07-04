@@ -1,0 +1,14 @@
+query($page: Int!,$limit: Int!){
+    receptionPagination(page: $page, limit: $limit) {
+        pageInfo {
+            nextPage
+            prevPage
+        }
+        count
+        items {
+            user {
+                id
+            }
+        }
+    }
+}

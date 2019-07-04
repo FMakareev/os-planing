@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PopupWrapper from "../../../../Components/PopupWrapper/PopupWrapper";
-import PopupHoc, {IPopupHoc} from '../../../../Components/PopupHOC/PopupHOC';
+import PopupHoc, {IPopupHoc} from '../../../../Enhancers/PopupHOC/PopupHOC';
 import FormCreateProject from '../FormCreateProject/FormCreateProject';
 import EditIcon from "../../../../Assets/img/spritesvg/edit.svg";
 

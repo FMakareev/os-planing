@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PopupHoc, {IPopupHoc} from "../../../../Components/PopupHOC/PopupHOC";
+import PopupHoc, {IPopupHoc} from "../../../../Enhancers/PopupHOC/PopupHOC";
 import Button from '../../../../Components/Button/Button';
 import EventList from '../EventList/EventList';
 import PopupWrapper from '../../../../Components/PopupWrapper/PopupWrapper';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PopupHoc, {IPopupHoc} from "../../../../Components/PopupHOC/PopupHOC";
+import PopupHoc, {IPopupHoc} from "../../../../Enhancers/PopupHOC/PopupHOC";
 import DeleteIcon from "../../../../Assets/img/spritesvg/delete.svg";
 import {Button} from "../../../../Components/Button/Button";
 import PopupWrapper from '../../../../Components/PopupWrapper/PopupWrapper';

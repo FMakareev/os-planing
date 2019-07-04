@@ -525,6 +525,14 @@ textarea{
 				background-size: 100%;
 			}
 		}
+		&--no-report{
+			color: #8288A2;
+			fill: #8288A2;
+			padding-left: 0 !important;
+			&:before{
+				content: none;
+			}
+		}
 		.icon-arrow{
 			//width: 10px;
 			//height: 6px;
@@ -551,6 +559,10 @@ textarea{
 	z-index: 1;
 	padding: 15px 0;
 	display: none;
+
+	&--active {
+		display: block;
+	}
 	a{
 		display: block;
 		text-decoration: none;
@@ -567,6 +579,9 @@ textarea{
 		}
 		&.review{
 			color: #f69752;
+		}
+		&.no-review{
+			color: #8288A2;
 		}
 		&:hover{
 			background: #41a3fd;
@@ -603,6 +618,9 @@ textarea{
 .change-ava{
 	display: flex;
 	align-items: center;
+	position: relative;
+	cursor: pointer;
+
 	&__img{
 		width: 96px;
 		height: 96px;
@@ -632,7 +650,7 @@ textarea{
 		background-color: transparent;
 		border: none;
 		padding: 0;
-
+		margin-top: 0 !important;
 		.icon{
 			display: block;
 			width: 24px;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import close from '../../Assets/img/spritesvg/close.svg';
-import {IPopupHoc} from "../PopupHOC/PopupHOC";
+import {IPopupHoc} from "../../Enhancers/PopupHOC/PopupHOC";
 
 interface IPopupWrapperProps extends IPopupHoc {
   className?: string;

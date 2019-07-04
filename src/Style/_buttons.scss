@@ -10,6 +10,7 @@
   cursor: pointer;
   text-decoration: none;
   outline: none;
+  transition: .225ms all;
   &:hover{
     background-color: #41a3fd;
   }
@@ -21,6 +22,7 @@
   }
   &--preloader {
     display: flex;
+    justify-content: center;
   }
 }
 

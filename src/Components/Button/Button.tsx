@@ -26,13 +26,14 @@ interface IButtonProps {
 	[prop: string]: any
 }
 
-export const Button: React.FC<IButtonProps> = ({children, style, as, to, mods, hidden, ...rest}) => {
+export const Button: React.FC<IButtonProps> = ({children, style, as, to, mods,type, hidden, ...rest}) => {
 	const Component = as === ButtonAsEnum.link ? Link : `button`;
 
 	return (
 		// @ts-ignore
 		<Component
 			{...rest}
+			type={type}
 			className={
 				classNames({
 						'button-primary': style === ButtonStyleEnum.primary,

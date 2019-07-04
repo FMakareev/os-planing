@@ -5,42 +5,38 @@ import Footer from "../../../../Components/Footer/Footer";
 import LoginHoc from "../../Components/LoginHOC/LoginHOC";
 
 
-const LoginFormWithHOC = LoginHoc(LoginForm)();
+const LoginFormWithHOC = LoginHoc(LoginForm);
 
 
 interface ILoginPageProps {
-    [prop: string]: any;
+  [prop: string]: any;
 }
 
 interface ILoginPageState {
-    [prop: string]: any;
+  [prop: string]: any;
 }
 
 export class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
 
 
-
-
-    render(){
-      return (
-        <div className="start-bg">
-          <div className="start">
-            <div className="start__logo">
-              <img
-                src={startLogo}
-                alt="logo"
-              />
-            </div>
-
-            <LoginFormWithHOC
-
+  render() {
+    return (
+      <div className="start-bg">
+        <div className="start">
+          <div className="start__logo">
+            <img
+              src={startLogo}
+              alt="logo"
             />
-
-            <Footer className="start__personaly"     />
           </div>
+
+          <LoginFormWithHOC/>
+
+          <Footer className="start__personaly"/>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 export default LoginPage;

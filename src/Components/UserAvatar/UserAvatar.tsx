@@ -2,7 +2,6 @@ import * as React from 'react';
 import classNames from 'classnames';
 
 interface IUserAvatarProps {
-  avatar?: string | null;
   href?: string;
   mods?: string;
   onClick?: any;

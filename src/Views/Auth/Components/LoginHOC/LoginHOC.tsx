@@ -29,7 +29,6 @@ const LoginHoc = (WrappedComponent: React.ElementType) => {
 
     onSubmit = async (values: LoginFormState) => {
       const {data, status}: AxiosResponse<ILoginResponse> = await this.props.userLogin(values);
-      console.log(data, status);
       if (status === 200 && data.user_data) {
         return this.props.history.push('/');
       }
@@ -42,7 +41,6 @@ const LoginHoc = (WrappedComponent: React.ElementType) => {
     };
 
     render() {
-      console.log(this.props);
       const {user} = this.props;
       return (<WrappedComponent
         loading={user.userLoginLoading}

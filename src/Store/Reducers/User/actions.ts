@@ -1,6 +1,9 @@
 import JsonToUrlEncoded from "../../../Helpers/JsonToUrlEncoded";
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import {Dispatch} from "redux";
+import UserItemQuery from './UserItemQuery.graphql';
+
+import Client from '../../../Apollo';
 import {
   UserLoginError,
   UserLoginSuccess,
@@ -11,6 +14,7 @@ import {
   UserInitError
 } from "./actionCreators";
 import {IUser} from "../../../Apollo/schema";
+import {ApolloError} from "apollo-boost";
 
 
 export const LogOutAction = () => (dispatch: Dispatch) => {
@@ -40,11 +44,28 @@ export const InitUserStoreAction = () => (dispatch: Dispatch): Promise<any> => {
       dispatch(UserInitLoading());
       const userData: string | null = window.localStorage.getItem('user_date');
       if (userData) {
-        dispatch(UserInitSuccess(JSON.parse(userData)));
-        resolve(JSON.parse(userData));
-        return JSON.parse(userData);
+        const user = JSON.parse(userData);
+        Client.query({
+          query: UserItemQuery,
+          variables: {
+            id: user.id,
+          }
+        })
+          .then((response: any) => {
+            console.log(response);
+            localStorage.setItem('user_date',JSON.stringify(response.data.userItem));
+            dispatch(UserInitSuccess(response.data.userItem));
+            resolve(response.data.userItem);
+          })
+          .catch((error: ApolloError) => {
+            console.log(error);
+            dispatch(UserInitError('Request error'));
+            resolve(null);
+          });
+
+      } else {
+        resolve(null);
       }
-      resolve(null);
 
       dispatch(UserInitError('User not found'));
     } catch (e) {

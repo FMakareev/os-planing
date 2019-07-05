@@ -1,0 +1,12 @@
+query ($id: String!) {
+    userItem(id: $id) {
+        id
+        email
+        fullName
+        role
+        avatar {
+            id
+            url
+        }
+    }
+}

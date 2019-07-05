@@ -16,19 +16,26 @@ interface IHeaderProfileProps extends IPopupHoc {
 }
 
 
-export const HeaderProfile: React.FC<IHeaderProfileProps> = ({isOpen,user, onToggle}) => (
-  <div className="header__profile profile-header">
-    <UserAvatar onClick={onToggle}/>
-    {
-      user.user && user.user.role === UserRoleEnum.admin &&
-      <ProfileDropdownAdmin {...user} isOpen={isOpen}/>
-    }
-    {
-      user.user && user.user.role !== UserRoleEnum.admin  &&
-      <ProfileDropdownUser {...user} isOpen={isOpen}/>
-    }
-  </div>
-);
+export const HeaderProfile: React.FC<IHeaderProfileProps> = ({isOpen, user, onToggle}) => {
+  return (
+    <div className="header__profile profile-header">
+      <UserAvatar
+        avatar={user.user &&
+        user.user.avatar &&
+        user.user.avatar.url}
+        onClick={onToggle}
+      />
+      {
+        user.user && user.user.role === UserRoleEnum.admin &&
+        <ProfileDropdownAdmin {...user} isOpen={isOpen}/>
+      }
+      {
+        user.user && user.user.role !== UserRoleEnum.admin &&
+        <ProfileDropdownUser {...user} isOpen={isOpen}/>
+      }
+    </div>
+  );
+}
 
 
 const mapStateToProps = (state: IStoreState) => ({

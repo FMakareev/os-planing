@@ -13,7 +13,6 @@ interface IPopupEditUserProps extends IPopupHoc, MutateProps {
 }
 
 const PopupEditUser: React.FC<IPopupEditUserProps> = ({isOpen, onClose, onOpen,initialValues, result,onSubmit,...rest}) => {
-  console.log('PopupEditUser: ',rest);
   return (
     <React.Fragment>
       <PopupWrapper

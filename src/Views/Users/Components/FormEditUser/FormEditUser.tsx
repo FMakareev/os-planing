@@ -61,9 +61,9 @@ const FormEditUser: React.FC<IFormEditUserProps> = ({initialValues, onSubmit, on
                  form,
                  submitting,
                  pristine,
-
+values
                }: FormRenderProps<any>): ReactNode => {
-        console.log(form);
+        console.log('loading: ', loading);
         return (<form onSubmit={handleSubmit} className="form">
           <Field
             name="city"

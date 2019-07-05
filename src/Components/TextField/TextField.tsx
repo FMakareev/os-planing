@@ -33,7 +33,6 @@ export const TextField: React.FC<ITextFieldProps> = ({
                                                      }) => {
   const Field = as === 'textarea' ? 'textarea' : 'input';
   const error = meta && meta.touched ? meta.error || meta.submitError : null;
-
   return (
     <React.Fragment>
 
@@ -44,10 +43,10 @@ export const TextField: React.FC<ITextFieldProps> = ({
           className={classNames("form__input", {
             'error': error,
           })}
-          type={type}
           placeholder={placeholder}
           disabled={disabled}
           {...input}
+          type={type}
         />
         {
           label && <TextFieldLabel label={label} error={error}/>

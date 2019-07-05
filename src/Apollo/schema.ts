@@ -53,7 +53,6 @@ export interface ICreateReceptionData {
     }
   }
 }
-// data.createReception.reception
 
 
 
@@ -62,6 +61,22 @@ export interface ICreateReceptionData {
 export interface IProject extends IBase{
   name: string;
 }
+
+
+export interface IUserChangePassword {
+  changePassword: {
+    user: IUser
+  }
+}
+export interface IUserChangePasswordVariables {
+  id: string;
+  newPassword: string;
+  oldPassword: string;
+}
+
+
+
+
 
 
 export interface Query {

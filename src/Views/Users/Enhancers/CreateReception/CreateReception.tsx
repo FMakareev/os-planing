@@ -2,7 +2,7 @@ import * as React from 'react';
 import {graphql, MutateProps} from 'react-apollo'
 
 import CreateUserMutation from './CreateUserMutation.graphql';
-import {IReceptionData} from '../../../../Apollo/schema';
+import {ICreateReceptionData} from '../../../../Apollo/schema';
 import {FormCreateUserState} from "../../Components/FormCreateUser/FormCreateUser";
 import {ApolloError} from 'apollo-boost';
 import Logging from "../../../../Helpers/Logging";
@@ -37,7 +37,7 @@ export interface IResponseUploadFile extends Response {
 }
 
 const CreateReception: any = (WrapperComponent: any) => {
-  return graphql<any, IReceptionData>(CreateUserMutation)(
+  return graphql<any, ICreateReceptionData>(CreateUserMutation)(
     class extends React.Component<ICreateUserProps | any> {
 
 

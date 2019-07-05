@@ -26,5 +26,5 @@ export class LogoutPage extends React.Component<ILogoutPageProps, ILogoutPageSta
 
 const mapDispatchToProps = (dispatch: any) => ({
   LogOut: () => dispatch(LogOutAction())
-})
+});
 export default connect(null, mapDispatchToProps)(withRouter(LogoutPage));

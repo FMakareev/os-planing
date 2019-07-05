@@ -4,7 +4,7 @@ const ProfileSettingsAdmin = React.lazy(() => import('./Views/ProfileSettingsAdm
 
 export const ProfileRoute = [
 	{
-		path: '/profile-settings',
+		path: '/settings',
 		exact: true,
 		name: 'Настройки администратора',
 		component: ProfileSettingsAdmin,

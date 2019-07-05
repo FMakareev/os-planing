@@ -1,0 +1,25 @@
+mutation(
+    $host: String,
+    $login: String,
+    $password: String,
+    $port: String,
+    $tlsUse: Boolean
+){
+    createSettings(
+        host: $host,
+        login: $login,
+        password: $password,
+        port: $port,
+        tlsUse: $tlsUse
+    ){
+        settings {
+            host
+            login
+            password
+            port
+            tlsUse
+            updated
+            created
+        }
+    }
+}

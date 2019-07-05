@@ -88,6 +88,16 @@ export interface IUserChangePasswordVariables {
   oldPassword: string;
 }
 
+export interface ISMTPSettings  extends IBase{
+  host: string;
+  port: string;
+  login: string;
+  password: string;
+  tlsUse: boolean;
+}
+
+
+
 
 export interface Query {
   projectList: IProject;

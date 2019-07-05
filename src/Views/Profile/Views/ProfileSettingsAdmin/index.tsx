@@ -4,13 +4,16 @@ import {PageTitle} from "../../../../Components/PageTitle/PageTitle";
 
 import {FormChangeAvatar} from '../../Components/FormChangeAvatar/FormChangeAvatar';
 
-import {FormChangeAdmin} from '../../Components/FormChangeAdmin/FormChangeAdmin';
+import {FormChangeSMTPSetting} from '../../Components/FormChangeSMTPSetting/FormChangeSMTPSetting';
 import LayoutWithSidebar from '../../../../Containers/LayoutWithSidebar/LayoutWithSidebar';
 import ChangeAvatarHOC from '../../Enhancers/ChangeAvatarHOC/ChangeAvatarHOC'
+import ChangeSettingsHoc from "../../Enhancers/ChangeSettingsHOC/ChangeSettingsHOC";
+import GetSmtpSetting from "../../Enhancers/GetSMTPSetting/GetSMTPSetting";
 
 
 const FormChangeAvatarWithQuery = ChangeAvatarHOC(FormChangeAvatar);
-const ChangeSettingsHocWithQuery = ChangeAvatarHOC(FormChangeAdmin);
+const FormChangeSMTPSettingWithQuery = ChangeSettingsHoc(FormChangeSMTPSetting);
+const GetSmtpSettingWithQuery = GetSmtpSetting(FormChangeSMTPSettingWithQuery);
 
 
 export const ProfileSettingsAdmin = () => (
@@ -32,7 +35,7 @@ export const ProfileSettingsAdmin = () => (
 			Настройки учетной записи
 		</PageTitle>
 		<div className="inner__content">
-			<ChangeSettingsHocWithQuery/>
+			<GetSmtpSettingWithQuery/>
 		</div>
 	</LayoutWithSidebar>
 );

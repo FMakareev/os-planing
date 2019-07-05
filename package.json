@@ -50,6 +50,7 @@
     "react-select": "^3.0.4",
     "react-smart-sections": "0.0.2",
     "react-sticky": "^6.0.3",
+    "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",

@@ -1,0 +1,11 @@
+query{
+    settingsItem {
+        host
+        login
+        password
+        port
+        tlsUse
+        updated
+        created
+    }
+}

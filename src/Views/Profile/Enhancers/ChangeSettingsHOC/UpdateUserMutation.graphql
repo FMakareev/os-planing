@@ -1,0 +1,14 @@
+mutation($email: String,$fullName: String,$id: String!){
+    updateUser(email: $email, fullName: $fullName, id: $id) {
+        user {
+            id
+            email
+            fullName
+            role
+            avatar {
+                id
+                url
+            }
+        }
+    }
+}

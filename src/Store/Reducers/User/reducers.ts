@@ -1,5 +1,5 @@
 /** isBrowser */
-import {Action, Reducer} from "redux";
+import {AnyAction, Reducer} from "redux";
 import {
   USER_ADD,
   USER_LOGIN_LOADING_ERROR,
@@ -35,7 +35,7 @@ export const UserInitialState: IUserState = {
 };
 
 
-export const ReducerUser: Reducer = (prevState = UserInitialState, {type, ...rest}: Action) => {
+export const ReducerUser: Reducer = (prevState = UserInitialState, {type,user, ...rest}: AnyAction) => {
   switch (type) {
 
     /**
@@ -50,6 +50,7 @@ export const ReducerUser: Reducer = (prevState = UserInitialState, {type, ...res
       return Object.assign({}, prevState, {
         ...UserInitialState,
         ...rest,
+        user,
         isLogin: true,
       });
     case USER_LOGIN_LOADING_ERROR:
@@ -65,12 +66,14 @@ export const ReducerUser: Reducer = (prevState = UserInitialState, {type, ...res
     case USER_INIT_LOADING_START:
       return Object.assign({}, prevState, {
         userInitLoading: true,
+
         ...rest,
       });
     case USER_INIT_LOADING_SUCCESS:
       return Object.assign({}, prevState, {
         ...UserInitialState,
         ...rest,
+        user,
         isLogin: true,
       });
     case USER_INIT_LOADING_ERROR:
@@ -100,15 +103,20 @@ export const ReducerUser: Reducer = (prevState = UserInitialState, {type, ...res
       });
 
     case USER_ADD:
+      localStorage.setItem('user_date', JSON.stringify(user));
       return Object.assign({}, prevState, {
         ...UserInitialState,
         isLogin: true,
+        userInitLoading: false,
+        user,
         ...rest,
       });
     case USER_REMOVE:
 
-      return UserInitialState;
-    default:
+      return Object.assign({}, prevState, {
+        ...UserInitialState,
+        userInitLoading: false,
+      });    default:
       return prevState;
   }
 };

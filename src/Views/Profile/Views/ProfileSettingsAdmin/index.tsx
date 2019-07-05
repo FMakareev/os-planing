@@ -6,10 +6,15 @@ import {FormChangeAvatar} from '../../Components/FormChangeAvatar/FormChangeAvat
 
 import {FormChangeAdmin} from '../../Components/FormChangeAdmin/FormChangeAdmin';
 import LayoutWithSidebar from '../../../../Containers/LayoutWithSidebar/LayoutWithSidebar';
+import ChangeAvatarHOC from '../../Enhancers/ChangeAvatarHOC/ChangeAvatarHOC'
+
+
+const FormChangeAvatarWithQuery = ChangeAvatarHOC(FormChangeAvatar);
+const ChangeSettingsHocWithQuery = ChangeAvatarHOC(FormChangeAdmin);
 
 
 export const ProfileSettingsAdmin = () => (
-	<LayoutWithSidebar sidebarContent={<FormChangeAvatar/>}>
+	<LayoutWithSidebar sidebarContent={<FormChangeAvatarWithQuery/>}>
 		<Breadcrumbs
 			history={[
 				{
@@ -27,7 +32,7 @@ export const ProfileSettingsAdmin = () => (
 			Настройки учетной записи
 		</PageTitle>
 		<div className="inner__content">
-			<FormChangeAdmin/>
+			<ChangeSettingsHocWithQuery/>
 		</div>
 	</LayoutWithSidebar>
 );

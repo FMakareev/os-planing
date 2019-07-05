@@ -1,4 +1,3 @@
-
 export enum UserRoleEnum {
   admin = 'admin',
   user = 'user',
@@ -27,7 +26,7 @@ export interface File extends IBase {
   created: string;
 }
 
-export interface IUser extends IBase{
+export interface IUser extends IBase {
   email: string;
   avatar?: File | null;
   role: UserRoleEnum;
@@ -35,7 +34,7 @@ export interface IUser extends IBase{
   id?: string;
 }
 
-export interface IReception extends IBase{
+export interface IReception extends IBase {
   id: string;
   city: string;
   user: IUser;
@@ -46,6 +45,7 @@ export interface IReception extends IBase{
 export interface IReceptionData {
   reception: IReception
 }
+
 export interface ICreateReceptionData {
   data: {
     createReception: {
@@ -55,10 +55,23 @@ export interface ICreateReceptionData {
 }
 
 
+export interface IUpdateUserData extends IBase {
+  data:{
+    updateUser: {
+      user: IUser
+    }
+  }
+
+}
+export interface IUpdateUserDataVariables extends IBase {
+ id: string;
+ avatar?: string;
+ email?: string;
+ fullName?: string;
+}
 
 
-
-export interface IProject extends IBase{
+export interface IProject extends IBase {
   name: string;
 }
 
@@ -68,15 +81,12 @@ export interface IUserChangePassword {
     user: IUser
   }
 }
+
 export interface IUserChangePasswordVariables {
   id: string;
   newPassword: string;
   oldPassword: string;
 }
-
-
-
-
 
 
 export interface Query {

@@ -1,0 +1,14 @@
+mutation($avatar: String, $id: String!) {
+    updateUser(id:$id, avatar:$avatar){
+        user {
+            id
+            email
+            fullName
+            role
+            avatar {
+                id
+                url
+            }
+        }
+    }
+}

@@ -9,6 +9,7 @@ mutation($city: String!, $user: UserInput!){
                 fullName
                 role
                 avatar {
+                    id
                     url
                 }
             }

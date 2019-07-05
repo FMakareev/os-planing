@@ -1,33 +1,77 @@
 import * as React from 'react';
-import PhotoIcon from "../../../../Assets/img/spritesvg/photo.svg";
-import {UserAvatar} from '../../../../Components/UserAvatar/UserAvatar';
+
 import {Button, ButtonStyleEnum} from '../../../../Components/Button/Button';
+import {Field, FieldProps, Form, FormRenderProps} from "react-final-form";
+import {ReactNode} from "react";
+import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFeedback";
+import AvatarFields from "../../../../Components/AvatarFields/AvatarFields";
+import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
 
 interface IFormChangeAvatarProps {
-	[prop: string]: any
+  [prop: string]: any
+}
+
+interface IFormChangeAvatarValues {
+  avatar?: {
+    file?: any,
+    preview?: string
+    url?: string
+    id?: string
+  }
 }
 
 
-export class FormChangeAvatar extends React.Component<IFormChangeAvatarProps>{
-	render(){
+export const FormChangeAvatar: React.FC<IFormChangeAvatarProps> = ({onSubmit, initialValues, loading}) => {
 
-		return (
-			<div className="inner-info">
-				<div className="change-ava">
-					<UserAvatar className={'change-ava__img'}/>
-					<button className="change-ava__link">
-						<img src={PhotoIcon} className="icon icon-photo "/>
-						Сменить фото
-					</button>
-				</div>
-				<div className="b-center">
-					<Button hidden={false} style={ButtonStyleEnum.border}>
-						Загрузить
-					</Button>
-				</div>
-			</div>
-		)
-	}
+  return (
+    <Form
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      render={({
+                 submitError,
+                 handleSubmit,
+                 form,
+                 submitting,
+                 pristine,
+        values
+               }: FormRenderProps<IFormChangeAvatarValues>): ReactNode => {
+        console.log(values);
+        return (<form onSubmit={handleSubmit}>
+          <div className="inner-info">
+            <Field
+              name="avatar"
+              type="file"
+              label={'Сменить фото'}
+              disabled={loading}
+            >
+              {
+                (props: FieldProps<any, any>) => (<AvatarFields {...props}/>)
+              }
+            </Field>
+            {submitError && <InvalidFeedback error={submitError}/>}
+
+            <div className="b-center">
+              <Button
+                hidden={false}
+                style={ButtonStyleEnum.border}
+                mods={'button-primary--preloader'}
+                disabled={pristine || loading}
+                type={'submit'}
+              >
+                Загрузить {
+                loading &&
+                <Preloader
+                    theme={PreloaderThemeEnum.light}
+                    style={{marginLeft: '8px'}}
+                />
+              }
+              </Button>
+            </div>
+          </div>
+        </form>)
+      }}
+    />
+  )
 }
 
 

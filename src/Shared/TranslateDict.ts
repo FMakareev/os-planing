@@ -13,7 +13,7 @@ interface IDict {
 // 3: "In field "avatar": Expected "String!", found null"
 // 4: "In field "fullName": Expected "String!", found null."
 export const TranslateDict: IDict = {
-  'Login or password not found': 'Пользователь с заданным логином или паролем не найден',
+  'Login or password not found': 'Пользователь с заданным логином не найден или пароль не действителен.',
   'not found': 'Совпадений не найдено',
   "GraphQL error: email already exist": 'электронная почта уже существует',
   "Internal Server Error": 'Ошибка сервера',
@@ -28,10 +28,10 @@ export const TranslateDict: IDict = {
 
 export const GetMessageByTranslateKey = (key: string) => {
   try {
-    return TranslateDict && TranslateDict[key] || key;
+    return TranslateDict && TranslateDict[key] || 'Ошибка сервера';
   } catch (e) {
-    return key
+    return 'Ошибка сервера';
   }
-}
+};
 
 export default TranslateDict;

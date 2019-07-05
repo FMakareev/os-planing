@@ -34,7 +34,7 @@ export const LogOutAction = () => (dispatch: Dispatch) => {
 };
 
 
-export const InitUserStoreAction = () => (dispatch: Dispatch) => {
+export const InitUserStoreAction = () => (dispatch: Dispatch): Promise<any> => {
   return new Promise((resolve) => {
     try {
       dispatch(UserInitLoading());
@@ -44,11 +44,11 @@ export const InitUserStoreAction = () => (dispatch: Dispatch) => {
         resolve(JSON.parse(userData));
         return JSON.parse(userData);
       }
-      resolve({});
+      resolve(null);
 
       dispatch(UserInitError('User not found'));
     } catch (e) {
-      resolve({});
+      resolve(null);
       dispatch(UserInitError(e));
     }
   })

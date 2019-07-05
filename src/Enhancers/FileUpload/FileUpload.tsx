@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Logging from "../../../../Helpers/Logging";
-import {IResponseUploadFile} from "../../../Users/Enhancers/CreateReception/CreateReception";
+import Logging from "../../Helpers/Logging";
+import {IResponseUploadFile} from "../../Views/Users/Enhancers/CreateReception/CreateReception";
 
 export interface IFileUploadProps {
   [prop: string]: any

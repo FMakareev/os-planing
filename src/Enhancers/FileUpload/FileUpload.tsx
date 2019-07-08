@@ -2,9 +2,23 @@ import * as React from 'react';
 import Logging from "../../Helpers/Logging";
 import {IResponseUploadFile} from "../../Views/Users/Enhancers/CreateReception/CreateReception";
 
-export interface IFileUploadProps {
+interface IFileUploadProps {
   [prop: string]: any
 }
+
+interface IFileUploadState {
+  loading: boolean;
+
+  [prop: string]: any
+}
+
+
+export interface IFileUpload {
+  uploadFile(file: any): Promise<IResponseUploadFile>;
+  uploadFileLoading: boolean;
+  [prop: string]: any
+}
+
 
 export interface IResponseUploadFile extends Response {
   errors: {
@@ -27,14 +41,32 @@ export interface IResponseUploadFile extends Response {
   [prop: string]: any;
 }
 
-// TODO: Добавить состояния loading, error в пропсы
+
 const FileUpload = (WrapperComponent: React.ElementType) => {
-  return class extends React.Component<IFileUploadProps> {
+  return class extends React.Component<IFileUploadProps, IFileUploadState> {
+
+    constructor(props: IFileUploadProps) {
+      super(props);
+      this.state =this.initialState;
+    }
+
+    get initialState() {
+      return {
+        loading: false,
+      }
+    }
+
+    toggleLoading = () => {
+      this.setState((state) => ({
+        loading: !state.loading
+      }))
+    };
 
 
-    uploadFile = <PromiseResponse extends any | IResponseUploadFile>(file: any): Promise<PromiseResponse> => {
+    uploadFile = <PromiseResponse extends any | IResponseUploadFile>(file: any): Promise<IResponseUploadFile> => {
       const formData = new FormData();
       formData.append('file', file);
+      this.toggleLoading();
       return fetch(`/uploader`,
         {
           credentials: 'include',
@@ -49,7 +81,9 @@ const FileUpload = (WrapperComponent: React.ElementType) => {
           }
         })
         .then((response: IResponseUploadFile): any => {
+
           if (response.message === "upload success") {
+            this.toggleLoading();
             return response;
           } else {
             throw response;
@@ -57,12 +91,16 @@ const FileUpload = (WrapperComponent: React.ElementType) => {
         })
         .catch((error: any) => {
           Logging(error.statusText, 'error');
+          this.toggleLoading();
           return error;
         })
     };
 
     render() {
-      return (<WrapperComponent uploadFile={this.uploadFile} {...this.props}/>)
+      return (<WrapperComponent
+        uploadFile={this.uploadFile}
+        uploadFileLoading={this.state.loading}
+        {...this.props}/>)
     }
   }
 };

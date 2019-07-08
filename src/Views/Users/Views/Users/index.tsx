@@ -4,16 +4,13 @@ import {EnumNotificationsTopMods, NotificationsTop} from "../../../../Components
 import Breadcrumbs from "../../../../Components/Breadcrumbs/Breadcrumbs";
 import PopupAddUser from '../../Components/PopupAddUser/PopupAddUser';
 
-import ReceptionListHOC from '../../Enhancers/ReceptionListHOC/ReceptionListHOC';
 import CreateReception from '../../Enhancers/CreateReception/CreateReception';
-import ReceptionList from "../../Components/ReceptionList/ReceptionList";
+import ReceptionList from "../../Enhancers/ReceptionList/ReceptionList";
+
 
 
 const PopupAddUserWithQuery = CreateReception(PopupAddUser);
 
-
-
-const ReceptionListWithQuery = ReceptionListHOC(ReceptionList);
 
 export const Users = () => (<div className="inner">
 	<Breadcrumbs history={[
@@ -46,9 +43,8 @@ export const Users = () => (<div className="inner">
 			пароль
 		</div>
 	</NotificationsTop>
-
 	<div className="notifications__content">
-		<ReceptionListWithQuery/>
+		<ReceptionList/>
 	</div>
 	<PopupAddUserWithQuery/>
 

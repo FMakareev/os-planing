@@ -1,0 +1,7 @@
+mutation($user: String!){
+    deleteNotifications(user: $user){
+        notification{
+            id
+        }
+    }
+}

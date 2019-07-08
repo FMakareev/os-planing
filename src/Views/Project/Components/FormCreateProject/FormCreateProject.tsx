@@ -24,12 +24,11 @@ const FormCreateProjectValidate = (values: FormCreateProjectState) => {
   return errors
 };
 
-const FormCreateProject: React.FC<IFormCreateProjectProps> = () => {
+const FormCreateProject: React.FC<IFormCreateProjectProps> = ({loading, initialValues, onSubmit}) => {
   return (
     <Form
       validate={FormCreateProjectValidate}
-      onSubmit={() => {
-      }}
+      onSubmit={onSubmit}
       render={({
                  submitError,
                  handleSubmit,
@@ -38,12 +37,20 @@ const FormCreateProject: React.FC<IFormCreateProjectProps> = () => {
                  pristine,
                }: FormRenderProps<any>): ReactNode => {
 
-        return (<form onSubmit={handleSubmit} className="form">
+        return (<form
+          id={'FormCreateProject'}
+          onReset={() => {
+            form.reset({});
+          }}
+          onSubmit={handleSubmit}
+          className="form"
+        >
           <Field
             name="name"
             type="text"
             placeholder="Название проекта"
             label={'Проект'}
+            disabled={loading}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
@@ -52,7 +59,7 @@ const FormCreateProject: React.FC<IFormCreateProjectProps> = () => {
           {submitError && <InvalidFeedback error={submitError}/>}
 
           <Button mods={'button-primary--preloader'} disabled={pristine} type={'submit'}>
-            Сохранить <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft:'8px'}}/>
+            Сохранить {loading && <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft: '8px'}}/>}
           </Button>
         </form>)
       }}

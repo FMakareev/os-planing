@@ -12,16 +12,25 @@ interface IPopupEditUserProps extends IPopupHoc, MutateProps {
   [prop: string]: any
 }
 
-const PopupEditUser: React.FC<IPopupEditUserProps> = ({isOpen, onClose, onOpen,initialValues, result,onSubmit,...rest}) => {
+const PopupEditUser: React.FC<IPopupEditUserProps> = ({isOpen, onClose, onOpen, initialValues, result, onSubmit, loading}) => {
   return (
     <React.Fragment>
       <PopupWrapper
         title={'Изменить пользователя'}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => {
+          const form = document.getElementById('FormEditUser');
+          form && form.dispatchEvent(new Event('reset', {cancelable: true}));
+          onClose && onClose()
+        }}
         className="popup--add-user"
       >
-        <FormEditUser {...result} onClose={onClose} onSubmit={onSubmit} initialValues={initialValues}/>
+        <FormEditUser
+          loading={loading}
+          onClose={onClose}
+          onSubmit={onSubmit}
+          initialValues={initialValues}
+        />
       </PopupWrapper>
       <a href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
         <img src={EditIcon} className="icon icon-edit "/>

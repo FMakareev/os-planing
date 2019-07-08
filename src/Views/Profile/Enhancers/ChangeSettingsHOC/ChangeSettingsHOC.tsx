@@ -9,6 +9,7 @@ import {Dispatch} from "redux";
 import {AddUser} from "../../../../Store/Reducers/User/actionCreators";
 import {IUserState} from "../../../../Store/Reducers/User/reducers";
 import {IFormChangeSMTPSettingValues} from '../../Components/FormChangeSMTPSetting/FormChangeSMTPSetting';
+import {FormApi} from "final-form";
 
 interface IChangeSettingsHocProps {
   ChangeSettings(options: any): any;
@@ -67,7 +68,7 @@ const ChangeSettingsHoc = (WrapperComponent: React.ElementType) => {
     };
 
 // TODO: добавить сравнение старых данных настроек и новых и если не было  изменений то не вызывать запрос
-    onSubmit = async (values: IFormChangeSMTPSettingValues) => {
+    onSubmit = async (values: IFormChangeSMTPSettingValues, form: FormApi<IFormChangeSMTPSettingValues>) => {
       const {ChangeSettings} = this.props;
 
       await Promise.all([
@@ -83,6 +84,7 @@ const ChangeSettingsHoc = (WrapperComponent: React.ElementType) => {
         this.updateUser(values),
       ]);
 
+      setTimeout(form.reset, 500);
     };
 
     render() {

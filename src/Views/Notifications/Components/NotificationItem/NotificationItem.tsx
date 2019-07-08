@@ -3,14 +3,14 @@ import NotificationWrapper from "../../../../Components/NotificationWrapper/Noti
 import classNames from 'classnames';
 import {UserAvatar} from "../../../../Components/UserAvatar/UserAvatar";
 import {Link} from 'react-router-dom';
-import {INotification} from '../../../../Types/Types';
+import {INotification} from "../../../../Apollo/schema";
 
 
 interface INotificationItemProps extends INotification {
 	[prop: string]: any
 }
 
-export const NotificationItem: React.FC<INotificationItemProps> = ({sender, isRead, report, createAt, message}) => (
+export const NotificationItem: React.FC<INotificationItemProps> = ({fromUser, to, report, createAt, message, isRead}) => (
 	<NotificationWrapper>
 		<div
 			className={classNames('notifications-item__new ',
@@ -19,15 +19,15 @@ export const NotificationItem: React.FC<INotificationItemProps> = ({sender, isRe
 			})}/>
 
 		<div className="notifications-item__top">
-			<UserAvatar avatar={sender.avatar} mods={'notifications-item__user-ava'}/>
+			<UserAvatar avatar={fromUser && fromUser.avatar} mods={'notifications-item__user-ava'}/>
 			{
-				sender &&
+				fromUser &&
         <div className="notifications-item__info">
           <div className="notifications-item__name">
-						{sender.firstName} {sender.lastName} {sender.patronymic}
+						{fromUser.fullName}
           </div>
           <div className="notifications-item__mail">
-						{sender.email}
+						{fromUser.email}
           </div>
         </div>
 			}

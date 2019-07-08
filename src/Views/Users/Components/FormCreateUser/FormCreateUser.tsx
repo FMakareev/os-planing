@@ -34,7 +34,8 @@ interface IFormCreateUserValidate {
 }
 
 
-interface IFormCreateUserProps extends MutationResult {
+interface IFormCreateUserProps  {
+  loading: boolean;
   [prop: string]: any
 }
 
@@ -88,7 +89,13 @@ const FormCreateUser: React.FC<IFormCreateUserProps> = ({onSubmit, loading}) => 
                  pristine,
                }: FormRenderProps<any>): ReactNode => {
 
-        return (<form onSubmit={handleSubmit} className="form">
+        return (<form
+          id={'FormCreateUser'}
+          onReset={()=>{
+            form.reset({});
+          }}
+          onSubmit={handleSubmit}
+          className="form">
           <Field
             name="city"
             type="text"

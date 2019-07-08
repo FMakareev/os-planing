@@ -1,0 +1,45 @@
+mutation(
+    $about: String!,
+    $attachments: [String],
+    $event: String!,
+    $goals: String!,
+    $massMedia: String,
+    $participantsAbout: String,
+    $participantsCount: Int,
+    $place: String!,
+    $producer: String!,
+){
+
+    createReport(
+        about: $about,
+        attachments: $attachments,
+        event: $event,
+        goals: $goals,
+        massMedia: $massMedia,
+        participantsAbout: $participantsAbout,
+        participantsCount: $participantsCount,
+        place: $place,
+        producer: $producer,
+    ){
+        report{
+            about
+            attachments {
+                id
+                url
+            }
+            event{
+                id
+            }
+            goals
+            id
+            massMedia
+            participantsAbout
+            participantsCount
+            place
+            producer
+            updated
+            created
+        }
+    }
+
+}

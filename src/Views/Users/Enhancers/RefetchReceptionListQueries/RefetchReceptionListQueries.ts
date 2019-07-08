@@ -1,4 +1,4 @@
-import ReceptionListQuery from "../ReceptionListHOC/ReceptionListQuery.graphql";
+import ReceptionListQuery from "../ReceptionList/ReceptionListQuery.graphql";
 
 
 const RefetchReceptionListQueries = () => ({

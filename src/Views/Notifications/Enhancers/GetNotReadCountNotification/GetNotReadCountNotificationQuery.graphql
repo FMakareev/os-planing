@@ -1,0 +1,5 @@
+query($user: String){
+    getNotReadCount: notificationPagination(limit:0, page: 1, user:$user){
+        notReadCount
+    }
+}

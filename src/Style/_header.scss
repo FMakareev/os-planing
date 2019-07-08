@@ -193,11 +193,14 @@
 		.icon{
 			width: 16px;
 			height: 16px;
-			fill: currentColor;
+			fill: #8288a2;
 			margin-right: 16px;
 		}
 		&:hover{
 			color: #41a3fd;
+			.icon {
+				fill: #41a3fd;
+			}
 		}
 	}
 }

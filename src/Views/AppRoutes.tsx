@@ -6,6 +6,7 @@ import {PrivacyRoute} from "./Privacy/Routes";
 import {ProfileRoute} from "./Profile/Routes";
 import {ProjectRoute} from "./Project/Routes";
 import {ReportRoute} from "./Report/Routes";
+import {MonthReportRoute} from "./MontheReport/Routes";
 import {StatisticsRoute} from "./Statistics/Routes";
 import {UsersRoute} from "./Users/Routes";
 import RoutesList from "./Pages/RoutesList/RoutesList";
@@ -24,6 +25,7 @@ export const AppRoutes = [
 	...ProfileRoute,
 	...ProjectRoute,
 	...ReportRoute,
+	...MonthReportRoute,
 	...StatisticsRoute,
 	...UsersRoute,
 	...LoginRoute,

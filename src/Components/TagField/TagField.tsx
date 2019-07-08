@@ -14,11 +14,11 @@ export class TagField extends React.Component<ITagFieldProps> {
 			<div>
 				<TagList/>
 				<div className="add-category">
-					<a className="add-category__link js-add-category__link" href="javascript:void(0);">
+					<a className="add-category__link" href="javascript:void(0);">
 						<img src={plus} className="icon icon-plus "/>
 						Добавить категорию
 					</a>
-					<ul className="add-category__dropdown js-add-category__dropdown">
+					<ul className="add-category__dropdown">
 						<li><a className="disabled" href="javascript:void(0);">Категория 1</a></li>
 						<li><a className="disabled" href="javascript:void(0);">Категория 2</a></li>
 						<li><a className="disabled" href="javascript:void(0);">Категория 3</a></li>

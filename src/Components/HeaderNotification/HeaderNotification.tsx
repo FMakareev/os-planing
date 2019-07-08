@@ -1,22 +1,24 @@
 import * as React from 'react';
 import notification from "../../Assets/img/spritesvg/notification.svg";
+import {Link} from "react-router-dom";
 
 
 interface IHeaderNotificationProps {
-	count?: number
+  count?: number
 }
 
-export const HeaderNotification: React.FC<IHeaderNotificationProps> = ({count}) => (<a
-	className="header__notification"
-	href="javascript:void(0);"
->
-	<img src={notification} className="icon icon-notification "/>
-	{
-		count && <span>
+export const HeaderNotification: React.FC<IHeaderNotificationProps> = ({count}) => {
+  return (<Link
+    className="header__notification"
+    to={'/notifications'}
+  >
+    <img src={notification} className="icon icon-notification "/>
+    {
+      count  && <span>
 				{count}
 			</span>
-	}
-
-</a>);
+    }
+  </Link>);
+};
 
 export default HeaderNotification;

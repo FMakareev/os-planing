@@ -72,7 +72,7 @@ export const DropFieldHoc = (WrapperComponent: React.FC<any>) => () => {
 			/>)
 		}
 	}
-}
+};
 export default DropFieldHoc;
 
 

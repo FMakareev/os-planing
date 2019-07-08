@@ -2,18 +2,19 @@ import * as React from 'react';
 import {graphql, MutateProps} from 'react-apollo'
 
 import CreateUserMutation from './CreateUserMutation.graphql';
-import {ICreateReceptionData} from '../../../../Apollo/schema';
+import {ICreateReceptionData, IProject} from '../../../../Apollo/schema';
 import {FormCreateUserState} from "../../Components/FormCreateUser/FormCreateUser";
 import {ApolloError} from 'apollo-boost';
 import Logging from "../../../../Helpers/Logging";
-import {FORM_ERROR} from "final-form";
+import {FORM_ERROR, FormApi} from "final-form";
 import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 import RefetchReceptionListQueries from "../RefetchReceptionListQueries/RefetchReceptionListQueries";
+import FileUpload, {IFileUpload} from "../../../../Enhancers/FileUpload/FileUpload";
+import {compose} from 'recompose';
 
-interface ICreateUserProps extends MutateProps {
+interface ICreateUserProps extends MutateProps, IFileUpload {
   [prop: string]: any
 }
-
 
 export interface IResponseUploadFile extends Response {
   errors: {
@@ -36,91 +37,62 @@ export interface IResponseUploadFile extends Response {
   [prop: string]: any;
 }
 
+
+const enhance = compose(
+  FileUpload,
+  graphql<any, ICreateReceptionData>(CreateUserMutation));
+
+
 const CreateReception: any = (WrapperComponent: any) => {
-  return graphql<any, ICreateReceptionData>(CreateUserMutation)(
-    class extends React.Component<ICreateUserProps | any> {
+  return enhance(class extends React.Component<ICreateUserProps | any> {
 
+    onSubmit = async (values: FormCreateUserState, form: FormApi<FormCreateUserState>) => {
+      const {uploadFile,mutate,onClose} = this.props;
+      const file: IResponseUploadFile = await uploadFile(typeof values.avatar === 'object' && values.avatar.file);
 
-      uploadFile = (file: any): Promise<IResponseUploadFile> => {
-
-        const formData = new FormData();
-
-        formData.append('file', file);
-
-        return fetch(`/uploader`,
-          {
-            credentials: 'include',
-            method: 'POST',
-            body: formData
+      if (file.message === "upload success") {
+        const {message}: any = await mutate({
+            variables: {
+              city: values.city,
+              user: {
+                email: values.email,
+                password: values.password,
+                avatar: file.file_data.id,
+                fullName: values.fullName
+              }
+            },
+            refetchQueries: [RefetchReceptionListQueries()]
           })
-          .then((response: Response): any => {
-            if (response.status >= 200 && response.status < 300) {
-              return response.json();
-            } else {
-              throw response;
-            }
-          })
-          .then((response: IResponseUploadFile): any => {
-            console.log('response: ', response);
-            if (response.message === "upload success") {
-              return response;
-            } else {
-              throw response;
-            }
-          })
-          .catch((error: any) => {
-            console.log(error);
-            Logging(error.statusText, 'error');
-            return error;
-          })
-      };
+          .catch((error: ApolloError) => {
+            Logging(error.message, 'error');
+            return JSON.parse(JSON.stringify(error));
+          });
 
-      onSubmit = async (values: FormCreateUserState) => {
-
-        const file: IResponseUploadFile = await this.uploadFile(typeof values.avatar === 'object' && values.avatar.file);
-
-        if (file.message === "upload success") {
-          const {message}: any = await this.props
-            .mutate({
-              variables: {
-                city: values.city,
-                user: {
-                  email: values.email,
-                  password: values.password,
-                  avatar: file.file_data.id,
-                  fullName: values.fullName
-                }
-              },
-              refetchQueries: [RefetchReceptionListQueries()]
-            })
-            .catch((error: ApolloError) => {
-              Logging(error.message, 'error');
-              return JSON.parse(JSON.stringify(error));
-            });
-
-          if (message) {
-            return {
-              [FORM_ERROR]: GetMessageByTranslateKey(message),
-            }
-          } else {
-            this.props.onClose && this.props.onClose();
+        if (message) {
+          return {
+            [FORM_ERROR]: GetMessageByTranslateKey(message),
           }
-
+        } else {
+          setTimeout(form.reset, 500);
+          onClose && onClose();
         }
-
-        return {
-          [FORM_ERROR]: GetMessageByTranslateKey(file.statusText),
-        }
-      };
-
-      render() {
-        return <WrapperComponent
-          {...this.props}
-          onSubmit={this.onSubmit}
-        />
       }
 
-    })
+      return {
+        [FORM_ERROR]: GetMessageByTranslateKey(file.statusText),
+      }
+    };
+
+    render() {
+      const {result, uploadFileLoading} = this.props;
+      return <WrapperComponent
+        {...this.props}
+        loading={result.loading || uploadFileLoading}
+        onSubmit={this.onSubmit}
+      />
+    }
+
+  })
 };
 
 export default CreateReception;

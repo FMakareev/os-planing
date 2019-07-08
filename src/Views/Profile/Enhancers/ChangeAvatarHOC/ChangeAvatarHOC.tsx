@@ -4,7 +4,7 @@ import ChangeAvatarMutation from './ChangeAvatarMutation.graphql';
 import {MutateProps, graphql} from "react-apollo";
 import {IUpdateUserDataVariables, IUpdateUserData, IUser} from "../../../../Apollo/schema";
 import {IResponseUploadFile} from "../../../Users/Enhancers/CreateReception/CreateReception";
-import {FORM_ERROR} from "final-form";
+import {FORM_ERROR, FormApi} from "final-form";
 import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 import {connect} from "react-redux";
 import {IStoreState} from "../../../../Store/Store";
@@ -37,7 +37,7 @@ const ChangeAvatarHOC = (WrapperComponent: React.ElementType) => {
     connect(mapStateToProps, mapDispatchToProps)(
       FileUpload(class extends React.Component<IChangeAvatarHOCProps> {
 
-        onSubmit = async (values: any) => {
+        onSubmit = async (values: any, form: FormApi<any>) => {
 
           const {user, mutate, uploadFile} = this.props;
 
@@ -59,13 +59,14 @@ const ChangeAvatarHOC = (WrapperComponent: React.ElementType) => {
               return JSON.parse(JSON.stringify(error));
             });
 
-          if(!data && (graphQLErrors || networkErrors || message)){
+          if (!data && (graphQLErrors || networkErrors || message)) {
             return {
               [FORM_ERROR]: GetMessageByTranslateKey(message),
             }
           }
           if (data) {
             this.props.updateUser(data.updateUser.user);
+            setTimeout(form.reset, 500);
           }
         };
 

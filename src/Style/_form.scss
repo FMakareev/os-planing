@@ -241,3 +241,72 @@
     }
   }
 }
+
+// n = new
+.n-form {
+
+
+  &__group {
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  &__input-container {
+    display: block;
+    width: 100%;
+    padding: 12px 16px ;
+    background: none;
+    color: #1b1b1b;
+    outline: none;
+    border: 1px solid #c3c9db;
+    border-radius: 6px;
+
+    &--focus {
+      border: 1px solid #41A3FD;
+    }
+    &--error {
+      border-color: #EF223A;
+    }
+    &--disabled {
+      background: #edeeef;
+      border-color: #edeeef;
+      color: #8288a2;
+    }
+
+  }
+  &__input {
+    width: 100%;
+    background: none;
+    color: #1b1b1b;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    &--disabled,
+    &:disabled {
+      background: #edeeef;
+      border-color: #edeeef;
+      color: #8288a2;
+    }
+
+  }
+  &__label {
+    color: #1b1b1b;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    pointer-events: none;
+
+    &--error {
+      color: #EF223A;
+    }
+    &--disabled {
+      color: #8288a2;
+    }
+  }
+
+}

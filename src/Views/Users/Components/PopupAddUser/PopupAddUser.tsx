@@ -8,21 +8,24 @@ import {MutateProps} from "react-apollo";
 
 interface IPopupAddUserProps extends IPopupHoc, MutateProps {
   onSubmit: any;
-
   [prop: string]: any
 }
 
-const PopupAddUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onSubmit, onOpen, result}) => {
+const PopupAddUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onSubmit, onOpen, loading}) => {
   return (
     <React.Fragment>
       <PopupWrapper
         title={'Добавить пользователя'}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => {
+          const form = document.getElementById('FormCreateUser');
+          form && form.dispatchEvent(new Event('reset', {cancelable: true}));
+          onClose && onClose()
+        }}
         className={"popup--add-user"}
       >
         <FormCreateUser
-          {...result}
+          loading={loading}
           onSubmit={onSubmit}
         />
       </PopupWrapper>

@@ -47,7 +47,6 @@ export class AvatarFields extends React.Component<IAvatarFieldsProps, IAvatarFie
   render() {
     const {meta, input, label} = this.props;
     const error = meta && meta.touched ? meta.error || meta.submitError : null;
-    console.log(input);
     return (<div className="change-ava">
 
       <UserAvatar

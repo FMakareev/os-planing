@@ -3,7 +3,7 @@ import {Form, Field, FieldProps, FormRenderProps} from 'react-final-form'
 import {ReactNode} from "react";
 import {TextField} from "../../../../Components/TextField/TextField";
 import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFeedback";
-import {Button} from "../../../../Components/Button/Button";
+import {Button, ButtonStyleEnum} from "../../../../Components/Button/Button";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
 import {MutationResult} from "react-apollo";
 import AvatarFields from '../../../../Components/AvatarFields/AvatarFields';
@@ -18,8 +18,9 @@ interface FormEditUserState {
 }
 
 
-interface IFormEditUserProps extends MutationResult {
+interface IFormEditUserProps {
   initialValues?: any;
+  loading: boolean;
 
   [prop: string]: any
 }
@@ -48,23 +49,27 @@ const FormEditUserValidate = (values: FormEditUserState) => {
   return errors
 };
 
-const FormEditUser: React.FC<IFormEditUserProps> = ({initialValues, onSubmit, onClose,loading}) => {
+const FormEditUser: React.FC<IFormEditUserProps> = ({initialValues, onSubmit, onClose, loading}) => {
   return (
     <Form
       initialValues={initialValues}
       validate={FormEditUserValidate}
       onSubmit={onSubmit}
-
       render={({
                  submitError,
                  handleSubmit,
                  form,
                  submitting,
                  pristine,
-values
                }: FormRenderProps<any>): ReactNode => {
-        console.log('loading: ', loading);
-        return (<form onSubmit={handleSubmit} className="form">
+
+        return (<form
+          id={'FormEditUser'}
+          onReset={()=>{
+            form.reset(initialValues);
+          }}
+          onSubmit={handleSubmit}
+          className="form">
           <Field
             name="city"
             type="text"
@@ -124,13 +129,17 @@ values
           {submitError && <InvalidFeedback error={submitError}/>}
 
           <div className="button-links">
-            <Button mods={'button-primary--preloader'} disabled={pristine} type={'submit'}>
+            <Button mods={'button-primary--preloader'} disabled={pristine || loading} type={'submit'}>
               Сохранить {loading && <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft: '8px'}}/>}
             </Button>
-            <Button onClick={()=>{
-              form.reset();
-              onClose && onClose()
-            }} type={'button'}>
+            <Button
+              style={ButtonStyleEnum.border}
+              onClick={() => {
+                form.reset(initialValues);
+                onClose && onClose()
+              }}
+              type={'button'}
+            >
               Отмена
             </Button>
           </div>

@@ -1,23 +1,42 @@
 import * as React from 'react';
 import PopupWrapper from "../../../../Components/PopupWrapper/PopupWrapper";
 import PopupHoc, {IPopupHoc} from '../../../../Enhancers/PopupHOC/PopupHOC';
-import FormCreateProject from '../FormCreateProject/FormCreateProject';
 import EditIcon from "../../../../Assets/img/spritesvg/edit.svg";
+import UpdateProjectHOC from "../../Enhancers/UpdateProjectHOC/UpdateProjectHOC";
+import FormUpdateProject from "../FormUpdateProject/FormUpdateProject";
 
 interface IPopupAddProjectProps extends IPopupHoc {
   [prop: string]: any
 }
 
-const PopupEditProject: React.FC<IPopupAddProjectProps> = ({isOpen,onOpen, onClose}) => {
+const PopupEditProject: React.FC<IPopupAddProjectProps> = ({
+                                                             isOpen,
+                                                             onOpen,
+                                                             initialValues,
+                                                             loading,
+                                                             onSubmit,
+                                                             onClose,
+                                                             ...rest
+                                                           }) => {
   return (
     <React.Fragment>
       <PopupWrapper
         title={'Редактировать проект'}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => {
+          const form = document.getElementById('FormUpdateProject');
+          form && form.dispatchEvent(new Event('reset', {cancelable: true}));
+
+          onClose && onClose()
+        }}
         className="popup--add-project"
       >
-        <FormCreateProject/>
+        <FormUpdateProject
+          loading={loading}
+          onSubmit={onSubmit}
+          onClose={onClose}
+          initialValues={initialValues}
+        />
       </PopupWrapper>
       <a href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
         <img src={EditIcon} className="icon icon-edit "/>
@@ -26,4 +45,4 @@ const PopupEditProject: React.FC<IPopupAddProjectProps> = ({isOpen,onOpen, onClo
   );
 };
 
-export default PopupHoc(PopupEditProject)({excludeWrapper: 'popup'});
+export default PopupHoc(UpdateProjectHOC(PopupEditProject))({excludeWrapper: 'popup'});

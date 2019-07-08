@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {FORM_ERROR} from "final-form";
+import {FORM_ERROR, FormApi} from "final-form";
 import {ApolloError} from 'apollo-boost';
-import {graphql, MutateProps} from "react-apollo";
+import {graphql, MutateProps, MutationResult} from "react-apollo";
+import {compose} from "redux";
 
 import UpdateReceptionMutation from './UpdateReceptionMutation.graphql';
 import {FormCreateUserState} from "../../Components/FormCreateUser/FormCreateUser";
@@ -10,54 +11,30 @@ import Logging from "../../../../Helpers/Logging";
 
 import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 
-import {IReceptionData} from "../../../../Apollo/schema";
+import {IUpdateReceptionData} from "../../../../Apollo/schema";
 import {IResponseUploadFile} from '../CreateReception/CreateReception';
+import FileUpload, {IFileUpload} from "../../../../Enhancers/FileUpload/FileUpload";
 
-interface IUpdateReceptionProps extends MutateProps {
+interface IUpdateReceptionProps extends MutateProps, IFileUpload {
+  UpdateReception: any;
+  UpdateReceptionResult: MutationResult;
   [prop: string]: any
 }
 
+const enhance = compose(
+  FileUpload,
+  graphql<any, IUpdateReceptionData>(UpdateReceptionMutation, {
+    name: 'UpdateReception',
+  })
+);
+
+
 const UpdateReception = (WrapperComponent: React.ElementType) => {
-  return graphql<any, IReceptionData>(UpdateReceptionMutation)(
+  return enhance(
     class extends React.Component<IUpdateReceptionProps> {
 
-      uploadFile = (file: any): Promise<IResponseUploadFile> => {
-
-        const formData = new FormData();
-
-        formData.append('file', file);
-
-        return fetch(`/uploader`,
-          {
-            credentials: 'include',
-            method: 'POST',
-            body: formData
-          })
-          .then((response: Response): any => {
-            if (response.status >= 200 && response.status < 300) {
-              return response.json();
-            } else {
-              throw response;
-            }
-          })
-          .then((response: IResponseUploadFile): any => {
-            console.log('response: ', response);
-            if (response.message === "upload success") {
-              return response;
-            } else {
-              throw response;
-            }
-          })
-          .catch((error: any) => {
-            console.log(error);
-            Logging(error.statusText, 'error');
-            return error;
-          })
-      };
-
-
-      onSubmit = async (values: FormCreateUserState) => {
-        console.log(values);
+      onSubmit = async (values: FormCreateUserState, form: FormApi<FormCreateUserState>) => {
+        const {UpdateReception, uploadFile} = this.props;
         const variables = {
           id: values.id,
           city: values.city,
@@ -70,7 +47,7 @@ const UpdateReception = (WrapperComponent: React.ElementType) => {
         };
 
         if (values.avatar && !values.avatar.id) {
-          const file: IResponseUploadFile = await this.uploadFile(values.avatar && values.avatar.file);
+          const file: IResponseUploadFile = await uploadFile(values.avatar && values.avatar.file);
           if (file.message !== "upload success") {
             return {
               [FORM_ERROR]: GetMessageByTranslateKey(file.statusText),
@@ -80,30 +57,30 @@ const UpdateReception = (WrapperComponent: React.ElementType) => {
           }
         }
 
-        const {message}: any = await this.props
-          .mutate({
-            variables,
-            refetchQueries: [RefetchReceptionListQueries()]
-          })
+        const {message}: any = await UpdateReception({
+          variables,
+          refetchQueries: [RefetchReceptionListQueries()]
+        })
           .catch((error: ApolloError) => {
             Logging(error.message, 'error');
             return JSON.parse(JSON.stringify(error));
           });
-
         if (message) {
           return {
             [FORM_ERROR]: GetMessageByTranslateKey(message),
           }
         } else {
+          form.reset();
           this.props.onClose && this.props.onClose();
         }
 
       };
 
       render() {
-        console.log(this.props);
+        const {UpdateReceptionResult, uploadFileLoading, ...rest} = this.props;
         return (<WrapperComponent
           {...this.props}
+          loading={UpdateReceptionResult.loading || uploadFileLoading}
           onSubmit={this.onSubmit}
         />)
       }

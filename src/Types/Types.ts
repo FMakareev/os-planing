@@ -14,12 +14,3 @@ export interface IUser {
 	id?: string;
 }
 
-export interface INotification {
-	id: string;
-	createAt: string;
-	updateAt: string;
-	isRead: boolean;
-	message: string;
-	sender: IUser;
-	report: IReport;
-}

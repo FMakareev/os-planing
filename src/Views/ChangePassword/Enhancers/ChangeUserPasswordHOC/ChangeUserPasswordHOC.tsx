@@ -9,7 +9,7 @@ import {IUserState} from "../../../../Store/Reducers/User/reducers";
 import {RouteComponentProps, withRouter} from "react-router";
 import Logging from "../../../../Helpers/Logging";
 import {ApolloError} from 'apollo-boost';
-import {FORM_ERROR} from "final-form";
+import {FORM_ERROR, FormApi} from "final-form";
 import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 
 interface IChangeUserPasswordHocProps extends MutateProps, RouteComponentProps {
@@ -27,22 +27,20 @@ const ChangeUserPasswordHoc = (WrapperComponent: React.ElementType) => {
     connect(mapStateToProps, null)(
       withRouter(class extends React.Component<IChangeUserPasswordHocProps, any> {
 
-        onSubmit = async (values: IUserChangePasswordVariables) => {
-          // TODO: добавить проверку на ошибки в ответе после того как бек пофиксит логику
-          console.log('values: ', values);
-          const {message, data, ...rest}: any = await this.props.mutate({
+        onSubmit = async (values: IUserChangePasswordVariables, form: FormApi<IUserChangePasswordVariables>) => {
+          const {message}: any = await this.props.mutate({
             variables: values,
           }).catch((error: ApolloError) => {
             Logging(error.message, 'error');
             return JSON.parse(JSON.stringify(error));
           });
 
-          console.log(data, rest, message);
           if (message) {
             return {
               [FORM_ERROR]: GetMessageByTranslateKey(message),
             }
           }
+          setTimeout(form.reset, 500);
           this.props.history.push('/profile-settings')
         };
 

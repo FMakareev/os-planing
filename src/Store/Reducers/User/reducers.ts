@@ -103,7 +103,7 @@ export const ReducerUser: Reducer = (prevState = UserInitialState, {type,user, .
       });
 
     case USER_ADD:
-      localStorage.setItem('user_date', JSON.stringify(user));
+      localStorage.setItem('user_data', JSON.stringify(user));
       return Object.assign({}, prevState, {
         ...UserInitialState,
         isLogin: true,

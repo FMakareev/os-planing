@@ -2,9 +2,9 @@ import * as React from 'react';
 import {PageTitle} from "../../../../Components/PageTitle/PageTitle";
 import PlaceIcon from "../../../../Assets/img/spritesvg/place.svg";
 import {TagList} from "../../../../Components/TagList/TagList";
-import {ReportContentCell} from "../ReportContentCell/ReportContentCell";
 import {Breadcrumbs} from '../../../../Components/Breadcrumbs/Breadcrumbs';
 import ProjectPlace from "../../../../Components/ProjectPlace/ProjectPlace";
+import ReportContentCell from "../../../../Components/ReportContentCell/ReportContentCell";
 
 interface IReportItemContentProps {
 	[prop: string]: any

@@ -1,16 +1,18 @@
 import * as React from 'react';
 import PopupHoc, {IPopupHoc} from "../../../../Enhancers/PopupHOC/PopupHOC";
-import DeleteIcon from "../../../../Assets/img/spritesvg/delete.svg";
 import {Button} from "../../../../Components/Button/Button";
 import PopupWrapper from '../../../../Components/PopupWrapper/PopupWrapper';
+import DeleteIcon from '../../../../Components/SvgIcons/DeleteIcon';
 
 interface IPopupDeleteProps extends IPopupHoc {
   onDelete?(id: string, callback: any): string;
 
+  buttonLabel?: string;
+
   [prop: string]: any
 }
 
-const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDelete, id}) => {
+const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDelete, id, buttonLabel}) => {
   return (
     <React.Fragment>
       <PopupWrapper
@@ -31,7 +33,7 @@ const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDe
         </div>
       </PopupWrapper>
       <a onClick={onOpen} className="notifications-item__delete" href="javascript:void(0);">
-        <img src={DeleteIcon} className="icon icon-delete"/>
+        <DeleteIcon style={{marginRight: '16px'}} className="icon icon-delete"/> {buttonLabel}
       </a>
     </React.Fragment>
   );

@@ -37,19 +37,19 @@ export const App: React.FC = () => {
                     case(LAYOUT_CALENDAR): {
                       return RouteWithHelmet(route)({
                         ...props,
-                      })
+                      });
                     }
                     case(LAYOUT_AUTH): {
                       return RouteWithHelmet(route)({
                         ...props,
                         Layout: LayoutLogin
-                      })
+                      });
                     }
                     default: {
                       return RouteWithHelmet(route)({
                         ...props,
                         Layout: LayoutApp
-                      })
+                      });
                     }
                   }
 

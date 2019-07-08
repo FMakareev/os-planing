@@ -1,0 +1,38 @@
+query ($page: Int!, $limit: Int!, $user: String) {
+    notificationPagination(page: $page, limit: $limit, user: $user) {
+        pageInfo {
+            nextPage
+            prevPage
+        }
+        count
+        items {
+            fromUser {
+                id
+                fullName
+                avatar {
+                    id
+                    url
+                }
+                email
+            }
+            id
+            isRead
+            message
+            report{
+                id
+            }
+            toUser{
+                id
+                fullName
+                avatar {
+                    id
+                    url
+                }
+                email
+            }
+            typeOfReport
+            updated
+            created
+        }
+    }
+}

@@ -1,0 +1,56 @@
+import * as React from 'react';
+import {compose} from "recompose";
+import {graphql} from 'react-apollo';
+import {connect} from "react-redux";
+
+import DeleteNotificationMutation from './DeleteNotificationMutation.graphql';
+import {IStoreState} from "../../../../Store/Store";
+import RefetchNotificationQueries from '../RefetchNotificationQueries/RefetchNotificationQueries';
+import {paginationConfig} from '../../View/paginationConfig';
+
+
+interface IDeleteNotificationProps {
+  [prop: string]: any
+}
+
+const mapStateToProps = (state: IStoreState) => ({
+  user: state.user,
+});
+
+
+const enhancer = compose(
+  graphql<any,any,any>(DeleteNotificationMutation),
+  connect(mapStateToProps)
+);
+
+
+const DeleteNotification = (WrapperComponent: React.ElementType) => {
+  return enhancer(class extends React.Component<IDeleteNotificationProps> {
+
+    onDelete = async (_: any, onClose: any) => {
+      const {user, mutate} = this.props;
+
+      await mutate({
+        variables: {
+          user: user && user.user.id,
+        },
+        refetchQueries: [RefetchNotificationQueries({
+          ...paginationConfig,
+          user: user && user.user.id,
+        })]
+      });
+
+      onClose && onClose();
+
+    };
+
+    render() {
+      return (<WrapperComponent
+        onDelete={this.onDelete}
+        buttonLabel={'Удалить все уведомления'}
+        {...this.props}/>);
+    }
+  })
+};
+
+export default DeleteNotification;

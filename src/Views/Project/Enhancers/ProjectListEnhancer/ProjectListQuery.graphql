@@ -1,0 +1,13 @@
+query($page: Int!,$limit: Int!){
+    projectPagination(page: $page, limit: $limit) {
+        pageInfo {
+            nextPage
+            prevPage
+        }
+        count
+        items {
+            name
+            id
+        }
+    }
+}

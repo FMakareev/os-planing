@@ -1,24 +1,27 @@
 import * as React from 'react';
-import {Link} from "react-router-dom";
 import {
   EnumNotificationWrapperMods,
   NotificationWrapper
 } from "../../../../Components/NotificationWrapper/NotificationWrapper";
+import {IProject} from "../../../../Apollo/schema";
 
-import EditIcon from '../../../../Assets/img/spritesvg/edit.svg'
-import PopupEditProject from '../PopupEditProject/PopupEditProject';
 
-interface IProjectItemProps {
-  title: string;
-  link: string;
+interface IProjectItemProps extends IProject{
+  EditComponent: any;
+  [prop: string]: any;
 }
 
-export const ProjectItem: React.FC<IProjectItemProps> = ({title, link}) => (
+export const ProjectItem: React.FC<IProjectItemProps> = ({name,id, EditComponent}) => (
   <NotificationWrapper mods={EnumNotificationWrapperMods.project}>
     <div className="notifications-item__title">
-      {title}
+      {name}
     </div>
-    <PopupEditProject/>
+    <EditComponent
+      initialValues={{
+        id,
+        name,
+      }}
+    />
   </NotificationWrapper>);
 
 export default ProjectItem;

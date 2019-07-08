@@ -1,4 +1,5 @@
 @import "~normalize.scss/normalize.scss";
+@import "~flexboxgrid-sass/flexboxgrid.scss";
 @import 'fontsMixin';
 @import 'var';
 //@import 'sprite';
@@ -198,6 +199,7 @@ textarea {
     padding: 23px 95px 18px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     &--user {
       padding: 23px 65px 18px;
@@ -335,7 +337,7 @@ textarea {
       .icon {
         width: 100%;
         height: 100%;
-        fill: currentColor;
+        fill: #8288a2;
       }
 
       &:hover {
@@ -344,15 +346,16 @@ textarea {
     }
 
     &__delete {
-      width: 14px;
-      height: 14px;
+
       color: #8288a2;
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-left: 40px;
 
       .icon {
-        width: 100%;
-        height: 100%;
+        width: 14px;
+        height: 14px;
         fill: currentColor;
       }
 
@@ -1094,7 +1097,7 @@ textarea {
     .icon {
       width: 8px;
       height: 8px;
-      fill: currentColor;
+      fill: #8288a2;
     }
   }
 }
@@ -1105,6 +1108,33 @@ textarea {
   .button-border {
     margin-top: 20px;
   }
+}
+
+
+
+.report-cell {
+  &_title {
+    color: #8288a2;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 14px;
+  }
+  &_text {
+    width: 100%;
+    color: #1b1b1b;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    margin-bottom: 20px;
+  }
+}
+
+br, .br {
+  width: 100%;
+  height: 1px;
+  background-color: #C3C9DB;
+  margin: 0 auto 40px;
 }
 
 @import 'calendar';

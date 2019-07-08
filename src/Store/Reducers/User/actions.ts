@@ -42,7 +42,7 @@ export const InitUserStoreAction = () => (dispatch: Dispatch): Promise<any> => {
   return new Promise((resolve) => {
     try {
       dispatch(UserInitLoading());
-      const userData: string | null = window.localStorage.getItem('user_date');
+      const userData: string | null = window.localStorage.getItem('user_data');
       if (userData) {
         const user = JSON.parse(userData);
         Client.query({
@@ -53,7 +53,7 @@ export const InitUserStoreAction = () => (dispatch: Dispatch): Promise<any> => {
         })
           .then((response: any) => {
             console.log(response);
-            localStorage.setItem('user_date',JSON.stringify(response.data.userItem));
+            localStorage.setItem('user_data',JSON.stringify(response.data.userItem));
             dispatch(UserInitSuccess(response.data.userItem));
             resolve(response.data.userItem);
           })
@@ -99,7 +99,7 @@ export const UserLoginAction = (value: any) => (dispatch: Dispatch) => {
     })
       .then((response: AxiosResponse<ILoginResponse>) => {
         if (response.data && response.data.user_data) {
-          localStorage.setItem('user_date', JSON.stringify(response.data.user_data));
+          localStorage.setItem('user_data', JSON.stringify(response.data.user_data));
           dispatch(UserLoginSuccess(response.data.user_data));
         } else {
           throw response;

@@ -3,21 +3,37 @@ import PopupWrapper from "../../../../Components/PopupWrapper/PopupWrapper";
 import PopupHoc, {IPopupHoc} from '../../../../Enhancers/PopupHOC/PopupHOC';
 import {Button} from "../../../../Components/Button/Button";
 import FormCreateProject from '../FormCreateProject/FormCreateProject';
+import AddProjectHoc from "../../Enhancers/AddProjectHOC/AddProjectHOC";
+
 
 interface IPopupAddProjectProps extends IPopupHoc {
   [prop: string]: any
 }
 
-const PopupAddProject: React.FC<IPopupAddProjectProps> = ({isOpen,onOpen, onClose}) => {
+
+const PopupAddProject: React.FC<IPopupAddProjectProps> = ({
+                                                            isOpen,
+                                                            onOpen,
+                                                            onClose,
+                                                            onSubmit,
+                                                            loading,
+                                                          }) => {
   return (
     <React.Fragment>
       <PopupWrapper
         title={'Добавить проект'}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={()=>{
+          const form = document.getElementById('FormCreateProject');
+          form && form.dispatchEvent(new Event('reset', {cancelable: true}));
+          onClose && onClose()
+        }}
         className="popup--add-project"
       >
-        <FormCreateProject/>
+        <FormCreateProject
+          onSubmit={onSubmit}
+          loading={loading}
+        />
       </PopupWrapper>
       <div className="buttons-block">
         <Button onClick={onOpen}>
@@ -28,4 +44,4 @@ const PopupAddProject: React.FC<IPopupAddProjectProps> = ({isOpen,onOpen, onClos
   );
 };
 
-export default PopupHoc(PopupAddProject)({excludeWrapper: 'popup'});
+export default PopupHoc(AddProjectHoc(PopupAddProject))({excludeWrapper: 'popup'});

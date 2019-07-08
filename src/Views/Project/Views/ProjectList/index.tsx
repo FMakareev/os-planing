@@ -1,10 +1,9 @@
 import * as React from 'react';
 import Breadcrumbs from "../../../../Components/Breadcrumbs/Breadcrumbs";
 import {PageTitle} from '../../../../Components/PageTitle/PageTitle';
-import ProjectItem from "../../Components/ProjectItem/ProjectItem";
 import {NotificationsTop} from '../../../../Components/NotificationsTop/NotificationsTop';
 import PopupAddProject from '../../Components/PopupAddProject/PopupAddProject';
-
+import ProjectListEnhancer from '../../Enhancers/ProjectListEnhancer/ProjectListEnhancer';
 
 export const ProjectList = () => (<div className="inner">
 
@@ -31,20 +30,7 @@ export const ProjectList = () => (<div className="inner">
 		</NotificationsTop>
 
 		<div className="notifications__content">
-
-			<ProjectItem
-				title={'Строительство'}
-				link={'/project/123'}
-			/>
-			<ProjectItem
-				title={'Строительство'}
-				link={'/project/123'}
-			/>
-			<ProjectItem
-				title={'Строительство'}
-				link={'/project/123'}
-			/>
-
+			<ProjectListEnhancer/>
 			<PopupAddProject/>
 		</div>
 	</section>

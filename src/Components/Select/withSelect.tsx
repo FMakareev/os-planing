@@ -55,10 +55,17 @@ export interface IWithSelectMeta {
   filterActive: boolean;
 }
 
+export enum WithSelectEventEnum {
+  keyboard = 'keyboard',
+  mouse = 'mouse',
+}
+
+
 export interface IWithSelectState {
   value: ISelectOption,
   indexActiveOption?: number;
   findSubstring?: string,
+  currentEvent?: string, // scroll, keyboard, hover
   meta: IWithSelectMeta
 }
 
@@ -128,6 +135,7 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
     removeClickEventHandler = () => {
       this.app && this.app.removeEventListener('click', this.onClickEventHandler);
     };
+
     /** @desc добавить слушатель клика на дом элемент приложения */
     addClickEventHandler = () => {
       this.app && this.app.addEventListener('click', this.onClickEventHandler);
@@ -210,6 +218,7 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
       if (option) {
         this.setState({
           indexActiveOption: this.props.options.findIndex((item: ISelectOption) => option.value === item.value),
+          currentEvent: WithSelectEventEnum.mouse,
         })
       }
     };
@@ -228,11 +237,13 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
         case ('ArrowDown'): {
           if (this.state.indexActiveOption < options.length - 1) {
             this.setState({
-              indexActiveOption: this.state.indexActiveOption + 1
+              indexActiveOption: this.state.indexActiveOption + 1,
+              currentEvent: WithSelectEventEnum.keyboard
             });
           } else {
             this.setState({
-              indexActiveOption: options.length - 1
+              indexActiveOption: options.length - 1,
+              currentEvent: WithSelectEventEnum.keyboard
             });
           }
 
@@ -241,7 +252,8 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
         case ('ArrowUp'): {
           if (this.state.indexActiveOption > 0) {
             this.setState({
-              indexActiveOption: this.state.indexActiveOption - 1
+              indexActiveOption: this.state.indexActiveOption - 1,
+              currentEvent: WithSelectEventEnum.keyboard
             })
           }
           break;

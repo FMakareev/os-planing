@@ -21,6 +21,7 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
                                                                          meta,
                                                                          onMenuHover,
                                                                          indexActiveOption,
+                                                                         currentEvent,
                                                                        }) => (
   <div
     onClick={(event)=>event.stopPropagation()}
@@ -33,6 +34,7 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
         {
           options && options.map((item: any, idx: number) => (
             <SelectDropDownItem
+              currentEvent={currentEvent}
               onMouseEnter={() => {
                 onMenuHover && onMenuHover(item)
               }}

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {RefObject} from "react";
+import {WithSelectEventEnum} from "./withSelect";
 
 interface ISelectDropDownItemProps {
 	active?: boolean;
@@ -18,8 +19,11 @@ export class SelectDropDownItem extends React.Component<ISelectDropDownItemProps
 	}
 
 	componentDidUpdate(prevProps: any) {
-		if (this.props.active) {
-			this.itemRef.current.scrollIntoView(false);
+		if (this.props.active && this.props.currentEvent === WithSelectEventEnum.keyboard) {
+			this.itemRef.current.scrollIntoView({
+				block: "center",
+				inline: "nearest",
+			});
 		}
 	}
 

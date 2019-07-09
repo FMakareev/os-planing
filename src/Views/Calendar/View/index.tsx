@@ -9,21 +9,23 @@ import PopupEvents from '../Components/PopupEvents/PopupEvents';
 const LayoutCalendar = React.lazy(() => import('../../../Containers/LayoutCalendar/LayoutCalendar'));
 
 
-
 const CalendarDayList = CreateListDay();
 
 export const Calendar: React.FC<any> = () => {
-	return (<LayoutCalendar headerChildren={<HeaderDate/>}>
-		<CalendarTop/>
-		<PopupEvents/>
-		<div className="calendar__main">
-			<CalendarHeader/>
-			<CalendarContent
-				days={CalendarDayList}
-			/>
-		</div>
+  return (<LayoutCalendar headerChildren={<HeaderDate
+    year={new Date().getFullYear()}
+	  month={new Date().getMonth()}
+  />}>
+    <CalendarTop/>
+    <PopupEvents/>
+    <div className="calendar__main">
+      <CalendarHeader/>
+      <CalendarContent
+        days={CalendarDayList}
+      />
+    </div>
 
-	</LayoutCalendar>);
+  </LayoutCalendar>);
 };
 
 export default Calendar;

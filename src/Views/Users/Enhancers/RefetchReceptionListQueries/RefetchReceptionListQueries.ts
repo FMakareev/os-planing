@@ -1,12 +1,9 @@
 import ReceptionListQuery from "../ReceptionList/ReceptionListQuery.graphql";
-
+import config from '../../../../config';
 
 const RefetchReceptionListQueries = () => ({
   query: ReceptionListQuery,
-  variables: {
-    limit: 50,
-    page: 1,
-  }
+  variables: config.pagination
 });
 
 export default RefetchReceptionListQueries;

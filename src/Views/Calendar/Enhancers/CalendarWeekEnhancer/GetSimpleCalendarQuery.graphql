@@ -1,0 +1,116 @@
+query($time: DateTime){
+    getSimpleCalendar(time: $time) {
+        monday {
+            date
+            receptions {
+                reception {
+                    id
+                    city
+                }
+                priorityStatus
+                eventCount
+                events{
+                    date
+                    status
+                    statusUpdated
+                }
+            }
+        }
+        tuesday {
+            date
+            receptions {
+                reception {
+                    id
+                    city
+                }
+                priorityStatus
+                eventCount
+                events{
+                    date
+                    status
+                    statusUpdated
+                }
+            }
+        }
+        wednesday {
+            date
+            receptions {
+                reception {
+                    id
+                    city
+                }
+                priorityStatus
+                eventCount
+                events{
+                    date
+                    status
+                    statusUpdated
+                }
+            }
+        }
+        thursday {
+            date
+            receptions {
+                reception {
+                    id
+                    city
+                }
+                priorityStatus
+                eventCount
+                events{
+                    date
+                    status
+                    statusUpdated
+                }
+            }
+        }
+        friday {
+            date
+            receptions {
+                reception {
+                    id
+                    city
+                }
+                priorityStatus
+                eventCount
+                events{
+                    date
+                    status
+                    statusUpdated
+                }
+            }
+        }
+        saturday {
+            date
+            receptions {
+                reception {
+                    id
+                    city
+                }
+                priorityStatus
+                eventCount
+                events{
+                    date
+                    status
+                    statusUpdated
+                }
+            }
+        }
+        sunday {
+            date
+            receptions {
+                reception {
+                    id
+                    city
+                }
+                priorityStatus
+                eventCount
+                events{
+                    date
+                    status
+                    statusUpdated
+                }
+            }
+        }
+    }
+}

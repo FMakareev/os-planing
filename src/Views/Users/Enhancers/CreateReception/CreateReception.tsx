@@ -11,6 +11,7 @@ import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 import RefetchReceptionListQueries from "../RefetchReceptionListQueries/RefetchReceptionListQueries";
 import FileUpload, {IFileUpload} from "../../../../Enhancers/FileUpload/FileUpload";
 import {compose} from 'recompose';
+import {paginationConfig} from "../../Views/Users/paginationConfig";
 
 interface ICreateUserProps extends MutateProps, IFileUpload {
   [prop: string]: any

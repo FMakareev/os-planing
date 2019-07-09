@@ -9,7 +9,8 @@
 /* Desktop */
 @media (max-width: 1199px) {
   .container{
-    width: 970px;
+    width: 100%;
+    padding: 0 20px;
   }
 }
   
@@ -17,7 +18,8 @@
 /* Tablet */
 @media (max-width: 991px)  {
   .container{
-    width: 750px;
+    width: 100%;
+    padding: 0 20px;
   }
 }
  

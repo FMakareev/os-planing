@@ -1,10 +1,10 @@
 import ProjectListQuery from "../ProjectListEnhancer/ProjectListQuery.graphql";
-import {paginationConfig} from "../../Views/ProjectList/paginationConfig";
+import config from '../../../../config';
 
 
 const RefetchProjectListQueries = () => ({
   query: ProjectListQuery,
-  variables: paginationConfig
+  variables: config.pagination
 });
 
 export default RefetchProjectListQueries;

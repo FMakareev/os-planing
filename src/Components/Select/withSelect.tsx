@@ -96,7 +96,7 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
     }
 
     get initialState(): IWithSelectState {
-      const indexSelected = this.props.options.findIndex((item: ISelectOption) => item.value === this.props.selected)
+      const indexSelected = this.props.options.findIndex((item: ISelectOption) => item.value === this.props.selected);
 
 
       return {
@@ -147,10 +147,12 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
         ...state,
         value: option,
         findSubstring: null,
-      }));
-      if (this.props && this.props.onChange) {
-        this.props.onChange(option);
-      }
+      }), ()=>{
+        if (this.props && this.props.onChange) {
+          this.props.onChange(option);
+        }
+      });
+
       this.onBlur();
     };
 
@@ -277,10 +279,10 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
 
     render() {
       const {meta, findSubstring} = this.state;
-
       return (
         <WrappedComponent
           {...this.state}
+          {...this.props}
           onChange={this.onChange}
           onBlur={this.onBlur}
           onFocus={this.onFocus}
@@ -290,7 +292,6 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
           inputRef={this.inputRef}
           handleInputChange={this.handleInputChange}
           findSubstring={this.state.findSubstring}
-          {...this.props}
           options={this.optionsFilter(this.props.options, meta.focus ? findSubstring : undefined)}
         />
       );

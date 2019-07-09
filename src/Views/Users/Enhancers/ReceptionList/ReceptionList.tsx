@@ -10,6 +10,7 @@ import Preloader, {
   PreloaderSizeEnum,
   PreloaderThemeEnum
 } from "../../../../Components/Preloader/Preloader";
+import {paginationConfig} from '../../Views/Users/paginationConfig';
 
 interface IReceptionListProps {
   [prop: string]: any
@@ -17,7 +18,10 @@ interface IReceptionListProps {
 
 const InfinityScrollWithQuery = InfinityScrollHoc(InfinityScroll)({
   query: ReceptionListQuery,
-  queryName: 'receptionPagination'
+  queryName: 'receptionPagination',
+  variables:{
+    ...paginationConfig,
+  }
 });
 
 const PopupDeleteWithQuery = DeleteReceptionHOC(PopupDelete);

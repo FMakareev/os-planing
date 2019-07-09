@@ -2,30 +2,56 @@ import * as React from 'react';
 import {HeaderDate} from "../../../Components/HeaderDate/HeaderDate";
 import {CalendarTop} from '../Components/CalendarTop/CalendarTop';
 import {CalendarHeader} from '../Components/CalendarHeader/CalendarHeader';
-import {CreateListDay} from "./mock";
 import {CalendarContent} from "../Components/CalendarContent/CalendarContent";
 import PopupEvents from '../Components/PopupEvents/PopupEvents';
+import CalendarEnhancer, {ICalendarDate} from '../Enhancers/CalendarEnhancer/CalendarEnhancer';
 
 const LayoutCalendar = React.lazy(() => import('../../../Containers/LayoutCalendar/LayoutCalendar'));
 
 
-const CalendarDayList = CreateListDay();
+interface ICalendarProps extends ICalendarDate{
 
-export const Calendar: React.FC<any> = () => {
+}
+
+export const Calendar: React.FC<ICalendarProps> = ({changeDate,
+                                                     currentDay,
+                                                     changeProject,
+                                                     changeReception,
+                                                     year,
+                                                     month,
+                                                     weeks,
+                                                     day,
+                                                     project,
+                                                     reception,
+                                                   }) => {
   return (<LayoutCalendar headerChildren={<HeaderDate
-    year={new Date().getFullYear()}
-	  month={new Date().getMonth()}
+    changeDate={changeDate}
+    year={year}
+    month={month}
+    currentDay={currentDay}
   />}>
-    <CalendarTop/>
-    <PopupEvents/>
+    <CalendarTop
+      changeProject={changeProject}
+      changeReception={changeReception}
+      project={project}
+      reception={reception}
+    />
+    {/*<PopupEvents/>*/}
     <div className="calendar__main">
       <CalendarHeader/>
       <CalendarContent
-        days={CalendarDayList}
+        changeDate={changeDate}
+        weeks={weeks}
+        year={year}
+        month={month}
+        day={day}
+        currentDay={currentDay}
+        project={project}
+        reception={reception}
       />
     </div>
 
   </LayoutCalendar>);
 };
 
-export default Calendar;
+export default CalendarEnhancer(Calendar);

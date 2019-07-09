@@ -5,6 +5,19 @@ export enum UserRoleEnum {
   user = 'user',
 }
 
+export enum PriorityStatusEnum {
+  need = 'need',
+  wait = 'wait',
+  accepted = 'accepted',
+  blank = 'blank',
+}
+
+export enum EventStatusEnum {
+  need = 'need',
+  wait = 'wait',
+  accepted = 'accepted',
+}
+
 export interface IBase {
   created?: string;
   updated?: string;
@@ -65,6 +78,7 @@ export interface ICreateReceptionData {
     }
   }
 }
+
 export interface IUpdateReceptionData {
   data: {
     updateReception: {
@@ -75,18 +89,19 @@ export interface IUpdateReceptionData {
 
 
 export interface IUpdateUserData extends IBase {
-  data:{
+  data: {
     updateUser: {
       user: IUser
     }
   }
 
 }
+
 export interface IUpdateUserDataVariables extends IBase {
- id: string;
- avatar?: string;
- email?: string;
- fullName?: string;
+  id: string;
+  avatar?: string;
+  email?: string;
+  fullName?: string;
 }
 
 
@@ -102,6 +117,7 @@ export interface ICreateProjectData {
     }
   }
 }
+
 export interface IUpdateProjectData {
   data: {
     updateProject: {
@@ -123,7 +139,7 @@ export interface IUserChangePasswordVariables {
   oldPassword: string;
 }
 
-export interface ISMTPSettings  extends IBase{
+export interface ISMTPSettings extends IBase {
   host: string;
   port: string;
   login: string;
@@ -185,7 +201,7 @@ export interface IMonthReport {
 
 }
 
-export interface INotification extends  IBase{
+export interface INotification extends IBase {
   id?: string;
   isRead?: boolean;
   message?: string;
@@ -196,10 +212,52 @@ export interface INotification extends  IBase{
 }
 
 
+export interface IEvent {
+  date: string;
+  id: string;
+  projects: IProject[];
+  reception: any; //ReferenceReception
+  status: EventStatusEnum;
+  statusUpdated: string;
+  text: string;
+  title: string;
+}
 
 
+export interface IReceptionCalendar {
+  reception: IReception;
+  priorityStatus: PriorityStatusEnum;
+  eventCount: number;
+  events: IEvent[];
+}
 
 
+export interface IDayWeek {
+  date: string;
+  receptions: IReceptionCalendar[];
+}
+
+
+export interface IWeek {
+  monday: IDayWeek;
+  tuesday: IDayWeek;
+  wednesday: IDayWeek;
+  thursday: IDayWeek;
+  friday: IDayWeek;
+  saturday: IDayWeek;
+  sunday: IDayWeek;
+  __typename: string;
+}
+
+
+export interface GetSimpleCalendarData {
+  getSimpleCalendar: IWeek;
+}
+
+
+export interface GetSimpleCalendarVariables {
+  time: string;
+}
 
 
 export interface Query {

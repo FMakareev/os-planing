@@ -4,12 +4,11 @@ import {graphql, MutateProps} from 'react-apollo'
 import UpdateProjectMutation from './UpdateProjectMutation.graphql';
 import {compose} from "recompose";
 import {IProject, IUpdateProjectData} from "../../../../Apollo/schema";
-import RefetchReceptionListQueries
-  from "../../../Users/Enhancers/RefetchReceptionListQueries/RefetchReceptionListQueries";
 import Logging from "../../../../Helpers/Logging";
 import {FORM_ERROR, FormApi} from "final-form";
 import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 import {ApolloError} from 'apollo-boost';
+import RefetchProjectListQueries from "../RefetchProjectListQueries/RefetchProjectListQueries";
 
 
 interface IUpdateProjectHOCProps  extends MutateProps{
@@ -28,7 +27,7 @@ const UpdateProjectHOC = (WrapperComponent: React.ElementType) => {
 
          const {message}: any = await mutate({
            variables: values,
-           refetchQueries: [RefetchReceptionListQueries()]
+           refetchQueries: [RefetchProjectListQueries()]
          })
            .catch((error: ApolloError) => {
              Logging(error.message, 'error');

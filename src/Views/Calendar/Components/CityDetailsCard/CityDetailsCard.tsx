@@ -5,16 +5,15 @@ import {
 } from '../../../Project/Components/ProjectReportStatus/ProjectReportStatus';
 import SelectStatus from "../../../../Components/Select/SelectStatus";
 import withSelect from "../../../../Components/Select/withSelect";
+import {IEvent} from '../../../../Apollo/schema';
 
-export interface ICityDetailsCardProps {
-  status: ReportStatusEnum;
-  id?: string;
-  projects?: string[];
-  description?: string;
+export interface ICityDetailsCardProps extends IEvent {
+
   [prop: string]: any
 }
 
 const SelectStatusWithSelect = withSelect(SelectStatus)();
+
 const CityDetailsCard: React.FC<ICityDetailsCardProps> = ({status}) => {
   return (
     <div className="city-details">
@@ -22,20 +21,20 @@ const CityDetailsCard: React.FC<ICityDetailsCardProps> = ({status}) => {
         selected={status}
         options={[
           {
-            label:ReportStatusEnum.ok,
-            value:ReportStatusEnum.ok
+            label: ReportStatusEnum.ok,
+            value: ReportStatusEnum.ok
           },
           {
-            label:ReportStatusEnum.report,
-            value:ReportStatusEnum.report
+            label: ReportStatusEnum.report,
+            value: ReportStatusEnum.report
           },
           {
-            label:ReportStatusEnum.review,
-            value:ReportStatusEnum.review
+            label: ReportStatusEnum.review,
+            value: ReportStatusEnum.review
           },
           {
-            label:ReportStatusEnum.noReport,
-            value:ReportStatusEnum.noReport
+            label: ReportStatusEnum.noReport,
+            value: ReportStatusEnum.noReport
           },
         ]}
 

@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import {SelectDate} from '../Select/SelectDate';
-import withSelect from "../Select/withSelect";
+import withSelect, {ISelectOption} from "../Select/withSelect";
 import {MonthOptions} from "./MonthOptions";
 import {Range} from '../../Helpers/Range';
+import {ICalendarDate} from "../../Views/Calendar/Enhancers/CalendarEnhancer/CalendarEnhancer";
 
 const YearOptions = () => {
   let start = 2019;
@@ -17,16 +18,20 @@ const YearOptions = () => {
 const SelectDateWith = withSelect(SelectDate)();
 
 
-interface IHeaderDateProps {
-  month?: number;
-  year?: number;
+interface IHeaderDateProps extends ICalendarDate {
+
 }
 
-export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year}) => (<div className="header__date">
+export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year, changeDate}) => (<div className="header__date">
   <div className="header__month">
     <SelectDateWith
       options={MonthOptions}
       selected={month}
+      onChange={(value: ISelectOption)=>{
+        changeDate({
+          month: value.value,
+        })
+      }}
     />
   </div>
 
@@ -34,6 +39,11 @@ export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year}) => (<div c
     <SelectDateWith
       options={YearOptions()}
       selected={year}
+      onChange={(value: ISelectOption)=>{
+        changeDate({
+          year: value.value,
+        })
+      }}
     />
   </div>
 </div>);

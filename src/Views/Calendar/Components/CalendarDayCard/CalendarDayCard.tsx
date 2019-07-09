@@ -1,29 +1,59 @@
-import * as React from 'react';
+import
+  * as React from 'react';
 import classNames from 'classnames';
+import {format} from 'date-fns';
+import ru from 'date-fns/locale/ru';
 
-interface ICalendarDayCardProps {
-    day: string;
-    projects: any;
-    status: any;
-    [prop: string]: any
+import {IReceptionCalendar} from "../../../../Apollo/schema";
+import CalendarDayReceptionList from "../CalendarDayReceptionList/CalendarDayReceptionList";
+import CalendarDayReception from '../CalendarDayReception/CalendarDayReception';
+
+
+export enum CalendarDayCardEnum {
+  passed = 'passed',
+  current = 'current',
 }
 
-export const CalendarDayCard: React.FC<ICalendarDayCardProps> = ({day, projects, status}) => (
-    <div className={classNames("calendar-item", {
-        'passed': 'passed' === status,
-        'current': 'current' === status,
-    })}>
-        <div className="calendar-item__title">{day}</div>
-        <div className="calendar-item__content">
-            {
-                projects && projects.map((item: any, index: number) => (<div key={index} className="calendar__city">
-                    {item.name}
-                    {item.count && item.status && <span className={item.status}>{item.count}</span>}
+interface ICalendarDayCardProps {
+  data: string;
+  receptions?: IReceptionCalendar[];
+  status?: CalendarDayCardEnum | null;
 
-                </div>))
-            }
-        </div>
+  [prop: string]: any
+}
+
+const DateFormat = (data: string) => {
+  return format(
+    new Date(data),
+    'd MMMM',
+    {
+      locale: ru
+    }
+  )
+};
+
+
+export const CalendarDayCard: React.FC<ICalendarDayCardProps> = ({data, projects, reception,receptions, status}) => (
+  <div className={classNames("calendar-item", {
+    'passed': CalendarDayCardEnum.passed === status,
+    'current': CalendarDayCardEnum.current === status,
+  })}>
+    <div className="calendar-item__title">
+      {DateFormat(data)}
     </div>
+    {
+      !reception &&
+      <CalendarDayReceptionList
+          receptions={receptions}
+      />
+    }
+    {
+      reception &&
+      <CalendarDayReception
+          reception={receptions && receptions.find((item: IReceptionCalendar)=>item.reception.id === reception)}
+      />
+    }
+  </div>
 );
 
 export default CalendarDayCard;

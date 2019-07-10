@@ -102,7 +102,6 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
 
       render() {
         const {data} = this.props;
-        console.log('InfinityScrollHoc: ', data);
 
         return (<WrapperComponent
           getNextItems={this.getNextItems}

@@ -1,0 +1,15 @@
+query ($id: String!){
+    eventItem(id: $id){
+        date
+        id
+        projects{
+            id
+            name
+        }
+        reception
+        status
+        statusUpdated
+        text
+        title
+    }
+}

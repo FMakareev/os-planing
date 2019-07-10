@@ -3,46 +3,47 @@ import {Breadcrumbs} from "../../../../Components/Breadcrumbs/Breadcrumbs";
 import {PageTitle} from "../../../../Components/PageTitle/PageTitle";
 import {ProjectPlace} from '../../../../Components/ProjectPlace/ProjectPlace';
 import {TagList} from "../../../../Components/TagList/TagList";
-import {Button} from '../../../../Components/Button/Button';
+import {Button, ButtonAsEnum} from '../../../../Components/Button/Button';
+import {IEvent} from "../../../../Apollo/schema";
 
-interface IProjectPageItemContentProps {
+import {EventDateFormat} from "../../Helpers/EventDateFormat";
+import EventBreadcrumbs from "../EventBreadcrumbs/EventBreadcrumbs";
+
+interface IProjectPageItemContentProps extends IEvent {
 	[prop: string]: any
 }
 
-export const ProjectPageItemContent: React.FC<IProjectPageItemContentProps> = () => (
+
+
+
+
+
+export const ProjectPageItemContent: React.FC<IProjectPageItemContentProps> = ({title,text, projects,date, id}) => (
 	<React.Fragment>
-		<Breadcrumbs history={[
-			{
-				name: 'Календарь',
-				to: '/'
-			},
-			{
-				name: '5 мая 2019',
-				to: '/calendar?data="5 мая 2019"'
-			},
-			{
-				name: '\n' +
-					'Зеленогорск',
-				to: `/report/ываыа`
-			},
-		]}/>
+		<EventBreadcrumbs
+			date={date}
+			id={id}
+		/>
 
 		<PageTitle>
-			Проект модернизации театра юного зрителя по адресу ул. Петропавловская, д. 54
+			{title}
 		</PageTitle>
 		<div className="inner__content">
+			<TagList
+				projects={projects}
+			/>
 			<ProjectPlace>
 				Зеленогорск
 			</ProjectPlace>
 
 			<TagList/>
-			<Button>
+			<Button as={ButtonAsEnum.link} to={`/event/edit/${id}`}>
 				Редактировать
 			</Button>
 
-			<p>Математическое моделирование однозначно показывает, что умножение двух векторов (векторное) отображает убывающий график функции. Комплексное число, следовательно, концентрирует невероятный определитель системы линейных уравнений. Умножение вектора на число изящно определяет математический анализ. Критерий сходимости Коши, следовательно, расточительно отображает Наибольший Общий Делитель (НОД). Разрыв функции изящно изменяет стремящийся функциональный анализ.</p>
-			<p>Геодезическая линия, как следует из вышесказанного, осмысленно стабилизирует аксиоматичный интеграл по ориентированной области. Доказательство, конечно, непосредственно раскручивает неопровержимый функциональный анализ, что и требовалось доказать. Расходящийся ряд, конечно, отображает тригонометрический ортогональный определитель. Матожидание недоказуемо.</p>
-			<p>Согласно последним исследованиям, расходящийся ряд упорядочивает стремящийся ортогональный определитель, что неудивительно. Степенной ряд, не вдаваясь в подробности, неограничен сверху. Однако не все знают, что доказательство стремительно порождает неопределенный интеграл. Дисперсия, не вдаваясь в подробности, решительно ускоряет равновероятный степенной ряд. Первая производная порождает функциональный анализ.</p>
+			<div>
+				{text}
+			</div>
 
 		</div>
 

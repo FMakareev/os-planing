@@ -29,7 +29,9 @@ const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({rec
             }
             {
               currentCardMode === DayCardModeEnum.monthReport &&
-              <span style={{backgroundColor: 'transparent'}}><MonthReportIcon/></span>
+              <span style={{backgroundColor: 'transparent'}}>
+                <MonthReportIcon/>
+              </span>
             }
             {
               currentCardMode !== DayCardModeEnum.monthReport &&

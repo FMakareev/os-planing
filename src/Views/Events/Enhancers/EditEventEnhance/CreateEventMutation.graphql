@@ -1,24 +1,31 @@
 mutation(
-    $id: String!,
+    $date: DateTime,
+    $projects: [String]!,
+    $reception: String,
     $status: EventStatus,
+    $text: String,
+    $title: String
 ){
-    updateEvent(
-        id: $id
+
+    createEvent(
+        date:$date,
+        projects: $projects,
+        reception: $reception
         status: $status,
+        text:$text,
+        title: $title
     ){
         event{
-            date
             id
+            date
             projects{
                 id
                 name
             }
             reception
             status
-            statusUpdated
             text
             title
         }
     }
 }
-

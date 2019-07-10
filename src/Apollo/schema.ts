@@ -6,7 +6,6 @@ export enum UserRoleEnum {
 }
 
 
-
 export enum EventStatusEnum {
   waitReport = 'waitReport',
   waitReview = 'waitReview',
@@ -212,11 +211,20 @@ export interface IEvent {
   date: string;
   id: string;
   projects: IProject[];
-  reception: any; //ReferenceReception
+  reception: any;
   status: EventStatusEnum;
   statusUpdated: string;
   text: string;
   title: string;
+}
+
+
+export interface IEventItemData {
+  eventItem: IEvent
+}
+
+export interface IEventItemVariables {
+  id: string;
 }
 
 
@@ -257,7 +265,7 @@ export interface GetSimpleCalendarVariables {
 
 
 /** получить календарь с фильтром по проекту */
-export interface GetCalendarByProjectData{
+export interface GetCalendarByProjectData {
   getCalendarByProject: IWeek;
 }
 
@@ -267,7 +275,7 @@ export interface GetCalendarByProjectVariables {
 }
 
 /** получить календарь с фильтром по приемной */
-export interface GetCalendarByReceptionData{
+export interface GetCalendarByReceptionData {
   getCalendarByReception: IWeek;
 }
 

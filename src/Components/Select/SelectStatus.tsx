@@ -2,6 +2,7 @@ import * as React from 'react';
 import ProjectReportStatus from "../../Views/Events/Components/ProjectReportStatus/ProjectReportStatus";
 import SelectStatusDropdown from './SelectStatusDropdown';
 import {ISelectBaseAPI} from "./withSelect";
+import {SelectDropDownList} from "./SelectDropDownList";
 
 interface ISelectStatusProps extends ISelectBaseAPI {
   [prop: string]: any
@@ -15,15 +16,13 @@ const SelectStatus: React.FC<ISelectStatusProps> = ({
                                                       onFocus,
                                                       onBlur,
                                                       onChange,
-                                                      label,
-                                                      placeholder,
-                                                      handleInputChange,
-                                                      wrapperRef,
+                                                      labelKey,
+                                                      valueKey,
                                                     }) => {
   return (
     <div className={'inner-info__status-wrap'}>
       <ProjectReportStatus
-        status={value.value}
+        status={!Array.isArray(value) ?value.value: ''}
 
         onClick={() => {
           if (!meta.active) {
@@ -38,8 +37,9 @@ const SelectStatus: React.FC<ISelectStatusProps> = ({
         selected={selected}
         active={meta.active}
         onChange={onChange}
-        status={value.value}
-
+        status={!Array.isArray(value) ?value.value: ''}
+        labelKey={labelKey}
+        valueKey={valueKey}
       />
     </div>
   );

@@ -10,6 +10,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
                                                                       options,
                                                                       active,
                                                                       onChange,
+                                                                      labelKey,
+                                                                      valueKey,
                                                                     }) => {
   return (
     <div className={classNames("inner-info__status-hidden", {
@@ -17,8 +19,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
     })}>
       <a
         onClick={() => onChange && onChange({
-          label: EventStatusEnum.ok,
-          value: EventStatusEnum.ok,
+          [labelKey]: EventStatusEnum.ok,
+          [valueKey]: EventStatusEnum.ok,
         })}
         className={"ok"}
         href="javascript:void(0);"
@@ -27,8 +29,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
       </a>
       <a
         onClick={() => onChange && onChange({
-          label: EventStatusEnum.waitReport,
-          value: EventStatusEnum.waitReport,
+          [labelKey]: EventStatusEnum.waitReport,
+          [valueKey]: EventStatusEnum.waitReport,
         })}
         className={"report"}
         href="javascript:void(0);">
@@ -36,8 +38,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
       </a>
       <a
         onClick={() => onChange && onChange({
-          label: EventStatusEnum.waitReview,
-          value: EventStatusEnum.waitReview,
+          [labelKey]: EventStatusEnum.waitReview,
+          [valueKey]: EventStatusEnum.waitReview,
         })}
         className={'review'}
         href="javascript:void(0);"
@@ -46,8 +48,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
       </a>
       <a
         onClick={() => onChange && onChange({
-          label: EventStatusEnum.noReport,
-          value: EventStatusEnum.noReport,
+          [labelKey]: EventStatusEnum.noReport,
+          [valueKey]: EventStatusEnum.noReport,
         })}
         href="javascript:void(0);"
         className={'no-review'}

@@ -22,6 +22,8 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
                                                                          onMenuHover,
                                                                          indexActiveOption,
                                                                          currentEvent,
+                                                                         labelKey,
+                                                                         valueKey,
                                                                        }) => (
   <div
     onClick={(event)=>event.stopPropagation()}
@@ -41,12 +43,12 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
               tabIndex={-1}
               key={`option-${idx}`}
               onClick={() => onChange && onChange(item)}
-              active={item.value === selected || indexActiveOption === idx}
+              active={item[valueKey] === selected || indexActiveOption === idx}
               className={classNames({
                 'sel': indexActiveOption === idx
               })}
             >
-              {item.label}
+              {item[labelKey]}
             </SelectDropDownItem>
           ))
         }

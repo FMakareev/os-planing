@@ -25,10 +25,14 @@ export const SelectDate: React.FC<ISelectDateProps> = ({
                                                          indexActiveOption,
                                                          onKeyDown,
                                                          currentEvent,
+                                                         labelKey,
+                                                         valueKey
                                                        }) => {
   return (
     <div ref={wrapperRef} className="jq-selectbox jqselect changed">
       <SelectDateToggle
+        labelKey={labelKey}
+        valueKey={valueKey}
         meta={meta}
         inputRef={inputRef}
         wrapperRef={wrapperRef}
@@ -48,6 +52,8 @@ export const SelectDate: React.FC<ISelectDateProps> = ({
       />
 
       <SelectDropDownList
+        labelKey={labelKey}
+        valueKey={valueKey}
         currentEvent={currentEvent}
         meta={meta}
         value={value}

@@ -26,9 +26,13 @@ export const SelectDefault: React.FC<ISelectDefaultProps> = ({
                                                                onKeyDown,
                                                                className,
                                                                currentEvent,
-                                                               onReset
+                                                               onReset,
+                                                               labelKey,
+                                                               valueKey,
                                                              }) => (
   <SelectToggleTextField
+    labelKey={labelKey}
+    valueKey={valueKey}
     className={className}
     meta={meta}
     inputRef={inputRef}
@@ -50,6 +54,8 @@ export const SelectDefault: React.FC<ISelectDefaultProps> = ({
     }}
   >
     <SelectDropDownList
+      labelKey={labelKey}
+      valueKey={valueKey}
       currentEvent={currentEvent}
       value={value}
       meta={meta}

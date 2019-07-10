@@ -5,7 +5,7 @@ import Close from '../SvgIcons/Close';
 
 interface ISelectToggleProps extends ISelectBaseAPI {
   className?: string;
-  // [prop: string]: any
+  [prop: string]: any
 }
 
 export const SelectToggleTextField: React.FC<ISelectToggleProps> = ({
@@ -21,7 +21,9 @@ export const SelectToggleTextField: React.FC<ISelectToggleProps> = ({
                                                                       onKeyDown,
                                                                       label,
                                                                       className,
-                                                                      onReset
+                                                                      onReset,
+                                                                      labelKey,
+                                                                      valueKey
                                                                     }) => (
   <div onClick={onClick} ref={wrapperRef} className={classNames("form__group form__group--select", className)}>
     <div className="jq-selectbox jqselect form__select">
@@ -30,7 +32,7 @@ export const SelectToggleTextField: React.FC<ISelectToggleProps> = ({
           ref={inputRef}
           className="jq-selectbox__select-text"
           type="text"
-          value={meta && meta.focus ? findSubstring : value && value.label}
+          value={meta && meta.focus ? findSubstring : !Array.isArray(value) && value ?value[labelKey]: ''}
           placeholder={placeholder}
           onKeyDown={(event) => {
             onKeyDown && onKeyDown(event.key);

@@ -4,13 +4,17 @@ import Logging from "../../Helpers/Logging";
 
 
 export interface ISelectOption {
-  value: string;
-  label: string;
+  // value: string;
+  // label: string;
+  [prop: string]: any;
 }
 
 export interface ISelectBaseAPI extends IWithSelectState {
   /** @desc прослушка стейта компонента */
   onChange?(option: ISelectOption): void;
+
+  /** @desc удаление опции по id, работает только если isMulti == true */
+  onRemoveValueByIdx?(index: number): void;
 
   /** @desc прослушка стейта компонента */
   onReset?(): void;
@@ -45,7 +49,7 @@ export interface ISelectBaseAPI extends IWithSelectState {
   options: any[];
 
   /** текущая выбранная опция */
-  value: ISelectOption
+  value: ISelectOption | ISelectOption[]
 
 
 }
@@ -65,7 +69,7 @@ export enum WithSelectEventEnum {
 
 
 export interface IWithSelectState {
-  value: ISelectOption,
+  value: ISelectOption | ISelectOption[],
   indexActiveOption?: number;
   findSubstring?: string,
   currentEvent?: string, // scroll, keyboard, hover
@@ -73,6 +77,9 @@ export interface IWithSelectState {
 }
 
 export interface IWithSelectProps {
+  valueKey: string;
+  labelKey: string;
+
   /** @desc */
   [prop: string]: any;
 }
@@ -80,6 +87,11 @@ export interface IWithSelectProps {
 
 export const withSelect = (WrappedComponent: React.FC<any>) => () => {
   return class extends React.Component<IWithSelectProps, any> {
+
+    static defaultProps = {
+      valueKey: 'value',
+      labelKey: 'label',
+    }
 
     /** ссылка на дом элемент в отором рендерится приложение */
     app: any = null;
@@ -90,22 +102,60 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
 
     constructor(props: any) {
       super(props);
-      this.state = this.initialState;
+      if (this.props.isMulti) {
+        this.state = this.initialStateIsMulti;
+      } else {
+        this.state = this.initialState;
+      }
+
       this.app = document.getElementById('root');
 
       this.wrapperRef = React.createRef();
       this.inputRef = React.createRef();
-
     }
 
     get initialState(): IWithSelectState {
-      const indexSelected = this.props.options.findIndex((item: ISelectOption) => item.value === this.props.selected);
-
+      const {
+        valueKey,
+        labelKey
+      } = this.props;
+      console.log(this.props);
+      const indexSelected = this.props.options.findIndex((item: ISelectOption) => item[valueKey] === this.props.selected);
+      const selectedOption = indexSelected !== -1 ? this.props.options[indexSelected] : null;
+      let value: any = null;
+      if (this.props.isMulti) {
+        value = [];
+        if (selectedOption) {
+          value.push(selectedOption);
+        }
+      } else {
+        value = selectedOption
+      }
 
       return {
-        value: indexSelected !== -1 ? this.props.options[indexSelected] : '',
+        value: value,
         findSubstring: undefined,
         indexActiveOption: indexSelected,
+        meta: {
+          active: this.props.defaultMenuIsOpen !== undefined ? this.props.defaultMenuIsOpen : false,
+          focus: this.props.defaultMenuIsOpen !== undefined ? this.props.defaultMenuIsOpen : false,
+          filterActive: this.props.defaultMenuIsOpen !== undefined ? this.props.defaultMenuIsOpen : false,
+        }
+      };
+    }
+
+
+    get initialStateIsMulti(): IWithSelectState {
+
+      let value: any = [];
+      if (Array.isArray(this.props.selected) || this.props.selected) {
+        value = this.props.selected;
+      }
+
+      return {
+        value: value,
+        findSubstring: undefined,
+        indexActiveOption: -1,
         meta: {
           active: this.props.defaultMenuIsOpen !== undefined ? this.props.defaultMenuIsOpen : false,
           focus: this.props.defaultMenuIsOpen !== undefined ? this.props.defaultMenuIsOpen : false,
@@ -144,17 +194,46 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
       this.app && this.app.addEventListener('click', this.onClickEventHandler);
     };
 
+    onRemoveValueByIdx = (index: number) => {
+      if (this.props.isMulti) {
+        this.setState((state: IWithSelectState) => ({
+            ...state,
+            value: Array.isArray(state.value) ? state.value.filter((_, idx: number) => idx !== index) : [state.value],
+            findSubstring: null,
+          }),
+          () => {
+            if (this.props && this.props.onChange) {
+              this.props.onChange(this.state.value);
+            }
+          });
+      }
+    };
+
     /** @desc метод пишет в состояние текущее активное значение options */
     onChange = (option: ISelectOption) => {
-      this.setState((state: any) => ({
-        ...state,
-        value: option,
-        findSubstring: null,
-      }), ()=>{
-        if (this.props && this.props.onChange) {
-          this.props.onChange(option);
-        }
-      });
+
+      if (this.props.isMulti) {
+
+        this.setState((state: IWithSelectState) => ({
+          ...state,
+          value: [...(Array.isArray(state.value) ? state.value : [state.value]), option],
+          findSubstring: null,
+        }), () => {
+          if (this.props && this.props.onChange) {
+            this.props.onChange(this.state.value);
+          }
+        });
+      } else {
+        this.setState((state: any) => ({
+          ...state,
+          value: option,
+          findSubstring: null,
+        }), () => {
+          if (this.props && this.props.onChange) {
+            this.props.onChange(this.state.value);
+          }
+        });
+      }
 
       this.onBlur();
     };
@@ -165,7 +244,7 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
         ...state,
         value: '',
         findSubstring: null,
-      }), ()=>{
+      }), () => {
         if (this.props && this.props.onChange) {
           this.props.onChange('');
         }
@@ -235,9 +314,10 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
 
     /** @desc фиксирует индекс опции над которой был курсор */
     onMenuHover = (option: ISelectOption) => {
+      const {valueKey} = this.props;
       if (option) {
         this.setState({
-          indexActiveOption: this.props.options.findIndex((item: ISelectOption) => option.value === item.value),
+          indexActiveOption: this.props.options.findIndex((item: ISelectOption) => option[valueKey] === item[valueKey]),
           currentEvent: WithSelectEventEnum.mouse,
         })
       }
@@ -289,8 +369,18 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
 
     /** @desc метод для поиска по подстроке в options, если подстрока пуста возвращает обычный список */
     optionsFilter = (options: ISelectOption[], substring: string): any[] => {
+
+      const {labelKey, valueKey} = this.props;
+      if (this.props.isMulti && Array.isArray(options)) {
+        return options.filter((option: ISelectOption) => {
+          if (Array.isArray(this.state.value)) {
+            return !!(this.state.value.findIndex((value: ISelectOption) => value[valueKey] === option[valueKey]) === -1)
+          }
+        });
+      }
+
       if (substring) {
-        return options.filter((item: ISelectOption) => item.label.indexOf(substring) !== -1);
+        return Array.isArray(options) ? options.filter((item: ISelectOption) => item[labelKey].indexOf(substring) !== -1) : [];
       }
       return options;
     };
@@ -307,6 +397,7 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
           onFocus={this.onFocus}
           onMenuHover={this.onMenuHover}
           onKeyDown={this.onKeyDown}
+          onRemoveValueByIdx={this.onRemoveValueByIdx}
           wrapperRef={this.wrapperRef}
           inputRef={this.inputRef}
           handleInputChange={this.handleInputChange}

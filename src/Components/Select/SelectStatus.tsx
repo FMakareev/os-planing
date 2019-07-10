@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ProjectReportStatus from "../../Views/Project/Components/ProjectReportStatus/ProjectReportStatus";
+import ProjectReportStatus from "../../Views/Events/Components/ProjectReportStatus/ProjectReportStatus";
 import SelectStatusDropdown from './SelectStatusDropdown';
 import {ISelectBaseAPI} from "./withSelect";
 

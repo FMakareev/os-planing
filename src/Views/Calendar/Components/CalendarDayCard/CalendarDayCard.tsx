@@ -1,59 +1,73 @@
-import
-  * as React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import {format} from 'date-fns';
-import ru from 'date-fns/locale/ru';
-
 import {IReceptionCalendar} from "../../../../Apollo/schema";
 import CalendarDayReceptionList from "../CalendarDayReceptionList/CalendarDayReceptionList";
 import CalendarDayReception from '../CalendarDayReception/CalendarDayReception';
+import {WithCalendar} from "../../Enhancers/CalendarContext/CalendarContext";
+import CalendarMonthReportsEnhancer, {DayCardModeEnum} from '../../Enhancers/CalendarMonthReportsEnhancer/CalendarMonthReportsEnhancer';
+import CalendarDayCardTitle from '../CalendarDayCardTitle/CalendarDayCardTitle';
 
 
 export enum CalendarDayCardEnum {
   passed = 'passed',
   current = 'current',
+  blank = 'blank',
 }
 
 interface ICalendarDayCardProps {
-  data: string;
+  date?: any;
   receptions?: IReceptionCalendar[];
-  status?: CalendarDayCardEnum | null;
+  status?: CalendarDayCardEnum;
 
   [prop: string]: any
 }
 
-const DateFormat = (data: string) => {
-  return format(
-    new Date(data),
-    'd MMMM',
-    {
-      locale: ru
-    }
-  )
-};
+
+/**
+ * 1. без фильтров
+ * 2. с фильтром по приемной
+ * 3. с фильтром по проектам
+ * 4. с фильтрами по приемной и проекту
+ * 5. без фильтров в режиме месячного отчета
+ * 6. с фильтром по приемной в режиме месячного отчета
+ * 7. с фильтром по проектам в режиме месячного отчета
+ * 8. с фильтрами по приемной и проекту в режиме месячного отчета
+ *
+ * */
 
 
-export const CalendarDayCard: React.FC<ICalendarDayCardProps> = ({data, projects, reception,receptions, status}) => (
+const CalendarDayReceptionListWithCalendar = WithCalendar(CalendarDayReceptionList);
+
+export const CalendarDayCard: React.FC<ICalendarDayCardProps> = ({date, projects, reception, receptions, status, enableMonthReport, currentCardMode, toggleCardMode,}) => (
   <div className={classNames("calendar-item", {
     'passed': CalendarDayCardEnum.passed === status,
     'current': CalendarDayCardEnum.current === status,
+    'month-report': currentCardMode === DayCardModeEnum.monthReport,
   })}>
-    <div className="calendar-item__title">
-      {DateFormat(data)}
-    </div>
+
+    <CalendarDayCardTitle
+      toggleCardMode={toggleCardMode}
+      currentCardMode={currentCardMode}
+      enableMonthReport={enableMonthReport}
+      date={date}
+    />
+
     {
-      !reception &&
-      <CalendarDayReceptionList
+      (!reception || currentCardMode === DayCardModeEnum.monthReport) &&
+      <CalendarDayReceptionListWithCalendar
           receptions={receptions}
+          enableMonthReport={enableMonthReport}
+          currentCardMode={currentCardMode}
       />
     }
+
     {
-      reception &&
+      reception && currentCardMode !== DayCardModeEnum.monthReport &&
       <CalendarDayReception
-          reception={receptions && receptions.find((item: IReceptionCalendar)=>item.reception.id === reception)}
+          reception={receptions && receptions.find((item: IReceptionCalendar) => item.reception.id === reception)}
       />
     }
   </div>
 );
 
-export default CalendarDayCard;
+export default CalendarMonthReportsEnhancer(CalendarDayCard);

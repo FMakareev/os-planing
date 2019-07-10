@@ -2,16 +2,10 @@ import * as React from 'react';
 import classNames from 'classnames';
 import {Arrow} from '../../../../Components/SvgIcons/Arrow';
 import {GetObjectByKey} from '../../../../Helpers/GetObjectByKey';
-
-export enum ReportStatusEnum {
-  ok = 'ok',
-  report = 'report',
-  noReport = 'noReport',
-  review = 'review',
-}
+import {EventStatusEnum} from "../../../../Apollo/schema";
 
 interface IProjectReportStatusProps {
-  status: ReportStatusEnum | string,
+  status: EventStatusEnum | string,
 
   [prop: string]: any
 }
@@ -23,19 +17,19 @@ export const ProjectReportStatus: React.FC<IProjectReportStatusProps> = ({status
     className={
       classNames("inner-info__status ", {
         "inner-info__status--withdate": date,
-        "inner-info__status--report": status === ReportStatusEnum.report,
-        "inner-info__status--no-report": status === ReportStatusEnum.noReport,
-        "inner-info__status--ok": status === ReportStatusEnum.ok,
-        "inner-info__status--review": status === ReportStatusEnum.review,
+        "inner-info__status--report": status === EventStatusEnum.waitReport,
+        "inner-info__status--no-report": status === EventStatusEnum.noReport,
+        "inner-info__status--ok": status === EventStatusEnum.ok,
+        "inner-info__status--review": status === EventStatusEnum.waitReview,
       })
     }
     href="javascript:void(0);">
 			<span>{
         GetObjectByKey({
-          report: status === ReportStatusEnum.report,
-          review: status === ReportStatusEnum.review,
-          noReport: status === ReportStatusEnum.noReport,
-          ok: status === ReportStatusEnum.ok,
+          report: status === EventStatusEnum.waitReport,
+          review: status === EventStatusEnum.waitReview,
+          noReport: status === EventStatusEnum.noReport,
+          ok: status === EventStatusEnum.ok,
         }, {
           report: 'Ожидает отчета',
           review: 'Ожидает проверки',

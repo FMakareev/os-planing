@@ -12,6 +12,9 @@ export interface ISelectBaseAPI extends IWithSelectState {
   /** @desc прослушка стейта компонента */
   onChange?(option: ISelectOption): void;
 
+  /** @desc прослушка стейта компонента */
+  onReset?(): void;
+
   /** @desc просушать когда срабатывает фокус */
   onFocus?(): void;
 
@@ -156,6 +159,21 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
       this.onBlur();
     };
 
+    /** @desc метод пишет в состояние текущее активное значение options */
+    onReset = () => {
+      this.setState((state: any) => ({
+        ...state,
+        value: '',
+        findSubstring: null,
+      }), ()=>{
+        if (this.props && this.props.onChange) {
+          this.props.onChange('');
+        }
+      });
+
+      this.onBlur();
+    };
+
     /** @desc активация выпадающего списка и в случае использования инпута ставит в нем фокус */
     onFocus = () => {
       this.setState((state: IWithSelectState) => ({
@@ -284,6 +302,7 @@ export const withSelect = (WrappedComponent: React.FC<any>) => () => {
           {...this.state}
           {...this.props}
           onChange={this.onChange}
+          onReset={this.onReset}
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onMenuHover={this.onMenuHover}

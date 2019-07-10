@@ -50,15 +50,25 @@
     flex-direction: column;
 
     &__title {
+      position: relative;
       background: #edeeef;
       color: #1b1b1b;
       font-size: 18px;
       font-weight: 500;
-      line-height: 24px;
       border-radius: 8px 8px 0 0;
       text-align: center;
       height: 45px;
       line-height: 45px;
+    }
+    &__title-month-report {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
 
     &__content {
@@ -83,6 +93,15 @@
         text-decoration: none;
       }
     }
+    &.month-report {
+      .calendar-item__title {
+        background-color: #C3C9DB;
+        color: #1b1b1b;
+        .icon {
+          fill: #8288A2;
+        }
+      }
+    }
 
     &__wrap {
       position: relative;
@@ -103,6 +122,7 @@
     display: block;
     text-decoration: none;
     line-height: 24px;
+    cursor: pointer;
 
     &:hover {
       text-decoration: underline;

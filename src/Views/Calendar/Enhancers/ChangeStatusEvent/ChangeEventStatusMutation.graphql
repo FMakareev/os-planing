@@ -1,0 +1,23 @@
+mutation(
+    $id: String!,
+    $status: EventStatus,
+){
+    updateEvent(
+        id: $id
+        status: $status,
+    ){
+        event{
+            id
+            date
+            projects {
+                id
+                name
+            }
+            reception
+            status
+            text
+            title
+        }
+    }
+}
+

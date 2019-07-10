@@ -1,6 +1,15 @@
 import * as React from 'react';
 import GetSimpleCalendarQuery from './GetSimpleCalendarQuery.graphql';
-import {GetSimpleCalendarData, GetSimpleCalendarVariables} from "../../../../Apollo/schema";
+import GetCalendarByProjectQuery from './GetCalendarByProjectQuery.graphql';
+import GetCalendarByReceptionQuery from './GetCalendarByReceptionQuery.graphql';
+import GetCalendarByReceptionAndProjectQuery from './GetCalendarByReceptionAndProjectQuery.graphql';
+
+
+import {GetSimpleCalendarData, GetSimpleCalendarVariables, GetCalendarByProjectVariables, GetCalendarByProjectData,
+  GetCalendarByReceptionVariables,
+  GetCalendarByReceptionData,
+  GetCalendarByReceptionAndProjectData,
+  GetCalendarByReceptionAndProjectVariables} from "../../../../Apollo/schema";
 import {Query, QueryResult} from "react-apollo";
 import Preloader, {PreloaderSizeEnum, PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
 
@@ -9,11 +18,83 @@ interface ICalendarWeekEnhancerProps {
   [prop: string]: any
 }
 
+
+const QueryRenderProps = <TData extends any, TVariables extends any> (WrapperComponent: React.ElementType, props: any, queryName: string) =>
+  ({data, loading, error}: QueryResult<TData, TVariables>) => {
+    if (loading) {
+      return <Preloader
+        style={{
+          margin: '16px auto',
+          display: 'block'
+        }}
+        theme={PreloaderThemeEnum.blue}
+        size={PreloaderSizeEnum.md}
+      />
+    }
+    if (error) {
+      return 'Error.'
+    }
+    return <WrapperComponent data={data && data[queryName]} {...props}/>
+  };
+
+
 const CalendarWeekEnhancer = (WrapperComponent: React.ElementType) => {
   return class extends React.Component<ICalendarWeekEnhancerProps> {
 
     render() {
-      const {time} = this.props;
+      const {time, project, reception} = this.props;
+
+
+      if(reception && project){
+        return (<Query
+          <GetCalendarByReceptionAndProjectData, GetCalendarByReceptionAndProjectVariables>
+          query={GetCalendarByReceptionAndProjectQuery}
+          variables={{
+            time: time,
+            reception,
+            project
+          }}
+        >
+          {
+            QueryRenderProps<GetCalendarByReceptionAndProjectData, GetCalendarByReceptionAndProjectVariables>(
+              WrapperComponent,
+              this.props,
+              'getCalendarByReceptionAndProject')
+          }
+        </Query>);
+      }
+      if(project){
+        return (<Query
+          <GetCalendarByProjectData, GetCalendarByProjectVariables>
+          query={GetCalendarByProjectQuery}
+          variables={{
+            time: time,
+            project,
+          }}
+        >
+          {
+            QueryRenderProps<GetCalendarByProjectData, GetCalendarByProjectVariables>(WrapperComponent, this.props, 'getCalendarByProject')
+          }
+        </Query>);
+      }
+      if(reception){
+        return (<Query
+          <GetCalendarByReceptionData, GetCalendarByReceptionVariables>
+          query={GetCalendarByReceptionQuery}
+          variables={{
+            time: time,
+            reception,
+          }}
+        >
+          {
+            QueryRenderProps<GetCalendarByReceptionData, GetCalendarByReceptionVariables>(
+              WrapperComponent,
+              this.props,
+              'getCalendarByReception')
+          }
+        </Query>);
+      }
+
       return (<Query
         <GetSimpleCalendarData, GetSimpleCalendarVariables>
         query={GetSimpleCalendarQuery}
@@ -22,22 +103,7 @@ const CalendarWeekEnhancer = (WrapperComponent: React.ElementType) => {
         }}
       >
         {
-          ({data, loading, error}: QueryResult<GetSimpleCalendarData, GetSimpleCalendarVariables>) => {
-            if (loading) {
-              return <Preloader
-                style={{
-                  margin: '16px auto',
-                  display: 'block'
-                }}
-                theme={PreloaderThemeEnum.blue}
-                size={PreloaderSizeEnum.md}
-              />
-            }
-            if (error) {
-              return 'Error.'
-            }
-            return <WrapperComponent data={data && data.getSimpleCalendar} {...this.props}/>
-          }
+          QueryRenderProps<GetSimpleCalendarData, GetSimpleCalendarVariables>(WrapperComponent, this.props, 'getSimpleCalendar')
         }
       </Query>);
     }

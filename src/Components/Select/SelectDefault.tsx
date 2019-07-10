@@ -26,6 +26,7 @@ export const SelectDefault: React.FC<ISelectDefaultProps> = ({
                                                                onKeyDown,
                                                                className,
                                                                currentEvent,
+                                                               onReset
                                                              }) => (
   <SelectToggleTextField
     className={className}
@@ -39,6 +40,7 @@ export const SelectDefault: React.FC<ISelectDefaultProps> = ({
     handleInputChange={handleInputChange}
     onKeyDown={onKeyDown}
     findSubstring={findSubstring}
+    onReset={onReset}
     onClick={() => {
       if (!meta.active) {
         onFocus && onFocus();

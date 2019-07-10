@@ -34,7 +34,7 @@ export const ReportEdit = () => (<LayoutWithSidebar
 			Зеленогорск
 		</ProjectPlace>
 		<div className="form__category">
-			<TagList/>
+			{/*<TagList/>*/}
 		</div>
 		<h2 className="h2">Отчет:</h2>
 		<FormReportEdit/>

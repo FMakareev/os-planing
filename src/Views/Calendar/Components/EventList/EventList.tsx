@@ -1,14 +1,17 @@
 import * as React from 'react';
 import Scrollbars from 'react-custom-scrollbars';
 
-import CityDetailsCard from '../CityDetailsCard/CityDetailsCard';
+import EventDetailsCard from '../EventDetailsCard/EventDetailsCard';
 import {IEvent} from "../../../../Apollo/schema";
+import ChangeStatusEvent from '../../Enhancers/ChangeStatusEvent/ChangeStatusEvent';
 
 interface IEventListProps {
   events: IEvent[];
 
   [prop: string]: any
 }
+
+const EventDetailsCardWithQuery = ChangeStatusEvent(EventDetailsCard);
 
 const EventList: React.FC<IEventListProps> = ({events}) => {
   return (
@@ -17,7 +20,8 @@ const EventList: React.FC<IEventListProps> = ({events}) => {
         height: '630px'
       }}>
         {
-          events && events.map((event: IEvent, idx: number) => (<CityDetailsCard
+          events && events.map((event: IEvent, idx: number) => (<EventDetailsCardWithQuery
+            key={idx}
             {...event}
           />))
         }

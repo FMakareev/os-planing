@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {ReportStatusEnum} from '../../Views/Project/Components/ProjectReportStatus/ProjectReportStatus';
 import classNames from 'classnames';
+import {EventStatusEnum} from "../../Apollo/schema";
 
 interface ISelectStatusDropdownProps {
   [prop: string]: any
@@ -10,10 +10,6 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
                                                                       options,
                                                                       active,
                                                                       onChange,
-                                                                      selected,
-                                                                      styleScrollbars,
-                                                                      meta,
-                                                                      onMenuHover,
                                                                     }) => {
   return (
     <div className={classNames("inner-info__status-hidden", {
@@ -21,8 +17,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
     })}>
       <a
         onClick={() => onChange && onChange({
-          label: ReportStatusEnum.ok,
-          value: ReportStatusEnum.ok,
+          label: EventStatusEnum.ok,
+          value: EventStatusEnum.ok,
         })}
         className={"ok"}
         href="javascript:void(0);"
@@ -31,8 +27,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
       </a>
       <a
         onClick={() => onChange && onChange({
-          label: ReportStatusEnum.report,
-          value: ReportStatusEnum.report,
+          label: EventStatusEnum.waitReport,
+          value: EventStatusEnum.waitReport,
         })}
         className={"report"}
         href="javascript:void(0);">
@@ -40,8 +36,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
       </a>
       <a
         onClick={() => onChange && onChange({
-          label: ReportStatusEnum.review,
-          value: ReportStatusEnum.review,
+          label: EventStatusEnum.waitReview,
+          value: EventStatusEnum.waitReview,
         })}
         className={'review'}
         href="javascript:void(0);"
@@ -50,8 +46,8 @@ const SelectStatusDropdown: React.FC<ISelectStatusDropdownProps> = ({
       </a>
       <a
         onClick={() => onChange && onChange({
-          label: ReportStatusEnum.noReport,
-          value: ReportStatusEnum.noReport,
+          label: EventStatusEnum.noReport,
+          value: EventStatusEnum.noReport,
         })}
         href="javascript:void(0);"
         className={'no-review'}

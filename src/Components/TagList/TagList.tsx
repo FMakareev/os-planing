@@ -1,21 +1,21 @@
 import * as React from 'react';
+import {IProject} from "../../Apollo/schema";
 
 interface ITagListProps {
-	[prop: string]: any
+  projects?: IProject[];
+
+  [prop: string]: any
 }
 
-export const TagList: React.FC<ITagListProps> = () => (
-	<div className="city-details__tags">
-		<div className="city-details__tag">
-			Реновация
-		</div>
-		<div className="city-details__tag">
-			Модернизация
-		</div>
-		<div className="city-details__tag">
-			Культура
-		</div>
-	</div>
+export const TagList: React.FC<ITagListProps> = ({projects}) => (
+  <div className="city-details__tags">
+    {
+      projects && projects.map((item: IProject, idx: number) => (
+        <div key={`TagList-${idx}`} className="city-details__tag">
+          {item.name}
+        </div>))
+    }
+  </div>
 );
 
 export default TagList;

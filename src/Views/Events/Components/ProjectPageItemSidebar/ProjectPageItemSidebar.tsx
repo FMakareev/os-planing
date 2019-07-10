@@ -3,7 +3,9 @@ import plus from '../../../../Assets/img/spritesvg/plus.svg';
 import editMini from '../../../../Assets/img/spritesvg/edit-mini.svg';
 import download from '../../../../Assets/img/spritesvg/download.svg';
 import Button, {ButtonAsEnum, ButtonStyleEnum} from "../../../../Components/Button/Button";
-import {ProjectReportStatus, ReportStatusEnum} from '../../../Project/Components/ProjectReportStatus/ProjectReportStatus';
+import {ProjectReportStatus} from '../ProjectReportStatus/ProjectReportStatus';
+import {EventStatusEnum} from "../../../../Apollo/schema";
+
 
 interface IProjectPageItemSidebarProps {
 	date?: string;
@@ -17,7 +19,7 @@ export const ProjectPageItemSidebar: React.FC<IProjectPageItemSidebarProps> = ({
 		</div>
 		<div className="inner-info__status-wrap">
 			<ProjectReportStatus
-				status={ReportStatusEnum.ok}
+				status={EventStatusEnum.ok}
 			/>
 		</div>
 

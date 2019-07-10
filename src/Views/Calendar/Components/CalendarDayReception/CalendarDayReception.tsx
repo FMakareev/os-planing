@@ -13,27 +13,32 @@ interface ICalendarDayReceptionProps {
 }
 
 const GetStatus = (status: EventStatusEnum) => {
-  switch (status) {
-    case(EventStatusEnum.accepted): {
-      return {
-        icon: okIcon,
-        text: 'Одобрено',
-        className: 'ok-report',
-      }
+  if (status === EventStatusEnum.ok) {
+    return {
+      icon: okIcon,
+      text: 'Одобрено',
+      className: 'ok-report',
     }
-    case(EventStatusEnum.need): {
-      return {
-        icon: ReportIcon,
-        text: 'Ожидает отчета',
-        className: 'wait-review',
-      }
+
+  } else if (status === EventStatusEnum.waitReport) {
+    return {
+      icon: ReportIcon,
+      text: 'Ожидает отчета',
+      className: 'wait-report',
     }
-    case(EventStatusEnum.wait): {
-      return {
-        icon: ReviewIcon,
-        text: 'Ожидает проверки',
-        className: 'wait-report',
-      }
+
+  } else if (status === EventStatusEnum.waitReview) {
+    return {
+      icon: ReviewIcon,
+      text: 'Ожидает проверки',
+      className: 'wait-review',
+    }
+
+  } else {
+    return {
+      icon: ReviewIcon,
+      text: 'Не требует отчета',
+      className: 'no-report',
     }
   }
 };
@@ -50,7 +55,7 @@ const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception})
           reception &&
           reception.events &&
           reception.events
-            .slice(3)
+            .slice(0, 3)
             .map((event: IEvent) => {
               const status = GetStatus(event.status);
               return (<div className="calendar-group">
@@ -59,7 +64,7 @@ const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception})
                   {status.text}
                 </div>
                 <div className="calendar__text">
-                  {event.text}
+                  {event.text && event.text.slice(0, 60) +'...'}
                 </div>
               </div>)
             })
@@ -70,7 +75,7 @@ const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception})
       {
         reception &&
         reception.events &&
-        reception.events && <PopupEvents
+        !!(reception.events.length > 0) && <PopupEvents
             events={reception.events}
             Button={({onClick}: any) => {
 
@@ -79,7 +84,7 @@ const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception})
                   Подробнее
                 </a>
                 <a className="calendar__more" href="javascript:void(0);">
-                  Еще {reception.events.length + 1}
+                  Еще {reception.events.length}
                 </a>
               </div>)
             }}

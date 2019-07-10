@@ -1,5 +1,5 @@
-query($time: DateTime){
-    getSimpleCalendar(time: $time) {
+query ($time: DateTime, $project: String!) {
+    getCalendarByProject(time: $time, project: $project) {
         monday {
             date
             receptions {

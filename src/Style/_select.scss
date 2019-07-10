@@ -80,6 +80,27 @@
       }
     }
   }
+
+  &__reset {
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    width: 12px;
+    height: 12px;
+    margin-top: -4px;
+    transition: all 0.35s;
+    fill: #8288A2;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
   &__trigger{
     position: absolute;
     top: 50%;

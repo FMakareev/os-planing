@@ -5,17 +5,13 @@ export enum UserRoleEnum {
   user = 'user',
 }
 
-export enum PriorityStatusEnum {
-  need = 'need',
-  wait = 'wait',
-  accepted = 'accepted',
-  blank = 'blank',
-}
+
 
 export enum EventStatusEnum {
-  need = 'need',
-  wait = 'wait',
-  accepted = 'accepted',
+  waitReport = 'waitReport',
+  waitReview = 'waitReview',
+  ok = 'ok',
+  noReport = 'noReport',
 }
 
 export interface IBase {
@@ -226,15 +222,15 @@ export interface IEvent {
 
 export interface IReceptionCalendar {
   reception: IReception;
-  priorityStatus: PriorityStatusEnum;
+  priorityStatus: EventStatusEnum;
   eventCount: number;
   events: IEvent[];
 }
 
 
 export interface IDayWeek {
-  date: string;
-  receptions: IReceptionCalendar[];
+  date?: any;
+  receptions?: IReceptionCalendar[];
 }
 
 
@@ -257,6 +253,38 @@ export interface GetSimpleCalendarData {
 
 export interface GetSimpleCalendarVariables {
   time: string;
+}
+
+
+/** получить календарь с фильтром по проекту */
+export interface GetCalendarByProjectData{
+  getCalendarByProject: IWeek;
+}
+
+export interface GetCalendarByProjectVariables {
+  time: string;
+  project?: string;
+}
+
+/** получить календарь с фильтром по приемной */
+export interface GetCalendarByReceptionData{
+  getCalendarByReception: IWeek;
+}
+
+export interface GetCalendarByReceptionVariables {
+  time: string;
+  reception: string;
+}
+
+/** получить календарь с фильтром по приемной и проекту */
+export interface GetCalendarByReceptionAndProjectData {
+  getCalendarByReception: IWeek;
+}
+
+export interface GetCalendarByReceptionAndProjectVariables {
+  time: string;
+  reception: string;
+  project: string;
 }
 
 

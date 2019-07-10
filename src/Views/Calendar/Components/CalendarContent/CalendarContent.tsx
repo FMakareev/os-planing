@@ -1,10 +1,9 @@
 import * as React from 'react';
-import CalendarDayCard from "../CalendarDayCard/CalendarDayCard";
 import CalendarWeek from "../CalendarWeek/CalendarWeek";
 import CalendarWeekEnhancer from '../../Enhancers/CalendarWeekEnhancer/CalendarWeekEnhancer';
-import {ICalendarDate} from "../../Enhancers/CalendarEnhancer/CalendarEnhancer";
+import {ICalendarContext} from "../../Enhancers/CalendarContext/CalendarContext";
 
-interface ICalendarContentProps extends ICalendarDate {
+interface ICalendarContentProps extends ICalendarContext {
   [prop: string]: any
 }
 

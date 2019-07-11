@@ -3,7 +3,9 @@ import LayoutWithSidebar from '../../../../Containers/LayoutWithSidebar/LayoutWi
 import MonthReportItemContent from '../../Components/MonthReportItemContent/MonthReportItemContent';
 import MonthReportItemSidebar from "../../Components/MonthReportItemSidebar/MonthReportItemSidebar";
 
-export const MonthReportItem = () => (<LayoutWithSidebar sidebarContent={<MonthReportItemSidebar/>}>
+export const MonthReportItem = () => (<LayoutWithSidebar
+	sidebarContent={<MonthReportItemSidebar/>}
+>
 	<MonthReportItemContent/>
 </LayoutWithSidebar>);
 

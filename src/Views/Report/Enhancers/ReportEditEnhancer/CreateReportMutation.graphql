@@ -1,0 +1,31 @@
+mutation(
+    $date: DateTime,
+    $projects: [String]!,
+    $reception: String,
+    $status: EventStatus,
+    $text: String,
+    $title: String
+){
+
+    createEvent(
+        date:$date,
+        projects: $projects,
+        reception: $reception
+        status: $status,
+        text:$text,
+        title: $title
+    ){
+        event{
+            id
+            date
+            projects{
+                id
+                name
+            }
+            reception
+            status
+            text
+            title
+        }
+    }
+}

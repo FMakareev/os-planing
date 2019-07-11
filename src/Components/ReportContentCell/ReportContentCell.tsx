@@ -2,7 +2,7 @@ import * as React from 'react';
 
 interface IReportContentCellProps {
   label: string;
-  content: string;
+  content: any;
 
   [prop: string]: any
 }

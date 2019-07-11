@@ -8,11 +8,12 @@ export const FindClassInPath = (path: any[], className: string): number => {
     return path.findIndex(item => {
       if (item.className) {
         let result: string[] = item.className.match(new RegExp(`((^|\\s)${className}(\\s|$))`, 'g'));
-        return result.length > 0;
+        return result ? result.length > 0 : false;
       }
       return false;
     });
   } catch (error) {
+    console.error('Error: ', error);
     return -1;
   }
 };

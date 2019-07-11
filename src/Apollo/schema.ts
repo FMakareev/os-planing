@@ -1,4 +1,3 @@
-import {IReport} from "../Types/Types";
 
 export enum UserRoleEnum {
   admin = 'admin',
@@ -83,13 +82,17 @@ export interface IUpdateReceptionData {
 }
 
 
+export interface IReceptionPagination {
+  receptionPagination: IPagination<IReception>;
+}
+
+
 export interface IUpdateUserData extends IBase {
   data: {
     updateUser: {
       user: IUser
     }
   }
-
 }
 
 export interface IUpdateUserDataVariables extends IBase {
@@ -122,6 +125,10 @@ export interface IUpdateProjectData {
 }
 
 
+export interface IProjectPagination {
+  projectPagination: IPagination<IProject>;
+}
+
 export interface IUserChangePassword {
   changePassword: {
     user: IUser
@@ -143,13 +150,13 @@ export interface ISMTPSettings extends IBase {
 }
 
 
-interface IMassMedia {
+export interface IMassMedia {
   id: string;
   title: string;
   link: string;
 }
 
-export interface IMonthReport {
+export interface IMonthReport extends IBase{
   reception?: IReception;
 
   // Общее количество мероприятий за отчетный месяц
@@ -236,6 +243,40 @@ export interface IReceptionCalendar {
 }
 
 
+export interface IUpdateEventData {
+  updateEvent: {
+    event: IEvent
+  }
+}
+
+export interface IUpdateEventVariables {
+  date: string;
+  id: string;
+  projects: string[];
+  reception: string;
+  status: EventStatusEnum,
+  text: string;
+  title: string;
+}
+
+export interface ICreateEventData {
+  createEvent: {
+    event: IEvent
+  }
+}
+
+export interface ICreateEventVariables {
+  date: string;
+  projects: string[];
+  reception: string;
+  status: EventStatusEnum,
+  text: string;
+  title: string;
+}
+
+
+
+
 export interface IDayWeek {
   date?: any;
   receptions?: IReceptionCalendar[];
@@ -302,6 +343,7 @@ export interface IReport extends IBase {
   event: IEvent;
   // Место проведения мероприятия
   place: string;
+
   // Задача (зачем было проведено мероприятие)
   task: string;
   // Кто поставил задачу (ФИО, место работы)
@@ -318,6 +360,14 @@ export interface IReport extends IBase {
   massMedia: IMassMedia[];
   // Прикрепить файлы (программа, презентации, протокол и т.п., фото)
   attachments: IFile[];
+}
+
+
+export interface IReportItemData {
+  reportItem: IReport
+}
+export interface IReportItemVariables {
+  id: string;
 }
 
 

@@ -12,7 +12,7 @@ import PlusIcon from '../../../../Components/SvgIcons/PlusIcon';
 
 const DropFieldWithHOC = DropFieldHoc(DropFieldWithFileList)();
 
-interface IFormReportEditValues extends IReport {
+export interface IFormReportEditValues extends IReport {
   [prop: string]: any
 }
 
@@ -23,17 +23,16 @@ interface IFormReportEditValidation {
 interface IFormReportEditProps {
   loading?: boolean;
 
-  onSubmit?(values: IFormReportEditValues): Promise<any>;
+  onSubmit: any;
 
   initialValues?: IReport;
 
   [prop: string]: any
 }
 
-export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading}) => (
+export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading, onSubmit}) => (
   <Form
-    onSubmit={() => {
-    }}
+    onSubmit={onSubmit}
     mutators={{
       ...arrayMutators
     }}

@@ -1,14 +1,23 @@
 import * as React from 'react';
 import {ProjectEditorSidebar} from "../../../Events/Components/ProjectEditorSidebar/ProjectEditorSidebar";
-import {Breadcrumbs} from "../../../../Components/Breadcrumbs/Breadcrumbs";
 import LayoutWithSidebar from "../../../../Containers/LayoutWithSidebar/LayoutWithSidebar";
 import FormMonthReportEdit from '../../Components/FormMonthReportEdit/FormMonthReportEdit';
 import PageTitle from "../../../../Components/PageTitle/PageTitle";
 import ProjectPlace from '../../../../Components/ProjectPlace/ProjectPlace';
 import {TagList} from "../../../../Components/TagList/TagList";
+import {IMonthReport} from "../../../../Apollo/schema";
+import EventBreadcrumbs from "../../../Events/Components/EventBreadcrumbs/EventBreadcrumbs";
+
+interface IMonthReportEditProps extends IMonthReport {
+  [prop: string]: any
+}
 
 
-export const ReportEdit = () => (<LayoutWithSidebar
+
+export const MonthReportEdit: React.FC<IMonthReportEditProps> = ({
+                             date,
+                             id,
+                           }) => (<LayoutWithSidebar
   sidebarContent={<ProjectEditorSidebar
     onClick={() => {
       const form = document.getElementById('FormMonthReportEdit');
@@ -17,20 +26,10 @@ export const ReportEdit = () => (<LayoutWithSidebar
     buttonLabel={'Сохранить отчет'}
   />}
 >
-  <Breadcrumbs history={[
-    {
-      name: 'Календарь',
-      to: '/'
-    },
-    {
-      name: '5 мая 2019',
-      to: '/calendar?data="5 мая 2019"'
-    },
-    {
-      name: 'Зеленогорск',
-      to: `/report/edit`
-    },
-  ]}/>
+  <EventBreadcrumbs
+    date={date}
+    id={id}
+  />
   <PageTitle>
     Проект модернизации театра юного зрителя по адресу ул. Петропавловская, д. 54
   </PageTitle>
@@ -48,4 +47,4 @@ export const ReportEdit = () => (<LayoutWithSidebar
 
 </LayoutWithSidebar>);
 
-export default ReportEdit;
+export default MonthReportEdit;

@@ -6,7 +6,9 @@ import FormReportEdit from '../../Components/FormReportEdit/FormReportEdit';
 import PageTitle from "../../../../Components/PageTitle/PageTitle";
 import ProjectPlace from '../../../../Components/ProjectPlace/ProjectPlace';
 import EventPageEnhancer from "../../../Events/Enhancers/EventPageEnhancer/EventPageEnhancer";
+import ReportEditEnhancer from "../../Enhancers/ReportEditEnhancer/ReportEditEnhancer";
 
+const FormReportEditWithEnhancer = ReportEditEnhancer(FormReportEdit);
 
 export const ReportEdit = () => (<LayoutWithSidebar
   sidebarContent={<ProjectEditorSidebar
@@ -42,7 +44,7 @@ export const ReportEdit = () => (<LayoutWithSidebar
       {/*<TagList/>*/}
     </div>
     <h2 className="h2">Отчет:</h2>
-    <FormReportEdit/>
+    <FormReportEditWithEnhancer/>
   </div>
 
 </LayoutWithSidebar>);

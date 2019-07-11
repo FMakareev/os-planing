@@ -5,8 +5,16 @@ import CreateEventMutation from './CreateEventMutation.graphql';
 
 import FileUpload from "../../../../Enhancers/FileUpload/FileUpload";
 import HasOwnProperty from "../../../../Helpers/HasOwnProperty";
-import {compose, graphql, MutateProps} from "react-apollo";
-import {EventStatusEnum, IEvent, IProject} from "../../../../Apollo/schema";
+import {compose, graphql, MutateProps, QueryResult} from "react-apollo";
+import {
+  EventStatusEnum,
+  ICreateEventVariables,
+  IEvent,
+  IProject,
+  IUpdateEventData,
+  IUpdateEventVariables,
+  ICreateEventData
+} from "../../../../Apollo/schema";
 import {withRouter} from "react-router-dom";
 
 interface IEditEventEnhanceEnhanceProps extends MutateProps<any, any> {
@@ -26,10 +34,10 @@ interface IEditEventEnhanceEnhanceProps extends MutateProps<any, any> {
 const enhancer = compose(
   withRouter,
   FileUpload,
-  graphql(UpdateEventMutation, {
+  graphql<IUpdateEventData, IUpdateEventVariables>(UpdateEventMutation, {
     name: 'UpdateEventMutation'
   }),
-  graphql(CreateEventMutation, {
+  graphql<ICreateEventData, ICreateEventVariables>(CreateEventMutation, {
     name: 'CreateEventMutation'
   }),
 );
@@ -45,7 +53,7 @@ const EditEventEnhance = (WrapperComponent: React.ElementType) => {
       return values;
     };
 
-    createEvent = async (values: any): Promise<any> => {
+    createEvent = async (values: any): Promise<QueryResult<ICreateEventData>> => {
       return await this.props.CreateEventMutation({
         variables: {
           ...values,
@@ -54,7 +62,7 @@ const EditEventEnhance = (WrapperComponent: React.ElementType) => {
       });
     };
 
-    updateEvent = async (values: any): Promise<any> => {
+    updateEvent = async (values: any): Promise<QueryResult<IUpdateEventData>> => {
       return await this.props.UpdateEventMutation({
         variables: values
       });
@@ -65,10 +73,11 @@ const EditEventEnhance = (WrapperComponent: React.ElementType) => {
     };
 
     onSubmit = async (values: any, form: FormApi<any>) => {
+      console.log(values);
       if (HasOwnProperty.call(values, 'id')) {
         const data = await this.updateEvent(this.formatValues(values));
         if (data.data) {
-          this.props.history.push(`/event/${data.data.createEvent.event.id}`)
+          this.props.history.push(`/event/${data.data.updateEvent.event.id}`)
         }
       } else {
         const data = await this.createEvent(this.formatValues(values));

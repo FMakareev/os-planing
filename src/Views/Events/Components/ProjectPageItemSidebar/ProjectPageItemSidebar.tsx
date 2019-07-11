@@ -61,7 +61,7 @@ export const ProjectPageItemSidebar: React.FC<IProjectPageItemSidebarProps> = ({
       <img className="icon icon-arrow" src={plus} alt=""/>
       Отчет
     </Button>
-    <Button as={ButtonAsEnum.link} to={'/report/edit/id'} style={ButtonStyleEnum.icon}>
+    <Button as={ButtonAsEnum.link} to={`/report/edit/${id}`} style={ButtonStyleEnum.icon}>
       <img className="icon icon-arrow" src={editMini} alt=""/>
       Редактировать отчет
     </Button>

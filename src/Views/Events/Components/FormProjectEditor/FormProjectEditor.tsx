@@ -20,7 +20,6 @@ const DropFieldWithHOC = DropFieldHoc(DropFieldWithFileList)();
 export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialValues, onSubmit, loading}) => (
   <Form
     initialValues={initialValues}
-
     onSubmit={onSubmit}
     render={({
                submitError,

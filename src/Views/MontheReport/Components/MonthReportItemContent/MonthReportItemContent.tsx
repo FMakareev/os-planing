@@ -5,6 +5,7 @@ import {Breadcrumbs} from '../../../../Components/Breadcrumbs/Breadcrumbs';
 import ProjectPlace from "../../../../Components/ProjectPlace/ProjectPlace";
 import ReceptionActivitiesReport from '../ReceptionActivitiesReport/ReceptionActivitiesReport';
 import {IMonthReport} from '../../../../Apollo/schema';
+import EventBreadcrumbs from "../../Views/MonthReportEdit";
 
 interface IReportItemContentProps {
 
@@ -13,23 +14,13 @@ interface IReportItemContentProps {
   [prop: string]: any
 }
 
-export const MonthReportItemContent: React.FC<IReportItemContentProps> = () => (
+export const MonthReportItemContent: React.FC<IReportItemContentProps> = ({date,
+                                                                            id}) => (
   <React.Fragment>
-    <Breadcrumbs history={[
-      {
-        name: 'Календарь',
-        to: '/'
-      },
-      {
-        name: '5 мая 2019',
-        to: '/calendar?data="5 мая 2019"'
-      },
-      {
-        name: '\n' +
-          'Зеленогорск',
-        to: `/report/ываыа`
-      },
-    ]}/>
+    <EventBreadcrumbs
+      date={date}
+      id={id}
+    />
 
     <PageTitle>
       Проект модернизации театра юного зрителя по адресу ул. Петропавловская, д. 54

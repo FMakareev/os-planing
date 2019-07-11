@@ -11,7 +11,7 @@ interface IProjectReportStatusProps {
 }
 
 
-export const ProjectReportStatus: React.FC<IProjectReportStatusProps> = ({status, wrapperRef, onClick, date}) => (
+export const ProjectReportStatus: React.FC<IProjectReportStatusProps> = ({status, wrapperRef, onClick, date, disabled}) => (
   <a
     onClick={onClick}
     className={
@@ -37,9 +37,12 @@ export const ProjectReportStatus: React.FC<IProjectReportStatusProps> = ({status
           ok: 'Одобрено',
         })
       }</span>
-    <span className="icon icon-arrow ">
+    {
+      !disabled &&
+      <span className="icon icon-arrow ">
 				<Arrow/>
 			</span>
+    }
   </a>
 );
 

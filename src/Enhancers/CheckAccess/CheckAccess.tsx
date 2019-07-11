@@ -9,15 +9,20 @@ const mapStateToProps = (state: IStoreState) => ({
 });
 
 
+export interface ICheckAccessApi {
+  access: UserRoleEnum;
+}
+
 interface ICheckAccessProps {
+  accessRights: UserRoleEnum
+  render: any;
   [prop: string]: any
 }
 
-const CheckAccess = (WrapperComponent: React.ElementType) => (accessRights: UserRoleEnum) =>
-  connect(mapStateToProps)((props: ICheckAccessProps) => {
-    const access = accessRights && props.user.user ? accessRights === props.user.user.role : false;
-    return <WrapperComponent access={access} {...props}/>
-  });
+const CheckAccess: React.FC<ICheckAccessProps> = ({children, accessRights, user, render, ...rest}) => {
+  const access = accessRights && user.user ? accessRights === user.user.role : false;
+  return render({access, ...rest})
+};
 
 
-export default CheckAccess;
+export default connect(mapStateToProps)(CheckAccess);

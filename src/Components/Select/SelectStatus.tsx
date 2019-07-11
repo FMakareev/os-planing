@@ -3,8 +3,10 @@ import ProjectReportStatus from "../../Views/Events/Components/ProjectReportStat
 import SelectStatusDropdown from './SelectStatusDropdown';
 import {ISelectBaseAPI} from "./withSelect";
 import {SelectDropDownList} from "./SelectDropDownList";
+import {EventStatusEnum} from "../../Apollo/schema";
 
 interface ISelectStatusProps extends ISelectBaseAPI {
+  // selected?:EventStatusEnum;
   [prop: string]: any
 }
 
@@ -18,13 +20,15 @@ const SelectStatus: React.FC<ISelectStatusProps> = ({
                                                       onChange,
                                                       labelKey,
                                                       valueKey,
+                                                      disabled,
                                                     }) => {
   return (
     <div className={'inner-info__status-wrap'}>
       <ProjectReportStatus
         status={!Array.isArray(value) ?value.value: ''}
-
+        disabled={disabled}
         onClick={() => {
+          if(disabled) return null;
           if (!meta.active) {
             onFocus && onFocus();
           } else {

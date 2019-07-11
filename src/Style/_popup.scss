@@ -64,6 +64,8 @@
     border-radius: 50%;
     display: flex;
     color: #1b1b1b;
+    cursor: pointer;
+    transition: all .225ms;
     .icon{
       width: 12px;
       height: 12px;

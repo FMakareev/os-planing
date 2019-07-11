@@ -296,6 +296,65 @@ export interface GetCalendarByReceptionAndProjectVariables {
 }
 
 
+export interface IReport extends IBase {
+  id: string;
+  // Наименование мероприятия, Дата проведения мероприятия, Время проведения мероприятия
+  event: IEvent;
+  // Место проведения мероприятия
+  place: string;
+  // Задача (зачем было проведено мероприятие)
+  task: string;
+  // Кто поставил задачу (ФИО, место работы)
+  producer: string;
+  // Цели мероприятия
+  goals: string;
+  // Количество участников, присутствовавших на мероприятии
+  participantsCount: number;
+  // ФИО основных участников
+  participantsAbout: string;
+  // Описание мероприятия
+  about: string;
+  // Ссылки СМИ о мероприятии
+  massMedia: IMassMedia[];
+  // Прикрепить файлы (программа, презентации, протокол и т.п., фото)
+  attachments: IFile[];
+}
+
+
+export interface ICreateReportData {
+  report: IReport
+}
+
+export interface ICreateReportVariables {
+  about: string
+  attachments: string[]
+  event: string[]
+  goals: string
+  massMedia: string
+  participantsAbout: string
+  participantsCount: number
+  place: string
+  producer: string
+}
+
+export interface IUpdateReportData {
+  report: IReport
+}
+
+export interface IUpdateReportVariables {
+  id: string
+  about: string
+  attachments: string[]
+  event: string[]
+  goals: string
+  massMedia: string
+  participantsAbout: string
+  participantsCount: number
+  place: string
+  producer: string
+}
+
+
 export interface Query {
   projectList: IProject;
   projectItem: IProject;

@@ -8,7 +8,7 @@ import PopupEvents from '../PopupEvents/PopupEvents';
 
 interface ICalendarDayReceptionProps {
   reception?: IReceptionCalendar;
-
+  date?: string;
   [prop: string]: any
 }
 
@@ -44,7 +44,7 @@ const GetStatus = (status: EventStatusEnum) => {
 };
 
 
-const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception}) => {
+const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception,date}) => {
   return (
     <div className="calendar-item__wrap">
       <div className="calendar-city">
@@ -77,6 +77,8 @@ const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception})
         reception.events &&
         !!(reception.events.length > 0) && <PopupEvents
             events={reception.events}
+            reception={reception}
+            date={date}
             Button={({onClick}: any) => {
 
               return (<div onClick={onClick && onClick} className="calendar__fix">

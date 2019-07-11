@@ -15,8 +15,8 @@ export enum CalendarDayCardEnum {
 }
 
 interface ICalendarDayCardProps {
-  date?: any;
-  receptions?: IReceptionCalendar[];
+  date: any;
+  receptions: IReceptionCalendar[];
   status?: CalendarDayCardEnum;
 
   [prop: string]: any
@@ -64,7 +64,8 @@ export const CalendarDayCard: React.FC<ICalendarDayCardProps> = ({date, projects
     {
       reception && currentCardMode !== DayCardModeEnum.monthReport &&
       <CalendarDayReception
-          reception={receptions && receptions.find((item: IReceptionCalendar) => item.reception.id === reception)}
+          date={date}
+          reception={receptions.find((item: IReceptionCalendar) => item.reception.id === reception)}
       />
     }
   </div>

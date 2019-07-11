@@ -22,8 +22,7 @@ interface IHeaderDateProps extends ICalendarDate {
 
 }
 
-export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year, changeDate, labelKey,
-                                                         valueKey}) => {
+export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year, changeDate}) => {
   return (<div className="header__date">
     <div className="header__month">
       <SelectDateWith
@@ -33,7 +32,7 @@ export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year, changeDate,
         selected={month}
         onChange={(value: ISelectOption)=>{
           changeDate({
-            month: value[valueKey],
+            month: value['value'],
           })
         }}
       />
@@ -47,7 +46,7 @@ export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year, changeDate,
         selected={year}
         onChange={(value: ISelectOption)=>{
           changeDate({
-            year: value[valueKey],
+            year: value['value'],
           })
         }}
       />

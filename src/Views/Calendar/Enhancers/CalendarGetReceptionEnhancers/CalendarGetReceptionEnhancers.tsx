@@ -1,26 +1,26 @@
 import * as React from 'react';
 import ReceptionPaginationQuery from './ReceptionPaginationQuery.graphql';
-import {graphql} from 'react-apollo';
+import {Query} from 'react-apollo';
 
-interface ICalendarGetReceptionEnhancersProps {
+interface IProps {
   [prop: string]: any
 }
 
-
-const CalendarGetReceptionEnhancers = (WrapperComponent: React.ElementType) => {
-  return graphql<any,any,any>(ReceptionPaginationQuery)(class extends React.Component<ICalendarGetReceptionEnhancersProps> {
-    render() {
-      const {data} = this.props;
-
-      if(data.loading){
-        return null
+// TODO: типизировать запрос
+const CalendarGetReceptionEnhancers = <TProps extends any>(WrappedComponent: any) => (props: IProps & TProps) => {
+  return <Query query={ReceptionPaginationQuery}>
+    {
+      ({data, loading,}: any) => {
+        if (loading) {
+          return null
+        }
+        return (<WrappedComponent
+          options={data.receptionPagination.items}
+          {...props}
+        />);
       }
-      return (<WrapperComponent
-        options={data.receptionPagination.items}
-        {...this.props}
-      />);
     }
-  })
+  </Query>
 };
 
 export default CalendarGetReceptionEnhancers;

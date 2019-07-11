@@ -26,6 +26,7 @@ export class SelectDataPicker extends React.Component<ISelectDataPickerProps, an
     return (
       <React.Fragment>
         <DatePicker
+          dateFormat="d.MM.yyyy"
           className="form__input form__input--date"
           selected={this.state.startDate}
           onChange={this.handleChange}

@@ -20,6 +20,9 @@ interface ICalendarTopProps {
   [prop: string]: any;
 }
 
+
+
+
 export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, changeProject,project,reception}) => (<div className="calendar__top">
   <div className="form form--selects">
 

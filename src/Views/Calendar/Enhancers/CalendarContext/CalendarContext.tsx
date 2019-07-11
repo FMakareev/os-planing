@@ -32,6 +32,7 @@ export interface ICalendarContext extends IState {
   changeProject?(project: string): void;
 
   changeReception?(reception: string): void;
+
   [prop: string]: any;
 }
 
@@ -49,7 +50,7 @@ const CalendarContext = React.createContext<ICalendarContext>({
 export const WithCalendar = (WrapperComponent: React.ElementType) => (props: any) => (
   <CalendarContext.Consumer>
     {
-      (propsContext: ICalendarContext ) => (
+      (propsContext: ICalendarContext) => (
         <WrapperComponent
           {...props}
           {...propsContext}
@@ -79,8 +80,8 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
 
     return {
       ...this.getCurrentMonth(date),
-      reception,
-      project,
+      reception: reception || '',
+      project: project || '',
     };
   }
 
@@ -98,7 +99,7 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
   changeProject = (project: any): void => {
     const {history, location} = this.props;
     history.push(`${location.pathname}?${joinQueryString(location.search, {project})}`);
-    this.setState({project});
+    this.setState({project: project || ''});
   };
 
   /**
@@ -107,7 +108,7 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
   changeReception = (reception: any): void => {
     const {history, location} = this.props;
     history.push(`${location.pathname}?${joinQueryString(location.search, {reception})}`);
-    this.setState({reception});
+    this.setState({reception: reception || ''});
   };
 
 
@@ -124,14 +125,20 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
    * */
   changeDate = ({year, month}: any): void => {
     let date = new Date();
-
     if (year) {
       date.setFullYear(year);
-    } else if (month >= 0) {
-      date.setMonth(month);
+    } else {
+      date.setFullYear(this.state.year);
     }
-    console.log(date);
-    this.setState(this.getCurrentMonth(date))
+    if (month >= 0) {
+      date.setMonth(month);
+    }else {
+      date.setMonth(this.state.month);
+    }
+    this.setState((state) => ({
+      ...state,
+      ...this.getCurrentMonth(date),
+    }))
   };
 
   /**

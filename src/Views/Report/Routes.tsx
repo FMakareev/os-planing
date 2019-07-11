@@ -5,19 +5,19 @@ const ReportEdit = React.lazy(() => import("./Views/ReportEdit"));
 
 export const ReportRoute: object[] = [
 	{
-		path: '/report/edit/:id',
+		path: '/report/edit/:eventId/:reportId',
 		exact: false,
 		name: 'Редактировать отчет',
 		component: ReportEdit,
 	},
 	{
-		path: '/report/edit',
+		path: '/report/edit/:eventId',
 		exact: true,
 		name: 'Создать отчет',
 		component: ReportEdit,
 	},
 	{
-		path: '/report/:id',
+		path: '/report/:eventId/:reportId',
 		exact: false,
 		name: 'Отчет',
 		component: ReportItem,

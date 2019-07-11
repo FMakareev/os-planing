@@ -49,10 +49,8 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
                submitError,
                handleSubmit,
                form: {
-                 mutators: {push, pop}
+                 mutators: {push}
                },
-               submitting,
-               pristine,
              }: FormRenderProps<IFormReportEditVariables>): ReactNode => {
       return (
         <form onSubmit={handleSubmit} id={'FormMonthReportEdit'} className="form">

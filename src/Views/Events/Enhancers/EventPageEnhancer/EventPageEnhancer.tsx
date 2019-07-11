@@ -17,10 +17,10 @@ const EventPageEnhancer = (WrapperComponent: React.ElementType) => {
       return (<Query
         <IEventItemData, IEventItemVariables>
 
-        skip={!params.id}
+        skip={!params.eventId}
         query={EventItemQuery}
         variables={{
-          id: params.id
+          id: params.eventId
         }}
       >
         {

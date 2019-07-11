@@ -5,7 +5,6 @@ import {TextField} from "../../../../Components/TextField/TextField";
 import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFeedback";
 import {Button} from "../../../../Components/Button/Button";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
-import {MutationResult} from "react-apollo";
 import AvatarFields from "../../../../Components/AvatarFields/AvatarFields";
 
 

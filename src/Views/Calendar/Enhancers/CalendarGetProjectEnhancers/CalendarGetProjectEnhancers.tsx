@@ -1,25 +1,29 @@
 import * as React from 'react';
-import {graphql} from 'react-apollo';
+import {Query} from 'react-apollo';
 import ProjectPaginationQuery from './ProjectPaginationQuery.graphql';
 
-interface ICalendarGetProjectEnhancersProps {
+interface IProps {
   [prop: string]: any
 }
 
 
-const CalendarGetProjectEnhancers = (WrapperComponent: React.ElementType) => {
-  return graphql<any,any,any>(ProjectPaginationQuery)(class extends React.Component<ICalendarGetProjectEnhancersProps> {
-    render() {
-      const {data} = this.props;
-      if(data.loading){
-        return null
+
+
+// TODO: типизировать запрос
+const CalendarGetProjectEnhancers = <TProps extends any>(WrappedComponent: any) => (props: IProps & TProps) => {
+  return <Query query={ProjectPaginationQuery}>
+    {
+      ({data, loading,}: any) => {
+        if (loading) {
+          return null
+        }
+        return (<WrappedComponent
+          options={data.projectPagination.items}
+          {...props}
+        />);
       }
-      return (<WrapperComponent
-        options={data.projectPagination.items}
-        {...this.props}
-      />);
     }
-  })
+  </Query>
 };
 
 export default CalendarGetProjectEnhancers;

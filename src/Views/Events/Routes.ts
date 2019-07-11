@@ -5,7 +5,7 @@ const EventEdit = React.lazy(() => import('./View/EventEditor'));
 
 export const EventRoute = [
   {
-    path: '/event/edit/:id',
+    path: '/event/edit/:eventId',
     exact: false,
     name: 'Редактировать мероприятие',
     component: EventEdit,
@@ -17,7 +17,7 @@ export const EventRoute = [
     component: EventEdit,
   },
   {
-    path: '/event/:id',
+    path: '/event/:eventId',
     exact: false,
     name: 'Мероприятие',
     component: Event,

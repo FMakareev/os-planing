@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {TagList} from '../TagList/TagList';
-import withSelect, {ISelectBaseAPI, ISelectOption} from "../Select/withSelect";
+import withSelect, {ISelectBaseAPI} from "../Select/withSelect";
 import {SelectDropDownList} from "../Select/SelectDropDownList";
 import PlusIcon from "../SvgIcons/PlusIcon";
-import {IProject} from '../../Apollo/schema';
+import {InvalidFeedback} from "../InvalidFeedback/InvalidFeedback";
 
 interface ITagFieldProps extends ISelectBaseAPI {
   [prop: string]: any
@@ -22,10 +22,12 @@ export const TagField: React.FC<ITagFieldProps> = ({
                                                      onFocus,
                                                      onBlur,
                                                      onRemoveValueByIdx,
-
+                                                     metaInput,
                                                      labelKey,
                                                      valueKey,
                                                    }) => {
+
+  const error = metaInput && metaInput.touched ? (metaInput.error || metaInput.submitError) : null;
   return (
     <div>
       <TagList
@@ -52,8 +54,11 @@ export const TagField: React.FC<ITagFieldProps> = ({
           <PlusIcon className="icon icon-plus "/>
           Добавить Категорию
         </a>
-
+        {
+          error && (<InvalidFeedback error={error}/>)
+        }
         <SelectDropDownList
+          style={{margin: 0}}
           labelKey={labelKey}
           valueKey={valueKey}
           currentEvent={currentEvent}

@@ -16,12 +16,12 @@ interface IEventItemProps {
 const ProjectPageItemSidebarWIthChangeStatusEvent = ChangeStatusEvent(ProjectPageItemSidebar);
 
 export const EventItem: React.FC<IEventItemProps> = ({data}) => {
-
-
   return (<LayoutWithSidebar sidebarContent={<ProjectPageItemSidebarWIthChangeStatusEvent {...data}/>}>
     <ProjectPageItemContent
+      city={data.reception.city}
       {...data}
     />
   </LayoutWithSidebar>);
-}
+};
+
 export default EventPageEnhancer(EventItem);

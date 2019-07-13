@@ -2,7 +2,7 @@ import * as React from 'react';
 import {graphql, MutateProps} from 'react-apollo'
 
 import CreateUserMutation from './CreateUserMutation.graphql';
-import {ICreateReceptionData, IProject} from '../../../../Apollo/schema';
+import {ICreateReceptionData} from '../../../../Apollo/schema';
 import {FormCreateUserState} from "../../Components/FormCreateUser/FormCreateUser";
 import {ApolloError} from 'apollo-boost';
 import Logging from "../../../../Helpers/Logging";
@@ -11,7 +11,6 @@ import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 import RefetchReceptionListQueries from "../RefetchReceptionListQueries/RefetchReceptionListQueries";
 import FileUpload, {IFileUpload} from "../../../../Enhancers/FileUpload/FileUpload";
 import {compose} from 'recompose';
-import {paginationConfig} from "../../Views/Users/paginationConfig";
 
 interface ICreateUserProps extends MutateProps, IFileUpload {
   [prop: string]: any

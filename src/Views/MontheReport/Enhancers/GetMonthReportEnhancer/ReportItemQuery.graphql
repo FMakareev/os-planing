@@ -1,0 +1,5 @@
+query($id: String!){
+    reportItem(id: $id){
+        id
+    }
+}

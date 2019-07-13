@@ -19,10 +19,11 @@ export class SelectDataPicker extends React.Component<ISelectDataPickerProps, an
     this.setState({
       startDate: date
     });
+    this.props.onChange && this.props.onChange(date);
   }
 
   render() {
-    const {label} = this.props;
+    const {label,customInput} = this.props;
     return (
       <React.Fragment>
         <DatePicker
@@ -34,6 +35,7 @@ export class SelectDataPicker extends React.Component<ISelectDataPickerProps, an
           showMonthDropdown
           showYearDropdown
           dropdownMode="scroll"
+          customInput={customInput}
         />
         <label className="form__label">{label}</label>
       </React.Fragment>

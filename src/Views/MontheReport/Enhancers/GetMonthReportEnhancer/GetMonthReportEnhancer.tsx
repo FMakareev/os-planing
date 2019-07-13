@@ -2,18 +2,19 @@ import * as React from 'react';
 
 import ReportItemQuery from './ReportItemQuery.graphql';
 import {Query, QueryResult} from "react-apollo";
-import {IReportItemVariables, IReportItemData} from '../../../../Apollo/schema';
+import { IMonthReportItemData, IMonthReportItemVariables} from '../../../../Apollo/schema';
 import Preloader, {PreloaderSizeEnum, PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
 
-interface IGetReportEnhancerProps {
+interface IGetMonthReportEnhancerProps {
   [prop: string]: any
 }
 
-const GetReportEnhancer = (WrappedComponent: React.ElementType) => (props: IGetReportEnhancerProps) => {
+const GetMonthReportEnhancer = (WrappedComponent: React.ElementType) => (props: IGetMonthReportEnhancerProps) => {
   const {match: {params}} = props;
+  console.log(props);
   return (
     <Query
-      <IReportItemData, IReportItemVariables>
+      <IMonthReportItemData, IMonthReportItemVariables>
       skip={!params.reportId}
       query={ReportItemQuery}
       variables={{
@@ -21,7 +22,7 @@ const GetReportEnhancer = (WrappedComponent: React.ElementType) => (props: IGetR
       }}
     >
       {
-        ({data, loading, error}: QueryResult<IReportItemData, IReportItemVariables>) => {
+        ({data, loading, error}: QueryResult<IMonthReportItemData, IMonthReportItemVariables>) => {
           if (loading) {
             return <Preloader
               style={{
@@ -36,7 +37,7 @@ const GetReportEnhancer = (WrappedComponent: React.ElementType) => (props: IGetR
             return 'Ошибка';
           }
           return <WrappedComponent
-            report={data && data.reportItem}
+            data={data && data.monthReportItem}
             {...props}/>
         }
       }
@@ -44,4 +45,4 @@ const GetReportEnhancer = (WrappedComponent: React.ElementType) => (props: IGetR
   );
 };
 
-export default GetReportEnhancer;
+export default GetMonthReportEnhancer;

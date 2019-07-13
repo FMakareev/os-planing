@@ -4,6 +4,7 @@ import withSelect, {ISelectOption} from "../../../../Components/Select/withSelec
 import {Button} from '../../../../Components/Button/Button';
 import CalendarGetReceptionEnhancers from '../../Enhancers/CalendarGetReceptionEnhancers/CalendarGetReceptionEnhancers';
 import CalendarGetProjectEnhancers from "../../Enhancers/CalendarGetProjectEnhancers/CalendarGetProjectEnhancers";
+import CalendarCreateEvent from '../CalendarCreateEvent/CalendarCreateEvent';
 
 
 const SelectDefaultWithSelect = withSelect(SelectDefault)();
@@ -21,35 +22,40 @@ interface ICalendarTopProps {
 }
 
 
+export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, changeProject, project, reception}) => (
+  <div className="calendar__top">
+    <div className="form form--selects">
 
+      <SelectReceptionWithEnhancer
+        label={'Приемная'}
+        placeholder={'Выберите город'}
+        selected={reception}
+        onChange={({value}: ISelectOption) => {
+          changeReception && changeReception(value);
+        }}
+      />
 
-export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, changeProject,project,reception}) => (<div className="calendar__top">
-  <div className="form form--selects">
+      <SelectProjectWithEnhancer
+        label={'Проект'}
+        placeholder={'Выберите категорию'}
+        selected={project}
+        onChange={({value}: ISelectOption) => {
+          changeProject && changeProject(value);
+        }}
+      />
 
-    <SelectReceptionWithEnhancer
-      label={'Приемная'}
-      placeholder={'Выберите город'}
-      selected={reception}
-      onChange={({value}: ISelectOption) => {
-        changeReception && changeReception(value);
-      }}
-    />
-
-    <SelectProjectWithEnhancer
-      label={'Проект'}
-      placeholder={'Выберите категорию'}
-      selected={project}
-      onChange={({value}: ISelectOption) => {
-        changeProject && changeProject(value);
-      }}
-    />
-
-  </div>
-  <div className="calendar__top-right">
-    <Button>
-      Экспорт в PDF
-    </Button>
-  </div>
-</div>);
+    </div>
+    <div className="calendar__top-right">
+      <div style={{
+        marginRight: '16px',
+        display: 'inline-block',
+      }}>
+        <CalendarCreateEvent/>
+      </div>
+      <Button>
+        Экспорт в PDF
+      </Button>
+    </div>
+  </div>);
 
 export default CalendarTop;

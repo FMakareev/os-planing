@@ -1,15 +1,25 @@
-query ($id: String!){
-    eventItem(id: $id){
+query ($id: String!) {
+    eventItem(id: $id) {
         date
         id
-        projects{
+        projects {
             id
             name
         }
-        reception
+        reception {
+            city
+            id
+        }
+        report
         status
         statusUpdated
         text
         title
+        attachments {
+            id
+            name
+            ext
+            url
+        }
     }
 }

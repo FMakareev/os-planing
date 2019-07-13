@@ -1,5 +1,6 @@
 mutation(
     $date: DateTime,
+    $attachments: [String],
     $projects: [String]!,
     $reception: String,
     $status: EventStatus,
@@ -10,10 +11,11 @@ mutation(
     createEvent(
         date:$date,
         projects: $projects,
-        reception: $reception
+        attachments:$attachments,
+        reception: $reception,
         status: $status,
         text:$text,
-        title: $title
+        title: $title,
     ){
         event{
             id
@@ -26,6 +28,12 @@ mutation(
             status
             text
             title
+            attachments {
+                id
+                name
+                ext
+                url
+            }
         }
     }
 }

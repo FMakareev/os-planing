@@ -4,10 +4,12 @@ import {TagList} from "../../../../Components/TagList/TagList";
 import ProjectPlace from "../../../../Components/ProjectPlace/ProjectPlace";
 import ReportContentCell from "../../../../Components/ReportContentCell/ReportContentCell";
 import EventBreadcrumbs from "../../../Events/Components/EventBreadcrumbs/EventBreadcrumbs";
-import {IMassMedia, IReport} from "../../../../Apollo/schema";
+import {IEvent, IMassMedia, IReport} from "../../../../Apollo/schema";
 import MassMediaItem from "../MassMediaItem/MassMediaItem";
 
 interface IReportItemContentProps extends IReport {
+  event: IEvent;
+
   [prop: string]: any
 }
 
@@ -21,19 +23,20 @@ export const ReportItemContent: React.FC<IReportItemContentProps> = ({
                                                                        participantsAbout,
                                                                        about,
                                                                        massMedia,
+                                                                       event
                                                                      }) => (
   <React.Fragment>
     <EventBreadcrumbs
       date={date}
-      id={id}
+      city={event.reception.city}
     />
 
     <PageTitle>
-      Проект модернизации театра юного зрителя по адресу ул. Петропавловская, д. 54
+      {event.title}
     </PageTitle>
     <div className="inner__content">
       <ProjectPlace>
-        Зеленогорск
+        {event.reception.city}
       </ProjectPlace>
       <TagList/>
 
@@ -72,7 +75,7 @@ export const ReportItemContent: React.FC<IReportItemContentProps> = ({
       />
 
       {
-        massMedia && massMedia.map((item: IMassMedia, idx: number) => (<MassMediaItem {...item}/>))
+        massMedia && massMedia.map((item: IMassMedia, idx: number) => (<MassMediaItem key={idx} {...item}/>))
       }
 
 

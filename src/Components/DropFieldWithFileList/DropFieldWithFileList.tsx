@@ -6,16 +6,18 @@ interface IDropFieldWithFileListProps extends IDropFieldFileListProps, IDropFiel
 	[prop: string]: any
 }
 
-export const DropFieldWithFileList: React.FC<IDropFieldWithFileListProps> = (props) => (
-	<React.Fragment>
-		<DropFieldFileList
-			{...props}
-		/>
-		<DropField
-			{...props}
-			onChange={props && props.addFile}
-		/>
-	</React.Fragment>
-);
+export const DropFieldWithFileList: React.FC<IDropFieldWithFileListProps> = (props) =>{
+	return  (
+		<React.Fragment>
+			<DropFieldFileList
+				{...props}
+			/>
+			<DropField
+				{...props}
+				onChange={props && props.addFile}
+			/>
+		</React.Fragment>
+	);
+}
 
 export default DropFieldWithFileList;

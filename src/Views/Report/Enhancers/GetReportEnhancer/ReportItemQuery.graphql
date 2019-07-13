@@ -1,5 +1,32 @@
-query($id: String!){
-    reportItem(id: $id){
+query ($id: String!) {
+    reportItem(id: $id) {
+        about
+        attachments {
+            id
+            url
+            name
+            ext
+        }
+        event {
+            id
+            reception {
+                city
+                id
+            }
+        }
+        goals
         id
+        massMedia {
+            id
+            link
+            title
+        }
+        participantsAbout
+        participantsCount
+        place
+        producer
+        task
+        updated
+        created
     }
 }

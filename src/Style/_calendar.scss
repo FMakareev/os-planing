@@ -179,6 +179,17 @@
     line-height: 18px;
   }
 
+  &__event-link {
+    color: #1b1b1b;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    text-decoration: none;
+    &:hover {
+      color: #41a3fd;
+    }
+  }
+
   &__fix {
     position: absolute;
     bottom: 0;
@@ -243,4 +254,7 @@
 
 .ok-report {
   color: #4dc87e;
+}
+.no-report {
+  color: #8288a2;
 }

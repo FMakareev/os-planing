@@ -1,34 +1,34 @@
-mutation(
-    $date: DateTime,
-    $id: String!,
-
-    $projects: [String]!,
-    $reception: String,
-    $status: EventStatus,
-    $text: String,
-    $title: String
-){
-
-    updateEvent(
-        date:$date,
-        id:$id
-        projects: $projects,
-        reception: $reception
-        status: $status,
-        text:$text,
-        title: $title
-    ){
-        event{
-            id
-            date
-            projects{
+mutation ($id: String!,$about: String!, $attachments: [String], $event: String!, $goals: String!, $massMedia: [IMassMediaInput], $participantsAbout: String, $participantsCount: Int, $place: String!, $producer: String!, $task: String) {
+    updateReport(id: $id, about: $about, attachments: $attachments, event: $event, goals: $goals, massMedia: $massMedia, participantsAbout: $participantsAbout, participantsCount: $participantsCount, place: $place, producer: $producer, task: $task) {
+        report {
+            about
+            attachments {
                 id
                 name
+                url
+                ext
             }
-            reception
-            status
-            text
-            title
+            event {
+                id
+                reception {
+                    city
+                    id
+                }
+            }
+            goals
+            id
+            massMedia {
+                id
+                link
+                title
+            }
+            participantsAbout
+            participantsCount
+            place
+            producer
+            task
+            updated
+            created
         }
     }
 }

@@ -5,6 +5,7 @@ import ReportIcon from '../../../../Assets/img/spritesvg/report.svg';
 import okIcon from '../../../../Assets/img/spritesvg/ok.svg';
 import ReviewIcon from '../../../../Assets/img/spritesvg/review.svg';
 import PopupEvents from '../PopupEvents/PopupEvents';
+import {Link} from 'react-router-dom';
 
 interface ICalendarDayReceptionProps {
   reception?: IReceptionCalendar;
@@ -36,7 +37,7 @@ const GetStatus = (status: EventStatusEnum) => {
 
   } else {
     return {
-      icon: ReviewIcon,
+      icon: null,
       text: 'Не требует отчета',
       className: 'no-report',
     }
@@ -60,12 +61,16 @@ const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception,d
               const status = GetStatus(event.status);
               return (<div className="calendar-group">
                 <div className={status.className}>
-                  <img src={status.icon} className={"icon"}/>
+                  {
+                    status.icon &&
+                    <img src={status.icon} className={"icon"}/>
+                  }
+
                   {status.text}
                 </div>
-                <div className="calendar__text">
+                <Link to={`/event/${event.id}`} className="calendar__event-link">
                   {event.text && event.text.slice(0, 60) +'...'}
-                </div>
+                </Link>
               </div>)
             })
         }

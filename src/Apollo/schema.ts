@@ -1,4 +1,3 @@
-
 export enum UserRoleEnum {
   admin = 'admin',
   user = 'user',
@@ -11,6 +10,22 @@ export enum EventStatusEnum {
   ok = 'ok',
   noReport = 'noReport',
 }
+
+
+export enum NotificationTypeEnum {
+  NOTIFICATION_TYPE_QUERY_SAVE_REPORT = 'NOTIFICATION_TYPE_QUERY_SAVE_REPORT',  // Запроса на сохранение отчета
+  NOTIFICATION_TYPE_CREATE_EVENT = 'NOTIFICATION_TYPE_CREATE_EVENT', // Создание нового мероприятия
+  NOTIFICATION_TYPE_DELETE_EVENT = 'NOTIFICATION_TYPE_DELETE_EVENT', // Удаление мероприятия
+
+  NOTIFICATION_TYPE_QUERY_GET_REPORT = 'NOTIFICATION_TYPE_QUERY_GET_REPORT',  // Запрос отчета
+  NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT = 'NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT',  // Запрос месячного отчета
+  NOTIFICATION_TYPE_APPROVED_REPORT = 'NOTIFICATION_TYPE_APPROVED_REPORT',  // Одобрение отчета
+  NOTIFICATION_TYPE_APPROVED_MONTH_REPORT = 'NOTIFICATION_TYPE_APPROVED_MONTH_REPORT',  // Одобрение месячного отчета
+}
+
+
+
+
 
 export interface IBase {
   created?: string;
@@ -51,6 +66,10 @@ export interface IUser extends IBase {
   role: UserRoleEnum;
   fullName: string;
   id?: string;
+  reception: {
+    id: string;
+    city: string;
+  }
 }
 
 export interface IReception extends IBase {
@@ -156,7 +175,7 @@ export interface IMassMedia {
   link: string;
 }
 
-export interface IMonthReport extends IBase{
+export interface IMonthReport extends IBase {
   reception?: IReception;
 
   // Общее количество мероприятий за отчетный месяц
@@ -199,9 +218,19 @@ export interface IMonthReport extends IBase{
   // Ссылки на СМИ о мероприятиях
   massMedia?: IMassMedia[];
 
-  attachments?: IFile[] | any[]
+  attachments?: IFile[]
 
 }
+
+
+export interface IMonthReportItemData {
+  monthReportItem: IMonthReport
+}
+
+export interface IMonthReportItemVariables {
+  id: string;
+}
+
 
 export interface INotification extends IBase {
   id?: string;
@@ -217,18 +246,38 @@ export interface INotification extends IBase {
 export interface IEvent {
   date: string;
   id: string;
-  projects: IProject[];
-  reception: any;
+  projects?: IProject[];
+  reception: {
+    city: string;
+    id?: string;
+  };
+  report?: string;
   status: EventStatusEnum;
   statusUpdated: string;
   text: string;
   title: string;
+  // Прикрепить файлы (программа, презентации, протокол и т.п., фото)
+  attachments: IFile[];
 }
 
 
 export interface IEventItemData {
   eventItem: IEvent
 }
+
+
+export interface IEventCreateVariables {
+  date: string;
+  id: string;
+  projects: any[];
+  reception: any;
+  status?: EventStatusEnum;
+  statusUpdated?: string;
+  text: string;
+  title: string;
+  attachments: any[];
+}
+
 
 export interface IEventItemVariables {
   id: string;
@@ -273,8 +322,6 @@ export interface ICreateEventVariables {
   text: string;
   title: string;
 }
-
-
 
 
 export interface IDayWeek {
@@ -366,21 +413,24 @@ export interface IReport extends IBase {
 export interface IReportItemData {
   reportItem: IReport
 }
+
 export interface IReportItemVariables {
   id: string;
 }
 
 
 export interface ICreateReportData {
-  report: IReport
+  createReport: {
+    report: IReport
+  }
 }
 
 export interface ICreateReportVariables {
   about: string
-  attachments: string[]
+  attachments: any[]
   event: string[]
   goals: string
-  massMedia: string
+  massMedia: IMassMediaInput[]
   participantsAbout: string
   participantsCount: number
   place: string
@@ -388,16 +438,23 @@ export interface ICreateReportVariables {
 }
 
 export interface IUpdateReportData {
-  report: IReport
+  updateReport: {
+    report: IReport
+  }
+}
+
+export interface IMassMediaInput {
+  title: string;
+  link: string;
 }
 
 export interface IUpdateReportVariables {
   id: string
   about: string
-  attachments: string[]
+  attachments: any[]
   event: string[]
   goals: string
-  massMedia: string
+  massMedia: IMassMediaInput[]
   participantsAbout: string
   participantsCount: number
   place: string

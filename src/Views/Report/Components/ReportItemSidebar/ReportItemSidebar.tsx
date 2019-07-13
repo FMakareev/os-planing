@@ -2,23 +2,29 @@ import * as React from 'react';
 import EditMini from '../../../../Assets/img/spritesvg/edit-mini.svg';
 import Download from '../../../../Assets/img/spritesvg/download.svg';
 import archive from '../../../../Assets/img/spritesvg/archive.svg';
-import doc from '../../../../Assets/img/spritesvg/doc.svg';
-import pdf from '../../../../Assets/img/spritesvg/pdf.svg';
-import jpg from '../../../../Assets/img/spritesvg/jpg.svg';
 import Button, {ButtonAsEnum, ButtonStyleEnum} from "../../../../Components/Button/Button";
-import {ReportFileItem, ReportFileTypeEnum} from '../ReportFileItem/ReportFileItem';
+import {getFileExt, ReportFileItem} from '../ReportFileItem/ReportFileItem';
+import {IEvent, IFile, IReport} from "../../../../Apollo/schema";
 
 
-interface IReportItemSidebarProps {
+interface IReportItemSidebarProps extends IReport {
+	event: IEvent;
 	[prop: string]: any
 }
 
-export const ReportItemSidebar: React.FC<IReportItemSidebarProps> = () => (
+
+
+
+export const ReportItemSidebar: React.FC<IReportItemSidebarProps> = ({
+	id,
+	event,
+	attachments
+																																		 }) => (
 	<div className="inner-info ">
 		<div className="inner__date">
 			5 мая 2019
 		</div>
-		<Button as={ButtonAsEnum.link} to={''} style={ButtonStyleEnum.icon}>
+		<Button as={ButtonAsEnum.link} to={`/report/update/${event.id}/${id}`} style={ButtonStyleEnum.icon}>
 			<img src={EditMini} className="icon icon-edit-mini "/>
 			Редактировать отчет
 		</Button>
@@ -26,26 +32,22 @@ export const ReportItemSidebar: React.FC<IReportItemSidebarProps> = () => (
 			<img src={Download} className="icon icon-download "/>
 			Скачать отчет PDF
 		</a>
+		{
+			attachments &&
+			<a className="archive-link" href="#!">
+				<img src={archive} className="icon icon-archive "/>
+				Скачать все файлы
+				<span>2,3 Мб</span>
+			</a>
+		}
 
-		<a className="archive-link" href="#!">
-			<img src={archive} className="icon icon-archive "/>
-			Скачать все файлы
-			<span>2,3 Мб</span>
-		</a>
-
-
-		<ReportFileItem
-			name={'File_pres.pdf'}
-			format={ReportFileTypeEnum.pdf}
-		/>
-		<ReportFileItem
-			name={'Document.doc'}
-			format={ReportFileTypeEnum.doc}
-		/>
-		<ReportFileItem
-			name={'Image_001.jpg'}
-			format={ReportFileTypeEnum.jpg}
-		/>
+		{
+			attachments && attachments.map((file: IFile)=>(<ReportFileItem
+				name={file.name}
+				downloadLink={file.url}
+				format={getFileExt(file.ext)}
+			/>))
+		}
 
 	</div>
 );

@@ -52,7 +52,6 @@ export const InitUserStoreAction = () => (dispatch: Dispatch): Promise<any> => {
           }
         })
           .then((response: any) => {
-            console.log(response);
             localStorage.setItem('user_data',JSON.stringify(response.data.userItem));
             dispatch(UserInitSuccess(response.data.userItem));
             resolve(response.data.userItem);

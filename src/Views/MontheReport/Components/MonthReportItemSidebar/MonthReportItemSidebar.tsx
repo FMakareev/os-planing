@@ -7,18 +7,19 @@ import pdf from '../../../../Assets/img/spritesvg/pdf.svg';
 import jpg from '../../../../Assets/img/spritesvg/jpg.svg';
 import Button, {ButtonAsEnum, ButtonStyleEnum} from "../../../../Components/Button/Button";
 import {ReportFileItem, ReportFileTypeEnum} from '../MonthReportFileItem/ReportFileItem';
+import {IFile, IMonthReport} from "../../../../Apollo/schema";
 
 
-interface IReportItemSidebarProps {
+interface IReportItemSidebarProps extends IMonthReport{
 	[prop: string]: any
 }
 
-export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = () => (
+export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = ({updated, id, attachments}) => (
 	<div className="inner-info ">
 		<div className="inner__date">
-			5 мая 2019
+			{updated}
 		</div>
-		<Button as={ButtonAsEnum.link} to={''} style={ButtonStyleEnum.icon}>
+		<Button as={ButtonAsEnum.link} to={`/month-report/edit/${id}`} style={ButtonStyleEnum.icon}>
 			<img src={EditMini} className="icon icon-edit-mini "/>
 			Редактировать отчет
 		</Button>
@@ -33,19 +34,12 @@ export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = () => (
 			<span>2,3 Мб</span>
 		</a>
 
-
-		<ReportFileItem
-			name={'File_pres.pdf'}
-			format={ReportFileTypeEnum.pdf}
-		/>
-		<ReportFileItem
-			name={'Document.doc'}
-			format={ReportFileTypeEnum.doc}
-		/>
-		<ReportFileItem
-			name={'Image_001.jpg'}
-			format={ReportFileTypeEnum.jpg}
-		/>
+		{
+			Array.isArray(attachments) && attachments.map((item: IFile)=> (<ReportFileItem
+				name={item.name}
+				format={ReportFileTypeEnum.pdf}
+			/>))
+		}
 
 	</div>
 );

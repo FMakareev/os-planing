@@ -12,9 +12,10 @@ import {
   IProject,
   IUpdateReportData,
   IUpdateReportVariables,
-  ICreateReportData
+  ICreateReportData, IEventCreateVariables, IMassMediaInput, IMassMedia
 } from "../../../../Apollo/schema";
 import {withRouter} from "react-router-dom";
+import {IResponseUploadFile} from "../../../Users/Enhancers/CreateReception/CreateReception";
 
 interface IReportEditEnhancerProps extends MutateProps<any, any> {
   initialValues: IReport;
@@ -49,10 +50,16 @@ const ReportEditEnhancer = (WrapperComponent: React.ElementType) => {
       if (HasOwnProperty.call(values, 'projects')) {
         values.projects = values.projects.map((item: IProject) => item.id)
       }
+      if (HasOwnProperty.call(values, 'massMedia')) {
+        values.massMedia = values.massMedia.map((item: IMassMedia ) => ({
+          link: item.link,
+          title: item.title,
+        }))
+      }
       return values;
     };
 
-    createReport = async (values: any): Promise<QueryResult<ICreateReportData>> => {
+    createReport = async (values: ICreateReportVariables): Promise<QueryResult<ICreateReportData>> => {
       return await this.props.CreateReportMutation({
         variables: {
           ...values,
@@ -60,27 +67,44 @@ const ReportEditEnhancer = (WrapperComponent: React.ElementType) => {
       });
     };
 
-    updateReport = async (values: any): Promise<QueryResult<IUpdateReportData>> => {
+    updateReport = async (values: IUpdateReportVariables): Promise<QueryResult<IUpdateReportData>> => {
       return await this.props.UpdateReportMutation({
         variables: values
       });
     };
 
-    uploadAllFiles = async (values: any): Promise<any> => {
+    uploadAllFiles = async (values: ICreateReportVariables): Promise<any> => {
+      const promiseAll = values.attachments.reduce((accum: any[], item: any) => {
+        if (item instanceof File) {
+          accum.push(this.props.uploadFile(item));
+        }
+        return accum;
+      }, []);
 
+      const data: IResponseUploadFile[] = await Promise.all(promiseAll);
+      console.log(data);
+      return [
+        ...data.map((item) => item.file_data && item.file_data.id),
+        ...values.attachments
+          .filter((item) => !(item instanceof File))
+          .map((item) => item.id),
+      ];
     };
 
-    onSubmit = async (values: IReport, form: FormApi<any>) => {
-      console.log(values);
+    onSubmit = async (values: ICreateReportVariables, form: FormApi<any>) => {
+      if (HasOwnProperty.call(values, 'attachments') && values.attachments.length) {
+        values.attachments = await this.uploadAllFiles(values);
+      }
+
       if (HasOwnProperty.call(values, 'id')) {
         const data = await this.updateReport(this.formatValues(values));
         if (data.data) {
-          this.props.history.push(`/event/${data.data.report.event.id}`)
+          this.props.history.push(`/report/${data.data.updateReport.report.event.id}/${data.data.updateReport.report.id}`)
         }
       } else {
         const data = await this.createReport(this.formatValues(values));
         if (data.data) {
-          this.props.history.push(`/event/${data.data.report.event.id}`)
+          this.props.history.push(`/report/${data.data.createReport.report.event.id}/${data.data.createReport.report.id}`)
         }
       }
 

@@ -73,10 +73,11 @@ export enum WithSelectEventEnum {
 export interface IWithSelectState {
   selected?: any,
   value: ISelectOption | ISelectOption[],
-  indexActiveOption?: number;
+  indexActiveOption: number;
   findSubstring?: string,
   currentEvent?: string, // scroll, keyboard, hover
   meta: IWithSelectMeta;
+
   [prop: string]: any;
 }
 
@@ -150,7 +151,8 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
       if (Array.isArray(this.props.selected) || this.props.selected) {
         value = this.props.selected;
       }
-
+      console.log('initialStateIsMulti this.props: ', this.props);
+      console.log('initialStateIsMulti value: ', value);
       return {
         selected: this.props.selected,
         value: value,
@@ -170,9 +172,10 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
         valueKey,
         options,
         selected,
+        isMulti,
       } = nextProps;
 
-      if (selected !== this.props.selected) {
+      if (!isMulti && selected !== this.props.selected) {
         const indexSelected = options.findIndex((item: ISelectOption) => item[valueKey] === selected);
         const selectedOption = indexSelected !== -1 ? options[indexSelected] : null;
         this.setState((state) => ({
@@ -217,7 +220,7 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
       if (this.props.isMulti) {
         this.setState((state: IWithSelectState) => ({
             ...state,
-            value: Array.isArray(state.value) ? state.value.filter((_, idx: number) => idx !== index) : [state.value],
+            value: Array.isArray(state.value) ? state.value.filter((_, idx: number) => idx !== index) : [],
             findSubstring: undefined,
           }),
           () => {
@@ -356,7 +359,7 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
       }
       switch (key) {
         case ('ArrowDown'): {
-          if (indexActiveOption && indexActiveOption < options.length - 1) {
+          if (indexActiveOption >= 0 && indexActiveOption < options.length - 1) {
             this.setState({
               indexActiveOption: indexActiveOption + 1,
               currentEvent: WithSelectEventEnum.keyboard
@@ -393,12 +396,10 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
     optionsFilter = (options: ISelectOption[], substring: string | undefined): any[] => {
 
       const {labelKey, valueKey} = this.props;
-      if (this.props.isMulti && Array.isArray(options)) {
+      if (this.props.isMulti && Array.isArray(options) && Array.isArray(this.state.value)) {
         return options.filter((option: ISelectOption) => {
-          if (Array.isArray(this.state.value)) {
-            return !!(this.state.value.findIndex((value: ISelectOption) => value[valueKey] === option[valueKey]) === -1)
-          }
-        });
+          return this.state.value.findIndex((item: any) => item[valueKey] === option[valueKey])
+        })
       }
 
       if (substring) {

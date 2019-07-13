@@ -1,7 +1,8 @@
 import * as React from 'react';
 import ReportContentCell from "../../../../Components/ReportContentCell/ReportContentCell";
+import {IMonthReport} from "../../../../Apollo/schema";
 
-interface IReceptionActivitiesReportProps {
+interface IReceptionActivitiesReportProps extends IMonthReport {
 
 
 
@@ -10,7 +11,13 @@ interface IReceptionActivitiesReportProps {
 }
 
 
-const ReceptionActivitiesReport: React.FC<IReceptionActivitiesReportProps> = () => {
+const ReceptionActivitiesReport: React.FC<IReceptionActivitiesReportProps> = ({
+                                                                                numberOfEvents,
+                                                                                numberOfEventsRequiringReport,
+                                                                                numberOfParticipantsPresentAtRequiringReport,
+                                                                                numberOfEventsNotRequiringReport,
+                                                                                treatmentInTheReception,
+                                                                              }) => {
   return (
     <React.Fragment>
       <h2 className="h2">
@@ -21,19 +28,19 @@ const ReceptionActivitiesReport: React.FC<IReceptionActivitiesReportProps> = () 
         <div className={'col-md-3'}>
           <ReportContentCell
             label={'Общее количество мероприятий за отчетный месяц'}
-            content={'3'}
+            content={numberOfEvents}
           />
         </div>
         <div className={'col-md-3'}>
           <ReportContentCell
             label={'Кол-во подотчетных мероприятий за отчетный период'}
-            content={'2'}
+            content={numberOfEventsRequiringReport}
           />
         </div>
         <div className={'col-md-3'}>
           <ReportContentCell
             label={'Количество участников, присутствовавших на подотчетных меропиятиях'}
-            content={'2'}
+            content={numberOfParticipantsPresentAtRequiringReport}
           />
         </div>
       </div>
@@ -42,13 +49,13 @@ const ReceptionActivitiesReport: React.FC<IReceptionActivitiesReportProps> = () 
         <div className={'col-md-3'}>
           <ReportContentCell
             label={'Количество мероприятий не для выполнения основных поставленных задач'}
-            content={'2'}
+            content={numberOfEventsNotRequiringReport}
           />
         </div>
         <div className={'col-md-3'}>
           <ReportContentCell
             label={'Количество встреч с гражданами (обращения в приемную)'}
-            content={'2'}
+            content={treatmentInTheReception}
           />
         </div>
       </div>

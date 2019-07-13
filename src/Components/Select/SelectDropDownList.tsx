@@ -24,9 +24,11 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
                                                                          currentEvent,
                                                                          labelKey,
                                                                          valueKey,
+                                                                         style,
                                                                        }) => (
   <div
     onClick={(event)=>event.stopPropagation()}
+    style={style}
     className={classNames("jq-selectbox__dropdown", {
       'active': active,
     })

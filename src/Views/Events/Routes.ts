@@ -11,8 +11,8 @@ export const EventRoute = [
     component: EventEdit,
   },
   {
-    path: '/event/edit',
-    exact: true,
+    path: '/event/create/:date',
+    exact: false,
     name: 'Создать мероприятие',
     component: EventEdit,
   },

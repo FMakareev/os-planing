@@ -35,7 +35,7 @@ export const TextField: React.FC<ITextFieldProps> = ({
   const [isFocus, toggleFocus] = React.useState(false);
 
   const Field = as === 'textarea' ? 'textarea' : 'input';
-  const error = meta && meta.touched ? meta.error || meta.submitError : null;
+  const error = meta && meta.touched ? (meta.error || meta.submitError) : null;
 
   return (
     <React.Fragment>

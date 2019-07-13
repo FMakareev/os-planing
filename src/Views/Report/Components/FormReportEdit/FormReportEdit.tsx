@@ -30,8 +30,9 @@ interface IFormReportEditProps {
   [prop: string]: any
 }
 
-export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading, onSubmit}) => (
+export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialValues, onSubmit}) => (
   <Form
+    initialValues={initialValues}
     onSubmit={onSubmit}
     mutators={{
       ...arrayMutators
@@ -134,9 +135,7 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading, onSubmi
         <FieldArray name={"massMedia"}>
           {
             ({fields}: any) => {
-              console.log(fields);
               return fields.map((name: any, index: number) => {
-                console.log(name);
                 return (<MassMediaField
                   onDelete={() => fields.remove(index)}
                   index={index + 1}

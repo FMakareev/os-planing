@@ -18,11 +18,12 @@ interface IProjectPageItemContentProps extends IEvent {
 
 
 
-export const ProjectPageItemContent: React.FC<IProjectPageItemContentProps> = ({title,text, projects,date, id}) => (
+export const ProjectPageItemContent: React.FC<IProjectPageItemContentProps> = ({title,text, projects,date,city, id}) => (
 	<React.Fragment>
 		<EventBreadcrumbs
 			date={date}
 			id={id}
+			city={city}
 		/>
 
 		<PageTitle>
@@ -33,7 +34,7 @@ export const ProjectPageItemContent: React.FC<IProjectPageItemContentProps> = ({
 				projects={projects}
 			/>
 			<ProjectPlace>
-				Зеленогорск
+				{city}
 			</ProjectPlace>
 
 			<TagList/>

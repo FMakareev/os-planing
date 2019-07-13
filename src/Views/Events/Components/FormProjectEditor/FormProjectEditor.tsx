@@ -17,8 +17,35 @@ interface IFormProjectEditorProps {
 const DropFieldWithHOC = DropFieldHoc(DropFieldWithFileList)();
 
 
+interface IFormProjectEditorValidation {
+  title?: string;
+  text?: string;
+  projects?: string;
+
+  [prop: string]: any
+}
+
+
+const FormProjectEditorValidation = (values: IEvent) => {
+  const errors: IFormProjectEditorValidation = {};
+
+  if (!values.title) {
+    errors.title = 'Обязательно для заполнения';
+  }
+  if (!values.text) {
+    errors.text = 'Обязательно для заполнения';
+  }
+  if (!values.projects || Array.isArray(values.projects) && !values.projects.length) {
+    errors.projects = 'Обязательно для заполнения';
+  }
+
+  return errors;
+};
+
+
 export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialValues, onSubmit, loading}) => (
   <Form
+    validate={FormProjectEditorValidation}
     initialValues={initialValues}
     onSubmit={onSubmit}
     render={({
@@ -26,7 +53,12 @@ export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialVal
                handleSubmit,
              }) => {
 
-      return (<form onSubmit={handleSubmit} id={'FormProjectEditor'} className="form">
+      return (<form
+        onSubmit={handleSubmit}
+        id={'FormProjectEditor'}
+        className="form"
+      >
+
         <Field
           name="title"
           type="text"
@@ -38,18 +70,18 @@ export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialVal
             (props: FieldProps<any, any>) => (<TextField {...props}/>)
           }
         </Field>
+
         <Field
           name="city"
           type="text"
           placeholder="Название Города"
           label={'Город'}
-          disabled={loading}
+          disabled={true}
         >
           {
             (props: FieldProps<any, any>) => (<TextField {...props}/>)
           }
         </Field>
-
 
         <div className="form__category">
           <GetProjectList
@@ -63,29 +95,25 @@ export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialVal
 
             >
               {
-                (props: FieldProps<any, any>) => {
-                  console.log(props);
-                  return (<TagField
-                    isMulti
-                    {...props.input}
-                    valueKey={'id'}
-                    labelKey={'name'}
-                    selected={props.input.value}
-                    options={options}
-                  />)
-                }
+                (props: FieldProps<any, any>) => (<TagField
+                  isMulti
+                  {...props.input}
+                  metaInput={props.meta}
+                  labelKey={'name'}
+                  valueKey={'id'}
+                  selected={props.input.value}
+                  options={options}
+                />)
               }
             </Field>)}
           />
-
-
         </div>
 
 
         <Field
           as={'textarea'}
-          name="text"
-          type="text"
+          name={"text"}
+          type={"text"}
           placeholder="Описание мероприятия"
           label={'Текст'}
           disabled={loading}

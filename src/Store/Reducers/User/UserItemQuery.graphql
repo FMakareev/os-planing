@@ -8,5 +8,9 @@ query ($id: String!) {
             id
             url
         }
+        reception {
+            id
+            city
+        }
     }
 }

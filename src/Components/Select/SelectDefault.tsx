@@ -31,6 +31,7 @@ export const SelectDefault: React.FC<ISelectDefaultProps> = ({
                                                                valueKey,
                                                              }) => (
   <SelectToggleTextField
+    indexActiveOption={indexActiveOption}
     labelKey={labelKey}
     valueKey={valueKey}
     className={className}

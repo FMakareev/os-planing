@@ -5,6 +5,8 @@ import {Button} from '../../../../Components/Button/Button';
 import CalendarGetReceptionEnhancers from '../../Enhancers/CalendarGetReceptionEnhancers/CalendarGetReceptionEnhancers';
 import CalendarGetProjectEnhancers from "../../Enhancers/CalendarGetProjectEnhancers/CalendarGetProjectEnhancers";
 import CalendarCreateEvent from '../CalendarCreateEvent/CalendarCreateEvent';
+import {UserRoleEnum} from "../../../../Apollo/schema";
+import CheckAccess, {ICheckAccessApi} from "../../../../Enhancers/CheckAccess/CheckAccess";
 
 
 const SelectDefaultWithSelect = withSelect(SelectDefault)();
@@ -46,12 +48,20 @@ export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, chang
 
     </div>
     <div className="calendar__top-right">
-      <div style={{
-        marginRight: '16px',
-        display: 'inline-block',
-      }}>
-        <CalendarCreateEvent/>
-      </div>
+      <CheckAccess
+        accessRights={UserRoleEnum.user}
+        render={({access}: ICheckAccessApi)=>{
+          if(!access) return null;
+          return (
+            <div style={{
+              marginRight: '16px',
+              display: 'inline-block',
+            }}>
+              <CalendarCreateEvent/>
+            </div>
+          )
+        }}/>
+
       <Button>
         Экспорт в PDF
       </Button>

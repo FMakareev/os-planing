@@ -18,7 +18,7 @@ const ProjectPageItemSidebarWIthChangeStatusEvent = ChangeStatusEvent(ProjectPag
 export const EventItem: React.FC<IEventItemProps> = ({data}) => {
   return (<LayoutWithSidebar sidebarContent={<ProjectPageItemSidebarWIthChangeStatusEvent {...data}/>}>
     <ProjectPageItemContent
-      city={data.reception.city}
+      city={data.reception && data.reception.city}
       {...data}
     />
   </LayoutWithSidebar>);

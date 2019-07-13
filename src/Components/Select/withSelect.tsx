@@ -374,7 +374,7 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
           break;
         }
         case ('ArrowUp'): {
-          if (indexActiveOption && indexActiveOption > 0) {
+          if (indexActiveOption > 0) {
             this.setState({
               indexActiveOption: indexActiveOption - 1,
               currentEvent: WithSelectEventEnum.keyboard
@@ -383,7 +383,7 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
           break;
         }
         case ('Enter'): {
-          if (indexActiveOption && indexActiveOption !== -1 && indexActiveOption <= options.length - 1) {
+          if (indexActiveOption >= 0 && indexActiveOption !== -1 && indexActiveOption <= options.length - 1) {
             this.onChange(options[indexActiveOption]);
           }
           break;

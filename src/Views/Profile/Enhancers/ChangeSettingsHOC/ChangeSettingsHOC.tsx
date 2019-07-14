@@ -9,7 +9,10 @@ import {Dispatch} from "redux";
 import {AddUser} from "../../../../Store/Reducers/User/actionCreators";
 import {IUserState} from "../../../../Store/Reducers/User/reducers";
 import {IFormChangeSMTPSettingValues} from '../../Components/FormChangeSMTPSetting/FormChangeSMTPSetting';
-import {FormApi} from "final-form";
+import {FormApi, FORM_ERROR} from "final-form";
+import {TextFieldEnum} from '../../../../Components/TextField/TextField';
+import SettingsItemQuery from "../GetSMTPSetting/SettingsItemQuery.graphql";
+import HasOwnProperty from "../../../../Helpers/HasOwnProperty";
 
 interface IChangeSettingsHocProps {
   ChangeSettings(options: any): any;
@@ -68,9 +71,12 @@ const ChangeSettingsHoc = (WrapperComponent: React.ElementType) => {
     };
 
 // TODO: добавить сравнение старых данных настроек и новых и если не было  изменений то не вызывать запрос
-    onSubmit = async (values: IFormChangeSMTPSettingValues, form: FormApi<IFormChangeSMTPSettingValues>) => {
+    onSubmit = (initialValues: any) => async (values: IFormChangeSMTPSettingValues, form: FormApi<IFormChangeSMTPSettingValues>) => {
       const {ChangeSettings} = this.props;
 
+      console.log('values: ', values);
+      console.log('initialValues: ', initialValues);
+      console.log('form: ', form);
       await Promise.all([
         ChangeSettings({
           variables: {
@@ -79,12 +85,23 @@ const ChangeSettingsHoc = (WrapperComponent: React.ElementType) => {
             login: values.login,
             password: values.password,
             tlsUse: values.tlsUse,
-          }
+          },
+          refetchQueries: [
+            {
+              query: SettingsItemQuery
+            }
+          ]
         }),
         this.updateUser(values),
       ]);
+      const result:any = {};
+      Object.entries(values).forEach(([key, value]) => {
+        if (HasOwnProperty.call(initialValues, key) && initialValues[key] !== value) {
+          result[key] = TextFieldEnum.SaveField;
+        }
+      });
 
-      setTimeout(form.reset, 500);
+      return result;
     };
 
     render() {

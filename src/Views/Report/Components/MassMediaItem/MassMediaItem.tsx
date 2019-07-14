@@ -10,9 +10,9 @@ const MassMediaItem: React.FC<IMassMediaItemProps> = ({
                                                         link
                                                       }) => {
   return (
-    <div className={'inner__content'}>
-      <p style={{textTransform: 'uppercase'}}>{title}</p>
-      <a className={'city-details__title'} href={link} target={'_blank'}>{link}</a>
+    <div className={'mass-media__wrapper'}>
+      <p className={'mass-media__title'}>{title}</p>
+      <a className={'mass-media__link'} href={link} target={'_blank'}>{link}</a>
     </div>
   );
 };

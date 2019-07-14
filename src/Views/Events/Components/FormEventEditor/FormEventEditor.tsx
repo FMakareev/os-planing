@@ -6,8 +6,9 @@ import DropFieldWithFileList from "../../../../Components/DropFieldWithFileList/
 import {Field, FieldProps, Form} from "react-final-form";
 import {IEvent} from "../../../../Apollo/schema";
 import GetProjectList from "../../Enhancers/GetProjectList/GetProjectList";
+import config from "../../../../config";
 
-interface IFormProjectEditorProps {
+interface IFormEventEditorProps {
   initialValues: IEvent;
   loading?: boolean;
 
@@ -17,7 +18,7 @@ interface IFormProjectEditorProps {
 const DropFieldWithHOC = DropFieldHoc(DropFieldWithFileList)();
 
 
-interface IFormProjectEditorValidation {
+interface IFormEventEditorValidation {
   title?: string;
   text?: string;
   projects?: string;
@@ -26,8 +27,8 @@ interface IFormProjectEditorValidation {
 }
 
 
-const FormProjectEditorValidation = (values: IEvent) => {
-  const errors: IFormProjectEditorValidation = {};
+const FormEventEditorValidation = (values: IEvent) => {
+  const errors: IFormEventEditorValidation = {};
 
   if (!values.title) {
     errors.title = 'Обязательно для заполнения';
@@ -43,9 +44,9 @@ const FormProjectEditorValidation = (values: IEvent) => {
 };
 
 
-export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialValues, onSubmit, loading}) => (
+export const FormEventEditor: React.FC<IFormEventEditorProps> = ({initialValues, onSubmit, loading}) => (
   <Form
-    validate={FormProjectEditorValidation}
+    validate={FormEventEditorValidation}
     initialValues={initialValues}
     onSubmit={onSubmit}
     render={({
@@ -55,7 +56,7 @@ export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialVal
 
       return (<form
         onSubmit={handleSubmit}
-        id={'FormProjectEditor'}
+        id={'FormEventEditor'}
         className="form"
       >
 
@@ -127,6 +128,8 @@ export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialVal
           name={"attachments"}
           type={"file"}
           disabled={loading}
+          accept={config.allowedFileExtensions.join(',')}
+          help={'Размер файла не должен привышать 50 мегабайт. Для загрузки разрешены файлы со следующими расширениями: .doc, .docx, pdf, jpeg'}
         >
           {
             (props: FieldProps<any, any>) => (<DropFieldWithHOC
@@ -141,4 +144,4 @@ export const FormProjectEditor: React.FC<IFormProjectEditorProps> = ({initialVal
   />
 );
 
-export default FormProjectEditor;
+export default FormEventEditor;

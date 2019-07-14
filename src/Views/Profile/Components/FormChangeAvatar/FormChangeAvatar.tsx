@@ -33,9 +33,8 @@ export const FormChangeAvatar: React.FC<IFormChangeAvatarProps> = ({onSubmit, in
                  form,
                  submitting,
                  pristine,
-        values
                }: FormRenderProps<IFormChangeAvatarValues>): ReactNode => {
-        console.log(values);
+
         return (<form onSubmit={handleSubmit}>
           <div className="inner-info">
             <Field

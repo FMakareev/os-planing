@@ -32,7 +32,7 @@ const EventPageEnhancer = (WrapperComponent: React.ElementType) => {
 
     formatData = (data?: IEventItemData) => {
       const {match: {params}, user} = this.props;
-      console.log(data);
+
       if (data && data.eventItem) {
         return {
           ...data.eventItem,
@@ -50,12 +50,11 @@ const EventPageEnhancer = (WrapperComponent: React.ElementType) => {
         }
       }
       return null;
-    }
+    };
 
 
     render() {
-      const {match: {params}, user} = this.props;
-      console.log(this.props);
+      const {match: {params}} = this.props;
       return (<Query
         <IEventItemData, IEventItemVariables>
         skip={!params.eventId}

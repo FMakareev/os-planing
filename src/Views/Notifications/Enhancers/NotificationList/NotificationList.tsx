@@ -5,8 +5,8 @@ import InfinityScroll from "../../../../Components/InfinityScroll/InfinityScroll
 import NotificationListQuery from './NotificationListQuery.graphql';
 import NotificationItem from '../../Components/NotificationItem/NotificationItem';
 import {INotification, IUser} from '../../../../Apollo/schema';
-import {paginationConfig} from '../../View/paginationConfig';
 import GetNotReadCountNotification from '../GetNotReadCountNotification/GetNotReadCountNotification';
+import config from "../../../../config";
 
 
 interface INotificationListProps {
@@ -22,7 +22,7 @@ const InfinityScrollWithQuery = InfinityScrollHoc<INotification>(InfinityScroll)
   query: NotificationListQuery,
   queryName: 'notificationPagination',
   variables: {
-    ...paginationConfig,
+    ...config.pagination,
     user: User && User.id
   }
 });

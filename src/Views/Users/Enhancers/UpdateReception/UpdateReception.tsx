@@ -14,7 +14,6 @@ import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 import {IUpdateReceptionData} from "../../../../Apollo/schema";
 import {IResponseUploadFile} from '../CreateReception/CreateReception';
 import FileUpload, {IFileUpload} from "../../../../Enhancers/FileUpload/FileUpload";
-import {paginationConfig} from "../../Views/Users/paginationConfig";
 
 interface IUpdateReceptionProps extends MutateProps, IFileUpload {
   UpdateReception: any;

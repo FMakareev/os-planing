@@ -50,6 +50,9 @@ const ReportEditEnhancer = (WrapperComponent: React.ElementType) => {
       if (HasOwnProperty.call(values, 'projects')) {
         values.projects = values.projects.map((item: IProject) => item.id)
       }
+      if (HasOwnProperty.call(values, 'event') && typeof  values.event !== 'string') {
+        values.event = values.event.id;
+      }
       if (HasOwnProperty.call(values, 'massMedia')) {
         values.massMedia = values.massMedia.map((item: IMassMedia ) => ({
           link: item.link,

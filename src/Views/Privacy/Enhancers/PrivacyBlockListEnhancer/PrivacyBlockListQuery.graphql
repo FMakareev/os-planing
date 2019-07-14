@@ -1,0 +1,8 @@
+query{
+    privacyBlockList{
+        id
+        index
+        title
+        content
+    }
+}

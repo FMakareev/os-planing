@@ -7,6 +7,7 @@ import ProjectPlace from '../../../../Components/ProjectPlace/ProjectPlace';
 import {TagList} from "../../../../Components/TagList/TagList";
 import {IMonthReport} from "../../../../Apollo/schema";
 import EventBreadcrumbs from "../../../Events/Components/EventBreadcrumbs/EventBreadcrumbs";
+import ExternalFinalFormSubmit from "../../../../Helpers/ExternalFinalFormSubmit";
 
 interface IMonthReportEditProps extends IMonthReport {
   [prop: string]: any
@@ -19,10 +20,7 @@ export const MonthReportEdit: React.FC<IMonthReportEditProps> = ({
                              id,
                            }) => (<LayoutWithSidebar
   sidebarContent={<ProjectEditorSidebar
-    onClick={() => {
-      const form = document.getElementById('FormMonthReportEdit');
-      form && form.dispatchEvent(new Event('submit', {cancelable: true}))
-    }}
+    onClick={ExternalFinalFormSubmit('FormMonthReportEdit')}
     buttonLabel={'Сохранить отчет'}
   />}
 >

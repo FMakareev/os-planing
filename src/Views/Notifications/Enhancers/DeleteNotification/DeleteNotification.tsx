@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import DeleteNotificationMutation from './DeleteNotificationMutation.graphql';
 import {IStoreState} from "../../../../Store/Store";
 import RefetchNotificationQueries from '../RefetchNotificationQueries/RefetchNotificationQueries';
-import {paginationConfig} from '../../View/paginationConfig';
+import config from "../../../../config";
 
 
 interface IDeleteNotificationProps {
@@ -35,7 +35,7 @@ const DeleteNotification = (WrapperComponent: React.ElementType) => {
           user: user && user.user.id,
         },
         refetchQueries: [RefetchNotificationQueries({
-          ...paginationConfig,
+          ...config.pagination,
           user: user && user.user.id,
         })]
       });

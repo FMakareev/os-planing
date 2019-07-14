@@ -1,7 +1,10 @@
-import React, {BaseSyntheticEvent, SyntheticEvent} from 'react';
+import React, {BaseSyntheticEvent} from 'react';
 
 interface IDropFieldHocProps {
   onChange?(files: IFile[]): void;
+
+  accept?: any[];
+  multiple?: boolean;
 
   [prop: string]: any
 }
@@ -48,10 +51,13 @@ export const DropFieldHoc = (WrapperComponent: React.FC<any>) => () => {
       }
     }
 
+
+
     addFile = (event: BaseSyntheticEvent<Element, EventTarget, SyntheticEventFileTarget>) => {
       try {
         const {onChange} = this.props;
         const files: IFile[] = event.target.files;
+
         this.setState((state) => ({
           ...state,
           fileList: [...state.fileList, ...files]
@@ -65,10 +71,13 @@ export const DropFieldHoc = (WrapperComponent: React.FC<any>) => () => {
 
     removeFile = (name: string) => {
       try {
+        const {onChange} = this.props;
         this.setState((state) => ({
           ...state,
           fileList: state.fileList.filter((item: IFile) => item.name !== name)
-        }))
+        }),() => {
+          onChange && onChange(this.state.fileList)
+        })
       } catch (error) {
         console.error('[ERROR]:removeFile: ', error);
       }

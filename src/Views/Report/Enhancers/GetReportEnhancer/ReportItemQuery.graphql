@@ -6,6 +6,7 @@ query ($id: String!) {
             url
             name
             ext
+            size
         }
         event {
             id

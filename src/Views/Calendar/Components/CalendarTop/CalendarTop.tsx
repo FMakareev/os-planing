@@ -32,6 +32,7 @@ export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, chang
         label={'Приемная'}
         placeholder={'Выберите город'}
         selected={reception}
+        className={'SelectReceptionWithEnhancer'}
         onChange={({value}: ISelectOption) => {
           changeReception && changeReception(value);
         }}
@@ -41,6 +42,7 @@ export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, chang
         label={'Проект'}
         placeholder={'Выберите категорию'}
         selected={project}
+        className={'SelectProjectWithEnhancer'}
         onChange={({value}: ISelectOption) => {
           changeProject && changeProject(value);
         }}

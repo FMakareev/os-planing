@@ -9,6 +9,7 @@ import {FieldArray} from "react-final-form-arrays";
 import arrayMutators from 'final-form-arrays'
 import MassMediaField from "../../../MontheReport/Components/MassMediaField/MassMediaField";
 import PlusIcon from '../../../../Components/SvgIcons/PlusIcon';
+import config from "../../../../config";
 
 const DropFieldWithHOC = DropFieldHoc(DropFieldWithFileList)();
 
@@ -43,8 +44,9 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
                form: {
                  mutators: {push}
                },
+      values
              }: FormRenderProps<IFormReportEditValues>): ReactNode => {
-
+      console.log('values: ', values);
       return (<form id={'FormReportEdit'} onSubmit={handleSubmit} className="form">
         <Field
           name="place"
@@ -165,6 +167,8 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
           name={"attachments"}
           type={"file"}
           disabled={loading}
+          accept={config.allowedFileExtensions.join(',')}
+          help={'Размер файла не должен привышать 50 мегабайт. Для загрузки разрешены файлы со следующими расширениями: .doc, .docx, pdf, jpeg'}
         >
           {
             (props: FieldProps<any, any>) => (<DropFieldWithHOC

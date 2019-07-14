@@ -24,9 +24,6 @@ export enum NotificationTypeEnum {
 }
 
 
-
-
-
 export interface IBase {
   created?: string;
   updated?: string;
@@ -461,6 +458,28 @@ export interface IUpdateReportVariables {
   producer: string
 }
 
+
+export interface IPrivacyBlock extends IBase {
+  content: string;
+  id?: string;
+  index: number;
+  title: string;
+}
+
+export interface IPrivacyBlockList {
+  privacyBlockList: IPrivacyBlock[]
+}
+
+export interface ICreatePrivacyBlockData {
+  createPrivacy: {
+    privacy: IPrivacyBlock
+  }
+}
+export interface IUpdatePrivacyBlockData {
+  updatePrivacy: {
+    privacy: IPrivacyBlock
+  }
+}
 
 export interface Query {
   projectList: IProject;

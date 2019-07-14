@@ -9,6 +9,7 @@ import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFee
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
 import TextFieldPassword from "../../../ChangePassword/Components/TextFieldPassword/TextFieldPassword";
 import Checkbox from "../../../../Components/Checkbox/Checkbox";
+import {EmailValidation} from '../../../../Helpers/Validation';
 
 
 interface IFormChangeSMTPSettingProps {
@@ -41,11 +42,21 @@ interface IFormChangeSMTPSettingValidation {
 const FormChangeSMTPSettingValidator = (values: IFormChangeSMTPSettingValues) => {
   const errors:IFormChangeSMTPSettingValidation = {};
 
+  if(!values.email){
+    errors.email = 'Обязательно для заполнения';
+  }
+  if(values.email && EmailValidation('Неверный адрес электронной почты')(values.email)){
+    errors.email = 'Неверный адрес электронной почты';
+  }
+
   if(!values.host){
     errors.host = 'Обязательно для заполнения';
   }
   if(!values.port){
     errors.port = 'Обязательно для заполнения';
+  }
+  if(values.port && isNaN(Number(values.port))){
+    errors.port = 'Должен быть числом';
   }
 
   return errors;
@@ -56,7 +67,7 @@ export const FormChangeSMTPSetting: React.FC<IFormChangeSMTPSettingProps> = ({in
   <Form
     validate={FormChangeSMTPSettingValidator}
     initialValues={initialValues}
-    onSubmit={onSubmit}
+    onSubmit={onSubmit(initialValues)}
     render={({
                submitError,
                handleSubmit,
@@ -101,7 +112,7 @@ export const FormChangeSMTPSetting: React.FC<IFormChangeSMTPSettingProps> = ({in
         </Field>
         <Field
           name={'port'}
-          type="text"
+          type="number"
           placeholder={'Введите порт SMTP'}
           label={'Порт SMTP'}
           disabled={loading}

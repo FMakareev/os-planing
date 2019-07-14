@@ -13,8 +13,6 @@ const GetSmtpSetting = (WrapperComponent: React.ElementType): React.FC<IGetSmtpS
     <Query query={SettingsItemQuery}>
       {
         ({loading, error, data}: any) => {
-          console.log('GetSmtpSetting: ', loading, data);
-
           if (loading) {
             return (<Preloader type={PreloaderTypeEnum.block} size={PreloaderSizeEnum.md}/>)
           }

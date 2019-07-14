@@ -1137,6 +1137,31 @@ br, .br {
   margin: 0 auto 40px;
 }
 
+.mass-media {
+  &__wrapper {
+    margin-bottom: 18px;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  &__link {
+    color: #3789d4;
+    text-decoration: none;
+    &:hover{
+
+      text-decoration: underline;
+    }
+  }
+
+}
+
+.d-none {
+  display: none!important;
+}
+
 @import 'calendar';
 @import 'buttons';
 @import 'form';

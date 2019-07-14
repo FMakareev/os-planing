@@ -17,9 +17,12 @@ interface IReportItemProps {
 
 const composeEnhancers = compose(GetReportEnhancer,EventPageEnhancer);
 
-export const ReportItem: React.FC<IReportItemProps> = ({data, report}) => (
-  <LayoutWithSidebar sidebarContent={<ReportItemSidebar event={data} {...report}/>}>
-    <ReportItemContent event={data} {...report}/>
-  </LayoutWithSidebar>);
+export const ReportItem: React.FC<IReportItemProps> = ({data, report}) =>{
+
+  return  (
+    <LayoutWithSidebar sidebarContent={<ReportItemSidebar {...report} event={data}/>}>
+      <ReportItemContent {...report} event={data}/>
+    </LayoutWithSidebar>);
+}
 
 export default composeEnhancers(ReportItem);

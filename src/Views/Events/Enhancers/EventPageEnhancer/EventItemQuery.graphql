@@ -17,9 +17,10 @@ query ($id: String!) {
         title
         attachments {
             id
+            url
             name
             ext
-            url
+            size
         }
     }
 }

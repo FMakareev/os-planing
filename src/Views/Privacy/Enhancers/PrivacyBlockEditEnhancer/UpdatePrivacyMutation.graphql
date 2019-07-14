@@ -1,0 +1,10 @@
+mutation($id: String!, $content: String!, $title: String!, $index: Int!){
+    updatePrivacy(id: $id, content: $content, title: $title, index: $index){
+        privacy{
+            id
+            title
+            content
+            index
+        }
+    }
+}

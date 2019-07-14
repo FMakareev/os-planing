@@ -3,12 +3,14 @@ import {SectionsSpy} from "react-smart-sections";
 import classNames from 'classnames';
 import {StickyContainer, Sticky} from 'react-sticky';
 import {ScrollTo, linearTween} from '../../../../Helpers/ScrollTo';
+import {IPrivacyBlock} from "../../../../Apollo/schema";
 
 interface IPrivacySidebarProps {
+	privacyBlockList: IPrivacyBlock[];
 	[prop: string]: any
 }
 
-export const PrivacySidebar: React.FC<IPrivacySidebarProps> = () => (
+export const PrivacySidebar: React.FC<IPrivacySidebarProps> = ({privacyBlockList}) => (
 	<div className="inner-info">
 		<SectionsSpy
 			render={(sections: any) => (
@@ -27,7 +29,7 @@ export const PrivacySidebar: React.FC<IPrivacySidebarProps> = () => (
 									})}
 									href={'!#'}
 								>
-									{section.name}
+									{privacyBlockList && privacyBlockList[index] && privacyBlockList[index].title || section.name}
 								</a>
 							)
 						})

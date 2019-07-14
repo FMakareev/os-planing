@@ -9,7 +9,7 @@ import Preloader, {
 import ProjectItem from "../../Components/ProjectItem/ProjectItem";
 import PopupEditProject from "../../Components/PopupEditProject/PopupEditProject";
 import {IProject} from "../../../../Apollo/schema";
-import {paginationConfig} from "../../Views/ProjectList/paginationConfig";
+import config from '../../../../config';
 
 interface IProjectListProps {
   [prop: string]: any
@@ -19,7 +19,7 @@ const InfinityScrollWithQuery = InfinityScrollHoc(InfinityScroll)({
   query: ProjectListQuery,
   queryName: 'projectPagination',
   variables:{
-    ...paginationConfig,
+    ...config.pagination,
   }
 });
 

@@ -10,7 +10,7 @@ import Preloader, {
   PreloaderSizeEnum,
   PreloaderThemeEnum
 } from "../../../../Components/Preloader/Preloader";
-import {paginationConfig} from '../../Views/Users/paginationConfig';
+import config from "../../../../config";
 
 interface IReceptionListProps {
   [prop: string]: any
@@ -20,7 +20,7 @@ const InfinityScrollWithQuery = InfinityScrollHoc(InfinityScroll)({
   query: ReceptionListQuery,
   queryName: 'receptionPagination',
   variables:{
-    ...paginationConfig,
+    ...config.pagination,
   }
 });
 

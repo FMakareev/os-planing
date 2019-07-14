@@ -24,63 +24,73 @@ export const ReportItemContent: React.FC<IReportItemContentProps> = ({
                                                                        about,
                                                                        massMedia,
                                                                        event
-                                                                     }) => (
-  <React.Fragment>
-    <EventBreadcrumbs
-      date={date}
-      city={event.reception.city}
-    />
+                                                                     }) => {
 
-    <PageTitle>
-      {event.title}
-    </PageTitle>
-    <div className="inner__content">
-      <ProjectPlace>
-        {event.reception.city}
-      </ProjectPlace>
-      <TagList/>
-
-      <h2 className="h2">
-        Отчет:
-      </h2>
-
-      <ReportContentCell
-        label={'Задача (зачем было проведено мероприятие)'}
-        content={task}
+  console.log(event);
+  return (
+    <React.Fragment>
+      <EventBreadcrumbs
+        date={event.date}
+        city={event.reception && event.reception.city}
       />
 
-      <ReportContentCell
-        label={'Кто поставил задачу (ФИО, место работы)'}
-        content={producer}
-      />
+      <PageTitle>
+        {event.title}
+      </PageTitle>
+      <div className="inner__content">
+        <ProjectPlace>
+          {event.reception.city}
+        </ProjectPlace>
+        <TagList projects={event.projects}/>
 
-      <ReportContentCell
-        label={'Цели мероприятия'}
-        content={goals}
-      />
+        <h2 className="h2">
+          Отчет:
+        </h2>
 
-      <ReportContentCell
-        label={'Количество участников, присутствовавших на мероприятии'}
-        content={participantsCount}
-      />
+        <ReportContentCell
+          label={'Задача (зачем было проведено мероприятие)'}
+          content={task}
+        />
 
-      <ReportContentCell
-        label={'ФИО основных участников'}
-        content={participantsAbout}
-      />
+        <ReportContentCell
+          label={'Кто поставил задачу (ФИО, место работы)'}
+          content={producer}
+        />
 
-      <ReportContentCell
-        label={'писание мероприятия'}
-        content={about}
-      />
+        <ReportContentCell
+          label={'Цели мероприятия'}
+          content={goals}
+        />
 
-      {
-        massMedia && massMedia.map((item: IMassMedia, idx: number) => (<MassMediaItem key={idx} {...item}/>))
-      }
+        <ReportContentCell
+          label={'Количество участников, присутствовавших на мероприятии'}
+          content={participantsCount}
+        />
+
+        <ReportContentCell
+          label={'ФИО основных участников'}
+          content={participantsAbout}
+        />
+
+        <ReportContentCell
+          label={'писание мероприятия'}
+          content={about}
+        />
 
 
-    </div>
-  </React.Fragment>
-);
+
+        <h2 className="h2">
+          Ссылки на СМИ о мероприятиях
+        </h2>
+
+        {
+          massMedia && massMedia.map((item: IMassMedia, idx: number) => (<MassMediaItem key={idx} {...item}/>))
+        }
+
+
+      </div>
+    </React.Fragment>
+  );
+}
 
 export default ReportItemContent;

@@ -1,0 +1,10 @@
+mutation($id: String!){
+    deletePrivacy(id: $id){
+        privacy{
+            id
+            title
+            content
+            index
+        }
+    }
+}

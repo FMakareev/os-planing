@@ -1,32 +1,42 @@
 import * as React from 'react';
 import {
-	EnumNotificationWrapperMods,
-	NotificationWrapper
+  EnumNotificationWrapperMods,
+  NotificationWrapper
 } from "../../../../Components/NotificationWrapper/NotificationWrapper";
+import {IStatisticProject, IStatisticReception} from "../../../../Apollo/Types/Statistics";
 
-interface IStatisticRowProps {
-	[prop: string]: any
+interface IStatisticRowProps extends IStatisticProject, IStatisticReception {
+  [prop: string]: any
 }
 
-export const StatisticRow: React.FC<IStatisticRowProps> = () => (
-	<NotificationWrapper mods={EnumNotificationWrapperMods.statics}>
-		<div className="notifications-item__name">Краснокаменск</div>
-		<div className="notifications-item__field">
-			<div className="field">М=50,42<span>D=15,64</span></div>
-		</div>
-		<div className="notifications-item__field">
-			<div className="field">М=64,1<span>D=17,98</span></div>
-		</div>
-		<div className="notifications-item__field">
-			<div className="field">М=13,12<span>D=1,98</span></div>
-		</div>
-		<div className="notifications-item__field">
-			<div className="field">М=14,88<span>D=2,64</span></div>
-		</div>
-		<div className="notifications-item__field">
-			<div className="field">М=32,62<span>D=8,54</span></div>
-		</div>
-	</NotificationWrapper>
+export const StatisticRow: React.FC<IStatisticRowProps> = ({
+                                                             project,
+                                                             reception,
+                                                             expectedValue,
+                                                             dispersion,
+                                                             sum
+                                                           }) => (
+  <NotificationWrapper mods={EnumNotificationWrapperMods.statics}>
+    <div className="notifications-item__name">
+      {project && project.name}
+      {reception && reception.city}
+    </div>
+    <div className="notifications-item__field">
+      <div className="field">
+        {expectedValue}
+      </div>
+    </div>
+    <div className="notifications-item__field">
+      <div className="field">
+        {dispersion}
+      </div>
+    </div>
+    <div className="notifications-item__field">
+      <div className="field">
+        {sum}
+      </div>
+    </div>
+  </NotificationWrapper>
 );
 
 export default StatisticRow;

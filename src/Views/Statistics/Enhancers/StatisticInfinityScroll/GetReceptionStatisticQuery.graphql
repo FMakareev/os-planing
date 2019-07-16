@@ -1,0 +1,20 @@
+query($limit: Int!, $page: Int!,$startDate: DateTime!, $stopDate: DateTime!,$project: String ){
+    getReceptionStatistic(limit:$limit,page: $page,startDate: $startDate,stopDate:$stopDate,  project:$project){
+        pageInfo{
+            currentPage
+            limit
+            nextPage
+            prevPage
+        }
+        count
+        items {
+            reception {
+                id
+                city
+            }
+            expectedValue
+            dispersion
+            sum
+        }
+    }
+}

@@ -410,7 +410,6 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
 
     render() {
       const {meta, findSubstring} = this.state;
-
       return (
         <WrappedComponent
           {...this.state}

@@ -28,7 +28,6 @@ const PopupDeleteWithQuery = DeleteReceptionHOC(PopupDelete);
 
 const ReceptionList: React.FC<IReceptionListProps> = () => {
   return (<InfinityScrollWithQuery
-
     onComplete={()=>{
       setTimeout(()=>console.log('onComplete 2:'), 1000);
     }}

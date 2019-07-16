@@ -13,6 +13,7 @@ interface IInfinityScrollHocOptions<TData = any> {
 interface IInfinityScrollHocVariables {
   limit: number;
   page: number;
+
   [prop: string]: any
 }
 
@@ -32,13 +33,16 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
   ({query, queryName, operationOption, variables}: IInfinityScrollHocOptions) => {
     return graphql<any, IPagination<TData>, IInfinityScrollHocVariables>(query, {
       ...operationOption,
-      options: {
-        variables: {
-          page: 1,
-          limit: 10,
-          ...variables,
-        }
-      }
+      options: (props: any) => {
+        console.log('options: ', props);
+        return ({
+          variables: {
+            page: 1,
+            limit: 10,
+          },
+          ...props.options,
+        })
+      },
     })(class extends React.Component<IInfinityScrollHocProps, IInfinityScrollHocState> {
 
       constructor(props: IInfinityScrollHocProps) {
@@ -50,32 +54,40 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
         return {
           page: 1,
           limit: 10,
-          ...variables,
+          ...(this.props.options && this.props.options.variables ? {
+            ...this.props.options.variables,
+          } : {}),
+
         }
       }
 
-
-      componentDidUpdate(prevProps: IInfinityScrollHocProps, prevState: IInfinityScrollHocState) {
-        const {data} = this.props;
-        if (!data.loading && !data.error) {
-          this.onComplete();
-        }
-
+      componentDidMount() {
+        // const {data: {refetch, subscribeToMore}, options} = this.props;
+        //
+        // subscribeToMore({
+        //   document: query,
+        //   variables: {
+        //     ...(options && options.variables ? {
+        //       ...options.variables,
+        //     } : {}),
+        //   },
+        //   updateQuery: (previousResult: any, {fetchMoreResult}: any) => {
+        //     console.log('updateQuery: ', previousResult, fetchMoreResult);
+        //   },
+        // });
       }
 
       onFetchMore = () => {
-        const {limit, page} = this.state;
         const {data} = this.props;
         data.fetchMore && data.fetchMore({
           variables: {
-            limit: limit,
-            page: page,
+            ...this.state,
           },
           updateQuery: (previousResult: any, {fetchMoreResult}: any) => {
             if (!fetchMoreResult) return previousResult;
             return {
               [queryName]: {
-                count: fetchMoreResult.receptionPagination.count,
+                count: fetchMoreResult[queryName].count,
                 items: [
                   ...previousResult[queryName].items,
                   ...fetchMoreResult[queryName].items
@@ -94,11 +106,6 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
         }), this.onFetchMore)
       };
 
-
-      /** @desc вызывается после того как получена новая порция данных */
-      onComplete = () => {
-        this.props.onComplete && this.props.onComplete()
-      };
 
       render() {
         const {data} = this.props;

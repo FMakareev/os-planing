@@ -41,10 +41,10 @@ const GetNotificationContent = ({type, report,monthReport, event}: INotification
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_CREATE_EVENT) {
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Создано новое мероприятие "${event && event.title}"
+        Создано новое мероприятие "{event && event.title}"
       </div>
       {
-        event && <Link to={`/event/${event.id}`} className="notifications-item__more">
+        event && <Link to={`/event/{event.id}`} className="notifications-item__more">
             Перейти к мероприятию
         </Link>
       }
@@ -52,7 +52,7 @@ const GetNotificationContent = ({type, report,monthReport, event}: INotification
   }
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_DELETE_EVENT) {
     return (<div className="notifications-item__text">
-      Удалено мероприятие "${event.title}"
+      Удалено мероприятие "{event.title}"
     </div>)
   }
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT) {
@@ -89,7 +89,7 @@ const GetNotificationContent = ({type, report,monthReport, event}: INotification
     // TODO: данный тип отчета нужно семантически переделать на только отчеты оп событиям и подобный тип сделатьотдельный на месячные отчеты
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Изменен отчет
+        Изменен отчет мероприятия "{report && report.event.title}"
       </div>
       {
         report && event &&<Link to={`/report/${event.id}/${report.id}`} className="notifications-item__more">

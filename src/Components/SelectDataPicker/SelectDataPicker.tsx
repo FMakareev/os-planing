@@ -23,7 +23,7 @@ export class SelectDataPicker extends React.Component<ISelectDataPickerProps, an
   }
 
   render() {
-    const {label,customInput} = this.props;
+    const {label,customInput,minDate,maxDate} = this.props;
     return (
       <React.Fragment>
         <DatePicker
@@ -36,6 +36,8 @@ export class SelectDataPicker extends React.Component<ISelectDataPickerProps, an
           showYearDropdown
           dropdownMode="scroll"
           customInput={customInput}
+          minDate={minDate}
+          maxDate={maxDate}
         />
         <label className="form__label">{label}</label>
       </React.Fragment>

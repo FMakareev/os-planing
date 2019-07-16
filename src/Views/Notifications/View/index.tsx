@@ -13,7 +13,7 @@ export const Notifications = () => (<div>
 	<Breadcrumbs history={[
 		{
 			name: 'Календарь',
-			to:'/'
+			to: '/'
 		},
 		{
 			name: 'Уведомления',

@@ -1,0 +1,8 @@
+{
+    receptionPagination(page: 1, limit: 100) {
+        items {
+            value: id
+            label: city
+        }
+    }
+}

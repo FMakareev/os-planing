@@ -14,12 +14,15 @@ interface IInfinityScrollProps extends DataValue<any, any> {
 }
 
 const InfinityScroll: React.FC<IInfinityScrollProps> = ({getNextItems, data, ItemComponent, PreloaderComponent, loading, ...rest}) => {
-  console.log(data);
-  console.log(loading);
-  // const hasMore = !data ? loading ? true : false ? data.items && (data.items.length < data.count): false
-  const hasMore = !data && loading ? true : (data && data.items) ? !(data.items.length === 0 && !loading) : data.items.length < data.count ;
+  console.log('InfinityScroll: ',data);
+  let hasMore = false;
 
-  console.log(hasMore);
+  if (!data && loading) {
+    hasMore = true;
+  } else if (data && !loading) {
+    hasMore = data.items.length < data.count;
+  }
+
   return (
     <InfiniteScroll
       dataLength={data && data.items && data.items.length}

@@ -31,13 +31,18 @@ export interface IBase {
   updated?: string;
 }
 
+
+export interface IPageInfo {
+  currentPage: number
+  limit: number
+  nextPage: number
+  prevPage: number
+}
+
 export interface IPagination<IDate = any> {
   count: number;
   items: IDate[];
-  pageInfo: {
-    nextPage: number;
-    prevPage: number;
-  };
+  pageInfo: IPageInfo;
   __typename: string;
 }
 

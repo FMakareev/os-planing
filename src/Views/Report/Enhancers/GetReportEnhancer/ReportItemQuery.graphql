@@ -24,10 +24,12 @@ query ($id: String!) {
         }
         participantsAbout
         participantsCount
+        treatmentInTheReception
         place
         producer
         task
         updated
         created
+        pdfUrl
     }
 }

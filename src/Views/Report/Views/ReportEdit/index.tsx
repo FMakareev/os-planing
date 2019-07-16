@@ -22,7 +22,7 @@ interface IReportEditProps {
 }
 
 
-const composeEnhancers = compose(GetReportEnhancer,EventPageEnhancer);
+const composeEnhancers = compose(EventPageEnhancer,GetReportEnhancer);
 
 export const ReportEdit: React.FC<IReportEditProps> = ({data,report}) => (<LayoutWithSidebar
   sidebarContent={<ProjectEditorSidebar

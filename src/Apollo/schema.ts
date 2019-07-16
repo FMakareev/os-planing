@@ -1,3 +1,5 @@
+import {IMonthReport} from "./Types/MonthReport";
+
 export enum UserRoleEnum {
   admin = 'admin',
   user = 'user',
@@ -73,8 +75,6 @@ export interface IReception extends IBase {
   id: string;
   city: string;
   user: IUser;
-  updated: string;
-  created: string;
 }
 
 export interface IReceptionData {
@@ -172,61 +172,8 @@ export interface IMassMedia {
   link: string;
 }
 
-export interface IMonthReport extends IBase {
-  reception?: IReception;
-
-  // Общее количество мероприятий за отчетный месяц
-  numberOfEvents?: string;
-
-  // Кол-во подотчетных мероприятий за отчетный период
-  numberOfEventsRequiringReport?: string;
-
-  // Количество участников, присутствующих на подотчетных мероприятиях
-  numberOfParticipantsPresentAtRequiringReport?: string;
-
-  // Количество мероприятий не для выполнения основных поставленных задач
-  numberOfEventsNotRequiringReport?: string;
-
-  // Количество встреч с гражданами (обращения в приемную)
-  treatmentInTheReception?: string;
 
 
-  // текущая деятельность приемной
-  currentActivity?: string;
-
-  //значимые итоги/достижения деятельности приемной
-  receptionAchievement?: string;
-
-  // основные проблемы, с которыми столкнулись сотрудники приемной при работе в отчетный период
-  mainProblems?: string;
-
-  // Описание основных проблемных тем в городе и на предпиятии за отчетный период
-  descriptionOfTheMainProblemTopics?: string;
-
-  // Ожидаемые отрицательные события в следующем за отчетным периодом месяце
-  expectedNegativeEvents?: string;
-
-  // Какие проблемы били решены в городе и на предпиятии за отчетный период
-  whatProblemsWereSolved?: string;
-
-  // Конфликты, недовольство, возмущения граждан. Ключевые решения.
-  keyConflictResolution?: string;
-
-  // Ссылки на СМИ о мероприятиях
-  massMedia?: IMassMedia[];
-
-  attachments?: IFile[]
-
-}
-
-
-export interface IMonthReportItemData {
-  monthReportItem: IMonthReport
-}
-
-export interface IMonthReportItemVariables {
-  id: string;
-}
 
 
 export interface INotification extends IBase {
@@ -235,8 +182,11 @@ export interface INotification extends IBase {
   message?: string;
   typeOfReport?: string;
   report?: IReport;
+  monthReport?: IMonthReport;
+  event: IEvent;
   fromUser?: IUser;
   toUser?: IUser;
+  type: NotificationTypeEnum
 }
 
 
@@ -286,6 +236,7 @@ export interface IReceptionCalendar {
   priorityStatus: EventStatusEnum;
   eventCount: number;
   events: IEvent[];
+  monthReport: IMonthReport;
 }
 
 
@@ -394,6 +345,8 @@ export interface IReport extends IBase {
   producer: string;
   // Цели мероприятия
   goals: string;
+  // Количество встреч с гражданами (обращения в приемную)
+  treatmentInTheReception: string;
   // Количество участников, присутствовавших на мероприятии
   participantsCount: number;
   // ФИО основных участников
@@ -404,6 +357,8 @@ export interface IReport extends IBase {
   massMedia: IMassMedia[];
   // Прикрепить файлы (программа, презентации, протокол и т.п., фото)
   attachments: IFile[];
+
+  pdfUrl: string
 }
 
 

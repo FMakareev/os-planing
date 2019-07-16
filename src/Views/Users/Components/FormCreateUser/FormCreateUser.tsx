@@ -67,7 +67,7 @@ const FormCreateUserValidate = (values: FormCreateUserState) => {
     errors.passwordConfirm = 'Пароль должен быть не менее 8 символов'
   }
 
-  if (values.password && values.passwordConfirm && values.password != values.passwordConfirm) {
+  if (values.password && values.passwordConfirm && values.password !== values.passwordConfirm) {
     errors.passwordConfirm = 'пароль не совпадают'
   }
 

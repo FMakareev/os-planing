@@ -1,0 +1,68 @@
+mutation(
+    $id: String,
+    $attachments: [String],
+    $currentActivity: String,
+    $descriptionOfTheMainProblemTopics: String,
+    $expectedNegativeEvents: String,
+    $keyConflictResolution: String,
+    $mainProblems: String,
+    $massMedia: [IMassMediaInput],
+    $numberOfEvents: Int,
+    $numberOfEventsNotRequiringReport: Int,
+    $numberOfEventsRequiringReport: Int,
+    $numberOfParticipantsPresentAtRequiringReport: Int,
+    $reception: String
+    $receptionAchievement: String,
+    $treatmentInTheReception: Int,
+    $whatProblemsWereSolved: String
+){
+    updateMonthReport(
+        id:$id,
+        attachments: $attachments,
+        currentActivity: $currentActivity,
+        descriptionOfTheMainProblemTopics: $descriptionOfTheMainProblemTopics,
+        expectedNegativeEvents: $expectedNegativeEvents,
+        keyConflictResolution: $keyConflictResolution,
+        mainProblems: $mainProblems,
+        massMedia: $massMedia,
+        numberOfEvents: $numberOfEvents,
+        numberOfEventsNotRequiringReport: $numberOfEventsNotRequiringReport,
+        numberOfEventsRequiringReport: $numberOfEventsRequiringReport,
+        numberOfParticipantsPresentAtRequiringReport: $numberOfParticipantsPresentAtRequiringReport,
+        reception: $reception,
+        receptionAchievement: $receptionAchievement,
+        treatmentInTheReception: $treatmentInTheReception,
+        whatProblemsWereSolved: $whatProblemsWereSolved
+    ){
+        monthReport{
+            id
+            attachments{
+                id
+                url
+                name
+                ext
+            }
+            currentActivity
+            descriptionOfTheMainProblemTopics
+            expectedNegativeEvents
+            keyConflictResolution
+            mainProblems
+            massMedia{
+                id
+                link
+                title
+            }
+            numberOfEvents
+            numberOfEventsNotRequiringReport
+            numberOfEventsRequiringReport
+            numberOfParticipantsPresentAtRequiringReport
+            reception{
+                id
+                city
+            }
+            receptionAchievement
+            treatmentInTheReception
+            whatProblemsWereSolved
+        }
+    }
+}

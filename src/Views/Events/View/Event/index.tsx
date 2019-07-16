@@ -3,20 +3,23 @@ import LayoutWithSidebar from "../../../../Containers/LayoutWithSidebar/LayoutWi
 import {ProjectPageItemContent} from '../../Components/ProjectPageItemContent/ProjectPageItemContent';
 import {ProjectPageItemSidebar} from '../../Components/ProjectPageItemSidebar/ProjectPageItemSidebar';
 import EventPageEnhancer from "../../Enhancers/EventPageEnhancer/EventPageEnhancer";
-import {IEvent} from '../../../../Apollo/schema';
+import {IEvent, IReport} from '../../../../Apollo/schema';
 import ChangeStatusEvent from "../../../Calendar/Enhancers/ChangeStatusEvent/ChangeStatusEvent";
+import GetReportEnhancer from "../../../Report/Enhancers/GetReportEnhancer/GetReportEnhancer";
 
 
 interface IEventItemProps {
   data: IEvent;
+  report?: IReport;
 }
 
 
 
 const ProjectPageItemSidebarWIthChangeStatusEvent = ChangeStatusEvent(ProjectPageItemSidebar);
 
-export const EventItem: React.FC<IEventItemProps> = ({data}) => {
-  return (<LayoutWithSidebar sidebarContent={<ProjectPageItemSidebarWIthChangeStatusEvent {...data}/>}>
+export const EventItem: React.FC<IEventItemProps> = ({data, report}) => {
+  console.log(data);
+  return (<LayoutWithSidebar sidebarContent={<ProjectPageItemSidebarWIthChangeStatusEvent {...report} {...data}/>}>
     <ProjectPageItemContent
       city={data.reception && data.reception.city}
       {...data}
@@ -24,4 +27,4 @@ export const EventItem: React.FC<IEventItemProps> = ({data}) => {
   </LayoutWithSidebar>);
 };
 
-export default EventPageEnhancer(EventItem);
+export default EventPageEnhancer(GetReportEnhancer(EventItem));

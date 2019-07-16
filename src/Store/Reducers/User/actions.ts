@@ -99,7 +99,8 @@ export const UserLoginAction = (value: any) => (dispatch: Dispatch) => {
       .then((response: AxiosResponse<ILoginResponse>) => {
         if (response.data && response.data.user_data) {
           localStorage.setItem('user_data', JSON.stringify(response.data.user_data));
-          dispatch(UserLoginSuccess(response.data.user_data));
+          // @ts-ignore
+          dispatch(InitUserStoreAction());
         } else {
           throw response;
         }

@@ -6,6 +6,20 @@ query ($page: Int!, $limit: Int!, $user: String) {
         }
         count
         items {
+            event {
+                id
+                title
+            }
+            report {
+                id
+                event{
+                    id
+                    title
+                }
+            }
+            monthReport {
+                id
+            }
             fromUser {
                 id
                 fullName
@@ -18,10 +32,9 @@ query ($page: Int!, $limit: Int!, $user: String) {
             id
             isRead
             message
-            report{
-                id
-            }
-            toUser{
+            type
+            typeOfReport
+            toUser {
                 id
                 fullName
                 avatar {

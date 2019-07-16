@@ -31,9 +31,10 @@ const QueryRenderProps = <TData extends any, TVariables extends any> (WrapperCom
         size={PreloaderSizeEnum.md}
       />
     }
-    if (error) {
-      return 'Error.'
-    }
+    console.log(data);
+    // if (error) {
+    //   return 'Ошибка'
+    // }
     return <WrapperComponent data={data && data[queryName]} {...props}/>
   };
 
@@ -48,6 +49,7 @@ const CalendarWeekEnhancer = (WrapperComponent: React.ElementType) => {
       if(reception && project){
         return (<Query
           <GetCalendarByReceptionAndProjectData, GetCalendarByReceptionAndProjectVariables>
+          errorPolicy="ignore"
           query={GetCalendarByReceptionAndProjectQuery}
           variables={{
             time: time,
@@ -66,6 +68,7 @@ const CalendarWeekEnhancer = (WrapperComponent: React.ElementType) => {
       if(project){
         return (<Query
           <GetCalendarByProjectData, GetCalendarByProjectVariables>
+          errorPolicy="ignore"
           query={GetCalendarByProjectQuery}
           variables={{
             time: time,
@@ -80,6 +83,7 @@ const CalendarWeekEnhancer = (WrapperComponent: React.ElementType) => {
       if(reception){
         return (<Query
           <GetCalendarByReceptionData, GetCalendarByReceptionVariables>
+          errorPolicy="ignore"
           query={GetCalendarByReceptionQuery}
           variables={{
             time: time,
@@ -98,6 +102,7 @@ const CalendarWeekEnhancer = (WrapperComponent: React.ElementType) => {
       return (<Query
         <GetSimpleCalendarData, GetSimpleCalendarVariables>
         query={GetSimpleCalendarQuery}
+        errorPolicy="ignore"
         variables={{
           time: time,
         }}

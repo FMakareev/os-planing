@@ -10,14 +10,15 @@ interface IGetReportEnhancerProps {
 }
 
 const GetReportEnhancer = (WrappedComponent: React.ElementType) => (props: IGetReportEnhancerProps) => {
-  const {match: {params}} = props;
+  const {match: {params}, data} = props;
+
   return (
     <Query
       <IReportItemData, IReportItemVariables>
-      skip={!params.reportId}
+      skip={(data && !data.report) || (data && !data.report && !params.reportId) || !data}
       query={ReportItemQuery}
       variables={{
-        id: params.reportId,
+        id: data && data.report || params.reportId,
       }}
     >
       {

@@ -55,6 +55,9 @@ const EventPageEnhancer = (WrapperComponent: React.ElementType) => {
 
     render() {
       const {match: {params}} = this.props;
+      console.log(this.props)
+      console.log('EventPageEnhancer:', this.props);
+
       return (<Query
         <IEventItemData, IEventItemVariables>
         skip={!params.eventId}
@@ -66,7 +69,6 @@ const EventPageEnhancer = (WrapperComponent: React.ElementType) => {
       >
         {
           ({data, error, loading}: QueryResult<IEventItemData, IEventItemVariables>) => {
-
             if (loading) {
               return <Preloader
                 style={{
@@ -80,7 +82,6 @@ const EventPageEnhancer = (WrapperComponent: React.ElementType) => {
             if (error) {
               return 'Error';
             }
-
             return (<WrapperComponent
               data={this.formatData(data)}
               {...this.props}/>)

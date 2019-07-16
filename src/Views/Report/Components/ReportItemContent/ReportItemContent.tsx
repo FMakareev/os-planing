@@ -21,6 +21,7 @@ export const ReportItemContent: React.FC<IReportItemContentProps> = ({
                                                                        goals,
                                                                        participantsCount,
                                                                        participantsAbout,
+                                                                       treatmentInTheReception,
                                                                        about,
                                                                        massMedia,
                                                                        event
@@ -70,6 +71,10 @@ export const ReportItemContent: React.FC<IReportItemContentProps> = ({
         <ReportContentCell
           label={'ФИО основных участников'}
           content={participantsAbout}
+        />
+        <ReportContentCell
+          label={'Количество встреч с гражданами (обращения в приемную)'}
+          content={treatmentInTheReception}
         />
 
         <ReportContentCell

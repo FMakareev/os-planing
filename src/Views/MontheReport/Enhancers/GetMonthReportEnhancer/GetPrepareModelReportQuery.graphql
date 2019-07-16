@@ -1,0 +1,9 @@
+query ($reception: String!, $date: DateTime!) {
+    getPrepareMouthReport(reception: $reception, date: $date) {
+        numberOfEvents
+        numberOfEventsRequiringReport
+        numberOfParticipantsPresentAtRequiringReport
+        numberOfEventsNotRequiringReport
+        treatmentInTheReception
+    }
+}

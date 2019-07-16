@@ -3,16 +3,22 @@ import {PageTitle} from "../../../../Components/PageTitle/PageTitle";
 import {ReportContentCell} from "../../../../Components/ReportContentCell/ReportContentCell";
 import ProjectPlace from "../../../../Components/ProjectPlace/ProjectPlace";
 import ReceptionActivitiesReport from '../ReceptionActivitiesReport/ReceptionActivitiesReport';
-import {IMassMedia, IMonthReport} from '../../../../Apollo/schema';
-import EventBreadcrumbs from "../../Views/MonthReportEdit";
+import {IMonthReport} from '../../../../Apollo/Types/MonthReport';
+import {IMassMedia} from '../../../../Apollo/schema';
 import MassMediaItem from "../../../Report/Components/MassMediaItem/MassMediaItem";
+import EventBreadcrumbs from "../../../Events/Components/EventBreadcrumbs/EventBreadcrumbs";
+import DateIcon from '../../../../Assets/img/date.svg';
+import {CalendarDateFormat} from "../../../Calendar/Components/CalendarDayCardTitle/CalendarDayCardTitle";
 
-interface IReportItemContentProps extends IMonthReport{
+
+interface IReportItemContentProps extends IMonthReport {
 
   [prop: string]: any
 }
 
-export const MonthReportItemContent: React.FC<IReportItemContentProps> = ({date,
+// TODO: передать корректную дату в хлебные крошки, 5 число какого-то месяца
+export const MonthReportItemContent: React.FC<IReportItemContentProps> = ({
+                                                                            date,
                                                                             id,
                                                                             reception,
                                                                             massMedia,
@@ -32,6 +38,7 @@ export const MonthReportItemContent: React.FC<IReportItemContentProps> = ({date,
   <React.Fragment>
     <EventBreadcrumbs
       date={date}
+      city={reception && reception.city}
       id={id}
     />
 
@@ -39,8 +46,8 @@ export const MonthReportItemContent: React.FC<IReportItemContentProps> = ({date,
       Ежемесячный отчет о работе приемной {reception && reception.city}
     </PageTitle>
     <div className="inner__content">
-      <ProjectPlace>
-        {date}
+      <ProjectPlace icon={DateIcon}>
+        {date && CalendarDateFormat(date)}
       </ProjectPlace>
 
 

@@ -4,20 +4,21 @@ const MonthReportEdit = React.lazy(() => import("./Views/MonthReportEdit"));
 
 
 export const MonthReportRoute: object[] = [
+
 	{
-		path: '/month-report/edit/:id',
+		path: '/month-report/update/:monthReportId',
 		exact: false,
 		name: 'Редактировать месячный отчет',
 		component: MonthReportEdit,
 	},
 	{
-		path: '/month-report/edit',
-		exact: true,
+		path: '/month-report/create/:date',
+		exact: false,
 		name: 'Создать месячный отчет',
 		component: MonthReportEdit,
 	},
 	{
-		path: '/month-report/:id',
+		path: '/month-report/:monthReportId',
 		exact: false,
 		name: 'Месячный отчет',
 		component: MonthReportItem,

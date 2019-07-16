@@ -58,6 +58,7 @@ export const CalendarDayCard: React.FC<ICalendarDayCardProps> = ({date, projects
           receptions={receptions}
           enableMonthReport={enableMonthReport}
           currentCardMode={currentCardMode}
+          date={date}
       />
     }
 

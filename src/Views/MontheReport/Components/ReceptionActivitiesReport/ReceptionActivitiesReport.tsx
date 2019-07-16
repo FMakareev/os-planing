@@ -1,8 +1,8 @@
 import * as React from 'react';
 import ReportContentCell from "../../../../Components/ReportContentCell/ReportContentCell";
-import {IMonthReport} from "../../../../Apollo/schema";
+import {IPrepareModel} from "../../../../Apollo/Types/MonthReport";
 
-interface IReceptionActivitiesReportProps extends IMonthReport {
+interface IReceptionActivitiesReportProps extends IPrepareModel {
 
 
 

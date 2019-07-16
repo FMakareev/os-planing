@@ -9,7 +9,7 @@ interface ICalendarDayCardTitleProps {
   [prop: string]: any
 }
 
-const DateFormat = (date: string) => {
+export const CalendarDateFormat = (date: string) => {
   return format(
     new Date(date),
     'd MMMM',
@@ -28,7 +28,7 @@ const CalendarDayCardTitle: React.FC<ICalendarDayCardTitleProps> = ({
                                                                     }) => {
   return (
     <div className="calendar-item__title">
-      {date && DateFormat(date)}
+      {date && CalendarDateFormat(date)}
 
       {
         enableMonthReport && <div

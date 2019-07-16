@@ -70,14 +70,14 @@ const UpdateReception = (WrapperComponent: React.ElementType) => {
             [FORM_ERROR]: GetMessageByTranslateKey(message),
           }
         } else {
-          form.reset();
+          setTimeout(form.reset, 500);
           this.props.onClose && this.props.onClose();
         }
 
       };
 
       render() {
-        const {UpdateReceptionResult, uploadFileLoading, ...rest} = this.props;
+        const {UpdateReceptionResult, uploadFileLoading} = this.props;
         return (<WrapperComponent
           {...this.props}
           loading={UpdateReceptionResult.loading || uploadFileLoading}

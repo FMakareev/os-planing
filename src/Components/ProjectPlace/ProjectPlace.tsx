@@ -4,13 +4,14 @@ import classNames from 'classnames';
 
 interface IProjectPlaceProps {
   iconClassName?: string;
+  icon?: string;
 
   [prop: string]: any
 }
 
-export const ProjectPlace: React.FC<IProjectPlaceProps> = ({children, iconClassName}) => (
+export const ProjectPlace: React.FC<IProjectPlaceProps> = ({children, iconClassName, icon}) => (
   <div className="project-place">
-    <img src={PlaceIcon} className={classNames("icon", iconClassName, {
+    <img src={icon || PlaceIcon} className={classNames("icon", iconClassName, {
       'icon-place': !iconClassName
     })}/>
     {children}

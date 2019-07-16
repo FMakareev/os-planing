@@ -128,6 +128,7 @@ export const FormEventEditor: React.FC<IFormEventEditorProps> = ({initialValues,
           name={"attachments"}
           type={"file"}
           disabled={loading}
+          multiple
           accept={config.allowedFileExtensions.join(',')}
           help={'Размер файла не должен привышать 50 мегабайт. Для загрузки разрешены файлы со следующими расширениями: .doc, .docx, pdf, jpeg'}
         >

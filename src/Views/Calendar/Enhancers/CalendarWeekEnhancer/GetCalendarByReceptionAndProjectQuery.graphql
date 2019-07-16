@@ -3,6 +3,13 @@ query($time: DateTime, $reception: String!, $project: String!){
         monday {
             date
             receptions {
+                monthReport{
+                    id
+                    reception {
+                        id
+                        city
+                    }
+                }
                 reception {
                     id
                     city
@@ -26,6 +33,13 @@ query($time: DateTime, $reception: String!, $project: String!){
         tuesday {
             date
             receptions {
+                monthReport{
+                    id
+                    reception {
+                        id
+                        city
+                    }
+                }
                 reception {
                     id
                     city
@@ -49,6 +63,13 @@ query($time: DateTime, $reception: String!, $project: String!){
         wednesday {
             date
             receptions {
+                monthReport{
+                    id
+                    reception {
+                        id
+                        city
+                    }
+                }
                 reception {
                     id
                     city
@@ -72,6 +93,13 @@ query($time: DateTime, $reception: String!, $project: String!){
         thursday {
             date
             receptions {
+                monthReport{
+                    id
+                    reception {
+                        id
+                        city
+                    }
+                }
                 reception {
                     id
                     city
@@ -95,6 +123,13 @@ query($time: DateTime, $reception: String!, $project: String!){
         friday {
             date
             receptions {
+                monthReport{
+                    id
+                    reception {
+                        id
+                        city
+                    }
+                }
                 reception {
                     id
                     city
@@ -118,6 +153,13 @@ query($time: DateTime, $reception: String!, $project: String!){
         saturday {
             date
             receptions {
+                monthReport{
+                    id
+                    reception {
+                        id
+                        city
+                    }
+                }
                 reception {
                     id
                     city
@@ -141,6 +183,13 @@ query($time: DateTime, $reception: String!, $project: String!){
         sunday {
             date
             receptions {
+                monthReport{
+                    id
+                    reception {
+                        id
+                        city
+                    }
+                }
                 reception {
                     id
                     city

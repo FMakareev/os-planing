@@ -2,8 +2,6 @@ import * as React from 'react';
 import {PageTitle} from "../../../Components/PageTitle/PageTitle";
 import Breadcrumbs from "../../../Components/Breadcrumbs/Breadcrumbs";
 import PrivacySidebar from "../Components/PrivacySidebar/PrivacySidebar";
-import {StickyContainer} from 'react-sticky';
-
 import {Section} from "react-smart-sections";
 import LayoutWithSidebar from '../../../Containers/LayoutWithSidebar/LayoutWithSidebar';
 import PrivacyBlockListEnhancer from "../Enhancers/PrivacyBlockListEnhancer/PrivacyBlockListEnhancer";

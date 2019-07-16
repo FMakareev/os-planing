@@ -1,5 +1,5 @@
-mutation ($about: String!, $attachments: [String], $event: String!, $goals: String!, $massMedia: [IMassMediaInput], $participantsAbout: String, $participantsCount: Int, $place: String!, $producer: String!, $task: String) {
-    createReport(about: $about, attachments: $attachments, event: $event, goals: $goals, massMedia: $massMedia, participantsAbout: $participantsAbout, participantsCount: $participantsCount, place: $place, producer: $producer, task: $task) {
+mutation ($about: String!, $attachments: [String], $event: String!, $goals: String!, $massMedia: [IMassMediaInput], $participantsAbout: String, $treatmentInTheReception: Int, $participantsCount: Int, $place: String!, $producer: String!, $task: String) {
+    createReport(about: $about, attachments: $attachments, event: $event, goals: $goals, massMedia: $massMedia, participantsAbout: $participantsAbout, participantsCount: $participantsCount, treatmentInTheReception: $treatmentInTheReception, place: $place, producer: $producer, task: $task) {
         report {
             about
             attachments {
@@ -24,6 +24,7 @@ mutation ($about: String!, $attachments: [String], $event: String!, $goals: Stri
             }
             participantsAbout
             participantsCount
+            treatmentInTheReception
             place
             producer
             task

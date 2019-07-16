@@ -10,7 +10,8 @@ import DropFieldHoc from "../../../../Components/DropFieldHOC/DropFieldHOC";
 import MassMediaField from '../MassMediaField/MassMediaField';
 import ReceptionActivitiesReport from "../ReceptionActivitiesReport/ReceptionActivitiesReport";
 import PlusIcon from "../../../../Components/SvgIcons/PlusIcon";
-import {IMonthReport} from "../../../../Apollo/schema";
+import {IMonthReport} from "../../../../Apollo/Types/MonthReport";
+import config from "../../../../config";
 
 
 const DropFieldWithHOC = DropFieldHoc(DropFieldWithFileList)();
@@ -27,6 +28,7 @@ interface IFormReportEditVariables {
 interface IFormReportEditProps {
   loading?: boolean;
   onSubmit?: any;
+  initialValues: IMonthReport;
 
   [prop: string]: any
 }
@@ -36,36 +38,37 @@ const FormMonthReportEditValidate = (values: IFormReportEditValues) => {
 }
 
 
-export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) => (
+export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading, onSubmit, initialValues}) => (
   <Form
     validate={FormMonthReportEditValidate}
+    initialValues={initialValues}
     mutators={{
       ...arrayMutators
     }}
-    onSubmit={(values: any) => {
-      console.log(values);
-    }}
+    onSubmit={onSubmit}
     render={({
                submitError,
                handleSubmit,
                form: {
                  mutators: {push}
                },
-             }: FormRenderProps<IFormReportEditVariables>): ReactNode => {
+               values,
+             }: FormRenderProps<IFormReportEditValues>): ReactNode => {
+      console.log(values);
       return (
         <form onSubmit={handleSubmit} id={'FormMonthReportEdit'} className="form">
 
 
-          <ReceptionActivitiesReport/>
+          <ReceptionActivitiesReport {...initialValues}/>
 
           <div className="br"/>
 
           <Field
-            name="name"
+            name="currentActivity"
             type={"type"}
             as={"textarea"}
             placeholder="Описание"
-            label={'текущая деятельность приемной'}
+            label={'Текущая деятельность приемной'}
             disabled={loading}
           >
             {
@@ -74,11 +77,11 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
           </Field>
 
           <Field
-            name={"name"}
+            name={"receptionAchievement"}
             type={"type"}
             as={"textarea"}
             placeholder={"Описание"}
-            label={'значимые итоги/достижения деятельности приемной'}
+            label={'Значимые итоги/достижения деятельности приемной'}
             disabled={loading}
           >
             {
@@ -87,13 +90,13 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
           </Field>
 
           <Field
-            name={"name"}
+            name={"mainProblems"}
             type={"type"}
             as={"textarea"}
             placeholder={"Описание"}
-            label={'основные проблемы, с которыми столкнулись сотрудники приемной при работе в отчетный период '}
+            label={'Основные проблемы, с которыми столкнулись сотрудники приемной при работе в отчетный период '}
             disabled={loading}
-            help={'взаимодействие с населением, руководством города/предприятия, бытовые'}
+            help={'Взаимодействие с населением, руководством города/предприятия, бытовые'}
           >
             {
               (props: FieldProps<any, any>) => (<TextField {...props}/>)
@@ -107,7 +110,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
           </h2>
 
           <Field
-            name={"name"}
+            name={"descriptionOfTheMainProblemTopics"}
             type={"type"}
             as={"textarea"}
             placeholder={"Описание"}
@@ -120,7 +123,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
           </Field>
 
           <Field
-            name={"name"}
+            name={"expectedNegativeEvents"}
             type={"type"}
             as={"textarea"}
             placeholder={"Описание"}
@@ -133,7 +136,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
           </Field>
 
           <Field
-            name={"name"}
+            name={"whatProblemsWereSolved"}
             type={"type"}
             as={"textarea"}
             placeholder={"Описание"}
@@ -146,7 +149,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
           </Field>
 
           <Field
-            name={"name"}
+            name={"keyConflictResolution"}
             type={"type"}
             as={"textarea"}
             placeholder={"Описание"}
@@ -166,9 +169,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
           <FieldArray name={"massMedia"}>
             {
               ({fields}: any) => {
-                console.log(fields);
                 return fields.map((name: any, index: number) => {
-                  console.log(name);
                   return (<MassMediaField
                     onDelete={() => fields.remove(index)}
                     index={index + 1}
@@ -180,7 +181,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
             }
           </FieldArray>
 
-          <div className="add-category">
+          <div className="add-category n-form__group">
             <a
               onClick={() => {
                 if (loading) return null;
@@ -198,6 +199,8 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading}) =
             name={"attachments"}
             type={"file"}
             disabled={loading}
+            multiple
+            accept={config.allowedFileExtensions.join(',')}
           >
             {
               (props: FieldProps<any, any>) => (<DropFieldWithHOC

@@ -44,9 +44,7 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
                form: {
                  mutators: {push}
                },
-      values
              }: FormRenderProps<IFormReportEditValues>): ReactNode => {
-      console.log('values: ', values);
       return (<form id={'FormReportEdit'} onSubmit={handleSubmit} className="form">
         <Field
           name="place"
@@ -95,7 +93,7 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
         </Field>
         <Field
           name="participantsCount"
-          type="text"
+          type="number"
           placeholder={""}
           label={'Количество участников, присутствовавших на мероприятии'}
           disabled={loading}
@@ -109,6 +107,17 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
           type="text"
           placeholder={""}
           label={'ФИО основных участников'}
+          disabled={loading}
+        >
+          {
+            (props: FieldProps<any, any>) => (<TextField {...props}/>)
+          }
+        </Field>
+        <Field
+          name="treatmentInTheReception"
+          type="number"
+          placeholder={""}
+          label={'Количество встреч с гражданами (обращения в приемную)'}
           disabled={loading}
         >
           {
@@ -167,6 +176,7 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
           name={"attachments"}
           type={"file"}
           disabled={loading}
+          multiple
           accept={config.allowedFileExtensions.join(',')}
           help={'Размер файла не должен привышать 50 мегабайт. Для загрузки разрешены файлы со следующими расширениями: .doc, .docx, pdf, jpeg'}
         >

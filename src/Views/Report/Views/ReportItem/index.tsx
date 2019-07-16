@@ -15,7 +15,7 @@ interface IReportItemProps {
   [prop: string]: any;
 }
 
-const composeEnhancers = compose(GetReportEnhancer,EventPageEnhancer);
+const composeEnhancers = compose(EventPageEnhancer,GetReportEnhancer);
 
 export const ReportItem: React.FC<IReportItemProps> = ({data, report}) =>{
 

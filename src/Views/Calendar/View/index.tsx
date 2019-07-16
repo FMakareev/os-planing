@@ -3,7 +3,7 @@ import {HeaderDate} from "../../../Components/HeaderDate/HeaderDate";
 import {CalendarTop} from '../Components/CalendarTop/CalendarTop';
 import {CalendarHeader} from '../Components/CalendarHeader/CalendarHeader';
 import {CalendarContent} from "../Components/CalendarContent/CalendarContent";
-import CalendarEnhancer, {ICalendarDate} from '../Enhancers/CalendarEnhancer/CalendarEnhancer';
+import {ICalendarDate} from '../Enhancers/CalendarEnhancer/CalendarEnhancer';
 import CalendarContextProvider, {WithCalendar} from '../Enhancers/CalendarContext/CalendarContext';
 
 const LayoutCalendar = React.lazy(() => import('../../../Containers/LayoutCalendar/LayoutCalendar'));

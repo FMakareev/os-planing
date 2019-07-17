@@ -7,32 +7,33 @@ import AttachmentsList from '../../../../Components/AttachmentsList/AttachmentsL
 import {EventDateFormat} from "../../../Events/Helpers/EventDateFormat";
 
 
-interface IReportItemSidebarProps extends IMonthReport{
-	[prop: string]: any
+interface IReportItemSidebarProps extends IMonthReport {
+  [prop: string]: any
 }
 
-export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = ({date, id, attachments, pdfUrl}) => (
-	<div className="inner-info ">
-		<div className="inner__date">
-			{date && EventDateFormat(date)}
-		</div>
-		<Button as={ButtonAsEnum.link} to={`/month-report/update/${id}`} style={ButtonStyleEnum.icon}>
-			<img src={EditMini} className="icon icon-edit-mini "/>
-			Редактировать отчет
-		</Button>
-		{
-			pdfUrl &&
-			<a className="button-icon" download href={pdfUrl}>
-				<img src={Download} className="icon icon-download "/>
-				Скачать отчет PDF
-			</a>
-		}
+export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = ({date, id, attachments, zipFile, pdfUrl}) => (
+  <div className="inner-info ">
+    <div className="inner__date">
+      {date && EventDateFormat(date)}
+    </div>
+    <Button as={ButtonAsEnum.link} to={`/month-report/update/${id}`} style={ButtonStyleEnum.icon}>
+      <img src={EditMini} className="icon icon-edit-mini "/>
+      Редактировать отчет
+    </Button>
+    {
+      pdfUrl &&
+      <a className="button-icon" download href={pdfUrl}>
+          <img src={Download} className="icon icon-download "/>
+          Скачать отчет PDF
+      </a>
+    }
 
-		<AttachmentsList
-			attachments={attachments}
-		/>
+    <AttachmentsList
+      allFiles={zipFile}
+      attachments={attachments}
+    />
 
-	</div>
+  </div>
 );
 
 export default MonthReportItemSidebar;

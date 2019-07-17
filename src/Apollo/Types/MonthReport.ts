@@ -72,6 +72,7 @@ export interface IMonthReport extends IBase {
 
   attachments: IFile[]
 
+  zipFile?: string;
   date?: string;
 
   id?: string;

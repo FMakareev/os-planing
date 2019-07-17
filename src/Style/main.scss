@@ -15,6 +15,10 @@
   outline-color: #3789d4;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 body {
   color: $black;
   background: #edeeef;
@@ -1111,7 +1115,6 @@ textarea {
 }
 
 
-
 .report-cell {
   &_title {
     color: #8288a2;
@@ -1120,6 +1123,7 @@ textarea {
     line-height: 20px;
     margin-bottom: 14px;
   }
+
   &_text {
     width: 100%;
     color: #1b1b1b;
@@ -1150,7 +1154,8 @@ br, .br {
   &__link {
     color: #3789d4;
     text-decoration: none;
-    &:hover{
+
+    &:hover {
 
       text-decoration: underline;
     }
@@ -1159,7 +1164,7 @@ br, .br {
 }
 
 .d-none {
-  display: none!important;
+  display: none !important;
 }
 
 @import 'calendar';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import ReportItemQuery from './ReportItemQuery.graphql';
+import MonthReportItemQuery from './MonthReportItemQuery.graphql';
 import GetPrepareModelReportQuery from './GetPrepareModelReportQuery.graphql';
 import {Query, QueryResult} from "react-apollo";
 import {
@@ -89,7 +89,7 @@ const GetMonthReportEnhancer = (WrappedComponent: React.ElementType) =>
       <Query
         <IMonthReportItemData, IMonthReportItemVariables>
         skip={params && !params.monthReportId}
-        query={ReportItemQuery}
+        query={MonthReportItemQuery}
         variables={{
           id: params && params.monthReportId,
         }}

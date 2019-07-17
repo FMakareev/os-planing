@@ -210,6 +210,7 @@ export interface IEvent {
   title: string;
   // Прикрепить файлы (программа, презентации, протокол и т.п., фото)
   attachments: IFile[];
+  zipFile?: string;
 }
 
 
@@ -363,6 +364,7 @@ export interface IReport extends IBase {
   // Прикрепить файлы (программа, презентации, протокол и т.п., фото)
   attachments: IFile[];
 
+  zipFile?: string;
   pdfUrl: string
 }
 

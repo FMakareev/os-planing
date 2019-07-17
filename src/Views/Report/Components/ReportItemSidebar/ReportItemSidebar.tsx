@@ -20,7 +20,7 @@ export const ReportItemSidebar: React.FC<IReportItemSidebarProps> = ({
                                                                        event,
                                                                        attachments,
                                                                        pdfUrl,
-
+                                                                       zipFile
                                                                      }) => (
   <div className="inner-info ">
     <div className="inner__date">
@@ -44,6 +44,7 @@ export const ReportItemSidebar: React.FC<IReportItemSidebarProps> = ({
       </Button>
     }
     <AttachmentsList
+      allFiles={zipFile}
       attachments={attachments}
     />
 

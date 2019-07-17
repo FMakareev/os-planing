@@ -28,7 +28,7 @@ export const ProjectPageItemSidebar: React.FC<IProjectPageItemSidebarProps> = ({
                                                                                  onChangeStatus,
                                                                                  attachments,
                                                                                  pdfUrl,
-                                                                                 reception
+                                                                                 reception, zipFile
                                                                                }) => (
   <div className="inner-info">
     <div className="inner-info__date">
@@ -112,6 +112,7 @@ export const ProjectPageItemSidebar: React.FC<IProjectPageItemSidebarProps> = ({
     }
 
     <AttachmentsList
+      allFiles={zipFile}
       attachments={attachments}
     />
   </div>

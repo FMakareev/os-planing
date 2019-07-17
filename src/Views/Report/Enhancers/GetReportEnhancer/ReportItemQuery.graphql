@@ -1,6 +1,7 @@
 query ($id: String!) {
     reportItem(id: $id) {
         about
+        zipFile
         attachments {
             id
             url

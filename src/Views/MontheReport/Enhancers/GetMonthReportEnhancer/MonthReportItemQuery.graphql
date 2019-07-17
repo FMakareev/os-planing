@@ -8,6 +8,7 @@ query($id: String!){
             ext
             size
         }
+#        zipFile
         currentActivity
         descriptionOfTheMainProblemTopics
         expectedNegativeEvents

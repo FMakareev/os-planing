@@ -1,8 +1,12 @@
+import * as Sentry from "@sentry/browser";
 
 
 export const Logging = (message: string, type: string) => {
 	switch (type) {
 		case('error'):{
+			if (process.env.NODE_ENV === 'production') {
+				Sentry.captureException(message);
+			}
 			console.error('[ERROR]: ',message);
 			return;
 		}

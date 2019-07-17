@@ -5,7 +5,7 @@ import {getFileExt, ReportFileItem} from "../../Views/Report/Components/ReportFi
 
 interface IAttachmentsListProps {
   attachments: IFile[];
-
+  allFiles?: string;
   [prop: string]: any
 }
 
@@ -16,12 +16,12 @@ const getSizeALlFile = (attachments: IFile[]): number =>
   }, 0);
 
 
-const AttachmentsList: React.FC<IAttachmentsListProps> = ({attachments}) => {
+const AttachmentsList: React.FC<IAttachmentsListProps> = ({attachments, allFiles}) => {
   return (
     <React.Fragment>
       {
-        !!(Array.isArray(attachments) && attachments.length) &&
-        <a className="archive-link" href="#!">
+        !!(Array.isArray(attachments) && attachments.length) && allFiles &&
+        <a className="archive-link" download href={allFiles}>
             <img src={archive} className="icon icon-archive "/>
             Скачать все файлы
             <span>{getSizeALlFile(attachments).toFixed(2)} Мб</span>

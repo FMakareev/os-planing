@@ -19,9 +19,7 @@ const GetStatisticFilterData = (WrapperComponent: React.ElementType) =>
     >
       {
         ({data, loading}: QueryResult<any>) => {
-          console.log(data);
           return (<WrapperComponent
-            // items={data && data.items ? data.items : []}
             items={data && data.receptionPagination && data.receptionPagination.items ||
             data && data.projectPagination && data.projectPagination.items}
             loading={loading}

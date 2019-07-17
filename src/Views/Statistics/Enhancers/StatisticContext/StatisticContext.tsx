@@ -46,6 +46,9 @@ export const WithStatistic = <TProps extends any>(WrapperComponent: React.Elemen
   );
 
 
+// 1.  Агрегирую по *проектам*, в фильтр вывожу *приемные* и запрашиваю getProjectStatistic
+// 2.  Агрегирую по *приемным*, в фильтр вывожу *проекты* и запрашиваю getReceptionStatistic
+
 export class StatisticContextProvider extends React.Component<any, IState> {
 
 
@@ -109,7 +112,6 @@ export class StatisticContextProvider extends React.Component<any, IState> {
 
   render() {
     const {children} = this.props;
-    console.log('StatisticContextProvider: ', this.state);
     return (<StatisticContext.Provider
       value={{
         ...this.state,

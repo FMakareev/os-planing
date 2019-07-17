@@ -11,15 +11,15 @@ export interface IStatisticProject {
 }
 
 export interface IGetProjectStatisticData {
-  getProjectStatistic: IPagination<IStatisticProject>
+  getProjectStatistic: IPagination<IStatisticProject> & {attachment: string}
 }
 
 export interface IGetProjectStatisticVariables  {
-  page: number;
-  limit: number;
-  startDate: string;
-  stopDate: string;
-  reception: string;
+  page?: number;
+  limit?: number;
+  startDate?: string;
+  stopDate?: string;
+  reception?: string;
 }
 
 
@@ -32,13 +32,13 @@ export interface IStatisticReception {
 }
 
 export interface IGetReceptionStatisticData {
-  getReceptionStatistic: IPagination<IStatisticReception>
+  getReceptionStatistic: IPagination<IStatisticReception> & {attachment: string}
 }
 
 export interface IGetReceptionStatisticVariables  {
-  page: number;
-  limit: number;
-  startDate: string;
-  stopDate: string;
-  project: string;
+  page?: number;
+  limit?: number;
+  startDate?: string;
+  stopDate?: string;
+  project?: string;
 }

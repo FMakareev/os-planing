@@ -16,5 +16,6 @@ query($limit: Int!, $page: Int!,$startDate: DateTime!, $stopDate: DateTime!,$pro
             dispersion
             sum
         }
+        attachment
     }
 }

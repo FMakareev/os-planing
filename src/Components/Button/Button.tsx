@@ -27,7 +27,7 @@ interface IButtonProps {
 	[prop: string]: any
 }
 
-export const Button: React.FC<IButtonProps> = ({children, style, as, mods,type, hidden,styles, ...rest}) => {
+export const Button: React.FC<IButtonProps> = ({children, style, as, mods,type,disabled, hidden,styles, ...rest}) => {
 	const Component = as === ButtonAsEnum.link ? Link : `button`;
 
 	return (
@@ -41,7 +41,8 @@ export const Button: React.FC<IButtonProps> = ({children, style, as, mods,type, 
 						'button-primary': style === ButtonStyleEnum.primary,
 						'button-border': style === ButtonStyleEnum.border,
 						'button-icon': style === ButtonStyleEnum.icon,
-						'hidden': hidden
+						'hidden': hidden,
+						'disabled': disabled,
 					},
 					mods
 				)

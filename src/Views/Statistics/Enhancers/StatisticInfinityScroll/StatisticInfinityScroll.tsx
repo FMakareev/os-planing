@@ -39,11 +39,11 @@ const StatisticInfinityScroll: React.FC<IStatisticInfinityScrollProps> = ({
                                                                           }) => {
 
 
-  if (aggregation === StatisticAggregationEnum.project && filter) {
+  if (aggregation === StatisticAggregationEnum.reception && filter) {
     const variables = {
       stopDate,
       startDate,
-      reception: filter,
+      project: filter,
       ...config.pagination,
     };
     return (
@@ -66,12 +66,12 @@ const StatisticInfinityScroll: React.FC<IStatisticInfinityScrollProps> = ({
       />
     );
   }
-  if (aggregation === StatisticAggregationEnum.reception && filter) {
+  if (aggregation === StatisticAggregationEnum.project && filter) {
 
     const variables = {
       stopDate,
       startDate,
-      project: filter,
+      reception: filter,
       ...config.pagination,
     };
     return (

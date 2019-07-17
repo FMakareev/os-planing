@@ -10,6 +10,7 @@ import {
 } from '../../Enhancers/StatisticContext/StatisticContext';
 import StatisticSelectTypeFilter from '../StatisticSelectTypeFilter/StatisticSelectTypeFilter';
 import {OptionTime} from './OptionTime';
+import StatisticExportXml from "../StatisticExportXML/StatisticExportXML";
 
 interface IStatisticsTopProps extends IWithStatistic {
   [prop: string]: any
@@ -119,9 +120,7 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
         </form>
       </div>
       <div className="statistics__right">
-        <Button>
-          Экспорт в Excel
-        </Button>
+        <StatisticExportXml/>
       </div>
     </div>
   );

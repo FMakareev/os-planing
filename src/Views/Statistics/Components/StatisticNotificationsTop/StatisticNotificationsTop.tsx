@@ -14,7 +14,7 @@ const StatisticNotificationsTop: React.FC<IStatisticNotificationsTopProps> = ({a
       <div className="notifications__item">
 
         {
-          aggregation === StatisticAggregationEnum.project ? "Проектам" : "Приемная"
+          aggregation === StatisticAggregationEnum.project ?  "Приемная":"Проектам"
         }
       </div>
       <div className="notifications__item">Мат. ожидание</div>
@@ -25,3 +25,4 @@ const StatisticNotificationsTop: React.FC<IStatisticNotificationsTopProps> = ({a
 };
 
 export default StatisticNotificationsTop;
+

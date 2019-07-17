@@ -70,13 +70,9 @@ const ChangeSettingsHoc = (WrapperComponent: React.ElementType) => {
       return null;
     };
 
-// TODO: добавить сравнение старых данных настроек и новых и если не было  изменений то не вызывать запрос
     onSubmit = (initialValues: any) => async (values: IFormChangeSMTPSettingValues, form: FormApi<IFormChangeSMTPSettingValues>) => {
       const {ChangeSettings} = this.props;
 
-      console.log('values: ', values);
-      console.log('initialValues: ', initialValues);
-      console.log('form: ', form);
       await Promise.all([
         ChangeSettings({
           variables: {

@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import {UserAvatar} from "../../../../Components/UserAvatar/UserAvatar";
 import {Link} from 'react-router-dom';
 import {INotification, NotificationTypeEnum} from "../../../../Apollo/schema";
+import {EventDateFormat} from "../../../Events/Helpers/EventDateFormat";
 
 
 interface INotificationItemProps extends INotification {
@@ -11,7 +12,7 @@ interface INotificationItemProps extends INotification {
 }
 
 
-const GetNotificationContent = ({type, report,monthReport, event}: INotification) => {
+const GetNotificationContent = ({type, report,monthReport, event, created}: INotification) => {
 
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_APPROVED_MONTH_REPORT) {
     // TODO: добавить дату месячного отчета и ссылку на страницу отчета
@@ -59,7 +60,7 @@ const GetNotificationContent = ({type, report,monthReport, event}: INotification
     // TODO: не хватает даты отчета
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Ожидание месячного отчета.
+        Ожидание месячного отчета от {created && EventDateFormat(created)}.
       </div>
       {
         monthReport && <Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
@@ -67,7 +68,7 @@ const GetNotificationContent = ({type, report,monthReport, event}: INotification
         </Link>
       }
       {
-        !monthReport && <Link to={`/month-report/create/`} className="notifications-item__more">
+        !monthReport && <Link to={`/month-report/create/${created && EventDateFormat(created)}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }
@@ -79,7 +80,12 @@ const GetNotificationContent = ({type, report,monthReport, event}: INotification
         Ожидает отчета по проекту "{event && event.title}"
       </div>
       {
-        report && event && <Link to={`/report/${event.id}/${report.id}`} className="notifications-item__more">
+        event && event.report && <Link to={`/report/${event.id}/${event.report}`} className="notifications-item__more">
+            Перейти к отчету
+        </Link>
+      }
+      {
+        event && !event.report && <Link to={`/report/create/${event.id}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }
@@ -92,7 +98,7 @@ const GetNotificationContent = ({type, report,monthReport, event}: INotification
         Изменен отчет мероприятия "{report && report.event.title}"
       </div>
       {
-        report && event &&<Link to={`/report/${event.id}/${report.id}`} className="notifications-item__more">
+        event && event.report && <Link to={`/report/${event.id}/${event.report}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }

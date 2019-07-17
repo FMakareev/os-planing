@@ -30,6 +30,7 @@ export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year, changeDate}
         valueKey={'value'}
         options={MonthOptions}
         selected={month}
+        className={'month'}
         onChange={(value: ISelectOption)=>{
           changeDate({
             month: value['value'],
@@ -44,6 +45,7 @@ export const HeaderDate: React.FC<IHeaderDateProps> = ({month, year, changeDate}
         valueKey={'value'}
         options={YearOptions()}
         selected={year}
+        className={'year'}
         onChange={(value: ISelectOption)=>{
           changeDate({
             year: value['value'],

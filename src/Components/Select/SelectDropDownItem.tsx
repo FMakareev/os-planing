@@ -25,7 +25,15 @@ export class SelectDropDownItem extends React.Component<ISelectDropDownItemProps
 				inline: "nearest",
 			});
 		}
+
+		if(!prevProps.isOpen && this.props.active && this.props.isOpen){
+			this.itemRef.current.scrollIntoView({
+				block: "center",
+				inline: "nearest",
+			});
+		}
 	}
+
 
 	render(){
 		const {onMouseEnter,onClick,className, children} = this.props;

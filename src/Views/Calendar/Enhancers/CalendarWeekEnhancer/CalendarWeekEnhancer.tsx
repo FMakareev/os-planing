@@ -31,7 +31,6 @@ const QueryRenderProps = <TData extends any, TVariables extends any> (WrapperCom
         size={PreloaderSizeEnum.md}
       />
     }
-    console.log(data);
     // if (error) {
     //   return 'Ошибка'
     // }

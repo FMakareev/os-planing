@@ -29,6 +29,7 @@ export const SelectDefault: React.FC<ISelectDefaultProps> = ({
                                                                onReset,
                                                                labelKey,
                                                                valueKey,
+                                                               scrollbarsOptions,
                                                              }) => (
   <SelectToggleTextField
     indexActiveOption={indexActiveOption}
@@ -66,10 +67,7 @@ export const SelectDefault: React.FC<ISelectDefaultProps> = ({
       onChange={onChange}
       onMenuHover={onMenuHover}
       indexActiveOption={indexActiveOption}
-      styleScrollbars={{
-        // width: 268,
-        height: 178,
-      }}
+      scrollbarsOptions={scrollbarsOptions}
     />
   </SelectToggleTextField>
 );

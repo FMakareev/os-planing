@@ -30,7 +30,6 @@ const GetStatus = (date: string, currentDay: string): CalendarDayCardEnum => {
     if (itemDate.getMonth() === currentDate.getMonth() &&
       itemDate.getFullYear() === currentDate.getFullYear() &&
       itemDate.getDate() === currentDate.getDate()) {
-      console.log('GetStatus: ', itemDate, currentDate);
       return CalendarDayCardEnum.current;
     }
 

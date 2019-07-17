@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {compose} from "recompose";
-import {graphql} from 'react-apollo';
+import {graphql, compose} from 'react-apollo';
 import {connect} from "react-redux";
 
 import DeleteNotificationMutation from './DeleteNotificationMutation.graphql';

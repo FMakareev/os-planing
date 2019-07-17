@@ -17,7 +17,7 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
                                                                          active,
                                                                          onChange,
                                                                          selected,
-                                                                         styleScrollbars,
+                                                                         scrollbarsOptions,
                                                                          meta,
                                                                          onMenuHover,
                                                                          indexActiveOption,
@@ -33,7 +33,13 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
       'active': active,
     })
     }>
-    <Scrollbars style={styleScrollbars}>
+    <Scrollbars
+      autoHeight
+      autoHeightMin={178}
+      autoHeightMax={300}
+      hideTracksWhenNotNeeded={true}
+      {...scrollbarsOptions}
+    >
       <ul>
         {
           options && options.map((item: any, idx: number) => (
@@ -45,6 +51,7 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
               tabIndex={-1}
               key={`option-${idx}`}
               onClick={() => onChange && onChange(item)}
+              isOpen={active}
               active={item[valueKey] === selected || indexActiveOption === idx}
               className={classNames({
                 'sel': indexActiveOption === idx

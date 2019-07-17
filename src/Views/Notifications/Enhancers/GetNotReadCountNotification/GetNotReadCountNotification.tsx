@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {graphql} from "react-apollo";
+import {graphql, compose} from "react-apollo";
 import GetNotReadCountNotificationQuery from './GetNotReadCountNotificationQuery.graphql';
-import {compose} from "recompose";
 
 interface IReadAllMessageProps {
   [prop: string]: any

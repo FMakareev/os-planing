@@ -55,6 +55,10 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
             selected={StartDate && StartDate.getHours()}
             placeholder={'Выберите время'}
             options={OptionTime}
+            scrollbarsOptions={{
+              autoHeightMin: 0,
+              autoHeightMax: 178,
+            }}
             onChange={(option: ISelectOption) => {
               onChangeStartDate &&
               option &&
@@ -68,6 +72,9 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
             className={'form__group--wide Aggregation'}
             label={'Агрегировать'}
             selected={aggregation}
+            scrollbarsOptions={{
+              autoHeightMin: 0
+            }}
             onChange={(option: ISelectOption) => {
               onChangeAggregation && onChangeAggregation(option.value);
             }}
@@ -105,7 +112,9 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
             selected={StopDate && StopDate.getHours()}
             placeholder={'Выберите время'}
             options={OptionTime}
-
+            scrollbarsOptions={{
+              autoHeightMin: 0
+            }}
             onChange={(option: ISelectOption) => {
               onChangeStopDate &&
               option &&

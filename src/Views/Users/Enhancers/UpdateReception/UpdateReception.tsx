@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {FORM_ERROR, FormApi} from "final-form";
 import {ApolloError} from 'apollo-boost';
-import {graphql, MutateProps, MutationResult} from "react-apollo";
-import {compose} from "redux";
+import {compose, graphql, MutateProps, MutationResult} from "react-apollo";
 
 import UpdateReceptionMutation from './UpdateReceptionMutation.graphql';
 import {FormCreateUserState} from "../../Components/FormCreateUser/FormCreateUser";

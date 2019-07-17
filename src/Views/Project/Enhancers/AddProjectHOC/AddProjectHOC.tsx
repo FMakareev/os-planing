@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {graphql, MutateProps} from 'react-apollo'
+import {compose, graphql, MutateProps} from 'react-apollo'
 
 import CreateProjectMutation from './CreateProjectMutation.graphql';
-import {compose} from "recompose";
 import {ICreateProjectData, IProject} from "../../../../Apollo/schema";
 import Logging from "../../../../Helpers/Logging";
 import {FORM_ERROR, FormApi} from "final-form";

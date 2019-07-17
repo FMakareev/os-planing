@@ -34,7 +34,6 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
     return graphql<any, IPagination<TData>, IInfinityScrollHocVariables>(query, {
       ...operationOption,
       options: (props: any) => {
-        console.log('options: ', props);
         return ({
           variables: {
             page: 1,

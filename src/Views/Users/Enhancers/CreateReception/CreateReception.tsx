@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {graphql, MutateProps} from 'react-apollo'
+import {compose, graphql, MutateProps} from 'react-apollo'
 
 import CreateUserMutation from './CreateUserMutation.graphql';
 import {ICreateReceptionData} from '../../../../Apollo/schema';
@@ -10,9 +10,8 @@ import {FORM_ERROR, FormApi} from "final-form";
 import {GetMessageByTranslateKey} from "../../../../Shared/TranslateDict";
 import RefetchReceptionListQueries from "../RefetchReceptionListQueries/RefetchReceptionListQueries";
 import FileUpload, {IFileUpload} from "../../../../Enhancers/FileUpload/FileUpload";
-import {compose} from 'recompose';
 
-interface ICreateUserProps extends MutateProps, IFileUpload {
+interface ICreateUserProps extends MutateProps<ICreateReceptionData, any>, IFileUpload {
   [prop: string]: any
 }
 
@@ -38,31 +37,32 @@ export interface IResponseUploadFile extends Response {
 }
 
 
-const enhance = compose(
+const enhance = (WrapperComponent: React.ElementType) =>compose(
+  graphql<ICreateReceptionData, any>(CreateUserMutation),
   FileUpload,
-  graphql<any, ICreateReceptionData>(CreateUserMutation));
+)(WrapperComponent);
 
 
 const CreateReception: any = (WrapperComponent: any) => {
-  return enhance(class extends React.Component<ICreateUserProps | any> {
+  return enhance(class extends React.Component<ICreateUserProps> {
 
     onSubmit = async (values: FormCreateUserState, form: FormApi<FormCreateUserState>) => {
-      const {uploadFile,mutate,onClose} = this.props;
+      const {uploadFile, mutate, onClose} = this.props;
       const file: IResponseUploadFile = await uploadFile(typeof values.avatar === 'object' && values.avatar.file);
 
       if (file.message === "upload success") {
         const {message}: any = await mutate({
-            variables: {
-              city: values.city,
-              user: {
-                email: values.email,
-                password: values.password,
-                avatar: file.file_data.id,
-                fullName: values.fullName
-              }
-            },
-            refetchQueries: [RefetchReceptionListQueries()]
-          })
+          variables: {
+            city: values.city,
+            user: {
+              email: values.email,
+              password: values.password,
+              avatar: file.file_data.id,
+              fullName: values.fullName
+            }
+          },
+          refetchQueries: [RefetchReceptionListQueries()]
+        })
           .catch((error: ApolloError) => {
             Logging(error.message, 'error');
             return JSON.parse(JSON.stringify(error));

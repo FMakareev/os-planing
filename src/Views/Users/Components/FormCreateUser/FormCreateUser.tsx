@@ -44,9 +44,9 @@ const FormCreateUserValidate = (values: FormCreateUserState) => {
   if (!values.city) {
     errors.city = 'Обязательно для заполнения'
   }
-  if (!values.avatar) {
-    errors.avatar = 'Обязательно для заполнения'
-  }
+  // if (!values.avatar) {
+  //   errors.avatar = 'Обязательно для заполнения'
+  // }
   if (!values.fullName) {
     errors.fullName = 'Обязательно для заполнения'
   }

@@ -31,8 +31,34 @@ interface IFormReportEditProps {
   [prop: string]: any
 }
 
+
+const FormReportEditValidation = (values: IFormReportEditValues) => {
+  const errors: any = {};
+
+  if(!values.about){
+    errors.about = 'Обязательно для заполнения';
+  }
+  if(!values.event){
+    errors.event = 'Обязательно для заполнения';
+  }
+  if(!values.goals){
+    errors.goals = 'Обязательно для заполнения';
+  }
+  if(!values.place){
+    errors.place = 'Обязательно для заполнения';
+  }
+  if(!values.producer){
+    errors.producer = 'Обязательно для заполнения';
+  }
+
+  return errors;
+
+}
+
+
 export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialValues, onSubmit}) => (
   <Form
+    validate={FormReportEditValidation}
     initialValues={initialValues}
     onSubmit={onSubmit}
     mutators={{

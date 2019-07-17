@@ -15,8 +15,18 @@ interface ICalendarWeekProps {
 }
 
 const FormatWeek = (weeks: IWeek) => {
-  delete weeks.__typename;
+  const month = [
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday',
+  ];
+
   return Object.entries(weeks)
+    .filter(([key]: [string, IDayWeek]) => month.find(item => item === key));
 };
 
 
@@ -46,7 +56,7 @@ const GetStatus = (date: string, currentDay: string): CalendarDayCardEnum => {
   return CalendarDayCardEnum.blank;
 };
 
-const CalendarDayCardWithCalendar = WithCalendar(CalendarDayCard)
+const CalendarDayCardWithCalendar = WithCalendar(CalendarDayCard);
 
 const CalendarWeek: React.FC<ICalendarWeekProps> = ({data, currentDay}) => {
   return (

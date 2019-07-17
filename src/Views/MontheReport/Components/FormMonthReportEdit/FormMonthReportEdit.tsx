@@ -34,7 +34,34 @@ interface IFormReportEditProps {
 }
 
 const FormMonthReportEditValidate = (values: IFormReportEditValues) => {
-  return {};
+  const errors: any = {};
+
+  if(!values.currentActivity){
+    errors.currentActivity = 'Обязательно для заполнения';
+  }
+  if(!values.descriptionOfTheMainProblemTopics){
+    errors.descriptionOfTheMainProblemTopics = 'Обязательно для заполнения';
+  }
+  if(!values.expectedNegativeEvents){
+    errors.expectedNegativeEvents = 'Обязательно для заполнения';
+  }
+  if(!values.keyConflictResolution){
+    errors.keyConflictResolution = 'Обязательно для заполнения';
+  }
+  if(!values.mainProblems){
+    errors.mainProblems = 'Обязательно для заполнения';
+  }
+  if(!values.receptionAchievement){
+    errors.receptionAchievement = 'Обязательно для заполнения';
+  }
+  if(!values.treatmentInTheReception){
+    errors.treatmentInTheReception = 'Обязательно для заполнения';
+  }
+  if(!values.whatProblemsWereSolved){
+    errors.whatProblemsWereSolved = 'Обязательно для заполнения';
+  }
+
+  return errors;
 }
 
 

@@ -1022,6 +1022,10 @@ textarea {
   }
 }
 
+.notifications__top--notification {
+  justify-content: space-between;
+}
+
 .notifications-item--statics {
   display: flex;
   padding-left: 65px;

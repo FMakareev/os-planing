@@ -57,7 +57,7 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
             options={OptionTime}
             scrollbarsOptions={{
               autoHeightMin: 0,
-              autoHeightMax: 178,
+              // autoHeightMax: 178,
             }}
             onChange={(option: ISelectOption) => {
               onChangeStartDate &&

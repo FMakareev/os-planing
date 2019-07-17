@@ -85,7 +85,7 @@ const EditEventEnhance = (WrapperComponent: React.ElementType) => {
       const data: IResponseUploadFile[] = await Promise.all(promiseAll);
 
       return [
-        ...data.map((item) => item.file_data.id),
+        ...data.map((item: IResponseUploadFile) => item.file_data && item.file_data.id),
         ...values.attachments
           .filter((item) => !(item instanceof File))
           .map((item) => item.id),

@@ -95,10 +95,20 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
     // TODO: данный тип отчета нужно семантически переделать на только отчеты оп событиям и подобный тип сделатьотдельный на месячные отчеты
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Изменен отчет мероприятия "{report && report.event.title}"
+        {
+          monthReport && <span>
+            Изменен месячный отчет от {monthReport.date && EventDateFormat(monthReport.date)}
+          </span>
+        }
+        {
+          !monthReport && <span>
+            Изменен отчет мероприятия "{report && report.event.title}"
+          </span>
+        }
+
       </div>
       {
-        event && event.report && <Link to={`/report/${event.id}/${event.report}`} className="notifications-item__more">
+        report && report.event && <Link to={`/report/${report.event.id}/${report.id}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }
@@ -126,7 +136,7 @@ export const NotificationItem: React.FC<INotificationItemProps> = (prop) => {
           })}/>
 
       <div className="notifications-item__top">
-        <UserAvatar avatar={fromUser && fromUser.avatar} mods={'notifications-item__user-ava'}/>
+        <UserAvatar avatar={fromUser && fromUser.avatar && fromUser.avatar.url} mods={'notifications-item__user-ava'}/>
         {
           fromUser &&
           <div className="notifications-item__info">
@@ -152,3 +162,4 @@ export const NotificationItem: React.FC<INotificationItemProps> = (prop) => {
 }
 
 export default NotificationItem;
+

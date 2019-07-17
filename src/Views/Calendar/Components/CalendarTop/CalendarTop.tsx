@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {SelectDefault} from '../../../../Components/Select/SelectDefault';
 import withSelect, {ISelectOption} from "../../../../Components/Select/withSelect";
-import {Button} from '../../../../Components/Button/Button';
+import {Button, ButtonAsEnum} from '../../../../Components/Button/Button';
 import CalendarGetReceptionEnhancers from '../../Enhancers/CalendarGetReceptionEnhancers/CalendarGetReceptionEnhancers';
 import CalendarGetProjectEnhancers from "../../Enhancers/CalendarGetProjectEnhancers/CalendarGetProjectEnhancers";
 import CalendarCreateEvent from '../CalendarCreateEvent/CalendarCreateEvent';
@@ -24,50 +24,54 @@ interface ICalendarTopProps {
 }
 
 
-export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, changeProject, project, reception}) => (
-  <div className="calendar__top">
-    <div className="form form--selects">
+export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, changeProject, project, reception, weeks, ...rest}) => {
+  console.log('CalendarTop: ', rest);
 
-      <SelectReceptionWithEnhancer
-        label={'Приемная'}
-        placeholder={'Выберите город'}
-        selected={reception}
-        className={'SelectReceptionWithEnhancer'}
-        onChange={({value}: ISelectOption) => {
-          changeReception && changeReception(value);
-        }}
-      />
+  return (
+    <div className="calendar__top">
+      <div className="form form--selects">
 
-      <SelectProjectWithEnhancer
-        label={'Проект'}
-        placeholder={'Выберите категорию'}
-        selected={project}
-        className={'SelectProjectWithEnhancer'}
-        onChange={({value}: ISelectOption) => {
-          changeProject && changeProject(value);
-        }}
-      />
+        <SelectReceptionWithEnhancer
+          label={'Приемная'}
+          placeholder={'Выберите город'}
+          selected={reception}
+          className={'SelectReceptionWithEnhancer'}
+          onChange={({value}: ISelectOption) => {
+            changeReception && changeReception(value);
+          }}
+        />
 
-    </div>
-    <div className="calendar__top-right">
-      <CheckAccess
-        accessRights={UserRoleEnum.user}
-        render={({access}: ICheckAccessApi)=>{
-          if(!access) return null;
-          return (
-            <div style={{
-              marginRight: '16px',
-              display: 'inline-block',
-            }}>
-              <CalendarCreateEvent/>
-            </div>
-          )
-        }}/>
+        <SelectProjectWithEnhancer
+          label={'Проект'}
+          placeholder={'Выберите категорию'}
+          selected={project}
+          className={'SelectProjectWithEnhancer'}
+          onChange={({value}: ISelectOption) => {
+            changeProject && changeProject(value);
+          }}
+        />
 
-      <Button>
-        Экспорт в PDF
-      </Button>
-    </div>
-  </div>);
+      </div>
+      <div className="calendar__top-right">
+        <CheckAccess
+          accessRights={UserRoleEnum.user}
+          render={({access}: ICheckAccessApi) => {
+            if (!access) return null;
+            return (
+              <div style={{
+                marginRight: '16px',
+                display: 'inline-block',
+              }}>
+                <CalendarCreateEvent/>
+              </div>
+            )
+          }}/>
+
+        <Button as={ButtonAsEnum.link} download to={`/pdf_calendar?date=${Array.isArray(weeks) && weeks[0].replace('Z','')}`}>
+          Экспорт в PDF
+        </Button>
+      </div>
+    </div>);
+}
 
 export default CalendarTop;

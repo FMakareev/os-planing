@@ -15,6 +15,7 @@ const GetStatisticFilterData = (WrapperComponent: React.ElementType) =>
 
     return (<Query
       <IPagination<any>, any>
+      fetchPolicy={'no-cache'}
       query={aggregation === StatisticAggregationEnum.project ? GetReceptionListQuery : GetProjectListQuery}
     >
       {

@@ -18,7 +18,7 @@ interface IFormChangeSMTPSettingProps {
 
 export interface IFormChangeSMTPSettingValues {
   email?: string;
-  fullName?: string;
+fullName?: string;
   host?: string;
   port?: string;
   login?: string;
@@ -49,12 +49,12 @@ const FormChangeSMTPSettingValidator = (values: IFormChangeSMTPSettingValues) =>
     errors.email = 'Неверный адрес электронной почты';
   }
 
-  if(!values.host){
-    errors.host = 'Обязательно для заполнения';
-  }
-  if(!values.port){
-    errors.port = 'Обязательно для заполнения';
-  }
+  // if(!values.host){
+  //   errors.host = 'Обязательно для заполнения';
+  // }
+  // if(!values.port){
+  //   errors.port = 'Обязательно для заполнения';
+  // }
   if(values.port && isNaN(Number(values.port))){
     errors.port = 'Должен быть числом';
   }

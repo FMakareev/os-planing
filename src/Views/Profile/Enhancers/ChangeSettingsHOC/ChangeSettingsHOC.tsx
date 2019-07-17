@@ -70,7 +70,7 @@ const ChangeSettingsHoc = (WrapperComponent: React.ElementType) => {
       return null;
     };
 
-    onSubmit = (initialValues: any) => async (values: IFormChangeSMTPSettingValues, form: FormApi<IFormChangeSMTPSettingValues>) => {
+    onSubmit = (initialValues: any) => async (values: IFormChangeSMTPSettingValues) => {
       const {ChangeSettings} = this.props;
 
       await Promise.all([
@@ -93,6 +93,8 @@ const ChangeSettingsHoc = (WrapperComponent: React.ElementType) => {
       const result:any = {};
       Object.entries(values).forEach(([key, value]) => {
         if (HasOwnProperty.call(initialValues, key) && initialValues[key] !== value) {
+          result[key] = TextFieldEnum.SaveField;
+        } else if (!HasOwnProperty.call(initialValues, key)){
           result[key] = TextFieldEnum.SaveField;
         }
       });

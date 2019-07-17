@@ -24,6 +24,9 @@ const StatisticSelectTypeFilter: React.FC<IStatisticSelectTypeFilterProps> = ({f
       label={'Фильтр'}
       selected={filter}
       disabled={loading}
+      scrollbarsOptions={{
+        autoHeightMin: 0
+      }}
       onChange={(option: ISelectOption) => {
         onChangeFilter && onChangeFilter(option.value);
       }}

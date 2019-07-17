@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {PageTitle} from "../../../Components/PageTitle/PageTitle";
-import {NotificationsTop} from "../../../Components/NotificationsTop/NotificationsTop";
+import {EnumNotificationsTopMods, NotificationsTop} from "../../../Components/NotificationsTop/NotificationsTop";
 import Breadcrumbs from "../../../Components/Breadcrumbs/Breadcrumbs";
 import NotificationList from "../Enhancers/NotificationList/NotificationList";
 import PopupDelete from '../../Users/Components/PopupDelete/PopupDelete';
@@ -25,7 +25,7 @@ export const Notifications = () => (<div>
 		Уведомления
 	</PageTitle>
 
-	<NotificationsTop>
+	<NotificationsTop mods={EnumNotificationsTopMods.notification}>
 		<div className="notifications__item">Пользователь</div>
 		<PopupDeleteWithQuery	/>
 	</NotificationsTop>

@@ -37,7 +37,7 @@ export interface IResponseUploadFile extends Response {
 }
 
 
-const enhance = (WrapperComponent: React.ElementType) =>compose(
+const enhance = (WrapperComponent: React.ElementType) => compose(
   graphql<ICreateReceptionData, any>(CreateUserMutation),
   FileUpload,
 )(WrapperComponent);
@@ -48,38 +48,45 @@ const CreateReception: any = (WrapperComponent: any) => {
 
     onSubmit = async (values: FormCreateUserState, form: FormApi<FormCreateUserState>) => {
       const {uploadFile, mutate, onClose} = this.props;
-      const file: IResponseUploadFile = await uploadFile(typeof values.avatar === 'object' && values.avatar.file);
+      let file: IResponseUploadFile | null = null;
+      if (typeof values.avatar === 'object' && values.avatar.file) {
+        file = await uploadFile(typeof values.avatar === 'object' && values.avatar.file);
+      }
 
-      if (file.message === "upload success") {
-        const {message}: any = await mutate({
-          variables: {
-            city: values.city,
-            user: {
-              email: values.email,
-              password: values.password,
-              avatar: file.file_data.id,
-              fullName: values.fullName
-            }
-          },
-          refetchQueries: [RefetchReceptionListQueries()]
-        })
-          .catch((error: ApolloError) => {
-            Logging(error.message, 'error');
-            return JSON.parse(JSON.stringify(error));
-          });
 
-        if (message) {
-          return {
-            [FORM_ERROR]: GetMessageByTranslateKey(message),
-          }
-        } else {
-          setTimeout(form.reset, 500);
-          onClose && onClose();
+      let variables = {
+        city: values.city,
+        user: {
+          email: values.email,
+          password: values.password,
+          avatar: file && file.file_data && file.file_data.id,
+          fullName: values.fullName
         }
       }
 
+      const {message}: any = await mutate({
+        variables,
+        refetchQueries: [RefetchReceptionListQueries()]
+      })
+        .catch((error: ApolloError) => {
+          Logging(error.message, 'error');
+          return JSON.parse(JSON.stringify(error));
+        });
+
+      if (message) {
+        return {
+          [FORM_ERROR]: GetMessageByTranslateKey(message),
+        }
+      } else {
+        setTimeout(form.reset, 500);
+        onClose && onClose();
+      }
+
+      if (!file) {
+        return null;
+      }
       return {
-        [FORM_ERROR]: GetMessageByTranslateKey(file.statusText),
+        [FORM_ERROR]: file && GetMessageByTranslateKey(file.statusText),
       }
     };
 

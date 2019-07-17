@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {SelectDefault} from '../../../../Components/Select/SelectDefault';
 import withSelect, {ISelectOption} from "../../../../Components/Select/withSelect";
-import {Button, ButtonAsEnum} from '../../../../Components/Button/Button';
 import CalendarGetReceptionEnhancers from '../../Enhancers/CalendarGetReceptionEnhancers/CalendarGetReceptionEnhancers';
 import CalendarGetProjectEnhancers from "../../Enhancers/CalendarGetProjectEnhancers/CalendarGetProjectEnhancers";
 import CalendarCreateEvent from '../CalendarCreateEvent/CalendarCreateEvent';
@@ -25,8 +24,6 @@ interface ICalendarTopProps {
 
 
 export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, changeProject, project, reception, weeks, ...rest}) => {
-  console.log('CalendarTop: ', rest);
-
   return (
     <div className="calendar__top">
       <div className="form form--selects">
@@ -67,11 +64,11 @@ export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, chang
             )
           }}/>
 
-        <Button as={ButtonAsEnum.link} download to={`/pdf_calendar?date=${Array.isArray(weeks) && weeks[0].replace('Z','')}`}>
+        <a className={'button-primary'} download href={`/pdf_calendar?date=${Array.isArray(weeks) && weeks[0].replace('Z','')}`}>
           Экспорт в PDF
-        </Button>
+        </a>
       </div>
     </div>);
-}
+};
 
 export default CalendarTop;

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button, {ButtonAsEnum} from "../../../../Components/Button/Button";
 import GetStatisticXmLink from "../../Enhancers/GetStatisticXMLink/GetStatisticXMLink";
 
 interface IStatisticExportXmlProps {
@@ -9,11 +8,11 @@ interface IStatisticExportXmlProps {
   [prop: string]: any
 }
 
-const StatisticExportXml: React.FC<IStatisticExportXmlProps> = ({link, loading}) => {
+const StatisticExportXml: React.FC<IStatisticExportXmlProps> = ({link}) => {
   return (
-    <Button disabled={!link} to={link || '#!'} as={ButtonAsEnum.link}>
+    <a className={'button-primary'} download href={link || '#!'}>
       Экспорт в Excel
-    </Button>
+    </a>
   );
 };
 

@@ -36,9 +36,9 @@ const FormEventEditorValidation = (values: IEvent) => {
   if (!values.text) {
     errors.text = 'Обязательно для заполнения';
   }
-  if (!values.projects || Array.isArray(values.projects) && !values.projects.length) {
-    errors.projects = 'Обязательно для заполнения';
-  }
+  // if (!values.projects || Array.isArray(values.projects) && !values.projects.length) {
+  //   errors.projects = 'Обязательно для заполнения';
+  // }
 
   return errors;
 };

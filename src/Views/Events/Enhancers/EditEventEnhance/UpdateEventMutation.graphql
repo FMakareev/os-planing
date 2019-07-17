@@ -2,7 +2,7 @@ mutation(
     $date: DateTime,
     $id: String!,
     $attachments: [String],
-    $projects: [String]!,
+    $projects: [String],
     $reception: String,
     $status: EventStatus,
     $text: String,

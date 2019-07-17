@@ -20,6 +20,7 @@ class CalendarCreateEvent extends React.Component<RouteComponentProps<ICalendarC
 
     return (
         <SelectDataPicker
+          minDate={new Date()}
           onChange={(props: any)=>{
             this.props.history.push(`/event/create/${new Date(props).toISOString()}`)
           }}

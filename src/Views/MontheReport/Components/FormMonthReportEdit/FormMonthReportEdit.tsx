@@ -54,9 +54,6 @@ const FormMonthReportEditValidate = (values: IFormReportEditValues) => {
   if(!values.receptionAchievement){
     errors.receptionAchievement = 'Обязательно для заполнения';
   }
-  if(!values.treatmentInTheReception){
-    errors.treatmentInTheReception = 'Обязательно для заполнения';
-  }
   if(!values.whatProblemsWereSolved){
     errors.whatProblemsWereSolved = 'Обязательно для заполнения';
   }
@@ -80,8 +77,9 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading, on
                  mutators: {push}
                },
                values,
+      ...rest
              }: FormRenderProps<IFormReportEditValues>): ReactNode => {
-      console.log(values);
+
       return (
         <form onSubmit={handleSubmit} id={'FormMonthReportEdit'} className="form">
 

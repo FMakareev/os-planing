@@ -32,18 +32,19 @@ interface ICalendarDayCardProps {
  * 6. с фильтром по приемной в режиме месячного отчета
  * 7. с фильтром по проектам в режиме месячного отчета
  * 8. с фильтрами по приемной и проекту в режиме месячного отчета
- *
  * */
 
 
 const CalendarDayReceptionListWithCalendar = WithCalendar(CalendarDayReceptionList);
 
-export const CalendarDayCard: React.FC<ICalendarDayCardProps> = ({date, projects, reception, receptions, status, enableMonthReport, currentCardMode, toggleCardMode,}) => (
-  <div className={classNames("calendar-item", {
-    'passed': CalendarDayCardEnum.passed === status,
-    'current': CalendarDayCardEnum.current === status,
-    'month-report': currentCardMode === DayCardModeEnum.monthReport,
-  })}>
+export const CalendarDayCard: React.FC<ICalendarDayCardProps> = ({date, projects, reception, receptions, status, enableMonthReport, currentCardMode, toggleCardMode}) => (
+  <div
+    className={classNames("calendar-item", {
+      'passed': CalendarDayCardEnum.passed === status,
+      'current': CalendarDayCardEnum.current === status,
+      'month-report': currentCardMode === DayCardModeEnum.monthReport,
+    })}
+  >
 
     <CalendarDayCardTitle
       toggleCardMode={toggleCardMode}

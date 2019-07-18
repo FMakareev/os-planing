@@ -35,7 +35,7 @@ const GetNotReadCountNotification = (WrapperComponent: React.ElementType) => (op
         {
           ({data,}: any) => {
             return <WrapperComponent
-              count={data.getNotReadCount && data.getNotReadCount.notReadCount > 0 ? data.getNotReadCount.notReadCount : null}
+              count={data && data.getNotReadCount && data.getNotReadCount.notReadCount > 0 ? data.getNotReadCount.notReadCount : null}
               {...this.props}
             />
           }

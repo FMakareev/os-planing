@@ -44,7 +44,27 @@ const GetMonthReportLink = (item: IReceptionCalendar, currentCardMode: DayCardMo
   return '#!';
 };
 
-const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({receptions, changeReception, enableMonthReport, currentCardMode, currentDay, user, date}) => {
+
+const ChangeMonth = (changeDate: any, date: string, currentDay?: string) => {
+  if(!currentDay) return null;
+
+  const itemDate = new Date(date);
+  const currentDate = new Date(currentDay);
+  if (itemDate.getMonth() !== currentDate.getMonth() &&
+    itemDate.getFullYear() !== currentDate.getFullYear()) {
+    changeDate({
+      year: itemDate.getFullYear(),
+      month: itemDate.getMonth(),
+    })
+  } else if (itemDate.getMonth() !== currentDate.getMonth()) {
+    changeDate({
+      month: itemDate.getMonth(),
+    })
+  }
+}
+
+
+const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({receptions, changeReception, enableMonthReport, currentCardMode, currentDay, user, date,changeDate}) => {
   return (
     <div className="calendar-item__content">
       {
@@ -59,6 +79,7 @@ const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({rec
               onClick={() => {
                 if (currentCardMode === DayCardModeEnum.monthReport) return null;
                 changeReception && changeReception(item.reception.id)
+                ChangeMonth(changeDate, date, currentDay);
               }}
               key={index}
               className="calendar__city"

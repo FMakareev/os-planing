@@ -4,6 +4,10 @@ import {Arrow} from '../../../../Components/SvgIcons/Arrow';
 import {GetObjectByKey} from '../../../../Helpers/GetObjectByKey';
 import {EventStatusEnum} from "../../../../Apollo/schema";
 
+import ReportIcon from '../../../../Assets/img/report-icon.svg';
+import ReviewIcon from '../../../../Assets/img/review-icon.svg';
+import OkIcon from '../../../../Assets/img/ok-icon.svg';
+
 interface IProjectReportStatusProps {
   status: EventStatusEnum | string,
 
@@ -24,19 +28,36 @@ export const ProjectReportStatus: React.FC<IProjectReportStatusProps> = ({status
       })
     }
     href="javascript:void(0);">
-			<span>{
-        GetObjectByKey({
-          report: status === EventStatusEnum.waitReport,
-          review: status === EventStatusEnum.waitReview,
-          noReport: status === EventStatusEnum.noReport,
-          ok: status === EventStatusEnum.ok,
-        }, {
-          report: 'Ожидает отчета',
-          review: 'Ожидает проверки',
-          noReport: 'Не ребует отчет',
-          ok: 'Одобрено',
-        })
-      }</span>
+    <span className={'icon'}>
+      <img
+        src={ReportIcon}
+        alt=""
+        className={classNames('',{'d-none':status !== EventStatusEnum.waitReport})}
+      />
+      <img
+        src={ReviewIcon}
+        alt=""
+        className={classNames('',{'d-none':status !== EventStatusEnum.waitReview})}
+      />
+      <img
+        src={OkIcon}
+        alt=""
+        className={classNames('',{'d-none':status !== EventStatusEnum.ok})}
+      />
+    </span>
+    <span>{
+      GetObjectByKey({
+        report: status === EventStatusEnum.waitReport,
+        review: status === EventStatusEnum.waitReview,
+        noReport: status === EventStatusEnum.noReport,
+        ok: status === EventStatusEnum.ok,
+      }, {
+        report: 'Ожидает отчета',
+        review: 'Ожидает проверки',
+        noReport: 'Не ребует отчет',
+        ok: 'Одобрено',
+      })
+    }</span>
     {
       !disabled &&
       <span className="icon icon-arrow ">

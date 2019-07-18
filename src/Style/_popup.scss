@@ -32,7 +32,7 @@
     .inner-info__status{
       padding-left: 40px;
       margin-bottom: 20px;
-      &:before{
+      &:before, .icon:first-child {
         width: 29px;
         height: 27px;
         top: -2px;

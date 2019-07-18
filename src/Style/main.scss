@@ -568,13 +568,16 @@ textarea {
     margin-bottom: 40px;
     text-decoration: none;
 
-    &:before {
-      content: '';
+    &:before,
+    .icon:first-child {
+      //content: '';
       width: 44px;
       height: 40px;
       position: absolute;
       left: 0;
+      bottom: 4px;
     }
+
 
     &--withdate {
       &:before {
@@ -586,6 +589,10 @@ textarea {
       color: #ef223a;
       fill: #ef223a;
 
+      img {
+        display: block;
+        width: 100%;
+      }
       &:before {
         background: url(../Assets/img/report-icon.svg) center center no-repeat;
         background-size: 100%;
@@ -596,6 +603,10 @@ textarea {
       color: #f69752;
       fill: #f69752;
 
+      img {
+        display: block;
+        width: 100%;
+      }
       &:before {
         background: url(../Assets/img/review-icon.svg) center center no-repeat;
         background-size: 100%;
@@ -606,6 +617,10 @@ textarea {
       color: #4dc87e;
       fill: #4dc87e;
 
+      img {
+        display: block;
+        width: 100%;
+      }
       &:before {
         background: url(../Assets/img/ok-icon.svg) center center no-repeat;
         background-size: 100%;

@@ -64,7 +64,7 @@ const CreateReception: any = (WrapperComponent: any) => {
         }
       }
 
-      const {message}: any = await mutate({
+      const {message, graphQLErrors, ...rest}: any = await mutate({
         variables,
         refetchQueries: [RefetchReceptionListQueries()]
       })
@@ -74,9 +74,17 @@ const CreateReception: any = (WrapperComponent: any) => {
         });
 
       if (message) {
-        return {
+        const errors = {
           [FORM_ERROR]: GetMessageByTranslateKey(message),
-        }
+        };
+
+        graphQLErrors.forEach((item: any) => {
+          if (item.message === "GraphQL error: email already exist") {
+            errors['email'] = 'Email занят';
+          }
+        });
+
+        return errors
       } else {
         setTimeout(form.reset, 500);
         onClose && onClose();

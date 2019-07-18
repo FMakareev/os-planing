@@ -6,6 +6,7 @@ import CalendarGetProjectEnhancers from "../../Enhancers/CalendarGetProjectEnhan
 import CalendarCreateEvent from '../CalendarCreateEvent/CalendarCreateEvent';
 import {UserRoleEnum} from "../../../../Apollo/schema";
 import CheckAccess, {ICheckAccessApi} from "../../../../Enhancers/CheckAccess/CheckAccess";
+import {joinQueryString} from "../../../../Helpers/joinQueryString";
 
 
 const SelectDefaultWithSelect = withSelect(SelectDefault)();
@@ -64,7 +65,12 @@ export const CalendarTop: React.FC<ICalendarTopProps> = ({changeReception, chang
             )
           }}/>
 
-        <a className={'button-primary'} download href={`/pdf_calendar?date=${Array.isArray(weeks) && weeks[0].replace('Z','')}`}>
+        <a className={'button-primary'} download
+           href={`/pdf_calendar?${joinQueryString('', {
+             ...(project ? {project} : {}),
+             ...(reception ? {reception} : {}),
+             ...(Array.isArray(weeks) ? {date: weeks[0].replace('Z', '')} : {}),
+           })}`}>
           Экспорт в PDF
         </a>
       </div>

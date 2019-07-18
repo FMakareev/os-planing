@@ -74,7 +74,7 @@ const CreateReception: any = (WrapperComponent: any) => {
         });
 
       if (message) {
-        const errors = {
+        const errors: any = {
           [FORM_ERROR]: GetMessageByTranslateKey(message),
         };
 

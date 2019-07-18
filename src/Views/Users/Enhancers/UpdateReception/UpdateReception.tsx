@@ -56,7 +56,7 @@ const UpdateReception = (WrapperComponent: React.ElementType) => {
           }
         }
 
-        const {message}: any = await UpdateReception({
+        const {message, graphQLErrors}: any = await UpdateReception({
           variables,
           refetchQueries: [RefetchReceptionListQueries()]
         })
@@ -65,9 +65,17 @@ const UpdateReception = (WrapperComponent: React.ElementType) => {
             return JSON.parse(JSON.stringify(error));
           });
         if (message) {
-          return {
-            [FORM_ERROR]: GetMessageByTranslateKey(message),
-          }
+          const errors: any = {
+            // [FORM_ERROR]: GetMessageByTranslateKey(message),
+          };
+
+          graphQLErrors.forEach((item: any) => {
+            if (item.message === "GraphQL error: email already exist") {
+              errors['email'] = 'Email занят';
+            }
+          });
+
+          return errors
         } else {
           setTimeout(form.reset, 500);
           this.props.onClose && this.props.onClose();

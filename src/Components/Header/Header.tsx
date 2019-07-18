@@ -7,7 +7,7 @@ import GetNotReadCountNotification
 	from "../../Views/Notifications/Enhancers/GetNotReadCountNotification/GetNotReadCountNotification";
 
 
-const HeaderNotificationWithQuery =GetNotReadCountNotification(HeaderNotification);
+const HeaderNotificationWithQuery =GetNotReadCountNotification(HeaderNotification)();
 
 
 export const Header: React.FC<any> = ({children}) => (

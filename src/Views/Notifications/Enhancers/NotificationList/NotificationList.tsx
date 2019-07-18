@@ -7,29 +7,38 @@ import NotificationItem from '../../Components/NotificationItem/NotificationItem
 import {INotification, IUser} from '../../../../Apollo/schema';
 import GetNotReadCountNotification from '../GetNotReadCountNotification/GetNotReadCountNotification';
 import config from "../../../../config";
+import {IStoreState} from "../../../../Store/Store";
 
 
 interface INotificationListProps {
   [prop: string]: any
 }
 
-// TODO: переделать на конект к стору чтобы данные были всегда валидными
-let UserJson = localStorage.getItem('user_data');
-const User: IUser = UserJson ? JSON.parse(UserJson) : {};
+
+const InfinityScrollWithQuery = ({variables, ...rest}: any) => {
+
+  const Component = InfinityScrollHoc<INotification>(InfinityScroll)({
+    query: NotificationListQuery,
+    queryName: 'notificationPagination',
+  });
+
+  return <Component
+    options={{
+      variables: {
+        ...config.pagination,
+        ...variables,
+      }
+    }}
+    {...rest}
+  />
+};
 
 
-const InfinityScrollWithQuery = InfinityScrollHoc<INotification>(InfinityScroll)({
-  query: NotificationListQuery,
-  queryName: 'notificationPagination',
-  variables: {
-    ...config.pagination,
-    user: User && User.id
-  }
-});
-
-const NotificationList: React.FC<INotificationListProps> = () => {
+const NotificationList: React.FC<INotificationListProps> = ({user}: any) => {
   return (<InfinityScrollWithQuery
-
+    variables={{
+      user: user && user.user && user.user.id
+    }}
     PreloaderComponent={<Preloader
       style={{
         margin: '50px auto',
@@ -46,4 +55,4 @@ const NotificationList: React.FC<INotificationListProps> = () => {
   />)
 };
 
-export default GetNotReadCountNotification(NotificationList);
+export default GetNotReadCountNotification(NotificationList)({pollInterval: 0});

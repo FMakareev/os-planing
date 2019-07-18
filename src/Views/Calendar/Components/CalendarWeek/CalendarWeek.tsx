@@ -34,13 +34,23 @@ const GetStatus = (date: string, currentDay: string): CalendarDayCardEnum => {
   try {
     const itemDate = new Date(date);
     const currentDate = new Date(currentDay);
+
     if (itemDate.getMonth() !== currentDate.getMonth()) {
       return CalendarDayCardEnum.passed;
     }
+
+
     if (itemDate.getMonth() === currentDate.getMonth() &&
       itemDate.getFullYear() === currentDate.getFullYear() &&
       itemDate.getDate() === currentDate.getDate()) {
-      return CalendarDayCardEnum.current;
+
+      if (
+        new Date().getFullYear() === currentDate.getFullYear() &&
+        new Date().getMonth() === currentDate.getMonth()
+      ) {
+        return CalendarDayCardEnum.current;
+      }
+
     }
 
     if (itemDate.getFullYear() !== currentDate.getFullYear()) {

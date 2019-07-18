@@ -169,7 +169,7 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
       year,
       day,
       weeks,
-      currentDay: new Date().toISOString()
+      currentDay: date.toISOString()
     }
 
   };

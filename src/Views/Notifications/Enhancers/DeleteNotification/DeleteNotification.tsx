@@ -7,6 +7,7 @@ import {IStoreState} from "../../../../Store/Store";
 import RefetchNotificationQueries from '../RefetchNotificationQueries/RefetchNotificationQueries';
 import config from "../../../../config";
 
+import GetNotReadCountNotificationQuery from '../GetNotReadCountNotification/GetNotReadCountNotificationQuery.graphql';
 
 interface IDeleteNotificationProps {
   [prop: string]: any
@@ -18,7 +19,7 @@ const mapStateToProps = (state: IStoreState) => ({
 
 
 const enhancer = compose(
-  graphql<any,any,any>(DeleteNotificationMutation),
+  graphql<any, any, any>(DeleteNotificationMutation),
   connect(mapStateToProps)
 );
 
@@ -33,10 +34,19 @@ const DeleteNotification = (WrapperComponent: React.ElementType) => {
         variables: {
           user: user && user.user.id,
         },
-        refetchQueries: [RefetchNotificationQueries({
-          ...config.pagination,
-          user: user && user.user.id,
-        })]
+        refetchQueries: [
+          RefetchNotificationQueries({
+            ...config.pagination,
+            user: user && user.user.id,
+          }),
+          {
+            query: GetNotReadCountNotificationQuery,
+            variables:{
+              user: user && user.user.id,
+            },
+            updateQuery: ()=>{}
+          }
+        ]
       });
 
       onClose && onClose();

@@ -398,7 +398,7 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
       const {labelKey, valueKey} = this.props;
       if (this.props.isMulti && Array.isArray(options) && Array.isArray(this.state.value)) {
         return options.filter((option: ISelectOption) => {
-          return this.state.value.findIndex((item: any) => item[valueKey] === option[valueKey])
+          return this.state.value.findIndex((item: any) => item[valueKey] === option[valueKey]) < 0
         })
       }
 

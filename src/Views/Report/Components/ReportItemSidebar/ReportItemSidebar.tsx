@@ -38,10 +38,10 @@ export const ReportItemSidebar: React.FC<IReportItemSidebarProps> = ({
 
     {
       pdfUrl &&
-      <Button as={ButtonAsEnum.link} to={pdfUrl} style={ButtonStyleEnum.icon}>
+      <a className={'button-primary'} href={pdfUrl} download>
           <img src={Download} className="icon icon-download "/>
           Скачать отчет PDF
-      </Button>
+      </a>
     }
     <AttachmentsList
       allFiles={zipFile}

@@ -75,7 +75,7 @@ const CreateReception: any = (WrapperComponent: any) => {
 
       if (message) {
         const errors: any = {
-          [FORM_ERROR]: GetMessageByTranslateKey(message),
+          // [FORM_ERROR]: 'Произошла ошибка во время выполнения запроса',
         };
 
         graphQLErrors.forEach((item: any) => {

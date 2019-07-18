@@ -65,6 +65,7 @@ const UpdateReception = (WrapperComponent: React.ElementType) => {
             return JSON.parse(JSON.stringify(error));
           });
         if (message) {
+
           const errors: any = {
             // [FORM_ERROR]: GetMessageByTranslateKey(message),
           };

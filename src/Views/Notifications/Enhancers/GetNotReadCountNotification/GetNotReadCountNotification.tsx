@@ -25,8 +25,8 @@ const GetNotReadCountNotification = (WrapperComponent: React.ElementType) => (op
       return (<Query
         skip={!(user && user.user)}
         query={GetNotReadCountNotificationQuery}
-        pollInterval={60000}
-        fetchPolicy={'no-cache'}
+        pollInterval={30000}
+        fetchPolicy={'cache-and-network'}
         {...options}
         variables={{
           user: user && user.user && user.user.id

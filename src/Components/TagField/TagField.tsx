@@ -70,9 +70,8 @@ export const TagField: React.FC<ITagFieldProps> = ({
           onChange={onChange}
           onMenuHover={onMenuHover}
           indexActiveOption={indexActiveOption}
-          styleScrollbars={{
-            // width: 268,
-            height: 178,
+          scrollbarsOptions={{
+            autoHeightMin: 0,
           }}
         />
       </div>

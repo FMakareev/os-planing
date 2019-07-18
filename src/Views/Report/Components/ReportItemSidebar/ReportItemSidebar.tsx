@@ -38,7 +38,7 @@ export const ReportItemSidebar: React.FC<IReportItemSidebarProps> = ({
 
     {
       pdfUrl &&
-      <a className={'button-primary'} href={pdfUrl} download>
+      <a className={'button-icon'} href={pdfUrl} download>
           <img src={Download} className="icon icon-download "/>
           Скачать отчет PDF
       </a>

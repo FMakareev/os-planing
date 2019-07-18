@@ -105,7 +105,7 @@ export const ProjectPageItemSidebar: React.FC<IProjectPageItemSidebarProps> = ({
 
     {
       pdfUrl &&
-      <a className={'button-primary'} href={pdfUrl} download>
+      <a className={'button-icon'} href={pdfUrl} download>
           <img src={Download} className="icon icon-download "/>
           Скачать отчет PDF
       </a>

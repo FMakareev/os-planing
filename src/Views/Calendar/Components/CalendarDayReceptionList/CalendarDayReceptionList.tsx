@@ -7,6 +7,8 @@ import {DayCardModeEnum} from "../../Enhancers/CalendarMonthReportsEnhancer/Cale
 import {IStoreState} from "../../../../Store/Store";
 import {connect} from "react-redux";
 import {IUserState} from "../../../../Store/Reducers/User/reducers";
+import {SetStateAction} from "react";
+import PopupEvents from "../PopupEvents/PopupEvents";
 
 interface ICalendarDayReceptionListProps extends ICalendarContext {
   receptions?: IReceptionCalendar[];
@@ -71,6 +73,20 @@ const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({rec
             </Link>)
         })
       }
+      {
+        activeReceptionCalendar &&
+        <PopupEvents
+          // @ts-ignore
+            events={activeReceptionCalendar.events}
+            reception={activeReceptionCalendar}
+            date={date}
+            isOpen={!!(activeReceptionCalendar)}
+            onClose={() => {
+              setReceptionCalendar && setReceptionCalendar(undefined)
+            }}
+        />
+      }
+
     </div>
   );
 };

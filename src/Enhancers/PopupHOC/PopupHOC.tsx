@@ -39,6 +39,13 @@ const PopupHoc = (WrapperComponent: React.ElementType) => (options: IPopupHocOpt
     constructor(props: any) {
       super(props);
       this.app = document.getElementById('root');
+      this.state = this.initialState;
+    }
+
+    get initialState(){
+      return {
+        isOpen: this.props.isOpen,
+      }
     }
 
     /**

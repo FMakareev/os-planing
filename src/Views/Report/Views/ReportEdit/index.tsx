@@ -25,6 +25,7 @@ interface IReportEditProps {
 const composeEnhancers = compose(EventPageEnhancer,GetReportEnhancer);
 
 export const ReportEdit: React.FC<IReportEditProps> = ({data,report}) => (<LayoutWithSidebar
+  buttonLabel={'Сохранить отчет'}
   sidebarContent={<ProjectEditorSidebar
     onClick={ExternalFinalFormSubmit('FormReportEdit')}
   />}

@@ -37,7 +37,6 @@ export const getFileExt = (ext: string): ReportFileTypeEnum => {
 };
 
 
-// TODO: сделать опредление формата
 export const ReportFileItem: React.FC<IReportFileItemProps> = ({
                                                                  downloadLink,
                                                                  name,
@@ -57,9 +56,9 @@ export const ReportFileItem: React.FC<IReportFileItemProps> = ({
         JpgIcon,
         AnyIcon
       })} className="icon icon-doc"/>
-      <span style={{wordBreak: 'break-all'}}>
+      <div style={{wordBreak: 'break-all'}}>
 			{name}
-			</span>
+			</div>
       <span>Скачать</span>
     </a>
   );

@@ -65,7 +65,8 @@ export const ProjectPageItemSidebar: React.FC<IProjectPageItemSidebarProps> = ({
               },
             ]}
           />)
-        }/>
+        }
+      />
     </div>
 
     {

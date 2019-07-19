@@ -44,7 +44,10 @@ const GetStatus = (status: EventStatusEnum) => {
   }
 };
 
-
+/**
+ * @desc компонент показывает часть списка мероприятий выбранной в фильтре приемной и дает возможность
+ * перейти в модальное окно со всеми мероприятиями
+ * */
 const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception,date}) => {
   return (
     <div className="calendar-item__wrap">
@@ -69,7 +72,7 @@ const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception,d
                   {status.text}
                 </div>
                 <Link to={`/event/${event.id}`} className="calendar__event-link">
-                  {event.text && event.text.slice(0, 60) +'...'}
+                  {event.title && event.title.slice(0, 60) +'...'}
                 </Link>
               </div>)
             })

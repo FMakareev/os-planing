@@ -25,10 +25,10 @@ const SelectStatus: React.FC<ISelectStatusProps> = ({
   return (
     <div className={'inner-info__status-wrap'}>
       <ProjectReportStatus
-        status={!Array.isArray(value) ?value.value: ''}
+        status={!Array.isArray(value) && value ? value.value : ''}
         disabled={disabled}
         onClick={() => {
-          if(disabled) return null;
+          if (disabled) return null;
           if (!meta.active) {
             onFocus && onFocus();
           } else {
@@ -41,7 +41,7 @@ const SelectStatus: React.FC<ISelectStatusProps> = ({
         selected={selected}
         active={meta.active}
         onChange={onChange}
-        status={!Array.isArray(value) ?value.value: ''}
+        status={!Array.isArray(value) && value ? value.value : ''}
         labelKey={labelKey}
         valueKey={valueKey}
       />

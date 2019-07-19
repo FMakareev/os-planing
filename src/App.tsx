@@ -28,7 +28,8 @@ const LayoutApp = React.lazy(() => import('./Containers/LayoutApp/LayoutApp'));
 
 export const App: React.FC = () => {
   return (
-      <React.Suspense fallback={<Preloader theme={PreloaderThemeEnum.blue} position={PreloaderPositionEnum.center} size={PreloaderSizeEnum.md}/>}>
+      <React.Suspense fallback={<Preloader theme={PreloaderThemeEnum.blue} position={PreloaderPositionEnum.center}
+                                           size={PreloaderSizeEnum.md}/>}>
         <Switch>
           {AppRoutes && AppRoutes.map((route: any, idx: number) => {
             return route && route.component ? (
@@ -40,12 +41,10 @@ export const App: React.FC = () => {
                 render={(props: any) => {
                   switch (route.layout) {
                     case(LAYOUT_CALENDAR): {
-                      return RouteWithHelmet(route)({
-                        ...props,
-                      });
+                      return                      RouteWithHelmet(route)(props);
                     }
                     case(LAYOUT_AUTH): {
-                      return RouteWithHelmet(route)({
+                      return                      RouteWithHelmet(route)({
                         ...props,
                         Layout: LayoutLogin
                       });

@@ -1,0 +1,15 @@
+mutation(
+    $id: String!,
+    $status: EventStatus,
+){
+    updateMonthReport(
+        id: $id
+        status: $status,
+    ){
+        monthReport{
+            id
+            status
+        }
+    }
+}
+

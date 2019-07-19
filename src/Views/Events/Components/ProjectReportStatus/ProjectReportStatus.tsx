@@ -54,7 +54,7 @@ export const ProjectReportStatus: React.FC<IProjectReportStatusProps> = ({status
       }, {
         report: 'Ожидает отчета',
         review: 'Ожидает проверки',
-        noReport: 'Не ребует отчет',
+        noReport: 'Не требует отчет',
         ok: 'Одобрено',
       })
     }</span>

@@ -1091,7 +1091,9 @@ textarea {
   line-height: 26px;
   cursor: pointer;
   margin-top: 30px;
-
+  input{
+    cursor: pointer;
+  }
   span {
     color: #3789d4;
     display: inline-block;
@@ -1185,6 +1187,12 @@ br, .br {
 .d-none {
   display: none !important;
 }
+.icon {
+  &-file-remove {
+    fill: #ef223a !important;
+  }
+}
+
 
 @import 'calendar';
 @import 'buttons';

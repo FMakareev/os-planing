@@ -87,17 +87,14 @@ const CalendarDayReception: React.FC<ICalendarDayReceptionProps> = ({reception,d
             events={reception.events}
             reception={reception}
             date={date}
-            Button={({onClick}: any) => {
-
-              return (<div onClick={onClick && onClick} className="calendar__fix">
-                <a className="calendar__more-info js-more-info" href="javascript:void(0);">
-                  Подробнее
-                </a>
-                <a className="calendar__more" href="javascript:void(0);">
-                  Еще {reception.events.length}
-                </a>
-              </div>)
-            }}
+            Button={({onClick}: any) => (<div onClick={onClick && onClick} className="calendar__fix">
+              <a className="calendar__more-info js-more-info" href="javascript:void(0);">
+                Подробнее
+              </a>
+              <a className="calendar__more" href="javascript:void(0);">
+                Еще {reception.events.length}
+              </a>
+            </div>)}
         />
       }
 

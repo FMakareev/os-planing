@@ -4,7 +4,6 @@ import {ICalendarContext} from "../../Enhancers/CalendarContext/CalendarContext"
 import CalendarCityEventCount from '../CalendarCityEventCount/CalendarCityEventCount';
 import MonthReportIcon from "../../../../Components/SvgIcons/MonthReportIcon";
 import {DayCardModeEnum} from "../../Enhancers/CalendarMonthReportsEnhancer/CalendarMonthReportsEnhancer";
-import {Link} from "react-router-dom";
 import {IStoreState} from "../../../../Store/Store";
 import {connect} from "react-redux";
 import {IUserState} from "../../../../Store/Reducers/User/reducers";
@@ -20,48 +19,18 @@ const mapStateToProps = (state: IStoreState) => ({
   user: state.user,
 });
 
-/**
- * @param item - объект с информацией по текущему дню календаря
- * @param currentCardMode - текущий режим отображения карточки дня
- * @param date - дата карточки дня
- * @param reception - приемная авторизованного пользователя
- * */
-const GetMonthReportLink = (item: IReceptionCalendar, currentCardMode: DayCardModeEnum, date?: string, reception?: any) => {
-
-  if (date) {
-    if (currentCardMode === DayCardModeEnum.monthReport) {
-
-      if (item.monthReport) {
-        return `/month-report/${item.monthReport.id}`
-      } else if (reception && item.reception.id === reception.id) {
-
-        return `/month-report/create/${new Date(date).toISOString()}`
-      }
-
-    }
-  }
-
-  return '#!';
-};
 
 
-const ChangeMonth = (changeDate: any, date: string, currentDay?: string) => {
-  if(!currentDay) return null;
 
-  const itemDate = new Date(date);
-  const currentDate = new Date(currentDay);
-  if (itemDate.getMonth() !== currentDate.getMonth() &&
-    itemDate.getFullYear() !== currentDate.getFullYear()) {
-    changeDate({
-      year: itemDate.getFullYear(),
-      month: itemDate.getMonth(),
-    })
-  } else if (itemDate.getMonth() !== currentDate.getMonth()) {
-    changeDate({
-      month: itemDate.getMonth(),
-    })
-  }
-}
+
+
+
+
+
+
+
+
+
 
 
 const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({receptions, changeReception, enableMonthReport, currentCardMode, currentDay, user, date,changeDate}) => {

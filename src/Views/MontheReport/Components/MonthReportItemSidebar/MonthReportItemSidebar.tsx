@@ -6,17 +6,56 @@ import {IMonthReport} from "../../../../Apollo/Types/MonthReport";
 import AttachmentsList from '../../../../Components/AttachmentsList/AttachmentsList';
 import {EventDateFormat} from "../../../Events/Helpers/EventDateFormat";
 import CheckAccess, {ICheckAccessApi} from "../../../../Enhancers/CheckAccess/CheckAccess";
+import withSelect, {ISelectOption} from "../../../../Components/Select/withSelect";
+import SelectStatus from "../../../../Components/Select/SelectStatus";
+import {EventStatusEnum, UserRoleEnum} from "../../../../Apollo/schema";
 
 
 interface IReportItemSidebarProps extends IMonthReport {
   [prop: string]: any
 }
 
-export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = ({date, id, attachments, zipFile, pdfUrl, reception}) => (
+
+const SelectStatusWithSelect = withSelect(SelectStatus)();
+
+
+export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = ({date, id, attachments, zipFile, pdfUrl, reception, onChangeStatus,status}) => (
   <div className="inner-info ">
-    <div className="inner__date">
+    <div className="inner-info__date">
       {date && EventDateFormat(date)}
     </div>
+
+    <div className="inner-info__status-wrap">
+      <CheckAccess
+        accessRights={UserRoleEnum.admin}
+        render={({access}: ICheckAccessApi) => (
+          <SelectStatusWithSelect
+            disabled={!access}
+            labelKey={'label'}
+            valueKey={'value'}
+            onChange={(option: ISelectOption) => {
+              onChangeStatus && onChangeStatus(id, option.value);
+            }}
+            selected={status || EventStatusEnum.waitReport}
+            options={[
+              {
+                label: EventStatusEnum.ok,
+                value: EventStatusEnum.ok
+              },
+              {
+                label: EventStatusEnum.waitReport,
+                value: EventStatusEnum.waitReport
+              },
+              {
+                label: EventStatusEnum.waitReview,
+                value: EventStatusEnum.waitReview
+              },
+            ]}
+          />)
+        }
+      />
+    </div>
+
 
     <CheckAccess
       accessByReception={reception && reception.id}
@@ -26,7 +65,8 @@ export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = ({date,
           <img src={EditMini} className="icon icon-edit-mini "/>
           Редактировать отчет
         </Button>)
-      }}/>
+      }}
+    />
 
 
     {

@@ -9,5 +9,6 @@ export default {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'image/jpeg',
     'image/x-citrix-jpeg',
+    'image/png',
   ]
 }

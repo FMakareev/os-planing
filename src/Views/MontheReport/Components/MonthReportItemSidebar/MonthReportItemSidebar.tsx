@@ -36,18 +36,19 @@ export const MonthReportItemSidebar: React.FC<IReportItemSidebarProps> = ({date,
             onChange={(option: ISelectOption) => {
               onChangeStatus && onChangeStatus(id, option.value);
             }}
+            className={'SelectStatusWithSelect'}
             selected={status || EventStatusEnum.waitReport}
             options={[
               {
-                label: EventStatusEnum.ok,
+                label: 'Одобрено',
                 value: EventStatusEnum.ok
               },
               {
-                label: EventStatusEnum.waitReport,
+                label: 'Ожидает отчета',
                 value: EventStatusEnum.waitReport
               },
               {
-                label: EventStatusEnum.waitReview,
+                label: 'Ожидает проверки',
                 value: EventStatusEnum.waitReview
               },
             ]}

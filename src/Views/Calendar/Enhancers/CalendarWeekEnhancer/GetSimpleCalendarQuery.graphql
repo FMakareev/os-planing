@@ -1,10 +1,11 @@
-query($time: DateTime){
+query ($time: DateTime) {
     getSimpleCalendar(time: $time) {
         monday {
             date
             receptions {
-                monthReport{
+                monthReport {
                     id
+                    status
                     reception {
                         id
                         city
@@ -33,8 +34,9 @@ query($time: DateTime){
         tuesday {
             date
             receptions {
-                monthReport{
+                monthReport {
                     id
+                    status
                     reception {
                         id
                         city
@@ -63,8 +65,9 @@ query($time: DateTime){
         wednesday {
             date
             receptions {
-                monthReport{
+                monthReport {
                     id
+                    status
                     reception {
                         id
                         city
@@ -93,8 +96,9 @@ query($time: DateTime){
         thursday {
             date
             receptions {
-                monthReport{
+                monthReport {
                     id
+                    status
                     reception {
                         id
                         city
@@ -123,8 +127,9 @@ query($time: DateTime){
         friday {
             date
             receptions {
-                monthReport{
+                monthReport {
                     id
+                    status
                     reception {
                         id
                         city
@@ -153,8 +158,9 @@ query($time: DateTime){
         saturday {
             date
             receptions {
-                monthReport{
+                monthReport {
                     id
+                    status
                     reception {
                         id
                         city
@@ -183,8 +189,9 @@ query($time: DateTime){
         sunday {
             date
             receptions {
-                monthReport{
+                monthReport {
                     id
+                    status
                     reception {
                         id
                         city

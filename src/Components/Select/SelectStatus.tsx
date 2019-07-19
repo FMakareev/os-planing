@@ -4,6 +4,7 @@ import SelectStatusDropdown from './SelectStatusDropdown';
 import {ISelectBaseAPI} from "./withSelect";
 import {SelectDropDownList} from "./SelectDropDownList";
 import {EventStatusEnum} from "../../Apollo/schema";
+import classNames from 'classnames';
 
 interface ISelectStatusProps extends ISelectBaseAPI {
   // selected?:EventStatusEnum;
@@ -21,9 +22,11 @@ const SelectStatus: React.FC<ISelectStatusProps> = ({
                                                       labelKey,
                                                       valueKey,
                                                       disabled,
+                                                      className,
+                                                      wrapperRef,
                                                     }) => {
   return (
-    <div className={'inner-info__status-wrap'}>
+    <div ref={wrapperRef} className={classNames('inner-info__status-wrap', className)}>
       <ProjectReportStatus
         status={!Array.isArray(value) && value ? value.value : ''}
         disabled={disabled}
@@ -37,6 +40,7 @@ const SelectStatus: React.FC<ISelectStatusProps> = ({
         }}
       />
       <SelectStatusDropdown
+        options={options}
         meta={meta}
         selected={selected}
         active={meta.active}

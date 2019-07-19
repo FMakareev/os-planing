@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {IReceptionCalendar} from "../../../../Apollo/schema";
+import {SetStateAction} from 'react';
+import {EventStatusEnum, IReceptionCalendar} from "../../../../Apollo/schema";
 import {ICalendarContext} from "../../Enhancers/CalendarContext/CalendarContext";
 import CalendarCityEventCount from '../CalendarCityEventCount/CalendarCityEventCount';
 import MonthReportIcon from "../../../../Components/SvgIcons/MonthReportIcon";
@@ -7,9 +8,9 @@ import {DayCardModeEnum} from "../../Enhancers/CalendarMonthReportsEnhancer/Cale
 import {IStoreState} from "../../../../Store/Store";
 import {connect} from "react-redux";
 import {IUserState} from "../../../../Store/Reducers/User/reducers";
-import {SetStateAction} from "react";
 import PopupEvents from "../PopupEvents/PopupEvents";
 import {Link} from "react-router-dom";
+import classNames from 'classnames';
 
 interface ICalendarDayReceptionListProps extends ICalendarContext {
   receptions?: IReceptionCalendar[];
@@ -75,7 +76,14 @@ const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({rec
               {
                 currentCardMode === DayCardModeEnum.monthReport &&
                 <span style={{backgroundColor: 'transparent'}}>
-                <MonthReportIcon/>
+                <MonthReportIcon
+
+                  fill={classNames({
+                    '#4dc87e': item.monthReport && item.monthReport.status === EventStatusEnum.ok,
+                    '#f69752': item.monthReport && item.monthReport.status === EventStatusEnum.waitReview,
+                    '#ef223a': item.monthReport && item.monthReport.status === EventStatusEnum.waitReport,
+                  })}
+                />
               </span>
               }
               {

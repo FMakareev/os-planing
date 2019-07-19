@@ -45,22 +45,23 @@ export const ProjectPageItemSidebar: React.FC<IProjectPageItemSidebarProps> = ({
             onChange={(option: ISelectOption) => {
               onChangeStatus && onChangeStatus(id, option.value);
             }}
+            className={'SelectStatusWithSelect'}
             selected={status}
             options={[
               {
-                label: EventStatusEnum.ok,
+                label: 'Одобрено',
                 value: EventStatusEnum.ok
               },
               {
-                label: EventStatusEnum.waitReport,
+                label: 'Ожидает отчета',
                 value: EventStatusEnum.waitReport
               },
               {
-                label: EventStatusEnum.waitReview,
+                label: 'Ожидает проверки',
                 value: EventStatusEnum.waitReview
               },
               {
-                label: EventStatusEnum.noReport,
+                label: 'Не требует отчета',
                 value: EventStatusEnum.noReport
               },
             ]}

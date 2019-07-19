@@ -5,7 +5,7 @@ import LayoutWithSidebar from '../../../../Containers/LayoutWithSidebar/LayoutWi
 import MonthReportItemContent from '../../Components/MonthReportItemContent/MonthReportItemContent';
 import MonthReportItemSidebar from "../../Components/MonthReportItemSidebar/MonthReportItemSidebar";
 import GetMonthReportEnhancer from "../../Enhancers/GetMonthReportEnhancer/GetMonthReportEnhancer";
-import ChangeStatusMonthReport from "../ChangeStatusMonthReport/ChangeStatusMonthReport";
+import ChangeStatusMonthReport from "../../Enhancers/ChangeStatusMonthReport/ChangeStatusMonthReport";
 
 interface IMonthReportItemProps {
 	monthReport: IMonthReport;

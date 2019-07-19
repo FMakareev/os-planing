@@ -41,15 +41,13 @@ const GetMonthReportEnhancer = (WrappedComponent: React.ElementType) =>
   connect(mapStateToProps, null)
   ((props: IGetMonthReportEnhancerProps) => {
 
-    console.log('GetMonthReportEnhancer props: ', props);
     const {match:{params}, user} = props;
-    console.log('GetMonthReportEnhancer params: ', params);
-
 
     if (params && params.date && user.user) {
       return (
         <Query
           <IGetPrepareModelReportData, IGetPrepareModelReportVariables>
+          fetchPolicy={'network-only'}
           skip={!params.date}
           query={GetPrepareModelReportQuery}
           variables={{

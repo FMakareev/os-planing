@@ -14,7 +14,8 @@ mutation(
     $receptionAchievement: String,
     $treatmentInTheReception: Int,
     $whatProblemsWereSolved: String
-    $date: DateTime
+    $date: DateTime,
+    $status: EventStatus
 ){
     createMonthReport(
         attachments: $attachments,
@@ -33,6 +34,7 @@ mutation(
         treatmentInTheReception: $treatmentInTheReception,
         whatProblemsWereSolved: $whatProblemsWereSolved,
         date: $date,
+        status: $status
     ){
         monthReport{
             id

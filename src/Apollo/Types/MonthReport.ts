@@ -1,4 +1,4 @@
-import {IBase, IFile, IMassMedia, IReception} from "../schema";
+import {EventStatusEnum, IBase, IFile, IMassMedia, IReception} from "../schema";
 
 
 export interface IPrepareModel {
@@ -78,6 +78,8 @@ export interface IMonthReport extends IBase {
   id?: string;
 
   pdfUrl?: string;
+
+  status: EventStatusEnum;
 
 }
 

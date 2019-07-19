@@ -13,6 +13,7 @@ import {
 } from "../../../../Apollo/Types/MonthReport";
 import {IResponseUploadFile} from "../../../Users/Enhancers/CreateReception/CreateReception";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {EventStatusEnum} from "../../../../Apollo/schema";
 
 
 interface IEditMonthReportEnhanceProps extends RouteComponentProps {
@@ -76,12 +77,18 @@ const EditMonthReportEnhance = (WrapperComponent: React.ElementType) => {
       }
 
       if (HasOwnProperty.call(values, 'id')) {
-        const {data}: FetchResult<IUpdateMonthReportData> = await this.updateMonthReport(values);
+        const {data}: FetchResult<IUpdateMonthReportData> = await this.updateMonthReport({
+          ...values,
+          status: EventStatusEnum.waitReview,
+        });
         if(data){
           history.push(`/month-report/${data.updateMonthReport.monthReport.id}`)
         }
       } else {
-        const {data}: FetchResult<ICreateMonthReportData> =  await this.createMonthReport(values);
+        const {data}: FetchResult<ICreateMonthReportData> =  await this.createMonthReport({
+          ...values,
+          status: EventStatusEnum.waitReview,
+        });
         if(data){
           history.push(`/month-report/${data.createMonthReport.monthReport.id}`)
         }

@@ -28,9 +28,10 @@ interface IPopupHocState {
 const PopupHoc = (WrapperComponent: React.ElementType) => (options: IPopupHocOptions) => {
   return class extends React.Component<any, IPopupHocState> {
 
-    state: IPopupHocState = {
+    static defaultProps = {
       isOpen: false,
-    };
+    }
+
 
     /** ссылка на дом элемент в отором рендерится приложение */
     app: any = null;

@@ -9,7 +9,7 @@ export interface IDropFieldFileListProps {
 
 export const DropFieldFileList: React.FC<IDropFieldFileListProps> = ({fileList,removeFile}) => {
 	return (
-		<div className="files js-files-previews dropzone-previews">
+		<div className="files dropzone-previews">
 			{
 				fileList.map((item: any, idx: number)=>(<DropFieldFileItem
 					key={`DropFieldFileItem-${idx}`}

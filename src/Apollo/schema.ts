@@ -23,6 +23,9 @@ export enum NotificationTypeEnum {
   NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT = 'NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT',  // Запрос месячного отчета
   NOTIFICATION_TYPE_APPROVED_REPORT = 'NOTIFICATION_TYPE_APPROVED_REPORT',  // Одобрение отчета
   NOTIFICATION_TYPE_APPROVED_MONTH_REPORT = 'NOTIFICATION_TYPE_APPROVED_MONTH_REPORT',  // Одобрение месячного отчета
+
+  NOTIFICATION_TYPE_QUERY_SAVE_MONTH_REPORT = 'NOTIFICATION_TYPE_QUERY_SAVE_MONTH_REPORT', // Запроса на сохранение месячного отчета,
+  NOTIFICATION_TYPE_QUERY_UPDATE_MONTH_REPORT = 'NOTIFICATION_TYPE_QUERY_UPDATE_MONTH_REPORT' // Запроса на обовления месячного отчета
 }
 
 
@@ -176,9 +179,6 @@ export interface IMassMedia {
   title: string;
   link: string;
 }
-
-
-
 
 
 export interface INotification extends IBase {
@@ -437,6 +437,7 @@ export interface ICreatePrivacyBlockData {
     privacy: IPrivacyBlock
   }
 }
+
 export interface IUpdatePrivacyBlockData {
   updatePrivacy: {
     privacy: IPrivacyBlock

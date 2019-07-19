@@ -18,7 +18,7 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
     // TODO: добавить дату месячного отчета и ссылку на страницу отчета
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Одобрен месячный отчет за
+        Одобрен месячный отчет за {monthReport && monthReport.date && EventDateFormat(monthReport.date)}.
       </div>
       {
         monthReport && <Link to={`/month-report/${monthReport && monthReport.id}`} className="notifications-item__more">
@@ -56,24 +56,6 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
       Удалено мероприятие "{event.title}"
     </div>)
   }
-  if (type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT) {
-    // TODO: не хватает даты отчета
-    return (<React.Fragment>
-      <div className="notifications-item__text">
-        Ожидание месячного отчета от {created && EventDateFormat(created)}.
-      </div>
-      {
-        monthReport && <Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
-            Перейти к отчету
-        </Link>
-      }
-      {
-        !monthReport && <Link to={`/month-report/create/${created && EventDateFormat(created)}`} className="notifications-item__more">
-            Перейти к отчету
-        </Link>
-      }
-    </React.Fragment>)
-  }
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_GET_REPORT) {
     return (<React.Fragment>
       <div className="notifications-item__text">
@@ -96,11 +78,6 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
     return (<React.Fragment>
       <div className="notifications-item__text">
         {
-          monthReport && <span>
-            Изменен месячный отчет от {monthReport.date && EventDateFormat(monthReport.date)}
-          </span>
-        }
-        {
           !monthReport && <span>
             Изменен отчет мероприятия "{report && report.event.title}"
           </span>
@@ -112,6 +89,37 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
             Перейти к отчету
         </Link>
       }
+    </React.Fragment>)
+  }
+
+
+  if (type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT) {
+    return (<React.Fragment>
+      <div className="notifications-item__text">
+        Ожидание месячного отчета от {monthReport && monthReport.date && EventDateFormat(monthReport.date)}.
+      </div>
+      {
+        monthReport && <Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
+            Перейти к отчету
+        </Link>
+      }
+      {
+        !monthReport && <Link to={`/month-report/create/${created && EventDateFormat(created)}`} className="notifications-item__more">
+            Перейти к отчету
+        </Link>
+      }
+    </React.Fragment>)
+  }
+  if(type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_SAVE_MONTH_REPORT){
+    return (<React.Fragment>
+      <div className="notifications-item__text">
+        {
+          monthReport && <span>
+            Создан месячный отчет от {monthReport.date && EventDateFormat(monthReport.date)}
+          </span>
+        }
+
+      </div>
       {
         monthReport &&<Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
             Перейти к отчету
@@ -119,6 +127,24 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
       }
     </React.Fragment>)
   }
+  if(type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_UPDATE_MONTH_REPORT){
+    return (<React.Fragment>
+      <div className="notifications-item__text">
+        {
+          monthReport && <span>
+            Изменен месячный отчет от {monthReport.date && EventDateFormat(monthReport.date)}
+          </span>
+        }
+
+      </div>
+      {
+        monthReport &&<Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
+            Перейти к отчету
+        </Link>
+      }
+    </React.Fragment>)
+  }
+
 
   return null;
 

@@ -24,6 +24,7 @@ const InfinityScrollWithQuery = ({variables, ...rest}: any) => {
 
   return <Component
     options={{
+      fetchPolicy:'network-only',
       variables: {
         ...config.pagination,
         ...variables,

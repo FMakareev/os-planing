@@ -5,15 +5,17 @@ import LayoutWithSidebar from '../../../../Containers/LayoutWithSidebar/LayoutWi
 import MonthReportItemContent from '../../Components/MonthReportItemContent/MonthReportItemContent';
 import MonthReportItemSidebar from "../../Components/MonthReportItemSidebar/MonthReportItemSidebar";
 import GetMonthReportEnhancer from "../../Enhancers/GetMonthReportEnhancer/GetMonthReportEnhancer";
+import ChangeStatusMonthReport from "../ChangeStatusMonthReport/ChangeStatusMonthReport";
 
 interface IMonthReportItemProps {
 	monthReport: IMonthReport;
 	[prop:string]: any;
 }
 
+const MonthReportItemSidebarWithEnhancer = ChangeStatusMonthReport(MonthReportItemSidebar);
 
 export const MonthReportItem: React.FC<IMonthReportItemProps> = ({monthReport}) => (<LayoutWithSidebar
-	sidebarContent={<MonthReportItemSidebar
+	sidebarContent={<MonthReportItemSidebarWithEnhancer
 		{...monthReport}
 	/>}
 >

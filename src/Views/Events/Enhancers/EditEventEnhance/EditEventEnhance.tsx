@@ -44,7 +44,10 @@ const enhancer = compose(
   }),
 );
 
-
+// TODO: возможно добавить после каждого обновления изменение статуса на "ожидает проверку" если стату
+//  не "не требует отчета",
+//  и решить вопрос как быть с обновлением отчета там тоже нужно обновлять статус события и кнопка создания отчета
+//  должна ли быть если статус "не требует отчета"
 const EditEventEnhance = (WrapperComponent: React.ElementType) => {
   return enhancer(class extends React.Component<IEditEventEnhanceEnhanceProps> {
 

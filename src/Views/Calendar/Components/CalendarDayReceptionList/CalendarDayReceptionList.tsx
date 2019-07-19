@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {IUserState} from "../../../../Store/Reducers/User/reducers";
 import {SetStateAction} from "react";
 import PopupEvents from "../PopupEvents/PopupEvents";
+import {Link} from "react-router-dom";
 
 interface ICalendarDayReceptionListProps extends ICalendarContext {
   receptions?: IReceptionCalendar[];
@@ -22,17 +23,24 @@ const mapStateToProps = (state: IStoreState) => ({
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * @param item - объект с информацией по текущему дню календаря
+ * @param currentCardMode - текущий режим отображения карточки дня
+ * @param date - дата карточки дня
+ * @param reception - приемная авторизованного пользователя
+ * */
+const GetMonthReportLink = (item: IReceptionCalendar, currentCardMode: DayCardModeEnum, date?: string, reception?: any) => {
+  if (date) {
+    if (currentCardMode === DayCardModeEnum.monthReport) {
+      if (item.monthReport) {
+        return `/month-report/${item.monthReport.id}`
+      } else if (reception && item.reception.id === reception.id) {
+        return `/month-report/create/${new Date(date).toISOString()}`
+      }
+    }
+  }
+  return '#!';
+};
 
 
 /**
@@ -49,11 +57,14 @@ const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({rec
       {
         receptions && receptions.map((item: IReceptionCalendar, index: number) => {
           return (
-            <a
-              href={'#!'}
+            <Link
+              to={GetMonthReportLink(item, currentCardMode, date, user.user && user.user.reception)}
               onClick={(event) => {
-                event.preventDefault();
-                setReceptionCalendar && setReceptionCalendar(item)
+                if (currentCardMode !== DayCardModeEnum.monthReport) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  setReceptionCalendar && setReceptionCalendar(item)
+                }
               }}
               key={index}
               className="calendar__city"
@@ -73,7 +84,7 @@ const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({rec
                   {...item}
                 />
               }
-            </a>)
+            </Link>)
         })
       }
       {

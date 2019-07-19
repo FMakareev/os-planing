@@ -20,10 +20,6 @@ export const Privacy: React.FC<IProps> = ({privacyBlockList}) => {
     <LayoutWithSidebar sidebarContent={<PrivacySidebar privacyBlockList={privacyBlockList}/>}>
       <Breadcrumbs history={[
         {
-          name: 'Календарь',
-          to: '/'
-        },
-        {
           name: 'Соглашение на обработку персональных данных',
           to: '/privacy'
         },

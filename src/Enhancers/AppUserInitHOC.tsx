@@ -30,8 +30,12 @@ const AppUserInitHoc = (WrapperComponent: React.ElementType) => {
   return connect(mapStateToProps, mapDispatchToProps)(withRouter(class extends React.Component<IAppUserInitHocProps, IAppUserInitHocState> {
 
     componentDidMount = async () => {
-      const result = await this.props.userInit();
+      const {location,userInit} = this.props;
+      const result = await userInit();
       if (result === null) {
+        if(location.pathname === '/privacy'){
+          return null;
+        }
         this.props.history.push('/login');
       }
     };

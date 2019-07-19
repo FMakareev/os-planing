@@ -26,7 +26,10 @@ const PopupEvents: React.FC<IPopupEventsProps> = ({isOpen,events, onClose, onOpe
           events={events}
         />
       </PopupWrapper>
-      <Button onClick={onOpen}/>
+      {
+        Button &&
+        <Button onClick={onOpen}/>
+      }
     </React.Fragment>
   );
 };

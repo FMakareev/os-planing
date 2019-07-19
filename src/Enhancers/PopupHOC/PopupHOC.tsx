@@ -92,6 +92,7 @@ const PopupHoc = (WrapperComponent: React.ElementType) => (options: IPopupHocOpt
       this.setState(() => ({
         isOpen: false,
       }))
+      this.props.onClose && this.props.onClose();
     };
 
     onToggle = () => {

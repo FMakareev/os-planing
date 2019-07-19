@@ -44,7 +44,6 @@ const DeleteNotification = (WrapperComponent: React.ElementType) => {
             variables:{
               user: user && user.user.id,
             },
-            updateQuery: ()=>{}
           }
         ]
       });

@@ -1,18 +1,39 @@
 import * as React from 'react';
+import classNames from 'classnames';
 
 interface ICookiePolicyProps {
   [prop: string]: any
 }
 
 const CookiePolicy: React.FC<ICookiePolicyProps> = () => {
+  let init = localStorage.getItem('cookies-policy');
+  const [isOpen, toggleOpen] = React.useState(init !== 'true');
+
+
   return (
-    <div className="cookies">
-      <div className="cookies__text">
+    <div
+      className={classNames('cookies', {
+        open: isOpen,
+      })}
+    >
+      <div
+        className="cookies__text"
+      >
         Мы используем файлы cookies для корректной работы сайта. Оставаясь на этом сайте, вы
         соглашаетесь с
-        <a href="javascript:void(0);">условиями использования файлов cookies</a>
+        <a
+          href="javascript:void(0);"
+        >
+          условиями использования файлов cookies
+        </a>
       </div>
-      <a className="button-border cookies__button js-cookies" href="javascript:void(0);">
+      <a
+        onClick={() => {
+          localStorage.setItem('cookies-policy', 'true');
+          toggleOpen(false)
+        }}
+        className="button-border cookies__button"
+        href="javascript:void(0);">
         Понятно
       </a>
     </div>

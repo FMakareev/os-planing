@@ -94,6 +94,7 @@ export const TextField: React.FC<ITextFieldProps> = ({
               toggleFocus(false)
             }}
             rows={rows}
+            type={type}
           />
           <div className={classNames("form__save", {
 

@@ -83,6 +83,8 @@ const PopupHoc = (WrapperComponent: React.ElementType) => (options: IPopupHocOpt
       this.setState(() => ({
         isOpen: true,
       }))
+
+      this.props.onOpen && this.props.onOpen();
     };
 
     onClose = () => {

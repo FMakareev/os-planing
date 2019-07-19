@@ -35,22 +35,25 @@ const mapStateToProps = (state: IStoreState) => ({
 
 
 
-const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({receptions, changeReception, enableMonthReport, currentCardMode, currentDay, user, date,changeDate}) => {
+/**
+ * @desc компонент выводит список приемныъх с маркером в виде кол-ва мероприятий
+ * в текущем дне либо если текущей день 5 число дает возможность вывести месячные отчеты
+ * */
+const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({receptions, changeReception, enableMonthReport, currentCardMode, currentDay, user, date, changeDate}) => {
+
+
+  const [activeReceptionCalendar, setReceptionCalendar] = React.useState<SetStateAction<IReceptionCalendar>>();
+
   return (
     <div className="calendar-item__content">
       {
         receptions && receptions.map((item: IReceptionCalendar, index: number) => {
-          if (currentCardMode === DayCardModeEnum.monthReport) {
-            console.log('GetMonthReportLink: ', GetMonthReportLink(item, currentCardMode, date, user.user && user.user.reception));
-          }
-
           return (
-            <Link
-              to={GetMonthReportLink(item, currentCardMode, date, user.user && user.user.reception)}
-              onClick={() => {
-                if (currentCardMode === DayCardModeEnum.monthReport) return null;
-                changeReception && changeReception(item.reception.id)
-                ChangeMonth(changeDate, date, currentDay);
+            <a
+              href={'#!'}
+              onClick={(event) => {
+                event.preventDefault();
+                setReceptionCalendar && setReceptionCalendar(item)
               }}
               key={index}
               className="calendar__city"
@@ -70,7 +73,7 @@ const CalendarDayReceptionList: React.FC<ICalendarDayReceptionListProps> = ({rec
                   {...item}
                 />
               }
-            </Link>)
+            </a>)
         })
       }
       {

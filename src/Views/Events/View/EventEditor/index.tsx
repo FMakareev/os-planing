@@ -23,7 +23,17 @@ export const EventEdit: React.FC<IEventEditProps> = ({data}) => (<LayoutWithSide
   <EventBreadcrumbs
     date={data && data.date}
     id={data && data.id}
-    city={data && data.reception.city}
+    reception={data && data.reception}
+    history={[
+      {
+        name: data && data.title,
+        to: `/event/${data && data.id}`,
+      },
+      {
+        name: '',
+        to: ``,
+      },
+    ]}
   />
 
   <div className="inner__content">

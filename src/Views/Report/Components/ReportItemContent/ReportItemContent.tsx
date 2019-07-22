@@ -26,13 +26,21 @@ export const ReportItemContent: React.FC<IReportItemContentProps> = ({
                                                                        massMedia,
                                                                        event
                                                                      }) => {
-
-  console.log(event);
   return (
     <React.Fragment>
       <EventBreadcrumbs
         date={event.date}
-        city={event.reception && event.reception.city}
+        reception={event && event.reception}
+        history={[
+          {
+            name: event && event.title,
+            to: `/event/${event && event.id}`,
+          },
+          {
+            name: 'Отчет',
+            to: `/report/${event && event.id}/${event && event.report}`,
+          },
+        ]}
       />
 
       <PageTitle>

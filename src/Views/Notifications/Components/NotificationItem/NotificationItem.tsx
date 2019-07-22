@@ -162,7 +162,7 @@ const GetNotificationContent = ({type, report, monthReport, event, created, type
       <div className="notifications-item__text">
         {
           monthReport && <span>
-            Сохранен месячный отчет от {monthReport.date && EventDateFormat(monthReport.date)}
+            Обновлен месячный отчет от {monthReport.date && EventDateFormat(monthReport.date)}
           </span>
         }
 

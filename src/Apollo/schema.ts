@@ -98,6 +98,7 @@ export interface IUser extends IBase {
   role: UserRoleEnum;
   fullName: string;
   id?: string;
+  password?: string;
   reception: {
     id: string;
     city: string;

@@ -14,11 +14,10 @@ import {
   IUpdateReportVariables,
   ICreateReportData,
   IMassMedia,
-  IFile, EventStatusEnum
+  IFile
 } from "../../../../Apollo/schema";
 import {withRouter} from "react-router-dom";
 import {IResponseUploadFile} from "../../../Users/Enhancers/CreateReception/CreateReception";
-import ChangeStatusEvent from "../../../Calendar/Enhancers/ChangeStatusEvent/ChangeStatusEvent";
 
 interface IReportEditEnhancerProps extends MutateProps<any, any> {
   initialValues: IReport;
@@ -37,7 +36,6 @@ interface IReportEditEnhancerProps extends MutateProps<any, any> {
 const enhancer = compose(
   withRouter,
   FileUpload,
-  ChangeStatusEvent,
   graphql<IUpdateReportData, IUpdateReportVariables>(UpdateReportMutation, {
     name: 'UpdateReportMutation'
   }),
@@ -110,13 +108,11 @@ const ReportEditEnhancer = (WrapperComponent: React.ElementType) => {
 
       if (HasOwnProperty.call(values, 'id')) {
         const data = await this.updateReport(this.formatValues(values));
-        await this.props.onChangeStatus(values.event, EventStatusEnum.waitReview);
         if (data.data) {
           this.props.history.push(`/report/${data.data.updateReport.report.event.id}/${data.data.updateReport.report.id}`)
         }
       } else {
         const data = await this.createReport(this.formatValues(values));
-        await this.props.onChangeStatus(values.event, EventStatusEnum.waitReview);
         if (data.data) {
           this.props.history.push(`/report/${data.data.createReport.report.event.id}/${data.data.createReport.report.id}`)
         }

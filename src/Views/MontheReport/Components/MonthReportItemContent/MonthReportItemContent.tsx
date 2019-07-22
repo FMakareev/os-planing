@@ -38,7 +38,7 @@ export const MonthReportItemContent: React.FC<IReportItemContentProps> = ({
   <React.Fragment>
     <EventBreadcrumbs
       date={date}
-      city={reception && reception.city}
+      reception={reception}
       id={id}
     />
 

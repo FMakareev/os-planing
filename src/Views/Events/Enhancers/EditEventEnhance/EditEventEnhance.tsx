@@ -65,14 +65,21 @@ const EditEventEnhance = (WrapperComponent: React.ElementType) => {
       return await this.props.CreateEventMutation({
         variables: {
           ...values,
-          status: EventStatusEnum.noReport,
+          status: EventStatusEnum.waitReview,
         }
       });
     };
 
     updateEvent = async (values: IEventCreateVariables): Promise<QueryResult<IUpdateEventData>> => {
       return await this.props.UpdateEventMutation({
-        variables: values
+        variables: {
+          ...values,
+          ...(values.status !== EventStatusEnum.noReport ? {
+            status: EventStatusEnum.waitReview
+          } : {}),
+        },
+
+
       });
     };
 

@@ -3,7 +3,7 @@ import NotificationWrapper from "../../../../Components/NotificationWrapper/Noti
 import classNames from 'classnames';
 import {UserAvatar} from "../../../../Components/UserAvatar/UserAvatar";
 import {Link} from 'react-router-dom';
-import {INotification, NotificationTypeEnum} from "../../../../Apollo/schema";
+import {INotification, NotificationTypeEnum, TypeOfReportEnum} from "../../../../Apollo/schema";
 import {EventDateFormat} from "../../../Events/Helpers/EventDateFormat";
 
 
@@ -12,7 +12,7 @@ interface INotificationItemProps extends INotification {
 }
 
 
-const GetNotificationContent = ({type, report,monthReport, event, created}: INotification) => {
+const GetNotificationContent = ({type, report, monthReport, event, created, typeOfReport}: INotification) => {
 
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_APPROVED_MONTH_REPORT) {
     // TODO: добавить дату месячного отчета и ссылку на страницу отчета
@@ -33,23 +33,40 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
         Одобрен отчет мероприятия "{event && event.title}"
       </div>
       {
-        event && <Link to={`/report/${event && event.id}/${event && event.report}`} className="notifications-item__more">
+        event &&
+        <Link to={`/report/${event && event.id}/${event && event.report}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }
     </React.Fragment>)
   }
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_CREATE_EVENT) {
-    return (<React.Fragment>
-      <div className="notifications-item__text">
-        Создано мероприятие "{event && event.title}"
-      </div>
-      {
-        event && <Link to={`/event/${event.id}`} className="notifications-item__more">
-            Перейти к мероприятию
-        </Link>
-      }
-    </React.Fragment>)
+
+    if (typeOfReport === TypeOfReportEnum.monthly) {
+      return (<React.Fragment>
+        <div className="notifications-item__text">
+          Создан месячный отчет "{monthReport && monthReport.date && EventDateFormat(monthReport.date)}"
+        </div>
+        {
+          monthReport && <Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
+              Перейти к отчету
+          </Link>
+        }
+      </React.Fragment>)
+    } else {
+      return (<React.Fragment>
+        <div className="notifications-item__text">
+          Создано мероприятие "{event && event.title}"
+        </div>
+        {
+          event && <Link to={`/event/${event.id}`} className="notifications-item__more">
+              Перейти к мероприятию
+          </Link>
+        }
+      </React.Fragment>)
+    }
+
+
   }
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_UPDATE_EVENT) {
     return (<React.Fragment>
@@ -97,7 +114,8 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
 
       </div>
       {
-        report && report.event && <Link to={`/report/${report.event.id}/${report.id}`} className="notifications-item__more">
+        report && report.event &&
+        <Link to={`/report/${report.event.id}/${report.id}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }
@@ -108,7 +126,7 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT) {
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Ожидание месячного отчета от {monthReport && monthReport.date && EventDateFormat(monthReport.date)}.
+        Ожидание месячного отчета от {created && EventDateFormat(created)}.
       </div>
       {
         monthReport && <Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
@@ -116,13 +134,13 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
         </Link>
       }
       {
-        !monthReport && <Link to={`/month-report/create/${created && EventDateFormat(created)}`} className="notifications-item__more">
+        !monthReport && <Link to={`/month-report/create/${created}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }
     </React.Fragment>)
   }
-  if(type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_SAVE_MONTH_REPORT){
+  if (type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_SAVE_MONTH_REPORT) {
     return (<React.Fragment>
       <div className="notifications-item__text">
         {
@@ -133,13 +151,13 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
 
       </div>
       {
-        monthReport &&<Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
+        monthReport && <Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }
     </React.Fragment>)
   }
-  if(type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_UPDATE_MONTH_REPORT){
+  if (type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_UPDATE_MONTH_REPORT) {
     return (<React.Fragment>
       <div className="notifications-item__text">
         {
@@ -150,7 +168,7 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
 
       </div>
       {
-        monthReport &&<Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
+        monthReport && <Link to={`/month-report/${monthReport.id}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }

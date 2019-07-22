@@ -206,12 +206,16 @@ export interface IMassMedia {
   link: string;
 }
 
+export enum TypeOfReportEnum {
+  monthly = 'monthly',
+  noMonthly = '',
+}
 
 export interface INotification extends IBase {
   id?: string;
   isRead?: boolean;
   message?: string;
-  typeOfReport?: string;
+  typeOfReport?: TypeOfReportEnum;
   report?: IReport;
   monthReport?: IMonthReport;
   event: IEvent;

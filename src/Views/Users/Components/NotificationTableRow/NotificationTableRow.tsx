@@ -40,7 +40,7 @@ export const NotificationTableRow: React.FC<INotificationTableRowProps> = ({
       </a>
     </div>
     <div className="notifications-item__password">
-      -----
+      {user && user.password}
     </div>
     <div className="notifications-item__setting-links">
 

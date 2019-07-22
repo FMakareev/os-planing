@@ -12,10 +12,13 @@ import {
   IProject,
   IUpdateReportData,
   IUpdateReportVariables,
-  ICreateReportData, IEventCreateVariables, IMassMediaInput, IMassMedia
+  ICreateReportData,
+  IMassMedia,
+  IFile, EventStatusEnum
 } from "../../../../Apollo/schema";
 import {withRouter} from "react-router-dom";
 import {IResponseUploadFile} from "../../../Users/Enhancers/CreateReception/CreateReception";
+import ChangeStatusEvent from "../../../Calendar/Enhancers/ChangeStatusEvent/ChangeStatusEvent";
 
 interface IReportEditEnhancerProps extends MutateProps<any, any> {
   initialValues: IReport;
@@ -34,6 +37,7 @@ interface IReportEditEnhancerProps extends MutateProps<any, any> {
 const enhancer = compose(
   withRouter,
   FileUpload,
+  ChangeStatusEvent,
   graphql<IUpdateReportData, IUpdateReportVariables>(UpdateReportMutation, {
     name: 'UpdateReportMutation'
   }),
@@ -50,11 +54,11 @@ const ReportEditEnhancer = (WrapperComponent: React.ElementType) => {
       if (HasOwnProperty.call(values, 'projects')) {
         values.projects = values.projects.map((item: IProject) => item.id)
       }
-      if (HasOwnProperty.call(values, 'event') && typeof  values.event !== 'string') {
+      if (HasOwnProperty.call(values, 'event') && typeof values.event !== 'string') {
         values.event = values.event.id;
       }
       if (HasOwnProperty.call(values, 'massMedia')) {
-        values.massMedia = values.massMedia.map((item: IMassMedia ) => ({
+        values.massMedia = values.massMedia.map((item: IMassMedia) => ({
           link: item.link,
           title: item.title,
         }))
@@ -76,8 +80,13 @@ const ReportEditEnhancer = (WrapperComponent: React.ElementType) => {
       });
     };
 
-    uploadAllFiles = async (values: ICreateReportVariables): Promise<any> => {
+    /**
+     *
+     * @params {array of (string|File)} values.attachments
+     * */
+    uploadAllFiles = async (values: ICreateReportVariables): Promise<string[]> => {
       const promiseAll = values.attachments.reduce((accum: any[], item: any) => {
+        // На сервер отправляются только объекты с типом File, объкты типа IFile не должны загружатся на сервер т.к. они там уже есть
         if (item instanceof File) {
           accum.push(this.props.uploadFile(item));
         }
@@ -85,27 +94,29 @@ const ReportEditEnhancer = (WrapperComponent: React.ElementType) => {
       }, []);
 
       const data: IResponseUploadFile[] = await Promise.all(promiseAll);
-      console.log(data);
       return [
-        ...data.map((item) => item.file_data && item.file_data.id),
+        ...data.map((item) => item.file_data && item.file_data.id), // берем из объектов только id
         ...values.attachments
-          .filter((item) => !(item instanceof File))
-          .map((item) => item.id),
+          .filter((item) => !(item instanceof File)) // удаляем из массива все что имеет тип File
+          .map((item: IFile) => item.id), // берем из объектов только id
       ];
     };
 
     onSubmit = async (values: ICreateReportVariables, form: FormApi<any>) => {
+
       if (HasOwnProperty.call(values, 'attachments') && values.attachments.length) {
         values.attachments = await this.uploadAllFiles(values);
       }
 
       if (HasOwnProperty.call(values, 'id')) {
         const data = await this.updateReport(this.formatValues(values));
+        await this.props.onChangeStatus(values.event, EventStatusEnum.waitReview);
         if (data.data) {
           this.props.history.push(`/report/${data.data.updateReport.report.event.id}/${data.data.updateReport.report.id}`)
         }
       } else {
         const data = await this.createReport(this.formatValues(values));
+        await this.props.onChangeStatus(values.event, EventStatusEnum.waitReview);
         if (data.data) {
           this.props.history.push(`/report/${data.data.createReport.report.event.id}/${data.data.createReport.report.id}`)
         }

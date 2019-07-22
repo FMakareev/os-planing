@@ -15,18 +15,43 @@ export enum EventStatusEnum {
 
 
 export enum NotificationTypeEnum {
-  NOTIFICATION_TYPE_QUERY_SAVE_REPORT = 'NOTIFICATION_TYPE_QUERY_SAVE_REPORT',  // Запроса на сохранение отчета
-  NOTIFICATION_TYPE_CREATE_EVENT = 'NOTIFICATION_TYPE_CREATE_EVENT', // Создание нового мероприятия
-  NOTIFICATION_TYPE_DELETE_EVENT = 'NOTIFICATION_TYPE_DELETE_EVENT', // Удаление мероприятия
+  /**
+   * Запроса на сохранение отчета, вызывается когда обновляется событие и ему ставится статус WAIT_REVIEW
+   * либо когда создается отчет createReport
+   * */
+  NOTIFICATION_TYPE_QUERY_SAVE_REPORT = 'NOTIFICATION_TYPE_QUERY_SAVE_REPORT',
 
-  NOTIFICATION_TYPE_QUERY_GET_REPORT = 'NOTIFICATION_TYPE_QUERY_GET_REPORT',  // Запрос отчета
-  NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT = 'NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT',  // Запрос месячного отчета
-  NOTIFICATION_TYPE_APPROVED_REPORT = 'NOTIFICATION_TYPE_APPROVED_REPORT',  // Одобрение отчета
+  /**
+   * Создание нового мероприятия приходит админу, создается в createEvent
+   * */
+  NOTIFICATION_TYPE_CREATE_EVENT = 'NOTIFICATION_TYPE_CREATE_EVENT',
+  /**
+   * Создание нового мероприятия приходит админу, создается в createEvent
+   * */
+  NOTIFICATION_TYPE_UPDATE_EVENT = 'NOTIFICATION_TYPE_UPDATE_EVENT',
+
+  /**
+   * Удаление мероприятия
+   * */
+  NOTIFICATION_TYPE_DELETE_EVENT = 'NOTIFICATION_TYPE_DELETE_EVENT',
+
+  /**
+   * Запрос отчета вызывается в updateEvent когда статус события == WAIT_REPORT (ожидает отчета)
+   * */
+  NOTIFICATION_TYPE_QUERY_GET_REPORT = 'NOTIFICATION_TYPE_QUERY_GET_REPORT',
+
+  /**
+   * Одобрение отчета, вызывается в updateEvent когда статус события == OK (одобрено)
+   * */
+  NOTIFICATION_TYPE_APPROVED_REPORT = 'NOTIFICATION_TYPE_APPROVED_REPORT',
+
   NOTIFICATION_TYPE_APPROVED_MONTH_REPORT = 'NOTIFICATION_TYPE_APPROVED_MONTH_REPORT',  // Одобрение месячного отчета
-
+  NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT = 'NOTIFICATION_TYPE_QUERY_GET_MONTH_REPORT',  // Запрос месячного отчета
   NOTIFICATION_TYPE_QUERY_SAVE_MONTH_REPORT = 'NOTIFICATION_TYPE_QUERY_SAVE_MONTH_REPORT', // Запроса на сохранение месячного отчета,
   NOTIFICATION_TYPE_QUERY_UPDATE_MONTH_REPORT = 'NOTIFICATION_TYPE_QUERY_UPDATE_MONTH_REPORT' // Запроса на обовления месячного отчета
 }
+
+
 
 
 export interface IBase {

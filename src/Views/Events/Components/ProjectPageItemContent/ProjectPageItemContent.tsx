@@ -19,6 +19,13 @@ export const ProjectPageItemContent: React.FC<IProjectPageItemContentProps> = ({
       date={date}
       id={id}
       city={city}
+      reception={reception}
+      history={[
+        {
+          name: title,
+          to: `/event/${id}`,
+        },
+      ]}
     />
 
     <PageTitle>

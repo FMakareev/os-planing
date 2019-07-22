@@ -22,17 +22,20 @@ const SelectStatusWithSelect = withSelect(SelectStatus)();
 export const ProjectPageItemSidebar: React.FC<IProjectPageItemSidebarProps> = ({
                                                                                  date,
                                                                                  statusUpdated,
+                                                                                 created,
                                                                                  status,
                                                                                  id,
                                                                                  report,
                                                                                  onChangeStatus,
                                                                                  attachments,
                                                                                  pdfUrl,
-                                                                                 reception, zipFile
+                                                                                 reception,
+                                                                                 zipFile
                                                                                }) => (
   <div className="inner-info">
     <div className="inner-info__date">
       {statusUpdated && EventDateFormat(statusUpdated)}
+      {!statusUpdated && created && EventDateFormat(created)}
     </div>
     <div className="inner-info__status-wrap">
       <CheckAccess

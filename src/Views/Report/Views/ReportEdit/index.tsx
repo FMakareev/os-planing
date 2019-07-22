@@ -33,7 +33,21 @@ export const ReportEdit: React.FC<IReportEditProps> = ({data,report}) => (<Layou
   <EventBreadcrumbs
     date={data.date}
     id={data.id}
-    city={data.reception.city}
+    reception={data && data.reception}
+    history={[
+      {
+        name: data && data.title,
+        to: `/event/${data && data.id}`,
+      },
+      {
+        name: 'Отчет',
+        to: `/report/${data && data.id}/${report && report.id}`,
+      },
+      {
+        name: '',
+        to: ``,
+      },
+    ]}
   />
   <PageTitle>
     {data.title}

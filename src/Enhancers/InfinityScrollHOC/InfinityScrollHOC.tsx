@@ -10,7 +10,7 @@ interface IInfinityScrollHocOptions<TData = any> {
   operationOption?: OperationOption<any, IPagination<TData>, IInfinityScrollHocVariables>
 }
 
-interface IInfinityScrollHocVariables {
+export interface IInfinityScrollHocVariables {
   limit: number;
   page: number;
 
@@ -102,7 +102,10 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
       getNextItems = () => {
         this.setState((state: IInfinityScrollHocState) => ({
           page: typeof state.page === 'number' ? state.page + 1 : 1,
-        }), this.onFetchMore)
+        }), ()=>{
+          this.props.onChange && this.props.onChange(this.state);
+          this.onFetchMore()
+        })
       };
 
 

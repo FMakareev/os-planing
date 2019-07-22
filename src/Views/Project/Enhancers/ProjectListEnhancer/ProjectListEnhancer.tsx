@@ -1,5 +1,5 @@
 import * as React from 'react';
-import InfinityScrollHoc from "../../../../Enhancers/InfinityScrollHOC/InfinityScrollHOC";
+import InfinityScrollHoc, {IInfinityScrollHocVariables} from "../../../../Enhancers/InfinityScrollHOC/InfinityScrollHOC";
 import InfinityScroll from "../../../../Components/InfinityScroll/InfinityScroll";
 import ProjectListQuery from './ProjectListQuery.graphql';
 import Preloader, {
@@ -10,6 +10,8 @@ import ProjectItem from "../../Components/ProjectItem/ProjectItem";
 import PopupEditProject from "../../Components/PopupEditProject/PopupEditProject";
 import {IProject} from "../../../../Apollo/schema";
 import config from '../../../../config';
+import PopupDelete from "../../../Users/Components/PopupDelete/PopupDelete";
+import DeleteProjectEnhancer from "../DeleteProjectEnhancer/DeleteProjectEnhancer";
 
 interface IProjectListProps {
   [prop: string]: any
@@ -23,9 +25,16 @@ const InfinityScrollWithQuery = InfinityScrollHoc(InfinityScroll)({
   }
 });
 
+const PopupDeleteWithQuery = DeleteProjectEnhancer(PopupDelete);
 
 const ProjectListEnhancer: React.FC<IProjectListProps> = () => {
+
+  const [state, setState] = React.useState<IInfinityScrollHocVariables>(config.pagination);
+
   return (<InfinityScrollWithQuery
+    onChange={(value: IInfinityScrollHocVariables)=>{
+      console.log('onChange: ', value);
+    }}
     PreloaderComponent={<Preloader
       style={{
         margin: '50px auto',
@@ -37,7 +46,14 @@ const ProjectListEnhancer: React.FC<IProjectListProps> = () => {
 
     ItemComponent={({id,name}: IProject) => (
       <ProjectItem
-        EditComponent={PopupEditProject}
+        EditComponent={(props: any)=>(<PopupEditProject
+          {...props}
+          pagination={state}
+        />)}
+        DeleteComponent={(props: any)=>(<PopupDeleteWithQuery
+          {...props}
+          pagination={state}
+        />)}
         id={id}
         name={name}
       />)}

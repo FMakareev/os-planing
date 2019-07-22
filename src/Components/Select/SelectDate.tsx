@@ -2,6 +2,7 @@ import * as React from 'react';
 import {SelectDropDownList} from './SelectDropDownList';
 import SelectDateToggle from "./SelectDateToggle";
 import {ISelectBaseAPI} from "./withSelect";
+import classNames from 'classnames';
 
 interface ISelectDateProps extends ISelectBaseAPI {
   [prop: string]: any
@@ -26,10 +27,11 @@ export const SelectDate: React.FC<ISelectDateProps> = ({
                                                          onKeyDown,
                                                          currentEvent,
                                                          labelKey,
-                                                         valueKey
+                                                         valueKey,
+                                                         className
                                                        }) => {
   return (
-    <div ref={wrapperRef} className="jq-selectbox jqselect changed">
+    <div ref={wrapperRef} className={classNames("jq-selectbox jqselect changed", className)}>
       <SelectDateToggle
         indexActiveOption={indexActiveOption}
         labelKey={labelKey}

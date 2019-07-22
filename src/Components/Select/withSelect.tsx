@@ -403,7 +403,8 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
       }
 
       if (substring) {
-        return Array.isArray(options) ? options.filter((item: ISelectOption) => item[labelKey].indexOf(substring) !== -1) : [];
+        return Array.isArray(options) ? options.filter((item: ISelectOption) =>
+          typeof item[labelKey] === 'string' ? item[labelKey].indexOf(substring) === 0 : false) : [];
       }
       return options;
     };

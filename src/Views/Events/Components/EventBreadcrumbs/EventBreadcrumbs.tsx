@@ -3,16 +3,21 @@ import {EventDateFormat} from "../../Helpers/EventDateFormat";
 import {Breadcrumbs} from "../../../../Components/Breadcrumbs/Breadcrumbs";
 
 interface IEventBreadcrumbsProps {
-  city?: string;
+  reception?: {
+    city: string;
+    id?: string;
+  };
+  history?: any[];
+
   [prop: string]: any
 }
 
-const GetCalendarLink = (date: string) => {
+const GetCalendarLink = (date: string, query?: string) => {
   const dateInst = new Date(date);
-  return `/?year=${dateInst.getFullYear()}&month=${dateInst.getMonth()}`
+  return `/?year=${dateInst.getFullYear()}&month=${dateInst.getMonth()}${query}`
 };
 
-const EventBreadcrumbs: React.FC<IEventBreadcrumbsProps> = ({date, city}) => {
+const EventBreadcrumbs: React.FC<IEventBreadcrumbsProps> = ({date, reception, history}) => {
   return (
     <Breadcrumbs history={[
       {
@@ -24,9 +29,10 @@ const EventBreadcrumbs: React.FC<IEventBreadcrumbsProps> = ({date, city}) => {
         to: date && GetCalendarLink(date),
       },
       {
-        name: city || '',
-        to: ``
+        name: reception && reception.city || '',
+        to: date && GetCalendarLink(date, `&reception=${reception && reception.id}`)
       },
+      ...(history ? history : []),
     ]}/>
   );
 };

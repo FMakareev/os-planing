@@ -27,8 +27,16 @@ export const SelectToggleTextField: React.FC<ISelectToggleProps> = ({
                                                                     }) => {
 
   return (
-    <div onClick={onClick} ref={wrapperRef} className={classNames("form__group form__group--select", className)}>
-      <div className="jq-selectbox jqselect form__select">
+    <div
+      onClick={onClick}
+      ref={wrapperRef}
+      className={classNames("form__group form__group--select", className)}
+    >
+      <div
+        className={classNames("jq-selectbox jqselect form__select", {
+          'dropdown opened': meta && meta.active,
+        })}
+      >
         <div className="jq-selectbox__select">
           <div
             style={{

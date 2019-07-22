@@ -30,10 +30,10 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_APPROVED_REPORT) {
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Одобрен отчет проекта "{report && report.event.title}"
+        Одобрен отчет мероприятия "{event && event.title}"
       </div>
       {
-        report && <Link to={`/report/${report.event.id}/${report.id}`} className="notifications-item__more">
+        event && <Link to={`/report/${event && event.id}/${event && event.report}`} className="notifications-item__more">
             Перейти к отчету
         </Link>
       }
@@ -42,10 +42,22 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_CREATE_EVENT) {
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Создано новое мероприятие "{event && event.title}"
+        Создано мероприятие "{event && event.title}"
       </div>
       {
-        event && <Link to={`/event/{event.id}`} className="notifications-item__more">
+        event && <Link to={`/event/${event.id}`} className="notifications-item__more">
+            Перейти к мероприятию
+        </Link>
+      }
+    </React.Fragment>)
+  }
+  if (type === NotificationTypeEnum.NOTIFICATION_TYPE_UPDATE_EVENT) {
+    return (<React.Fragment>
+      <div className="notifications-item__text">
+        Обновлено мероприятие "{event && event.title}"
+      </div>
+      {
+        event && <Link to={`/event/${event.id}`} className="notifications-item__more">
             Перейти к мероприятию
         </Link>
       }
@@ -79,7 +91,7 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
       <div className="notifications-item__text">
         {
           !monthReport && <span>
-            Изменен отчет мероприятия "{report && report.event.title}"
+            Сохранен отчет мероприятия "{report && report.event.title}"
           </span>
         }
 
@@ -132,7 +144,7 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
       <div className="notifications-item__text">
         {
           monthReport && <span>
-            Изменен месячный отчет от {monthReport.date && EventDateFormat(monthReport.date)}
+            Сохранен месячный отчет от {monthReport.date && EventDateFormat(monthReport.date)}
           </span>
         }
 
@@ -152,7 +164,7 @@ const GetNotificationContent = ({type, report,monthReport, event, created}: INot
 
 
 export const NotificationItem: React.FC<INotificationItemProps> = (prop) => {
-  const {fromUser, to, report, createAt, message, isRead} = prop;
+  const {fromUser, to, report, created, message, isRead} = prop;
   return (
     <NotificationWrapper>
       <div
@@ -175,7 +187,7 @@ export const NotificationItem: React.FC<INotificationItemProps> = (prop) => {
           </div>
         }
         <div className="notifications-item__date">
-          {createAt}
+          {created && EventDateFormat(created)}
         </div>
       </div>
 

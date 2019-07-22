@@ -29,7 +29,7 @@ export const MonthReportEdit: React.FC<IMonthReportEditProps> = ({monthReport}) 
   >
     <EventBreadcrumbs
       date={monthReport && monthReport.date}
-      city={monthReport && monthReport.reception && monthReport.reception.city}
+      reception={monthReport && monthReport.reception}
       id={monthReport && monthReport.id}
     />
     <PageTitle>

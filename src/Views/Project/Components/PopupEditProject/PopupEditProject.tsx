@@ -26,7 +26,6 @@ const PopupEditProject: React.FC<IPopupAddProjectProps> = ({
         onClose={() => {
           const form = document.getElementById('FormUpdateProject');
           form && form.dispatchEvent(new Event('reset', {cancelable: true}));
-
           onClose && onClose()
         }}
         className="popup--add-project"

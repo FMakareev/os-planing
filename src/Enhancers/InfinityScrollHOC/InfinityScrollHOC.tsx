@@ -42,6 +42,7 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
           ...props.options,
         })
       },
+      // @ts-ignore
     })(class extends React.Component<IInfinityScrollHocProps, IInfinityScrollHocState> {
 
       constructor(props: IInfinityScrollHocProps) {
@@ -59,6 +60,7 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
 
         }
       }
+
 
       componentDidMount() {
         // const {data: {refetch, subscribeToMore}, options} = this.props;
@@ -100,9 +102,24 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
       };
 
       getNextItems = () => {
-        this.setState((state: IInfinityScrollHocState) => ({
-          page: typeof state.page === 'number' ? state.page + 1 : 1,
-        }), ()=>{
+        this.setState((state: IInfinityScrollHocState) => {
+          const {data} = this.props;
+          if (data && data[queryName]) {
+            if(data[queryName].pageInfo.prevPage === 1 && data[queryName].pageInfo.nextPage === 2){
+              return ({
+                page: 2,
+              })
+            } else {
+              return ({
+                page: typeof state.page === 'number' ? state.page + 1 : 1,
+              })
+            }
+          } else {
+            return ({
+              page: typeof state.page === 'number' ? state.page + 1 : 1,
+            })
+          }
+        }, () => {
           this.props.onChange && this.props.onChange(this.state);
           this.onFetchMore()
         })
@@ -111,14 +128,12 @@ const InfinityScrollHoc = <TData extends any>(WrapperComponent: React.ElementTyp
 
       render() {
         const {data} = this.props;
-
         return (<WrapperComponent
           getNextItems={this.getNextItems}
 
           {...this.props}
           {...data}
-
-          data={data[queryName]}
+           data={data[queryName]}
         />)
       }
     })

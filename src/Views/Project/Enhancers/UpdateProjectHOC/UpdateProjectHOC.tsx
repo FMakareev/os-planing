@@ -23,7 +23,6 @@ const UpdateProjectHOC = (WrapperComponent: React.ElementType) => {
 
        updateProject = async (values: IProject, form: FormApi<IProject>) => {
          const {mutate,onClose} = this.props;
-
          const {message}: any = await mutate({
            variables: values,
            refetchQueries: [RefetchProjectListQueries()]
@@ -41,6 +40,7 @@ const UpdateProjectHOC = (WrapperComponent: React.ElementType) => {
            setTimeout(form.reset, 500);
            onClose && onClose();
          }
+
        };
 
 

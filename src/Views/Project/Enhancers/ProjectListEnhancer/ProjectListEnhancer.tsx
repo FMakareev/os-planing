@@ -17,23 +17,24 @@ interface IProjectListProps {
   [prop: string]: any
 }
 
-const InfinityScrollWithQuery = InfinityScrollHoc(InfinityScroll)({
-  query: ProjectListQuery,
-  queryName: 'projectPagination',
-  variables:{
-    ...config.pagination,
-  }
-});
+const InfinityScrollWithQuery = (props: any) => {
+  const Component = InfinityScrollHoc(InfinityScroll)({
+    query: ProjectListQuery,
+    queryName: 'projectPagination',
+  });
+
+  return <Component {...props}/>;
+}
 
 const PopupDeleteWithQuery = DeleteProjectEnhancer(PopupDelete);
 
 const ProjectListEnhancer: React.FC<IProjectListProps> = () => {
 
-  const [state, setState] = React.useState<IInfinityScrollHocVariables>(config.pagination);
+  const [state] = React.useState<IInfinityScrollHocVariables>(config.pagination);
 
   return (<InfinityScrollWithQuery
-    onChange={(value: IInfinityScrollHocVariables)=>{
-      console.log('onChange: ', value);
+    options={{
+      variables: state,
     }}
     PreloaderComponent={<Preloader
       style={{
@@ -44,16 +45,10 @@ const ProjectListEnhancer: React.FC<IProjectListProps> = () => {
       size={PreloaderSizeEnum.md}
     />}
 
-    ItemComponent={({id,name}: IProject) => (
+    ItemComponent={({id, name}: IProject) => (
       <ProjectItem
-        EditComponent={(props: any)=>(<PopupEditProject
-          {...props}
-          pagination={state}
-        />)}
-        DeleteComponent={(props: any)=>(<PopupDeleteWithQuery
-          {...props}
-          pagination={state}
-        />)}
+        EditComponent={PopupEditProject}
+        DeleteComponent={PopupDeleteWithQuery}
         id={id}
         name={name}
       />)}

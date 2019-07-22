@@ -88,7 +88,7 @@ const GetNotificationContent = ({type, report, monthReport, event, created, type
   if (type === NotificationTypeEnum.NOTIFICATION_TYPE_QUERY_GET_REPORT) {
     return (<React.Fragment>
       <div className="notifications-item__text">
-        Ожидает отчета по проекту "{event && event.title}"
+        Ожидает отчета по мероприятию "{event && event.title}"
       </div>
       {
         event && event.report && <Link to={`/report/${event.id}/${event.report}`} className="notifications-item__more">

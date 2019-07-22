@@ -15,6 +15,7 @@ const GetReportEnhancer = (WrappedComponent: React.ElementType) => (props: IGetR
   return (
     <Query
       <IReportItemData, IReportItemVariables>
+      fetchPolicy={'no-cache'}
       skip={(data && !data.report) || (data && !data.report && !params.reportId) || !data}
       query={ReportItemQuery}
       variables={{

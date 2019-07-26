@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactHtmlParser from "react-html-parser";
 
 interface IReportContentCellProps {
   label: string;
@@ -15,7 +16,7 @@ export const ReportContentCell: React.FC<IReportContentCellProps> = ({label, con
       }
     </div>
     <div className="report-cell_text">
-      {content}
+      {content && ReactHtmlParser(content)}
     </div>
   </React.Fragment>
 );

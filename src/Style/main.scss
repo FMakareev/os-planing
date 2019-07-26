@@ -31,6 +31,11 @@ label,
 select,
 textarea {
   font-family: 'Montserrat', sans-serif;
+  &::placeholder{
+    color: #757575;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
 }
 
 .page {
@@ -1193,6 +1198,22 @@ br, .br {
   }
 }
 
+.public-DraftEditorPlaceholder-root{
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #757575;
+  font-weight: 500;
+
+  font-family: 'Montserrat', sans-serif;
+}
+.DraftEditor-root{
+
+  position: relative;
+}
+.public-DraftEditor-content{
+  min-height: 90px;
+}
 
 @import 'calendar';
 @import 'buttons';

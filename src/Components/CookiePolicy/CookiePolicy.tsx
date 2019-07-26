@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import {Link} from 'react-router-dom';
 
 interface ICookiePolicyProps {
   [prop: string]: any
@@ -20,12 +21,9 @@ const CookiePolicy: React.FC<ICookiePolicyProps> = () => {
         className="cookies__text"
       >
         Мы используем файлы cookies для корректной работы сайта. Оставаясь на этом сайте, вы
-        соглашаетесь с
-        <a
-          href="javascript:void(0);"
-        >
+        соглашаетесь с  <Link to={'/privacy'}>
           условиями использования файлов cookies
-        </a>
+        </Link>
       </div>
       <a
         onClick={() => {

@@ -85,6 +85,7 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
         </Field>
         <Field
           name="task"
+          as={'textarea'}
           type="text"
           placeholder=""
           label={'Задача'}
@@ -98,6 +99,7 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
         <Field
           name="producer"
           type="text"
+          as={'textarea'}
           placeholder={"ФИО, место работы"}
           label={'Кто поставил задачу'}
           disabled={loading}
@@ -109,6 +111,7 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
         <Field
           name="goals"
           type="text"
+          as={'textarea'}
           placeholder={""}
           label={'Цели мероприятия'}
           disabled={loading}
@@ -132,6 +135,7 @@ export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialV
           name="participantsAbout"
           type="text"
           placeholder={""}
+          as={'textarea'}
           label={'ФИО основных участников'}
           disabled={loading}
         >

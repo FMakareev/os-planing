@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import SaveIcon from "../../Assets/img/spritesvg/save.svg";
 import {InvalidFeedback} from '../InvalidFeedback/InvalidFeedback';
 import TextFieldLabel from '../TextFieldLabel/TextFieldLabel';
+import RichTextEditor from "../RichTextEditor/RichTextEditor";
 
 export interface ITextFieldProps {
   input?: FieldInputProps<any, any>;
@@ -60,7 +61,7 @@ export const TextField: React.FC<ITextFieldProps> = ({
 
   const [isFocus, toggleFocus] = React.useState(false);
 
-  const Field = as === 'textarea' ? 'textarea' : 'input';
+  const Field = as === 'textarea' ? RichTextEditor : 'input';
   // saveField - отвечает за то сохранилось ли текущее поле при запросе к беку или нет, нужно тоб показать какие поля бли сохранен, а какие нет
   // message - текст ошибки
   const {saveField, message} = getStatusSubmitSaveField(meta);

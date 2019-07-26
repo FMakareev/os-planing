@@ -4,7 +4,7 @@ import {ProjectPlace} from '../../../../Components/ProjectPlace/ProjectPlace';
 import {TagList} from "../../../../Components/TagList/TagList";
 import {Button, ButtonAsEnum} from '../../../../Components/Button/Button';
 import {IEvent} from "../../../../Apollo/schema";
-
+import ReactHtmlParser from 'react-html-parser';
 import EventBreadcrumbs from "../EventBreadcrumbs/EventBreadcrumbs";
 import CheckAccess, {ICheckAccessApi} from "../../../../Enhancers/CheckAccess/CheckAccess";
 
@@ -54,7 +54,7 @@ export const ProjectPageItemContent: React.FC<IProjectPageItemContentProps> = ({
 
 
       <div>
-        {text}
+        {text && ReactHtmlParser(text)}
       </div>
 
     </div>

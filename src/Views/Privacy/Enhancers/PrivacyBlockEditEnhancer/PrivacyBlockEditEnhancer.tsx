@@ -50,7 +50,6 @@ const PrivacyBlockEditEnhancer = (WrapperComponent: React.ElementType) => {
     };
 
     onSubmit = async (values: IPrivacyBlock): Promise<any> => {
-      console.log(values);
       if (HasOwnProperty.call(values, 'id')) {
         await this.props.UpdatePrivacy({
           variables: values,

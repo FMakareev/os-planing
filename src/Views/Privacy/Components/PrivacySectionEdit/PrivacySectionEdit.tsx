@@ -36,6 +36,17 @@ const PrivacySectionEdit: React.FC<IPrivacySectionEditProps> = ({onSubmit, loadi
     <Form
       initialValues={initialValues}
       onSubmit={onSubmit}
+      validate={(value)=>{
+        const errors: any = {};
+        if(!value.title){
+          errors.title = 'Обязательно для заполнения'
+        }
+        if(!value.content){
+          errors.content = 'Обязательно для заполнения'
+        }
+
+        return errors
+      }}
       render={({
                  submitError,
                  handleSubmit,

@@ -73,9 +73,10 @@ export const FormEventEditor: React.FC<IFormEventEditorProps> = ({initialValues,
         </Field>
 
         <Field
-          name="city"
-          type="text"
-          placeholder="Название Города"
+          as={'textarea'}
+          name={"city"}
+          type={"text"}
+          placeholder={"Название Города"}
           label={'Город'}
           disabled={true}
         >
@@ -90,10 +91,8 @@ export const FormEventEditor: React.FC<IFormEventEditorProps> = ({initialValues,
               as={'textarea'}
               name="projects"
               type="text"
-              placeholder="Описание мероприятия"
               label={'Текст'}
               disabled={loading}
-
             >
               {
                 (props: FieldProps<any, any>) => (<TagField

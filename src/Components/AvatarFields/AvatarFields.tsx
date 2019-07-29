@@ -35,7 +35,10 @@ export class AvatarFields extends React.Component<IAvatarFieldsProps, IAvatarFie
         });
       };
       reader.onerror = () => {
-        console.log(reader.error);
+        if(reader.error){
+          Logging(reader.error.toString(),'error');
+        }
+
       };
 
       reader.readAsDataURL(file);

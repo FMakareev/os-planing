@@ -21,7 +21,6 @@ const AddProjectHoc = (WrapperComponent: React.ElementType) => {
      return enhance(class extends React.Component<IAddProjectHocProps | any> {
        createProject = async (values: IProject, form: FormApi<IProject>) => {
 
-         console.log(form);
 
          const {mutate,onClose} = this.props;
 
@@ -51,7 +50,6 @@ const AddProjectHoc = (WrapperComponent: React.ElementType) => {
 
        render(){
          const {result} = this.props;
-         console.log(this.props);
          return <WrapperComponent
            loading={result.loading}
            onSubmit={this.createProject}

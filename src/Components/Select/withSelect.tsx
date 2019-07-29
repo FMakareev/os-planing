@@ -151,8 +151,7 @@ export const withSelect = <T extends {}>(WrappedComponent: React.ComponentType |
       if (Array.isArray(this.props.selected) || this.props.selected) {
         value = this.props.selected;
       }
-      console.log('initialStateIsMulti this.props: ', this.props);
-      console.log('initialStateIsMulti value: ', value);
+
       return {
         selected: this.props.selected,
         value: value,

@@ -57,7 +57,7 @@ const EventDetailsCard: React.FC<IEventDetailsCardProps> = ({status, text, id, p
         projects={projects}
       />
       <div className="city-details__text">
-        {text && text.slice(0, 124) + '...'}
+        {text && text.replace(/(<([^>]+)>)/ig, "").slice(0, 124) + '...'}
       </div>
     </div>
   );

@@ -55,8 +55,6 @@ const EventPageEnhancer = (WrapperComponent: React.ElementType) => {
 
     render() {
       const {match: {params}} = this.props;
-      console.log(this.props)
-      console.log('EventPageEnhancer:', this.props);
 
       return (<Query
         <IEventItemData, IEventItemVariables>

@@ -84,7 +84,6 @@ export class StatisticContextProvider extends React.Component<any, IState> {
 
   /** @desc */
   onChangeStartDate = (startDate: string, startTime?: number): void => {
-    console.log(startTime);
     if (typeof startTime === 'number' && startTime >= 0) {
       this.setState({
         startDate: new Date(new Date(startDate).setHours(startTime)).toISOString(),

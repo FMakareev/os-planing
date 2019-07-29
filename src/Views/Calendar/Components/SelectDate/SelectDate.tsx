@@ -7,7 +7,6 @@ interface ISelectDateProps {
 
 
 export const ReactSelectDate: React.FC<ISelectDateProps> = (props) => {
-    console.log(props);
     return (
          <Select
              {...props}

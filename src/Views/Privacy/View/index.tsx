@@ -30,7 +30,6 @@ export const Privacy: React.FC<IProps> = ({privacyBlockList}) => {
       <div className="inner__content">
         {
           privacyBlockList && privacyBlockList.map((item: IPrivacyBlock, index: number) => {
-            console.log(item.title);
             return (<Section key={`privacy${index}`} name={item.title+index}>
               <PrivacySectionCompose privacy={item}/>
             </Section>)

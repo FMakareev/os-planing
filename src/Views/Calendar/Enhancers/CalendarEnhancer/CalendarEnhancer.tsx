@@ -39,7 +39,6 @@ const CalendarEnhancer = (WrapperComponent: React.ElementType) => {
     get initialState() {
       const {month, year, reception, project} = this.getQueryParamInUrl();
       const date = new Date();
-      console.log(this.props);
       if (year) {
         date.setFullYear(year);
       }
@@ -100,7 +99,6 @@ const CalendarEnhancer = (WrapperComponent: React.ElementType) => {
       } else if (month >= 0) {
         date.setMonth(month);
       }
-      console.log(date);
       this.setState(this.getCurrentMonth(date))
     };
 

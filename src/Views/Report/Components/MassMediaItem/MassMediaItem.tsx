@@ -12,7 +12,7 @@ const MassMediaItem: React.FC<IMassMediaItemProps> = ({
                                                       }) => {
   return (
     <div className={'mass-media__wrapper'}>
-      <p className={'mass-media__title'}>
+      <p className={'mass-media__title text-content'}>
         {title && ReactHtmlParser(title)}
       </p>
       <a className={'mass-media__link'} href={link} target={'_blank'}>{link}</a>

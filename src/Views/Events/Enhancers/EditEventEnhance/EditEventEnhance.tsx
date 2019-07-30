@@ -65,7 +65,7 @@ const EditEventEnhance = (WrapperComponent: React.ElementType) => {
       return await this.props.CreateEventMutation({
         variables: {
           ...values,
-          status: EventStatusEnum.waitReport,
+          status: EventStatusEnum.noReport,
         }
       });
     };

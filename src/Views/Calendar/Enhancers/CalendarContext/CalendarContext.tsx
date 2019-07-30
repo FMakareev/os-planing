@@ -9,13 +9,21 @@ interface IState {
   month: number;
   year: number;
   day?: number;
+
   currentDay?: string;
+  /** @desc список недель которые сейчас будут отрендерены,
+   *  каждая неделя это рандомный timestamp в диапозоне от начала недели до конца
+   *  как правило это текущий день недели и время на каждой неделе
+   *  */
   weeks?: string[];
   reception?: string;
   project?: string;
 }
 
-interface IProps {
+interface IProps extends RouteComponentProps {
+  /** @desc количество недель отображаемых в калентадаре */
+  numberOfWeeksRender?: number;
+
   [prop: string]: any
 }
 
@@ -61,9 +69,13 @@ export const WithCalendar = (WrapperComponent: React.ElementType) => (props: any
 );
 
 
-export class CalendarContextProvider extends React.Component<RouteComponentProps<IProps>, IState> {
+export class CalendarContextProvider extends React.Component<IProps, IState> {
 
-  constructor(props: RouteComponentProps<IProps>) {
+  static defaultProps = {
+    numberOfWeeksRender: 6,
+  };
+
+  constructor(props: IProps) {
     super(props);
     this.state = this.initialState;
   }
@@ -121,7 +133,7 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
   };
 
   /**
-   * @desc
+   * @desc изменяем дату или год или и то и другое, возвращает новое состояние даты
    * */
   changeDate = ({year, month}: any): void => {
     let date = new Date();
@@ -132,7 +144,7 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
     }
     if (month >= 0) {
       date.setMonth(month);
-    }else {
+    } else {
       date.setMonth(this.state.month);
     }
     this.setState((state) => ({
@@ -142,10 +154,10 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
   };
 
   /**
-   * @desc
+   * @desc формуриет набор параметров для отображения месяца
    * */
   getCurrentMonth = (date: Date) => {
-
+    const {numberOfWeeksRender = 6} = this.props;
     const month: number = date.getMonth();
     const year: number = date.getFullYear();
     let weeks: any[] = [];
@@ -155,7 +167,7 @@ export class CalendarContextProvider extends React.Component<RouteComponentProps
 
     let now = Date.parse(date.toISOString());
     weeks.push(now - (day - 1) * msInPerDay);
-    for (let i = 1; i < 5; i += 1) {
+    for (let i = 1; i < numberOfWeeksRender; i += 1) {
       weeks.push(weeks[i - 1] + 7 * msInPerDay);
     }
 

@@ -53,7 +53,7 @@ export const ProjectPageItemContent: React.FC<IProjectPageItemContentProps> = ({
       />
 
 
-      <div>
+      <div className={'text-content text-content'}>
         {text && ReactHtmlParser(text)}
       </div>
 

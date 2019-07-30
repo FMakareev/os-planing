@@ -16,6 +16,7 @@ interface IReportItemContentProps extends IReport {
 export const ReportItemContent: React.FC<IReportItemContentProps> = ({
                                                                        date,
                                                                        id,
+  place,
                                                                        task,
                                                                        producer,
                                                                        goals,
@@ -48,7 +49,7 @@ export const ReportItemContent: React.FC<IReportItemContentProps> = ({
       </PageTitle>
       <div className="inner__content">
         <ProjectPlace>
-          {event.reception.city}
+          {place}
         </ProjectPlace>
         <TagList projects={event.projects}/>
 

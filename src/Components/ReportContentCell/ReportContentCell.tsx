@@ -15,7 +15,7 @@ export const ReportContentCell: React.FC<IReportContentCellProps> = ({label, con
         label
       }
     </div>
-    <div className="report-cell_text">
+    <div className="report-cell_text text-content">
       {content && ReactHtmlParser(content)}
     </div>
   </React.Fragment>

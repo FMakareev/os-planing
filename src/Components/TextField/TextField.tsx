@@ -61,7 +61,7 @@ export const TextField: React.FC<ITextFieldProps> = ({
 
   const [isFocus, toggleFocus] = React.useState(false);
 
-  const Field = as === 'textarea' ? RichTextEditor : 'input';
+  const Field = as === 'textarea' ? 'textarea' : 'input';
   // saveField - отвечает за то сохранилось ли текущее поле при запросе к беку или нет, нужно тоб показать какие поля бли сохранен, а какие нет
   // message - текст ошибки
   const {saveField, message} = getStatusSubmitSaveField(meta);

@@ -153,6 +153,13 @@ export class CalendarContextProvider extends React.Component<IProps, IState> {
     }))
   };
 
+  getFirstDateOfTheWeek = (date: Date): Date => {
+    let currentDayWeek = date.getDay() === 0 ? 7 : date.getDay()-1;
+    let currentDateWeek = date.getDate();
+    date.setDate(currentDateWeek - currentDayWeek);
+    return date
+  }
+
   /**
    * @desc формуриет набор параметров для отображения месяца
    * */
@@ -166,9 +173,18 @@ export class CalendarContextProvider extends React.Component<IProps, IState> {
     const msInPerDay: number = 86400000;
 
     let now = Date.parse(date.toISOString());
+
     weeks.push(now - (day - 1) * msInPerDay);
+
     for (let i = 1; i < numberOfWeeksRender; i += 1) {
-      weeks.push(weeks[i - 1] + 7 * msInPerDay);
+      const week = weeks[i - 1] + 7 * msInPerDay;
+      const d = new Date(week);
+
+      let firstDateWeek = this.getFirstDateOfTheWeek(d);
+
+      if(firstDateWeek.getMonth() === month){
+        weeks.push(week);
+      }
     }
 
     weeks = weeks.map((item: number): any => new Date(item).toISOString());

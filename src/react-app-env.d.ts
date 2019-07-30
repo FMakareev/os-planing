@@ -4,6 +4,7 @@ declare module '@brigad/redux-rest-easy'
 declare module 'react-smart-sections'
 declare module 'react-html-parser'
 declare module 'react-sticky'
+declare module 'final-form-focus'
 
 
 interface Window {

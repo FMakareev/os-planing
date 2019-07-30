@@ -13,7 +13,7 @@ export const ChangePassword = () => (<div className="inner inner--password">
     history={[
       {
         name: 'Настройки',
-        to: '/profile-settings'
+        to: '/settings'
       },
       {
         name: 'Сменить пароль',

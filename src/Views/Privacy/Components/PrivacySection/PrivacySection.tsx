@@ -14,7 +14,7 @@ export const PrivacySection: React.FC<IPrivacySectionProps> = ({id, title, conte
     <h2 className="h2">
       {title}
     </h2>
-    <div style={{marginBottom: '16px'}}>
+    <div style={{marginBottom: '16px'}} className={'text-content'}>
       {content && ReactHtmlParser(content)}
     </div>
     <CheckAccess

@@ -39,8 +39,10 @@ export const SelectToggleTextField: React.FC<ISelectToggleProps> = ({
       >
         <div className="jq-selectbox__select">
           <div
+            title={meta && meta.focus && findSubstring ? findSubstring : !Array.isArray(value) && value ? value[labelKey] : ''}
             style={{
               position: 'absolute',
+              width: 'calc(100% - 30px)',
             }}
             className="jq-selectbox__select-text"
           >

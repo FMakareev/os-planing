@@ -5,6 +5,7 @@ import {TextField} from "../../../../Components/TextField/TextField";
 import {Button, ButtonStyleEnum} from "../../../../Components/Button/Button";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
 import {IPrivacyBlock} from "../../../../Apollo/schema";
+import createDecorator from "final-form-focus";
 
 
 interface IPrivacySectionEditProps {
@@ -17,6 +18,7 @@ interface IPrivacySectionEditProps {
   [prop: string]: any
 }
 
+const focusOnError = createDecorator();
 
 const PrivacySectionEdit: React.FC<IPrivacySectionEditProps> = ({onSubmit, loading, initialValues, cancelCallback}) => {
   let id = `PrivacySectionEdit-${initialValues.index}`;
@@ -34,6 +36,7 @@ const PrivacySectionEdit: React.FC<IPrivacySectionEditProps> = ({onSubmit, loadi
 
   return (
     <Form
+      decorators={[focusOnError]}
       initialValues={initialValues}
       onSubmit={onSubmit}
       validate={(value)=>{

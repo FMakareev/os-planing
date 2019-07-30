@@ -5,6 +5,7 @@ import {Field, FieldProps, Form, FormRenderProps} from "react-final-form";
 import {ReactNode} from "react";
 import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFeedback";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
+import createDecorator from "final-form-focus";
 
 interface IFormChangePasswordProps {
   initialValues: IFormChangePasswordState;
@@ -50,12 +51,14 @@ const FormChangePasswordValidation = (values: IFormChangePasswordState) => {
   }
   return errors;
 };
+const focusOnError = createDecorator();
 
 
 export const FormChangePassword: React.FC<IFormChangePasswordProps> = ({onSubmit, loading, initialValues}) => (
   <Form
     initialValues={initialValues}
     validate={FormChangePasswordValidation}
+    decorators={[focusOnError]}
     onSubmit={onSubmit}
     render={({
                submitError,

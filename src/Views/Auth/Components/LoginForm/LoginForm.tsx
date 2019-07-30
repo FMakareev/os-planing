@@ -5,6 +5,7 @@ import {ReactNode} from 'react';
 import {TextField} from '../../../../Components/TextField/TextField';
 import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFeedback";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
+import createDecorator from "final-form-focus";
 
 interface ILoginFormProps {
   onSubmit(values: any): Promise<any>;
@@ -29,6 +30,7 @@ const LoginFormValidate = (values: LoginFormState) => {
   return errors
 };
 
+const focusOnError = createDecorator();
 
 const LoginForm: React.FC<ILoginFormProps> = ({
                                                 onSubmit,
@@ -37,6 +39,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
   return (
     <Form
       validate={LoginFormValidate}
+      decorators={[focusOnError]}
       onSubmit={onSubmit}
       render={({
                  submitError,

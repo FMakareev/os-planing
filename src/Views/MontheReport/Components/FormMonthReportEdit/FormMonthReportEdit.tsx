@@ -3,6 +3,7 @@ import {ReactNode} from "react";
 import {Form, Field, FieldProps, FormRenderProps} from 'react-final-form'
 import {FieldArray} from 'react-final-form-arrays'
 import arrayMutators from 'final-form-arrays'
+import createDecorator from 'final-form-focus'
 
 import {TextField} from "../../../../Components/TextField/TextField";
 import DropFieldWithFileList from '../../../../Components/DropFieldWithFileList/DropFieldWithFileList';
@@ -32,6 +33,9 @@ interface IFormReportEditProps {
 
   [prop: string]: any
 }
+
+const focusOnError = createDecorator()
+
 
 const FormMonthReportEditValidate = (values: IFormReportEditValues) => {
   const errors: any = {};
@@ -66,6 +70,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading, on
   <Form
     validate={FormMonthReportEditValidate}
     initialValues={initialValues}
+    decorators={[focusOnError]}
     mutators={{
       ...arrayMutators
     }}

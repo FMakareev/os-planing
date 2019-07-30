@@ -6,6 +6,7 @@ import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFee
 import {Button, ButtonStyleEnum} from "../../../../Components/Button/Button";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
 import AvatarFields from '../../../../Components/AvatarFields/AvatarFields';
+import createDecorator from "final-form-focus";
 
 
 interface FormEditUserState {
@@ -47,10 +48,12 @@ const FormEditUserValidate = (values: FormEditUserState) => {
 
   return errors
 };
+const focusOnError = createDecorator();
 
 const FormEditUser: React.FC<IFormEditUserProps> = ({initialValues, onSubmit, onClose, loading}) => {
   return (
     <Form
+      decorators={[focusOnError]}
       initialValues={initialValues}
       validate={FormEditUserValidate}
       onSubmit={onSubmit}

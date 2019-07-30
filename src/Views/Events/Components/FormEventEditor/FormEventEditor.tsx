@@ -4,6 +4,8 @@ import TagField from '../../../../Components/TagField/TagField';
 import DropFieldHoc from "../../../../Components/DropFieldHOC/DropFieldHOC";
 import DropFieldWithFileList from "../../../../Components/DropFieldWithFileList/DropFieldWithFileList";
 import {Field, FieldProps, Form} from "react-final-form";
+import createDecorator from 'final-form-focus'
+
 import {IEvent} from "../../../../Apollo/schema";
 import GetProjectList from "../../Enhancers/GetProjectList/GetProjectList";
 import config from "../../../../config";
@@ -43,11 +45,13 @@ const FormEventEditorValidation = (values: IEvent) => {
   return errors;
 };
 
+const focusOnError = createDecorator();
 
 export const FormEventEditor: React.FC<IFormEventEditorProps> = ({initialValues, onSubmit, loading}) => (
   <Form
     validate={FormEventEditorValidation}
     initialValues={initialValues}
+    decorators={[focusOnError]}
     onSubmit={onSubmit}
     render={({
                submitError,

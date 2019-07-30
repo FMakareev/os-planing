@@ -1,12 +1,14 @@
 import * as React from 'react';
-import {TextField} from "../../../../Components/TextField/TextField";
-import DropFieldWithFileList from '../../../../Components/DropFieldWithFileList/DropFieldWithFileList';
-import DropFieldHoc from "../../../../Components/DropFieldHOC/DropFieldHOC";
 import {Field, FieldProps, Form, FormRenderProps} from "react-final-form";
-import {IReport} from "../../../../Apollo/schema";
 import {ReactNode} from "react";
 import {FieldArray} from "react-final-form-arrays";
 import arrayMutators from 'final-form-arrays'
+import createDecorator from 'final-form-focus'
+
+import {TextField} from "../../../../Components/TextField/TextField";
+import DropFieldWithFileList from '../../../../Components/DropFieldWithFileList/DropFieldWithFileList';
+import DropFieldHoc from "../../../../Components/DropFieldHOC/DropFieldHOC";
+import {IReport} from "../../../../Apollo/schema";
 import MassMediaField from "../../../MontheReport/Components/MassMediaField/MassMediaField";
 import PlusIcon from '../../../../Components/SvgIcons/PlusIcon';
 import config from "../../../../config";
@@ -30,6 +32,8 @@ interface IFormReportEditProps {
 
   [prop: string]: any
 }
+
+const focusOnError = createDecorator()
 
 
 const FormReportEditValidation = (values: IFormReportEditValues) => {
@@ -59,6 +63,7 @@ const FormReportEditValidation = (values: IFormReportEditValues) => {
 export const FormReportEdit: React.FC<IFormReportEditProps> = ({loading,initialValues, onSubmit}) => (
   <Form
     validate={FormReportEditValidation}
+    decorators={[focusOnError]}
     initialValues={initialValues}
     onSubmit={onSubmit}
     mutators={{

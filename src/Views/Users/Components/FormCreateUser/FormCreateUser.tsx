@@ -6,6 +6,7 @@ import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFee
 import {Button} from "../../../../Components/Button/Button";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
 import AvatarFields from "../../../../Components/AvatarFields/AvatarFields";
+import createDecorator from "final-form-focus";
 
 
 export interface FormCreateUserState {
@@ -75,9 +76,13 @@ const FormCreateUserValidate = (values: FormCreateUserState) => {
   return errors
 };
 
+const focusOnError = createDecorator();
+
+
 const FormCreateUser: React.FC<IFormCreateUserProps> = ({onSubmit, loading}) => {
   return (
     <Form
+      decorators={[focusOnError]}
       validate={FormCreateUserValidate}
       onSubmit={onSubmit}
       render={({

@@ -6,6 +6,7 @@ import {TextField} from "../../../../Components/TextField/TextField";
 import {ReactNode} from "react";
 import {InvalidFeedback} from "../../../../Components/InvalidFeedback/InvalidFeedback";
 import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Preloader";
+import createDecorator from "final-form-focus";
 
 interface IFormCreateProjectProps {
   [prop: string]: any
@@ -23,12 +24,14 @@ const FormCreateProjectValidate = (values: FormCreateProjectState) => {
   }
   return errors
 };
+const focusOnError = createDecorator();
 
 const FormCreateProject: React.FC<IFormCreateProjectProps> = ({loading, initialValues, onSubmit}) => {
   return (
     <Form
       validate={FormCreateProjectValidate}
       onSubmit={onSubmit}
+      decorators={[focusOnError]}
       render={({
                  submitError,
                  handleSubmit,

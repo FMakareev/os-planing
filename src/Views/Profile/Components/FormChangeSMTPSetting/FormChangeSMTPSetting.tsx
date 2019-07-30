@@ -10,6 +10,7 @@ import Preloader, {PreloaderThemeEnum} from "../../../../Components/Preloader/Pr
 import TextFieldPassword from "../../../ChangePassword/Components/TextFieldPassword/TextFieldPassword";
 import Checkbox from "../../../../Components/Checkbox/Checkbox";
 import {EmailValidation} from '../../../../Helpers/Validation';
+import createDecorator from "final-form-focus";
 
 
 interface IFormChangeSMTPSettingProps {
@@ -61,10 +62,12 @@ const FormChangeSMTPSettingValidator = (values: IFormChangeSMTPSettingValues) =>
 
   return errors;
 };
+const focusOnError = createDecorator();
 
 
 export const FormChangeSMTPSetting: React.FC<IFormChangeSMTPSettingProps> = ({initialValues, loading, onSubmit}) => (
   <Form
+    decorators={[focusOnError]}
     validate={FormChangeSMTPSettingValidator}
     initialValues={initialValues}
     onSubmit={onSubmit(initialValues)}

@@ -39,7 +39,7 @@ const StatisticInfinityScroll: React.FC<IStatisticInfinityScrollProps> = ({
                                                                           }) => {
 
 
-  if (aggregation === StatisticAggregationEnum.reception && filter) {
+  if (aggregation === StatisticAggregationEnum.reception) {
     const variables = {
       stopDate,
       startDate,
@@ -66,7 +66,7 @@ const StatisticInfinityScroll: React.FC<IStatisticInfinityScrollProps> = ({
       />
     );
   }
-  if (aggregation === StatisticAggregationEnum.project && filter) {
+  if (aggregation === StatisticAggregationEnum.project) {
 
     const variables = {
       stopDate,

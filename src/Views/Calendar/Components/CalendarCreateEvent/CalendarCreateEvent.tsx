@@ -7,26 +7,25 @@ interface ICalendarCreateEventProps {
   [prop: string]: any
 }
 
-const CalendarCreateEventButton = ({onClick}: any)=>{
+const CalendarCreateEventButton = ({onClick}: any) => {
   return (<Button onClick={onClick} as={ButtonAsEnum.button}>
     Создать мероприятие
   </Button>)
 };
 
 
-class CalendarCreateEvent extends React.Component<RouteComponentProps<ICalendarCreateEventProps>>{
+class CalendarCreateEvent extends React.Component<RouteComponentProps<ICalendarCreateEventProps>> {
 
-  render(){
+  render() {
 
     return (
-        <SelectDataPicker
-          minDate={new Date()}
-          onChange={(props: any)=>{
-            this.props.history.push(`/event/create/${new Date(props).toISOString()}`)
-          }}
-            customInput={<CalendarCreateEventButton/>}
-        />
-      )
+      <SelectDataPicker
+        onChange={(props: any) => {
+          this.props.history.push(`/event/create/${new Date(props).toISOString()}`)
+        }}
+        customInput={<CalendarCreateEventButton/>}
+      />
+    )
   }
 }
 

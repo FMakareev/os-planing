@@ -11,6 +11,7 @@ import {
 import StatisticSelectTypeFilter from '../StatisticSelectTypeFilter/StatisticSelectTypeFilter';
 import {OptionTime} from './OptionTime';
 import StatisticExportXml from "../StatisticExportXML/StatisticExportXML";
+import dateFormat from "dateformat";
 
 interface IStatisticsTopProps extends IWithStatistic {
   [prop: string]: any
@@ -43,7 +44,9 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
               label={'Дата'}
               maxDate={StopDate}
               onChange={(value: any) => {
-                onChangeStartDate && value && onChangeStartDate(new Date(value).toISOString());
+                if (onChangeStartDate && value) {
+                  onChangeStartDate(dateFormat(new Date(value), 'yyyy-mm-dd\'T\'HH:MM:ss'))
+                }
               }}
             />
           </div>
@@ -60,10 +63,11 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
               // autoHeightMax: 178,
             }}
             onChange={(option: ISelectOption) => {
-              onChangeStartDate &&
-              option &&
-              StartDate &&
-              onChangeStartDate(StartDate.toISOString(), option.value);
+              if (onChangeStartDate &&
+                option &&
+                StartDate) {
+                onChangeStartDate(dateFormat(StartDate,'yyyy-mm-dd\'T\'HH:MM:ss'), option.value);
+              }
             }}
           />
           <SelectDefaultWithSelect
@@ -100,7 +104,9 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
               label={'Дата'}
               minDate={StartDate}
               onChange={(value: any) => {
-                onChangeStopDate && value && onChangeStopDate(new Date(value).toISOString());
+                if (onChangeStopDate && value) {
+                  onChangeStopDate(dateFormat(new Date(value), 'yyyy-mm-dd\'T\'HH:MM:ss'))
+                }
               }}
             />
           </div>
@@ -116,15 +122,15 @@ export const StatisticsTop: React.FC<IStatisticsTopProps> = ({
               autoHeightMin: 0
             }}
             onChange={(option: ISelectOption) => {
-              onChangeStopDate &&
-              option &&
-              StopDate &&
-              onChangeStopDate(StopDate.toISOString(), option.value);
+              if (onChangeStopDate &&
+                option &&
+                StopDate) {
+                onChangeStopDate(dateFormat(StopDate,'yyyy-mm-dd\'T\'HH:MM:ss'), option.value);
+              }
             }}
           />
 
           <StatisticSelectTypeFilter/>
-
 
         </form>
       </div>

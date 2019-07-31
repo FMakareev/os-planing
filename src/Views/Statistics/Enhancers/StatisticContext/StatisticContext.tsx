@@ -1,4 +1,5 @@
 import * as React from 'react';
+import dateFormat from 'dateformat';
 
 
 export enum StatisticAggregationEnum {
@@ -60,8 +61,8 @@ export class StatisticContextProvider extends React.Component<any, IState> {
 
   get initialState() {
     return {
-      startDate: new Date().toISOString(),
-      stopDate: new Date().toISOString(),
+      startDate: dateFormat(new Date(),'yyyy-mm-dd\'T\'HH:MM:ss'),
+      stopDate:  dateFormat(new Date(),'yyyy-mm-dd\'T\'HH:MM:ss'),
       aggregation: StatisticAggregationEnum.project,
       filter: undefined,
     }
@@ -86,7 +87,7 @@ export class StatisticContextProvider extends React.Component<any, IState> {
   onChangeStartDate = (startDate: string, startTime?: number): void => {
     if (typeof startTime === 'number' && startTime >= 0) {
       this.setState({
-        startDate: new Date(new Date(startDate).setHours(startTime)).toISOString(),
+        startDate: dateFormat(new Date(new Date(startDate).setHours(startTime)),'yyyy-mm-dd\'T\'HH:MM:ss'),
       })
     } else {
       this.setState({
@@ -99,7 +100,7 @@ export class StatisticContextProvider extends React.Component<any, IState> {
   onChangeStopDate = (stopDate: string, stopTime?: number): void => {
     if (typeof stopTime === 'number' && stopTime >= 0) {
       this.setState({
-        stopDate: new Date(new Date(stopDate).setHours(stopTime)).toISOString(),
+        stopDate: dateFormat(new Date(new Date(stopDate).setHours(stopTime)),'yyyy-mm-dd\'T\'HH:MM:ss'),
       })
     } else {
       this.setState({

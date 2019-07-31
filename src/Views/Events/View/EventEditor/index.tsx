@@ -25,14 +25,10 @@ export const EventEdit: React.FC<IEventEditProps> = ({data}) => (<LayoutWithSide
     id={data && data.id}
     reception={data && data.reception}
     history={[
-      {
+      ...(data && data.title ? [{
         name: data && data.title,
         to: `/event/${data && data.id}`,
-      },
-      {
-        name: '',
-        to: ``,
-      },
+      },] : [])
     ]}
   />
 

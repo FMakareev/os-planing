@@ -20,7 +20,7 @@ const GetStatisticXmLink = (WrapperComponent: React.ElementType) => {
   return WithStatistic(class extends React.Component<IGetStatisticXmLinkProps> {
     render() {
       const {aggregation, filter, stopDate, startDate} = this.props;
-      if (aggregation === StatisticAggregationEnum.reception  && filter) {
+      if (aggregation === StatisticAggregationEnum.reception) {
         return (<Query
           <IGetReceptionStatisticData, IGetReceptionStatisticVariables>
           fetchPolicy={'cache-only'}
@@ -42,7 +42,7 @@ const GetStatisticXmLink = (WrapperComponent: React.ElementType) => {
           }
         </Query>);
       }
-      if (aggregation === StatisticAggregationEnum.project&& filter) {
+      if (aggregation === StatisticAggregationEnum.project) {
         return (<Query
           <IGetProjectStatisticData, IGetProjectStatisticVariables>
           fetchPolicy={'cache-only'}

@@ -44,6 +44,8 @@ export const SelectDropDownList: React.FC<ISelectDropDownListProps> = ({
         {
           options && options.map((item: any, idx: number) => (
             <SelectDropDownItem
+              label={item[labelKey]}
+              value={item[valueKey]}
               currentEvent={currentEvent}
               onMouseEnter={() => {
                 onMenuHover && onMenuHover(item)

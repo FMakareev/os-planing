@@ -8,7 +8,9 @@ interface ICalendarCreateEventProps {
 }
 
 const CalendarCreateEventButton = ({onClick}: any) => {
-  return (<Button onClick={onClick} as={ButtonAsEnum.button}>
+  return (<Button
+    id={'ButtonCalendarCreateEvent'}
+    onClick={onClick} as={ButtonAsEnum.button}>
     Создать мероприятие
   </Button>)
 };

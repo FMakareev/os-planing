@@ -15,32 +15,35 @@ interface IPopupDeleteProps extends IPopupHoc {
 const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDelete, user, buttonLabel}) => {
   return (
     <React.Fragment>
-      <PopupWrapper
-        onCloseBtnId={'PopupDeleteUserBtnClose'}
-        title={'Вы уверены?'}
-        isOpen={isOpen}
-        onClose={onClose}
-        className="popup--delete"
-      >
-        <div className="button-links">
-          <Button
-            id={'DeleteUserBtnCancel'}
-            onClick={onClose}
-            type={'button'}
-          >
-            Отмена
-          </Button>
-          <Button
-            onClick={() => {
-              onDelete && onDelete(user.id, onClose);
-            }}
-            type={'button'}
-            id={'DeleteUserBtnOk'}
-          >
-            Да
-          </Button>
-        </div>
-      </PopupWrapper>
+      {
+        isOpen && <PopupWrapper
+            onCloseBtnId={'PopupDeleteUserBtnClose'}
+            title={'Вы уверены?'}
+            isOpen={isOpen}
+            onClose={onClose}
+            className="popup--delete"
+        >
+            <div className="button-links">
+                <Button
+                    id={'DeleteUserBtnCancel'}
+                    onClick={onClose}
+                    type={'button'}
+                >
+                    Отмена
+                </Button>
+                <Button
+                    onClick={() => {
+                      onDelete && onDelete(user.id, onClose);
+                    }}
+                    type={'button'}
+                    id={'DeleteUserBtnOk'}
+                >
+                    Да
+                </Button>
+            </div>
+        </PopupWrapper>
+      }
+
       <a
         id={`ButtonOpenFormDeleteUser-${user && user.email}`}
         onClick={onOpen}

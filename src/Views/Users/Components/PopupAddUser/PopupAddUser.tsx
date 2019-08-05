@@ -14,22 +14,25 @@ interface IPopupAddUserProps extends IPopupHoc, MutateProps {
 const PopupAddUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onSubmit, onOpen, loading}) => {
   return (
     <React.Fragment>
-      <PopupWrapper
-        title={'Добавить пользователя'}
-        onCloseBtnId={'PopupAddUserBtnClose'}
-        isOpen={isOpen}
-        onClose={() => {
-          const form = document.getElementById('FormCreateUser');
-          form && form.dispatchEvent(new Event('reset', {cancelable: true}));
-          onClose && onClose()
-        }}
-        className={"popup--add-user"}
-      >
-        <FormCreateUser
-          loading={loading}
-          onSubmit={onSubmit}
-        />
-      </PopupWrapper>
+      {
+        isOpen &&
+        <PopupWrapper
+            title={'Добавить пользователя'}
+            onCloseBtnId={'PopupAddUserBtnClose'}
+            isOpen={isOpen}
+            onClose={() => {
+              const form = document.getElementById('FormCreateUser');
+              form && form.dispatchEvent(new Event('reset', {cancelable: true}));
+              onClose && onClose()
+            }}
+            className={"popup--add-user"}
+        >
+            <FormCreateUser
+                loading={loading}
+                onSubmit={onSubmit}
+            />
+        </PopupWrapper>
+      }
       <div className="buttons-block">
         <Button id={'ButtonOpenFormAddUser'} onClick={onOpen}>
           Добавить

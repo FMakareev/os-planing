@@ -20,23 +20,25 @@ const PopupEditProject: React.FC<IPopupAddProjectProps> = ({
                                                            }) => {
   return (
     <React.Fragment>
-      <PopupWrapper
-        title={'Редактировать проект'}
-        isOpen={isOpen}
-        onClose={() => {
-          const form = document.getElementById('FormUpdateProject');
-          form && form.dispatchEvent(new Event('reset', {cancelable: true}));
-          onClose && onClose()
-        }}
-        className="popup--add-project"
-      >
-        <FormUpdateProject
-          loading={loading}
-          onSubmit={onSubmit}
-          onClose={onClose}
-          initialValues={initialValues}
-        />
-      </PopupWrapper>
+      {
+        isOpen &&  <PopupWrapper
+            title={'Редактировать проект'}
+            isOpen={isOpen}
+            onClose={() => {
+              const form = document.getElementById('FormUpdateProject');
+              form && form.dispatchEvent(new Event('reset', {cancelable: true}));
+              onClose && onClose()
+            }}
+            className="popup--add-project"
+        >
+            <FormUpdateProject
+                loading={loading}
+                onSubmit={onSubmit}
+                onClose={onClose}
+                initialValues={initialValues}
+            />
+        </PopupWrapper>
+      }
       <a href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
         <img src={EditIcon} className="icon icon-edit "/>
       </a>

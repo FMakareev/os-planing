@@ -5,7 +5,6 @@ import EditIcon from "../../../../Assets/img/spritesvg/edit.svg";
 import FormEditUser from "../FormEditUser/FormEditUser";
 import UpdateReception from '../../Enhancers/UpdateReception/UpdateReception';
 import {MutateProps} from "react-apollo";
-import {Button} from "../../../../Components/Button/Button";
 
 interface IPopupEditUserProps extends IPopupHoc, MutateProps {
   onSubmit: any;
@@ -14,27 +13,32 @@ interface IPopupEditUserProps extends IPopupHoc, MutateProps {
 }
 
 const PopupEditUser: React.FC<IPopupEditUserProps> = ({isOpen, onClose, onOpen, initialValues, result, onSubmit, loading}) => {
+
   return (
     <React.Fragment>
-      <PopupWrapper
-        title={'Изменить пользователя'}
-        onCloseBtnId={'PopupEditUserBtnClose'}
-        isOpen={isOpen}
-        onClose={() => {
-          const form = document.getElementById('FormEditUser');
-          form && form.dispatchEvent(new Event('reset', {cancelable: true}));
-          onClose && onClose()
-        }}
-        className="popup--add-user"
-      >
-        <FormEditUser
-          loading={loading}
-          onClose={onClose}
-          onSubmit={onSubmit}
-          initialValues={initialValues}
-        />
-      </PopupWrapper>
-      <a id={`ButtonOpenFormEditUser-${initialValues.email}`} href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
+      {
+        isOpen && <PopupWrapper
+            title={'Изменить пользователя'}
+            onCloseBtnId={'PopupEditUserBtnClose'}
+            isOpen={isOpen}
+            onClose={() => {
+              const form = document.getElementById('FormEditUser');
+              form && form.dispatchEvent(new Event('reset', {cancelable: true}));
+              onClose && onClose()
+            }}
+            className="popup--add-user"
+        >
+            <FormEditUser
+                loading={loading}
+                onClose={onClose}
+                onSubmit={onSubmit}
+                initialValues={initialValues}
+            />
+        </PopupWrapper>
+      }
+
+      <a id={`ButtonOpenFormEditUser-${initialValues.email}`} href="javascript:void(0);" onClick={onOpen}
+         className="notifications-item__edit ">
         <img src={EditIcon} className="icon icon-edit "/>
       </a>
     </React.Fragment>

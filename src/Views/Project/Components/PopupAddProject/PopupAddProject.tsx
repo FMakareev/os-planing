@@ -23,6 +23,7 @@ const PopupAddProject: React.FC<IPopupAddProjectProps> = ({
       <PopupWrapper
         title={'Добавить проект'}
         isOpen={isOpen}
+        onCloseBtnId={'PopupAddProjectBtnClose'}
         onClose={()=>{
           const form = document.getElementById('FormCreateProject');
           form && form.dispatchEvent(new Event('reset', {cancelable: true}));
@@ -36,7 +37,7 @@ const PopupAddProject: React.FC<IPopupAddProjectProps> = ({
         />
       </PopupWrapper>
       <div className="buttons-block">
-        <Button onClick={onOpen}>
+        <Button id={'ButtonAddProject'} onClick={onOpen}>
           Добавить
         </Button>
       </div>

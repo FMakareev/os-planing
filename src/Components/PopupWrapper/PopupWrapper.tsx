@@ -5,6 +5,7 @@ import {IPopupHoc} from "../../Enhancers/PopupHOC/PopupHOC";
 import ReactDOM from 'react-dom';
 
 interface IPopupWrapperProps extends IPopupHoc {
+  onCloseBtnId?: string;
   className?: string;
   title?: string;
   subtitle?: string;
@@ -34,7 +35,7 @@ class PopupWrapper extends React.Component<IPopupWrapperProps> {
   }
 
   render() {
-    const {className, children, isOpen, onClose, subtitle, title}= this.props;
+    const {className, children, isOpen, onClose, subtitle, title,onCloseBtnId}= this.props;
 
     return ReactDOM.createPortal(
       <div onClick={onClose} className={classNames('popupbg', {
@@ -45,7 +46,7 @@ class PopupWrapper extends React.Component<IPopupWrapperProps> {
         }} className={classNames("popup", className, {
           'popup--open': isOpen
         })}>
-          <a onClick={onClose} className="popup__close">
+          <a id={onCloseBtnId} onClick={onClose} className="popup__close">
             <img className={"icon icon-close"} src={close} alt=""/>
           </a>
           {

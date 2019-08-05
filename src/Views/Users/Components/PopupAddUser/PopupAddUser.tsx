@@ -16,6 +16,7 @@ const PopupAddUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onSubmit, 
     <React.Fragment>
       <PopupWrapper
         title={'Добавить пользователя'}
+        onCloseBtnId={'PopupAddUserBtnClose'}
         isOpen={isOpen}
         onClose={() => {
           const form = document.getElementById('FormCreateUser');
@@ -30,7 +31,7 @@ const PopupAddUser: React.FC<IPopupAddUserProps> = ({isOpen, onClose, onSubmit, 
         />
       </PopupWrapper>
       <div className="buttons-block">
-        <Button onClick={onOpen}>
+        <Button id={'ButtonOpenFormAddUser'} onClick={onOpen}>
           Добавить
         </Button>
       </div>

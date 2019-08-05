@@ -5,6 +5,7 @@ import EditIcon from "../../../../Assets/img/spritesvg/edit.svg";
 import FormEditUser from "../FormEditUser/FormEditUser";
 import UpdateReception from '../../Enhancers/UpdateReception/UpdateReception';
 import {MutateProps} from "react-apollo";
+import {Button} from "../../../../Components/Button/Button";
 
 interface IPopupEditUserProps extends IPopupHoc, MutateProps {
   onSubmit: any;
@@ -17,6 +18,7 @@ const PopupEditUser: React.FC<IPopupEditUserProps> = ({isOpen, onClose, onOpen, 
     <React.Fragment>
       <PopupWrapper
         title={'Изменить пользователя'}
+        onCloseBtnId={'PopupEditUserBtnClose'}
         isOpen={isOpen}
         onClose={() => {
           const form = document.getElementById('FormEditUser');
@@ -32,7 +34,7 @@ const PopupEditUser: React.FC<IPopupEditUserProps> = ({isOpen, onClose, onOpen, 
           initialValues={initialValues}
         />
       </PopupWrapper>
-      <a href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
+      <a id={`ButtonOpenFormEditUser-${initialValues.email}`} href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
         <img src={EditIcon} className="icon icon-edit "/>
       </a>
     </React.Fragment>

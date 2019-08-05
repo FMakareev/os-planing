@@ -53,7 +53,7 @@ export const NotificationTableRow: React.FC<INotificationTableRowProps> = ({
       />
 
       <DeleteComponent
-        id={id}
+        user={user}
       />
 
     </div>

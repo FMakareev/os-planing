@@ -20,22 +20,24 @@ const PopupAddProject: React.FC<IPopupAddProjectProps> = ({
                                                           }) => {
   return (
     <React.Fragment>
-      <PopupWrapper
-        title={'Добавить проект'}
-        isOpen={isOpen}
-        onCloseBtnId={'PopupAddProjectBtnClose'}
-        onClose={()=>{
-          const form = document.getElementById('FormCreateProject');
-          form && form.dispatchEvent(new Event('reset', {cancelable: true}));
-          onClose && onClose()
-        }}
-        className="popup--add-project"
-      >
-        <FormCreateProject
-          onSubmit={onSubmit}
-          loading={loading}
-        />
-      </PopupWrapper>
+      {
+        isOpen && <PopupWrapper
+            title={'Добавить проект'}
+            isOpen={isOpen}
+            onCloseBtnId={'PopupAddProjectBtnClose'}
+            onClose={()=>{
+              const form = document.getElementById('FormCreateProject');
+              form && form.dispatchEvent(new Event('reset', {cancelable: true}));
+              onClose && onClose()
+            }}
+            className="popup--add-project"
+        >
+            <FormCreateProject
+                onSubmit={onSubmit}
+                loading={loading}
+            />
+        </PopupWrapper>
+      }
       <div className="buttons-block">
         <Button id={'ButtonAddProject'} onClick={onOpen}>
           Добавить

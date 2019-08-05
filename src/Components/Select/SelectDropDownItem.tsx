@@ -36,8 +36,11 @@ export class SelectDropDownItem extends React.Component<ISelectDropDownItemProps
 
 
 	render(){
-		const {onMouseEnter,onClick,className, children} = this.props;
+		const {onMouseEnter,onClick,className, children,label,
+			value} = this.props;
 		return ( <li
+			data-option-value={value}
+			data-option-label={label}
 			ref={this.itemRef}
 			onMouseEnter={onMouseEnter}
 			tabIndex={-1}

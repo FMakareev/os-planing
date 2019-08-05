@@ -75,6 +75,7 @@
     "scroll-into-view": "^1.9.7",
     "shallowequal": "^1.1.0",
     "smart-sections": "0.0.6",
+    "testcafe": "^1.3.3",
     "typescript": "^3.4.5"
   },
   "scripts": {

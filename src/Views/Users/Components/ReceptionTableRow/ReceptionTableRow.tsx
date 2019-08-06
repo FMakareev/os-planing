@@ -7,7 +7,7 @@ import {UserAvatar} from '../../../../Components/UserAvatar/UserAvatar';
 import {IReception} from "../../../../Apollo/schema";
 
 
-interface INotificationTableRowProps extends IReception {
+interface IReceptionTableRowProps extends IReception {
   EditComponent?: any;
   DeleteComponent?: any;
 
@@ -15,15 +15,20 @@ interface INotificationTableRowProps extends IReception {
 }
 
 
-export const NotificationTableRow: React.FC<INotificationTableRowProps> = ({
-                                                                             EditComponent,
-                                                                             DeleteComponent,
-                                                                             id,
-                                                                             user,
-                                                                             city,
+export const ReceptionTableRow: React.FC<IReceptionTableRowProps> = ({
+                                                                       EditComponent,
+                                                                       DeleteComponent,
+                                                                       id,
+                                                                       user,
+                                                                       city,
 
-                                                                           }) => (
-  <NotificationWrapper data-id={user.email} id={`NotificationTableRow-${user.email}`} mods={EnumNotificationWrapperMods.user}>
+                                                                     }) => (
+  <NotificationWrapper
+    dataAttr={{
+      'data-user-row-id': user.email,
+    }}
+    mods={EnumNotificationWrapperMods.user}
+  >
     <div className="notifications-item__user">
 
       <UserAvatar avatar={user.avatar && user.avatar.url} mods={'notifications-item__user-ava'}/>
@@ -53,11 +58,15 @@ export const NotificationTableRow: React.FC<INotificationTableRowProps> = ({
       />
 
       <DeleteComponent
-        user={user}
+        data={{
+          user,
+          id,
+          city,
+        }}
       />
 
     </div>
   </NotificationWrapper>
 );
 
-export default NotificationTableRow;
+export default ReceptionTableRow;

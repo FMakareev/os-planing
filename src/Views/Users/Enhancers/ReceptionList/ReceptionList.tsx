@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {NotificationTableRow} from "../../Components/NotificationTableRow/NotificationTableRow";
+import {ReceptionTableRow} from "../../Components/ReceptionTableRow/ReceptionTableRow";
 import PopupEditUser from "../../Components/PopupEditUser/PopupEditUser";
 import PopupDelete from "../../Components/PopupDelete/PopupDelete";
 import DeleteReceptionHOC from '../DeleteReceptionHOC/DeleteReceptionHOC';
@@ -38,7 +38,7 @@ const ReceptionList: React.FC<IReceptionListProps> = () => {
     />}
 
     ItemComponent={(props: any) => (
-      <NotificationTableRow
+      <ReceptionTableRow
         EditComponent={PopupEditUser}
         DeleteComponent={PopupDeleteWithQuery}
         {...props}

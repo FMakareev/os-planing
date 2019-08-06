@@ -12,7 +12,7 @@ interface IPopupDeleteProps extends IPopupHoc {
   [prop: string]: any
 }
 
-const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDelete, user, buttonLabel}) => {
+const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDelete, data, buttonLabel,...rest}) => {
   return (
     <React.Fragment>
       {
@@ -33,7 +33,7 @@ const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDe
                 </Button>
                 <Button
                     onClick={() => {
-                      onDelete && onDelete(user.id, onClose);
+                      onDelete && onDelete(data && data.id, onClose);
                     }}
                     type={'button'}
                     id={'DeleteUserBtnOk'}
@@ -45,7 +45,6 @@ const PopupDelete: React.FC<IPopupDeleteProps> = ({isOpen, onClose, onOpen, onDe
       }
 
       <a
-        id={`ButtonOpenFormDeleteUser-${user && user.email}`}
         onClick={onOpen}
         className="notifications-item__delete"
         href="javascript:void(0);"

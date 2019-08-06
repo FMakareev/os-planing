@@ -12,7 +12,7 @@ interface IProjectItemProps extends IProject{
 }
 
 export const ProjectItem: React.FC<IProjectItemProps> = ({name,id, EditComponent, DeleteComponent}) => (
-  <NotificationWrapper mods={EnumNotificationWrapperMods.project}>
+  <NotificationWrapper id={`ProjectItem-${name}`} mods={EnumNotificationWrapperMods.project}>
     <div className="notifications-item__title">
       {name}
     </div>

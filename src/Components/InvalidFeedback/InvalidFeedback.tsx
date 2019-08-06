@@ -7,8 +7,8 @@ interface IInvalidFeedbackProps {
 	[prop: string]: any
 }
 
-export const InvalidFeedback: React.FC<IInvalidFeedbackProps> = ({error}) => (
-	<div className={classNames('form__invalid-feedback', {
+export const InvalidFeedback: React.FC<IInvalidFeedbackProps> = ({error, id}) => (
+	<div id={id} className={classNames('form__invalid-feedback', {
 		'hidden': !error,
 	})}>
 		{error}

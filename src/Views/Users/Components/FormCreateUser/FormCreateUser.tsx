@@ -165,7 +165,7 @@ const FormCreateUser: React.FC<IFormCreateUserProps> = ({onSubmit, loading}) => 
               (props: FieldProps<any, any>) => (<AvatarFields {...props}/>)
             }
           </Field>
-          {submitError && <InvalidFeedback error={submitError}/>}
+          {submitError && <InvalidFeedback id={'FormCreateUserSubmitError'} error={submitError}/>}
 
           <Button mods={'button-primary--preloader'} disabled={pristine || loading} type={'submit'}>
             Сохранить {loading && <Preloader theme={PreloaderThemeEnum.light} style={{marginLeft: '8px'}}/>}

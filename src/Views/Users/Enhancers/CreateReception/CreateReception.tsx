@@ -62,9 +62,9 @@ const CreateReception: any = (WrapperComponent: any) => {
           avatar: file && file.file_data && file.file_data.id,
           fullName: values.fullName
         }
-      }
+      };
 
-      const {message, graphQLErrors, ...rest}: any = await mutate({
+      const {message, graphQLErrors}: any = await mutate({
         variables,
         refetchQueries: [RefetchReceptionListQueries()]
       })
@@ -75,9 +75,8 @@ const CreateReception: any = (WrapperComponent: any) => {
 
       if (message) {
         const errors: any = {
-          // [FORM_ERROR]: 'Произошла ошибка во время выполнения запроса',
+          [FORM_ERROR]: GetMessageByTranslateKey(message),
         };
-
         graphQLErrors.forEach((item: any) => {
           if (item.message === "GraphQL error: email already exist") {
             errors['email'] = 'Email занят';

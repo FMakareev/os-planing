@@ -15,7 +15,8 @@ interface IDict {
 export const TranslateDict: IDict = {
   'Login or password not found': 'Пользователь с заданным логином не найден или пароль не действителен.',
   'not found': 'Совпадений не найдено',
-  "GraphQL error: email already exist": 'электронная почта уже существует',
+  "GraphQL error: email already exist": 'Электронная почта уже существует',
+  "GraphQL error: GraphQL error: email already exist": 'Электронная почта уже существует',
   "Internal Server Error": 'Ошибка сервера',
   'Variable "$city" of required type "String!" was not provided.': '"Приемная" обязательна для заполнения',
   'Network error: Response not successful: Received status code 400': 'Ошибка сервера',
@@ -23,14 +24,16 @@ export const TranslateDict: IDict = {
   'In field "password": Expected "String!", found null': 'Пароль обязателен для заполнения',
   'In field "avatar": Expected "String!", found null': 'Аватар обязателен для заполнения',
   'In field "fullName": Expected "String!", found null': 'ФИО обязателено для заполнения',
+  "GraphQL error: 'NoneType' object has no attribute 'is_broken'": 'Проблемы с почтовым сервером',
 };
 
 
 export const GetMessageByTranslateKey = (key: string) => {
   try {
-    return TranslateDict && TranslateDict[key] || 'Ошибка сервера';
+    // eslint-disable-next-line no-mixed-operators
+    return TranslateDict && TranslateDict[key] || 'Произошла ошибка во время выполнения запроса';
   } catch (e) {
-    return 'Ошибка сервера';
+    return 'Произошла ошибка во время выполнения запроса';
   }
 };
 

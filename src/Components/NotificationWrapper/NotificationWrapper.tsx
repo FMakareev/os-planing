@@ -8,10 +8,12 @@ export enum EnumNotificationWrapperMods{
 }
 
 interface INotificationWrapper {
-	mods?: EnumNotificationWrapperMods
+	mods?: EnumNotificationWrapperMods;
+	id?: string;
 }
 
-export const NotificationWrapper: React.FC<INotificationWrapper> = ({children, mods}) => (<div
+export const NotificationWrapper: React.FC<INotificationWrapper> = ({children, mods,id}) => (<div
+	id={id}
 	className={classNames("notifications-item",{
 		'notifications-item--project': mods === EnumNotificationWrapperMods.project,
 		'notifications-item--user': mods === EnumNotificationWrapperMods.user,

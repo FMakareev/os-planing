@@ -23,7 +23,7 @@ export const NotificationTableRow: React.FC<INotificationTableRowProps> = ({
                                                                              city,
 
                                                                            }) => (
-  <NotificationWrapper mods={EnumNotificationWrapperMods.user}>
+  <NotificationWrapper id={`NotificationTableRow-${user.email}`} mods={EnumNotificationWrapperMods.user}>
     <div className="notifications-item__user">
 
       <UserAvatar avatar={user.avatar && user.avatar.url} mods={'notifications-item__user-ava'}/>

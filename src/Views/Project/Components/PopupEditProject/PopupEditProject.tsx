@@ -39,7 +39,7 @@ const PopupEditProject: React.FC<IPopupAddProjectProps> = ({
             />
         </PopupWrapper>
       }
-      <a href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
+      <a data-edit-reception-btn={initialValues.name} href="javascript:void(0);" onClick={onOpen} className="notifications-item__edit ">
         <img src={EditIcon} className="icon icon-edit "/>
       </a>
     </React.Fragment>

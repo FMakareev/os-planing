@@ -24,6 +24,7 @@ const PopupEditProject: React.FC<IPopupAddProjectProps> = ({
         isOpen &&  <PopupWrapper
             title={'Редактировать проект'}
             isOpen={isOpen}
+            onCloseBtnId={'PopupEditProjectBtnClose'}
             onClose={() => {
               const form = document.getElementById('FormUpdateProject');
               form && form.dispatchEvent(new Event('reset', {cancelable: true}));

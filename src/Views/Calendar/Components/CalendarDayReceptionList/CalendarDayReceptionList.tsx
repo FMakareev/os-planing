@@ -36,7 +36,8 @@ const GetMonthReportLink = (item: IReceptionCalendar, currentCardMode: DayCardMo
       if (item.monthReport) {
         return `/month-report/${item.monthReport.id}`
       } else if (reception && item.reception.id === reception.id) {
-        return `/month-report/create/${new Date(date).toISOString()}`
+        let formatDate = new Date(date).toISOString();
+        return `/month-report/create/${formatDate.substr(0, formatDate.length - 1)}`
       }
     }
   }

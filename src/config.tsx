@@ -10,5 +10,8 @@ export default {
     'image/jpeg',
     'image/x-citrix-jpeg',
     'image/png',
+    '.zip',
+    '.rar',
+    'video/*',
   ]
 }

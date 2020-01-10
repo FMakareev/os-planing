@@ -133,7 +133,7 @@ export const FormEventEditor: React.FC<IFormEventEditorProps> = ({initialValues,
           disabled={loading}
           multiple
           accept={config.allowedFileExtensions.join(',')}
-          help={'Размер файла не должен привышать 50 мегабайт. Для загрузки разрешены файлы со следующими расширениями: .doc, .docx, pdf, jpeg'}
+          help={'Размер файла не должен превышать 50 мегабайт. Для загрузки разрешены файлы со следующими расширениями: .doc, .docx, .pdf, .jpeg, .jfif, .pjpeg, .pjp, .png, .rar, .zip, .avi, .mpeg, .mov, .movie, .mp4 '}
         >
           {
             (props: FieldProps<any, any>) => (<DropFieldWithHOC

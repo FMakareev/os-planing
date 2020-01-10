@@ -144,7 +144,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading, on
             type={"type"}
             as={"textarea"}
             placeholder={"Описание"}
-            label={'Описание основных проблемных тем в городе и на предпиятии за отчетный период'}
+            label={'Описание основных проблемных тем в городе и на предприятии за отчетный период'}
             disabled={loading}
           >
             {
@@ -170,7 +170,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading, on
             type={"type"}
             as={"textarea"}
             placeholder={"Описание"}
-            label={'Какие проблемы били решены в городе и на предпиятии за отчетный период'}
+            label={'Какие проблемы были решены в городе и на предприятии за отчетный период'}
             disabled={loading}
           >
             {
@@ -193,7 +193,7 @@ export const FormMonthReportEdit: React.FC<IFormReportEditProps> = ({loading, on
 
 
           <h2 className="h2">
-            Ссылки на СМИ о мероприятиях
+            Ссылки на СМИ о мероприятии
           </h2>
 
           <FieldArray name={"massMedia"}>

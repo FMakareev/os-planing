@@ -14,7 +14,7 @@ interface IEventBreadcrumbsProps {
 
 const GetCalendarLink = (date: string, query?: string) => {
   const dateInst = new Date(date);
-  return `/?year=${dateInst.getFullYear()}&month=${dateInst.getMonth()}${query}`
+  return `/?year=${dateInst.getFullYear()}&month=${dateInst.getMonth()}${query || ''}`
 };
 
 const EventBreadcrumbs: React.FC<IEventBreadcrumbsProps> = ({date, reception, history}) => {
